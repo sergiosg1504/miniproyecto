@@ -1,6 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import List from "../views/ListView.vue";
+import Mod from "../views/Modify.vue";
 
 Vue.use(VueRouter);
 
@@ -9,6 +11,16 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
+  },
+  {
+    path: "/list",
+    name: "ListView",
+    component: List,
+  },
+  {
+    path: "/mod",
+    name: "Modify",
+    component: Mod,
   },
   {
     path: "/about",

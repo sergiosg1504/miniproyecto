@@ -5,13 +5,16 @@
 </template>
 
 <script>
+
 export default {
   name: "Home",
-  components: {},
+  components: {
+
+  },
   methods: {
-    listado() {
-      this.$router.push("list");
-    },
+    listado(){
+      this.$router.push('list');
+    }
   },
 };
 </script>

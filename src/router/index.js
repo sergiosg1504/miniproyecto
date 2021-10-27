@@ -16,11 +16,13 @@ const routes = [
     path: "/list",
     name: "ListView",
     component: List,
+    props: true
   },
   {
     path: "/mod",
     name: "Modify",
     component: Mod,
+    props: true
   },
   {
     path: "/about",

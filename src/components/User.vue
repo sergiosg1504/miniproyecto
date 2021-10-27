@@ -1,19 +1,20 @@
 <template>
   <div>
-    <p>{{usuarioComputado}}</p>
-    <form @submit.prevent="modificar()">
-    </form>
+    <mod :usu="user"/>
   </div>
 </template>
 
 <script>
+//AQUI EL USUARIO ESTA ALMACENADO
+import Mod from "./Mod.vue";
 
 export default {
-  name: "Mod",
+  name: "User",
   components: {
+    Mod
   },
-  props: {
-    usu: Object
+  props:{
+      user: Object
   },
   data: () => ({
     usuario: {},
@@ -22,16 +23,10 @@ export default {
       email: user.email,
       rol: user.rol,*/
   }),
-  computed:{
-    usuarioComputado(){
-      return this.usu;
-    }
-  },
-  created(){
-    
-  },
   methods:{
-    
+    hola () {
+      console.log("Hola soy: " + this.user.email);
+    }
   }
 };
 </script>

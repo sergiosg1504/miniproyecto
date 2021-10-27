@@ -3,19 +3,19 @@
         <h1>Modificar datos
             <button @click="cancel()">Cancelar</button>
         </h1>
-        <p>Hola</p>
-        <mod/>
+        <p>Hola {{usu.nombre}}</p>
     </div>
 </template>
 
 <script>
 
-import Mod from "../components/Mod.vue";
 
 export default {
   name: "Modify",
   components: {
-      Mod,
+  },
+  props: {
+      usu: Object
   },
   data: () => ({
 

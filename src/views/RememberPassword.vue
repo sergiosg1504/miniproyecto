@@ -11,10 +11,35 @@
         required
         placeholder="Email"
       />
+      <label class="form-label" v-if="emailSended" for="#password"
+        >Contraseña:</label
+      >
+      <input
+        v-if="emailSended"
+        v-model="password"
+        class="form-input"
+        type="password"
+        id="password"
+        required
+        placeholder="Password"
+      />
+      <label class="form-label" v-if="emailSended" for="#password-repeat"
+        >Repite la contraeña:</label
+      >
+      <input
+        v-if="emailSended"
+        v-model="passwordRepeat"
+        class="form-input"
+        type="password"
+        id="password-repeat"
+        required
+        placeholder="Password"
+      />
       <p class="error" v-if="!emailIsValid">Formato de email no valido</p>
       <p class="error" v-if="!emailRegistered()">
         Email no registrado en la BD
       </p>
+      <p class="error" v-if="!passwordIsValid">Contraseña no valida</p>
       <input
         class="form-submit"
         type="submit"
@@ -37,12 +62,21 @@ import auth from "@/logic/auth";
 export default {
   data: () => ({
     email: "",
+    password: "",
+    passwordRepeat: "",
     error: false,
     expressionEmail: /\w+@\w+\.+[a-z]/,
+    flagEmail: false,
   }),
   computed: {
     emailIsValid() {
       return this.expressionEmail.test(this.email);
+    },
+    emailSended() {
+      return this.flagEmail;
+    },
+    passwordIsValid() {
+      return this.password === this.passwordRepeat;
     },
   },
   methods: {
@@ -50,11 +84,14 @@ export default {
       try {
         await auth.checkEmail(this.email);
         // enviar correo con el codigo
+        // flagEmail = true
+        this.flagEmail = true;
+        await auth.updatePassword(this.email, this.password);
+        this.$router.push("/");
       } catch (error) {
         // comprobar codigos de error
         this.error = true;
       }
-      return false;
     },
   },
 };

@@ -41,6 +41,7 @@
         class="form-input"
         type="password"
         id="password"
+        required
         placeholder="Password"
       />
       <label class="form-label" for="#password-repeat"
@@ -51,6 +52,7 @@
         class="form-input"
         type="password"
         id="password-repeat"
+        required
         placeholder="Password"
       />
       <p class="error" v-if="!passwordIsValid">Contraseña no valida</p>
@@ -94,7 +96,7 @@ export default {
     async register() {
       try {
         await auth.register(this.user);
-        this.$router.push("/login");
+        this.$router.push("/");
         // se envia email y no se deja entrar en la plataforma hasta validar
       } catch (error) {
         if (error === 409) this.error = 1;

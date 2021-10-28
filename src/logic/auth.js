@@ -4,11 +4,11 @@ import axios from "axios";
 const API = "";
 export default {
   //setUserLogged(userLogged) {
-  //Cookies.set("userLogged", userLogged);
+  // Cookies.set("userLogged", userLogged);
   //},
-  getUserLogged() {
-    //return Cookies.get("userLogged");
-  },
+  //getUserLogged() {
+  // return Cookies.get("userLogged");
+  //},
   register(user) {
     return axios.post(API, user);
   },
@@ -18,6 +18,10 @@ export default {
   },
   checkEmail(email) {
     return axios.post(API, email);
+  },
+  updatePassword(email, password) {
+    const user = { email, password };
+    return axios.post(API, user);
   },
 
   async put(user) {

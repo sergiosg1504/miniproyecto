@@ -11,7 +11,7 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/login",
+    path: "/",
     name: "login",
     component: Login,
   },
@@ -26,7 +26,7 @@ const routes = [
     component: RememberPassword,
   },
   {
-    path: "/",
+    path: "/home",
     name: "Home",
     component: Home,
   },
@@ -34,14 +34,14 @@ const routes = [
     path: "/list",
     name: "ListView",
     component: List,
-    props: true
+    props: true,
   },
   {
     path: "/mod",
     name: "Modify",
     component: Mod,
-    props: true
-  }
+    props: true,
+  },
 ];
 
 const router = new VueRouter({

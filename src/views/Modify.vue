@@ -90,7 +90,8 @@ export default {
   }
 }
 div {
-  margin: 0 auto;
+  text-align: center;
+  margin: 150px auto;
   border-radius: 5px;
   box-shadow: 0 3px 5px 2px rgba(0, 0, 0, 0.3);
   padding-top: 15px;

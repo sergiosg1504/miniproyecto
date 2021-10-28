@@ -32,4 +32,8 @@ export default {
     let response = await axios.get("api");
     return response.data;
   },
+  async del(user) {
+    let response = await axios.delete(API, user);
+    console.log(response.data);
+  },
 };

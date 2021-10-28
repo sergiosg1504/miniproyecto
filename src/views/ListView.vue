@@ -20,7 +20,7 @@
         <td>{{ item.email }}</td>
         <td>{{ rol(item.rol) }}</td>
         <button @click="modify(item)" class="mod">Modificar</button>
-        <button class="del">Eliminar</button>
+        <button class="del" @click="del(item)">Eliminar</button>
         <user :user="item" />
       </tr>
     </table>
@@ -72,6 +72,19 @@ export default {
       //this.result = auth.get();
       auth.get();
       this.result.sort((a, b) => (a.apellidos > b.apellidos ? 1 : -1));
+    },
+    del(data) {
+      let confirmacion = confirm(
+        "Estas seguro de que quieres eliminar a " +
+          data.nombre +
+          " " +
+          data.apellidos
+      );
+      if (confirmacion === true) {
+        auth.del(data);
+      } else {
+        console.log("Bye");
+      }
     },
   },
   computed: {
@@ -152,6 +165,7 @@ table {
   border-collapse: collapse;
 }
 tr {
+  text-align: center;
   border: solid;
   border-width: 1px 0;
   height: 50px;

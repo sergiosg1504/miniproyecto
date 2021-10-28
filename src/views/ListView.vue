@@ -1,8 +1,13 @@
 <template id="lista">
   <div class="list">
+    <h1>Listado de alumnos</h1>
+    <div class="filt">
+      <form>
+        <p>Filtro por nombre</p>
+        <input class="filter" type="text" v-model="filtro" />
+      </form>
+    </div>
     <table>
-      <h1>Listado de alumnos</h1>
-      <input type="text" v-model="filtro" />
       <tr>
         <th>Nombre</th>
         <th>Apellidos</th>
@@ -100,7 +105,9 @@ th {
   height: 40px;
   border-radius: 20px;
   border: none;
-  background: #82c0e7;
+  background: #4c54cc;
+  color: whitesmoke;
+  font-family: monospace;
 }
 
 .del {
@@ -109,6 +116,52 @@ th {
   border-radius: 20px;
   border: none;
   margin: 3px 10px;
-  background: #f44336;
+  background: #f46a65;
+  color: whitesmoke;
+  font-family: monospace;
+}
+
+h1 {
+  text-align: center;
+}
+
+.filt {
+  text-align: center;
+  margin: 0 40px;
+  background: white;
+  height: 70px;
+  width: 250px;
+  border-radius: 5px;
+  box-shadow: 0 3px 5px 2px rgba(0, 0, 0, 0.3);
+  font-weight: bold;
+}
+.filter {
+  border: none;
+  border-radius: 10px;
+  height: 28px;
+  background: lightgrey;
+  font-family: monospace;
+  font-size: 18px;
+}
+
+table {
+  margin: 0 auto;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 3px 5px 2px rgba(0, 0, 0, 0.3);
+  border-collapse: collapse;
+}
+tr {
+  border: solid;
+  border-width: 1px 0;
+  height: 50px;
+  border-color: rgb(238, 238, 238);
+}
+
+tr:first-child {
+  border-top: none;
+}
+tr:last-child {
+  border-bottom: none;
 }
 </style>

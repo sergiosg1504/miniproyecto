@@ -42,13 +42,13 @@ import auth from "@/logic/auth.js";
 export default {
   data: () => ({
     email: "",
-    passwod: "",
+    password: "",
     error: false,
   }),
   methods: {
     async login() {
       try {
-        await auth.login(this.email, this.passwod);
+        await auth.login(this.email, this.password);
         const user = {
           email: this.email,
         };

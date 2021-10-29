@@ -6,6 +6,7 @@ import RememberPassword from "../views/RememberPassword";
 import Home from "../views/Home.vue";
 import List from "../views/ListView.vue";
 import Mod from "../views/Modify.vue";
+import Profile from "../components/Profile.vue";
 
 Vue.use(VueRouter);
 
@@ -29,6 +30,12 @@ const routes = [
     path: "/home",
     name: "Home",
     component: Home,
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    component: Profile,
+    props: true,
   },
   {
     path: "/list",

@@ -1,8 +1,11 @@
 <template>
   <div class="home">
-    <p class="bien">¡Bienvenido a la pagina de inicio!</p>
-    <p>Aqui puedes ver el listado de alumnos:</p>
-    <button @click="listado()">Ver listado usuarios</button>
+    <div>
+      <p class="bien">¡Bienvenido a la pagina de inicio!</p>
+      <p>Aqui puedes ver el listado de alumnos:</p>
+      <button @click="listado()">Ver listado usuarios</button>
+    </div>
+    <button class="perfil" @click="perfil()">Mi Perfil</button>
   </div>
 </template>
 
@@ -10,9 +13,20 @@
 export default {
   name: "Home",
   components: {},
+  data: () => ({
+    prueba: {
+      nombre: "JuanJosé",
+      apellidos: "López",
+      email: "jjlopez19@usal.es",
+      role: 1,
+    },
+  }),
   methods: {
     listado() {
       this.$router.push("list");
+    },
+    perfil() {
+      this.$router.push({ name: "profile", params: { user: this.prueba } });
     },
   },
 };
@@ -41,5 +55,11 @@ button {
   margin: 15px 0;
   color: rgb(37, 34, 34);
   font-family: monospace;
+}
+
+.perfil {
+  position: absolute;
+  top: 40px;
+  right: 60px;
 }
 </style>

@@ -36,13 +36,14 @@ export default {
     cancel() {
       this.$router.go(-1);
     },
-    guardar() {
+    async guardar() {
       if (this.selected === "Estudiante") {
         this.usu.rol = 1;
       } else {
         this.usu.rol = 2;
       }
-      auth.put(this.usu);
+      let response = await auth.put(this.usu);
+      console.log(response.data);
       this.$router.go(-1);
     },
   },

@@ -24,16 +24,14 @@ export default {
     return axios.post(API, user);
   },
 
-  async put(user) {
-    let response = await axios.put(API, user);
-    console.log(response.data);
+  put(user) {
+    return axios.put(API, user);
   },
-  async get() {
-    let response = await axios.get("api");
+  get() {
+    let response = axios.get(API);
     return response.data;
   },
   async del(user) {
-    let response = await axios.delete(API, user);
-    console.log(response.data);
+    return axios.delete(API, user);
   },
 };

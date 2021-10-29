@@ -1,7 +1,7 @@
 import axios from "axios";
 //import Cookies from "js-cookie";
 
-const API = "";
+const API = "http://127.0.0.1:5000/";
 export default {
   //setUserLogged(userLogged) {
   // Cookies.set("userLogged", userLogged);

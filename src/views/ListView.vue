@@ -68,12 +68,11 @@ export default {
       if (data === 1) return "Estudiante";
       else return "Profesor";
     },
-    getAlumnos() {
-      //this.result = auth.get();
-      auth.get();
+    async getAlumnos() {
+      this.result = await auth.get();
       this.result.sort((a, b) => (a.apellidos > b.apellidos ? 1 : -1));
     },
-    del(data) {
+    async del(data) {
       let confirmacion = confirm(
         "Estas seguro de que quieres eliminar a " +
           data.nombre +
@@ -81,7 +80,8 @@ export default {
           data.apellidos
       );
       if (confirmacion === true) {
-        auth.del(data);
+        let response = await auth.del(data);
+        console.log(response.data);
       } else {
         console.log("Bye");
       }

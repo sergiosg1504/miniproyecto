@@ -28,7 +28,7 @@ export default {
     return axios.put(API, user);
   },
   get() {
-    let response = axios.get(API);
+    let response = axios.get(API + "retrieve_all");
     return response.data;
   },
   async del(user) {

@@ -1,3 +1,4 @@
+import re
 import flask
 from flask import request, jsonify
 from flask_cors import CORS
@@ -182,15 +183,19 @@ def retrieve_all():
     cursor = con.cursor()
     cursor.execute("SELECT * FROM users")
     results = cursor.fetchall()
-    column = cursor.column_names
     if results:
-        aux = {}
-        for i in range(len(column)):
-            for items in results:
-                aux[column[i]] = items[i]
-
+        aux2 = []
+        for items in results:
+            i = 0
+            aux = {}
+            while i < 6:
+                print(items)
+                for item in items:
+                    print(item)
+                    aux[cursor.description[i][0]] = item
+                    i += 1
         aux.pop("password")
-        js = {"msg": "Usuarios encontrados", "code": 200, "lista": aux}
+        js = {"msg": "Usuarios encontrados", "code": 200, "lista": aux2}
         con.close()
         cursor.close()
         return jsonify(js)

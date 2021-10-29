@@ -38,7 +38,7 @@ export default {
   },
   data: () => ({
     result: [
-      {
+      /*{
         nombre: "Roberto",
         apellidos: "Merchan Gonzalez",
         email: "robertomergon@usal.es",
@@ -55,7 +55,7 @@ export default {
         apellidos: "Lopez Carnero",
         email: "jjlopez@usal.es",
         rol: 2,
-      },
+      },*/
     ],
     texto: "",
     arrayFiltrado: [],
@@ -70,6 +70,7 @@ export default {
     },
     async getAlumnos() {
       this.result = await auth.get();
+      console.log(this.result.data);
       this.result.sort((a, b) => (a.apellidos > b.apellidos ? 1 : -1));
     },
     async del(data) {

@@ -49,10 +49,10 @@ export default {
     async login() {
       try {
         await auth.login(this.email, this.password);
-        const user = {
-          email: this.email,
-        };
-        auth.setUserLogged(user);
+        //const user = {
+        //email: this.email,
+        //};
+        //auth.setUserLogged(user);
         this.$router.push("/home");
       } catch (error) {
         if (error === 400) {

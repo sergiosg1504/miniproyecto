@@ -23,14 +23,15 @@ export default {
     return axios.post(API + "upadatePassword", user);
   },
 
-  put(user) {
-    return axios.put(API, user);
+  post(user) {
+    //let usuario = {}
+    return axios.post(API + "update?id=" + user.id, user);
   },
   get() {
     let response = axios.get(API + "retrieve_all");
-    return response.data;
+    return response;
   },
-  async del(user) {
-    return axios.delete(API, user);
+  del(user) {
+    return axios.get(API + "delete?id=" + user.id);
   },
 };

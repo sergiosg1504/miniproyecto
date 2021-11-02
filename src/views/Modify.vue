@@ -5,8 +5,8 @@
       <button class="cancel" @click="cancel()">Cancelar</button>
     </h1>
     <form @submit.prevent="guardar">
-      <p>Nombre: <input class="in" type="text" v-model="usu.nombre" /></p>
-      <p>Apellidos: <input class="in" type="text" v-model="usu.apellidos" /></p>
+      <p>Nombre: <input class="in" type="text" v-model="usu.name" /></p>
+      <p>Apellidos: <input class="in" type="text" v-model="usu.surnames" /></p>
       <p>Email: <input class="in" type="email" v-model="usu.email" /></p>
       <p>
         Seleccione un rol:
@@ -38,11 +38,11 @@ export default {
     },
     async guardar() {
       if (this.selected === "Estudiante") {
-        this.usu.rol = 1;
+        this.usu.role = 1;
       } else {
-        this.usu.rol = 2;
+        this.usu.role = 2;
       }
-      let response = await auth.put(this.usu);
+      let response = await auth.post(this.usu);
       console.log(response.data);
       this.$router.go(-1);
     },
@@ -60,14 +60,14 @@ export default {
       return this.usu.email;
     },
     rol() {
-      if (this.usu.rol === 1) {
+      if (this.usu.role === 1) {
         return "Estudiante";
       } else {
         return "Profesor";
       }
     },
     otherRol() {
-      if (this.usu.rol === 2) {
+      if (this.usu.role === 2) {
         return "Estudiante";
       } else {
         return "Profesor";

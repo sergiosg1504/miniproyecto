@@ -290,4 +290,65 @@ def delete():
             return jsonify(js)
 
 
+@app.route("/check_email", method=["POST"])
+def check_email():
+    request_data = request.get_json()
+    param = dict(request_data)
+    try:
+        con = mysql.connector.connect(**config)
+    except mysql.connector.Error as err:
+        js = {"msg": "Un error ha ocurrido en la conexión a la base de datos", "code": 500}
+        return jsonify(js)
+    email = param["email"]
+    cursor = con.cursor()
+    query = "Select * FROM users WHERE email='{}'".format(email)
+    cursor.execute(query)
+    results = cursor.fetchone()
+    if not results:
+        con.close()
+        cursor.close()
+        js = {"msg": "El usuario no existe en la bd", "code": 400}
+        return jsonify(js)
+    else:
+        con.close()
+        cursor.close()
+        js = {"msg": "El email esta registrado", "code": 200}
+        return jsonify(js)
+
+
+@app.route("/update_password", method=["POST"])
+def update_password():
+    request_data = request.get_json()
+    param = dict(request_data)
+    arg = request.args
+    try:
+        con = mysql.connector.connect(**config)
+    except mysql.connector.Error as err:
+        js = {
+            "msg": "Un error ha ocurrido en la conexión a la base de datos" + err.msg, "code": 500}
+        return jsonify(js)
+    cursor = con.cursor()
+    if len(param) != 4:
+        js = {"msg": "No se han recibido todos los datos correctamente", "code": 400}
+        con.close()
+        cursor.close()
+        return jsonify(js)
+    else:
+        query = "UPDATE users SET password='{}' WHERE email='{}'".format(
+            param["password"], param["email"])
+        try:
+            cursor.execute(query)
+            con.commit()
+        except mysql.connector.Error as err:
+            js = {"msg": "Error al actualizar la base de datos" +
+                  err.msg, "code": 500}
+            con.close()
+            cursor.close()
+            return jsonify(js)
+        js = {"msg": "usuario actualizado correctamente", "code": 200}
+        con.close()
+        cursor.close()
+        return jsonify(js)
+
+
 app.run()

@@ -189,9 +189,7 @@ def retrieve_all():
             i = 0
             aux = {}
             while i < 6:
-                print(items)
                 for item in items:
-                    print(item)
                     aux[cursor.description[i][0]] = item
                     i += 1
         aux.pop("password")

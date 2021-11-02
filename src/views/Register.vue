@@ -82,7 +82,7 @@ export default {
     },
     passwordRepeat: "",
     expressionEmail: /\w+@\w+\.+[a-z]/,
-    error: 0,
+    aux: {},
   }),
   computed: {
     emailIsValid() {
@@ -94,13 +94,12 @@ export default {
   },
   methods: {
     async register() {
-      try {
-        await auth.register(this.user);
-        this.$router.push("/");
-        // se envia email y no se deja entrar en la plataforma hasta validar
-      } catch (error) {
-        if (error === 409) this.error = 1;
-      }
+      this.aux = await auth.register(this.user);
+      this.aux = this.aux.data;
+      // se envia email y no se deja entrar en la plataforma hasta valida
+      if (this.aux.code === 409) this.error = 1;
+      if (this.aux.code === 200) this.$router.push("/");
+      else this.error = 2;
     },
   },
 };

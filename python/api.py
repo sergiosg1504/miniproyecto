@@ -192,6 +192,7 @@ def retrieve_all():
                 for item in items:
                     aux[cursor.description[i][0]] = item
                     i += 1
+                aux2.append(aux)
         aux.pop("password")
         js = {"msg": "Usuarios encontrados", "code": 200, "lista": aux2}
         con.close()

@@ -5,7 +5,7 @@
       <p class="form-label2">Inicie sesión</p>
       <label class="form-label" for="#email">Email: </label>
       <input
-        v-mode="userLogin.email"
+        v-model="userLogin.email"
         class="from_input"
         type="email"
         id="email"
@@ -45,26 +45,25 @@ export default {
       email: "",
       password: "",
     },
-    error: false,
+    error: 0,
+    aux: {},
   }),
   methods: {
     async login() {
-      try {
-        await auth.login(this.userLogin);
-        //const user = {
-        //email: this.email,
-        //};
-        //auth.setUserLogged(user);
+      this.aux = await auth.login(this.userLogin);
+      this.aux = this.aux.data;
+      //const user = {
+      //email: this.email,
+      //};
+      //auth.setUserLogged(user);
+      if (this.aux.code === 400) {
+        this.error = true;
+        console.log("Credenciales incorrectas");
+      } else if (this.aux.code === 200) {
         this.$router.push("/home");
-      } catch (error) {
-        if (error === 400) {
-          this.error = true;
-          console.log("Credenciales incorrectas");
-        } else if (error === 200) {
-          console.log("OK");
-        } else {
-          this.error = true;
-        }
+        console.log("OK");
+      } else {
+        this.error = true;
       }
     },
   },

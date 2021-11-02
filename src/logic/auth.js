@@ -23,8 +23,9 @@ export default {
     return axios.post(API, user);
   },
 
-  put(user) {
-    return axios.put(API + "update", user);
+  post(user) {
+    //let usuario = {}
+    return axios.post(API + "update?id=" + user.id, user);
   },
   get() {
     let response = axios.get(API + "retrieve_all");

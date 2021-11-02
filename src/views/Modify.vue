@@ -42,7 +42,7 @@ export default {
       } else {
         this.usu.role = 2;
       }
-      let response = await auth.put(this.usu);
+      let response = await auth.post(this.usu);
       console.log(response.data);
       this.$router.go(-1);
     },

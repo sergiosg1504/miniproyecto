@@ -290,7 +290,7 @@ def delete():
             return jsonify(js)
 
 
-@app.route("/check_email", method=["POST"])
+@app.route("/check_email", methods=["POST"])
 def check_email():
     request_data = request.get_json()
     param = dict(request_data)
@@ -316,7 +316,7 @@ def check_email():
         return jsonify(js)
 
 
-@app.route("/update_password", method=["POST"])
+@app.route("/update_password", methods=["POST"])
 def update_password():
     request_data = request.get_json()
     param = dict(request_data)
@@ -328,27 +328,21 @@ def update_password():
             "msg": "Un error ha ocurrido en la conexión a la base de datos" + err.msg, "code": 500}
         return jsonify(js)
     cursor = con.cursor()
-    if len(param) != 4:
-        js = {"msg": "No se han recibido todos los datos correctamente", "code": 400}
+    query = "UPDATE users SET password='{}' WHERE email='{}'".format(
+        param["password"], param["email"])
+    try:
+        cursor.execute(query)
+        con.commit()
+    except mysql.connector.Error as err:
+        js = {"msg": "Error al actualizar la base de datos" +
+              err.msg, "code": 500}
         con.close()
         cursor.close()
         return jsonify(js)
-    else:
-        query = "UPDATE users SET password='{}' WHERE email='{}'".format(
-            param["password"], param["email"])
-        try:
-            cursor.execute(query)
-            con.commit()
-        except mysql.connector.Error as err:
-            js = {"msg": "Error al actualizar la base de datos" +
-                  err.msg, "code": 500}
-            con.close()
-            cursor.close()
-            return jsonify(js)
-        js = {"msg": "usuario actualizado correctamente", "code": 200}
-        con.close()
-        cursor.close()
-        return jsonify(js)
+    js = {"msg": "usuario actualizado correctamente", "code": 200}
+    con.close()
+    cursor.close()
+    return jsonify(js)
 
 
 app.run()

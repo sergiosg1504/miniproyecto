@@ -12,9 +12,8 @@ export default {
   register(user) {
     return axios.post(API + "register", user);
   },
-  login(email, password) {
-    const user = { email: email, password: password };
-    return axios.post(API + "login", user);
+  login(userLogin) {
+    return axios.post(API + "login", userLogin);
   },
   checkEmail(email) {
     return axios.post(API, email);

@@ -5,7 +5,7 @@
       <p class="form-label2">Inicie sesión</p>
       <label class="form-label" for="#email">Email: </label>
       <input
-        v-mode="email"
+        v-model="userLogin.email"
         class="from_input"
         type="email"
         id="email"
@@ -13,7 +13,7 @@
       />
       <label class="form-label" for="#password">Password:</label>
       <input
-        v-model="password"
+        v-model="userLogin.password"
         class="form-input"
         type="password"
         id="password"
@@ -41,28 +41,29 @@
 import auth from "@/logic/auth.js";
 export default {
   data: () => ({
-    email: "",
-    password: "",
-    error: false,
+    userLogin: {
+      email: "",
+      password: "",
+    },
+    error: 0,
+    aux: {},
   }),
   methods: {
     async login() {
-      try {
-        await auth.login(this.email, this.password);
-        //const user = {
-        //email: this.email,
-        //};
-        //auth.setUserLogged(user);
+      this.aux = await auth.login(this.userLogin);
+      this.aux = this.aux.data;
+      //const user = {
+      //email: this.email,
+      //};
+      //auth.setUserLogged(user);
+      if (this.aux.code === 400) {
+        this.error = true;
+        console.log("Credenciales incorrectas");
+      } else if (this.aux.code === 200) {
         this.$router.push("/home");
-      } catch (error) {
-        if (error === 400) {
-          this.error = true;
-          console.log("Credenciales incorrectas");
-        }
-        if (error === 200) console.log("OK");
-        else {
-          this.error = true;
-        }
+        console.log("OK");
+      } else {
+        this.error = true;
       }
     },
   },

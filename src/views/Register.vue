@@ -57,11 +57,11 @@
       />
       <p class="error" v-if="!passwordIsValid">Contraseña no valida</p>
       <input class="form-submit" type="submit" value="Registrarte" />
+      <p class="error" v-if="error === 1">Email ya registrado</p>
+      <p class="error" v-if="error === 2">
+        Error al actualizar. Intentelo mas tarde
+      </p>
     </form>
-    <p class="error" v-if="error === 1">Usuario ya registrado</p>
-    <p class="error" v-if="error === 2">
-      Error al actualizar. Intentelo mas tarde
-    </p>
     <p class="msg2">
       ¿Ya tienes cuenta?
       <router-link :to="{ name: 'login' }">Identificarse</router-link>
@@ -83,6 +83,7 @@ export default {
     passwordRepeat: "",
     expressionEmail: /\w+@\w+\.+[a-z]/,
     error: 0,
+    aux: {},
   }),
   computed: {
     emailIsValid() {
@@ -94,13 +95,14 @@ export default {
   },
   methods: {
     async register() {
-      try {
-        await auth.register(this.user);
-        this.$router.push("/");
-        // se envia email y no se deja entrar en la plataforma hasta validar
-      } catch (error) {
-        if (error === 409) this.error = 1;
-      }
+      this.aux = await auth.register(this.user);
+      this.aux = this.aux.data;
+      if (this.aux.code === 409) {
+        this.error = 1;
+        console.log("error");
+      } else if (this.aux.code === 500) this.error = 2;
+      else if (this.aux.code === 200) this.$router.push("/");
+      else this.error = 1;
     },
   },
 };

@@ -1,12 +1,19 @@
 <template>
   <div class="todo">
     <span class="container">
-      <img class="imagen" src="../assets/alumno.png" v-if="user.role === 1" />
       <img
         class="imagen"
-        id="p"
+        id="alumno"
+        src="../assets/alumno.png"
+        v-if="user.role === 1"
+        @click.prevent="cambiarImagen"
+      />
+      <img
+        class="imagen"
+        id="profesor"
         src="@/assets/Profesor.png"
         v-if="user.role === 2"
+        @click.prevent="cambiarImagen"
       />
     </span>
     <div>
@@ -23,7 +30,14 @@
 export default {
   name: "Profile",
   data: () => ({}),
-  methods: {},
+  methods: {
+    cambiarImagen() {
+      if (this.user.role === 1) {
+        document.getElementById("alumno").src = "/img/Profesor.34a14eab.png";
+      } else
+        document.getElementById("profesor").src = "/img/alumno.9ea70eaa.png";
+    },
+  },
   props: {
     user: Object,
   },

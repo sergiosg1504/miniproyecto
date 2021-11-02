@@ -25,13 +25,13 @@ export default {
   },
 
   put(user) {
-    return axios.put(API, user);
+    return axios.put(API + "update", user);
   },
   get() {
     let response = axios.get(API + "retrieve_all");
-    return response.data;
+    return response;
   },
-  async del(user) {
-    return axios.delete(API, user);
+  del(user) {
+    return axios.get(API + "delete?id=" + user.id);
   },
 };

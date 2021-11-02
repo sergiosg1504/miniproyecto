@@ -15,10 +15,10 @@
         <th>Rol</th>
       </tr>
       <tr v-for="(item, i) in arrayFiltrado" :key="i">
-        <td>{{ item.nombre }}</td>
-        <td>{{ item.apellidos }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.surnames }}</td>
         <td>{{ item.email }}</td>
-        <td>{{ rol(item.rol) }}</td>
+        <td>{{ rol(item.role) }}</td>
         <button @click="modify(item)" class="mod">Modificar</button>
         <button class="del" @click="del(item)">Eliminar</button>
         <user :user="item" />
@@ -37,26 +37,7 @@ export default {
     User,
   },
   data: () => ({
-    result: [
-      /*{
-        nombre: "Roberto",
-        apellidos: "Merchan Gonzalez",
-        email: "robertomergon@usal.es",
-        rol: 1,
-      },
-      {
-        nombre: "Sergio",
-        apellidos: "Sanchez Garcia",
-        email: "sergiosg@usal.es",
-        rol: 1,
-      },
-      {
-        nombre: "Juan Jose",
-        apellidos: "Lopez Carnero",
-        email: "jjlopez@usal.es",
-        rol: 2,
-      },*/
-    ],
+    result: [],
     texto: "",
     arrayFiltrado: [],
   }),
@@ -69,20 +50,26 @@ export default {
       else return "Profesor";
     },
     async getAlumnos() {
-      this.result = await auth.get();
-      console.log(this.result.data);
-      this.result.sort((a, b) => (a.apellidos > b.apellidos ? 1 : -1));
+      let aux1 = await auth.get();
+      let aux2 = aux1.data.lista;
+      let i = 0;
+      aux2.forEach((element) => {
+        this.result[i++] = element;
+      });
+      this.result.sort((a, b) => (a.surnames > b.surnames ? 1 : -1));
     },
     async del(data) {
       let confirmacion = confirm(
         "Estas seguro de que quieres eliminar a " +
-          data.nombre +
+          data.name +
           " " +
-          data.apellidos
+          data.surnames
       );
       if (confirmacion === true) {
         let response = await auth.del(data);
         console.log(response.data);
+        let index = this.result.findIndex((element) => element.id === data.id);
+        this.result.splice(index, 1);
       } else {
         console.log("Bye");
       }
@@ -96,7 +83,7 @@ export default {
       set(value) {
         value = value.toLowerCase();
         this.arrayFiltrado = this.result.filter(
-          (item) => item.nombre.toLowerCase().indexOf(value) !== -1
+          (item) => item.name.toLowerCase().indexOf(value) !== -1
         );
         this.texto = value;
       },

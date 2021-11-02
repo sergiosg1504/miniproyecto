@@ -18,9 +18,9 @@ export default {
   checkEmail(email) {
     return axios.post(API, email);
   },
-  updatePassword(email, password) {
-    const user = { email, password };
-    return axios.post(API, user);
+  updatePassword(user) {
+    // mirar que nombre de funcion de api esta bien
+    return axios.post(API + "upadatePassword", user);
   },
 
   put(user) {

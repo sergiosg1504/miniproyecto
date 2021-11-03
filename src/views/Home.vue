@@ -5,15 +5,25 @@
       <p>Aqui puedes ver el listado de alumnos:</p>
       <button @click="listado()">Ver listado usuarios</button>
     </div>
-    <button class="perfil" @click="perfil()">Mi Perfil</button>
+    <div class="arriba">
+      <button class="out" @click="logout()">Log out</button>
+      <button class="perfil" @click="perfil()">Mi Perfil</button>
+    </div>
   </div>
 </template>
 
 <script>
+import auth from "../logic/auth";
+
 export default {
   name: "Home",
   components: {},
-  data: () => ({}),
+  data: () => ({
+    userOut: {
+      email: this.usuario.email,
+      password: this.usuario.password,
+    },
+  }),
   props: {
     usuario: Object,
   },
@@ -22,10 +32,18 @@ export default {
   },
   methods: {
     listado() {
-      this.$router.push("list");
+      this.$router.push({
+        name: "ListView",
+        params: { userLog: this.usuario },
+      });
     },
     perfil() {
       this.$router.push({ name: "profile", params: { users: this.usuario } });
+    },
+    async logout() {
+      this.$router.push("/");
+      let res = await auth.out(this.userOut);
+      console.log(res);
     },
   },
 };
@@ -56,9 +74,17 @@ button {
   font-family: monospace;
 }
 
-.perfil {
+.arriba {
   position: absolute;
   top: 40px;
   right: 60px;
+}
+
+.perfil {
+  margin: 10px;
+}
+
+.out {
+  background: #f46a65;
 }
 </style>

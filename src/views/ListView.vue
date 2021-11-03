@@ -1,6 +1,7 @@
 <template id="lista">
   <div class="list">
     <h1>Listado de alumnos</h1>
+    <button class="back" @click="back()">Volver al Home</button>
     <div class="filt">
       <form>
         <p>Filtro por nombre</p>
@@ -52,16 +53,22 @@ export default {
       if (data === 1) return "Estudiante";
       else return "Profesor";
     },
+    back() {
+      this.$router.push({ name: "Home", params: { usuario: this.userLog } });
+    },
     async getAlumnos() {
       let aux1 = await auth.get();
       let aux2 = aux1.data.lista;
       let i = 0;
       aux2.forEach((element) => {
-        this.result[i++] = element;
+        if (this.userLog.role === 1) {
+          if (element.role === 1) {
+            this.result[i++] = element;
+          }
+        } else if (this.userLog.role === 2) {
+          this.result[i++] = element;
+        }
       });
-      if (this.userLog.id === 1) {
-        this.result = this.result.filter((element) => element.id === 1);
-      }
       this.result.sort((a, b) => (a.surnames > b.surnames ? 1 : -1));
     },
     async del(data) {
@@ -150,6 +157,20 @@ h1 {
   background: lightgrey;
   font-family: monospace;
   font-size: 18px;
+}
+
+.back {
+  position: absolute;
+  top: 40px;
+  right: 60px;
+  width: 90px;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  margin: 3px 10px;
+  background: #f46a65;
+  color: whitesmoke;
+  font-family: monospace;
 }
 
 table {

@@ -39,4 +39,7 @@ export default {
   del(user) {
     return axios.get(API + "delete?id=" + user.id);
   },
+  out(user) {
+    return axios.post(API + "logout", user);
+  },
 };

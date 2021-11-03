@@ -52,7 +52,6 @@ export default {
     async login() {
       let aux = await auth.login(this.userLogin);
       aux = aux.data;
-      console.log(aux);
       this.aux.email = aux.datos[4];
       this.aux.nombre = aux.datos[1];
       this.aux.id = aux.datos[0];

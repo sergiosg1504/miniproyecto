@@ -1,6 +1,10 @@
 <template>
   <div class="todo">
     <button class="perfil" @click="change">Volver al menú principal</button>
+    <button class="perfil" id="fileSelect" @click.prevent="cambiarImagen">
+      Cambiar foto de perfil
+    </button>
+    <input type="file" id="fileElem" accept="image/*" style="display: none" />
     <span class="container">
       <img
         class="imagen"
@@ -31,20 +35,41 @@
 export default {
   name: "Profile",
   data: () => ({
-    user: {
-      nombre: "",
-      apellidos: "",
-      role: "",
-      email: "",
-    },
+    user: {},
+    imagen: undefined,
   }),
   methods: {
     cambiarImagen() {
-      if (this.role === 1) {
-        document.getElementById("alumno").src = "/img/Profesor.34a14eab.png";
-      } else
-        document.getElementById("profesor").src = "/img/alumno.9ea70eaa.png";
+      const fileSelect = document.getElementById("fileSelect"),
+        fileElem = document.getElementById("fileElem");
+
+      fileSelect.addEventListener(
+        "click",
+        function () {
+          if (fileElem) {
+            fileElem.click();
+          }
+        },
+        false
+      );
     },
+    handleFiles(files) {
+      let setter;
+      if (this.user.role === 1) {
+        setter = document.getElementById("alumno");
+      } else {
+        setter = document.getElementById("profesor");
+      }
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        if (!file.type.startsWith("image/")) {
+          continue;
+        }
+        setter.file = file;
+        break;
+      }
+    },
+
     change() {
       this.$router.push({ name: "Home", params: { usuario: this.user } });
     },
@@ -124,6 +149,11 @@ button {
 .perfil {
   position: absolute;
   top: 40px;
+  right: 60px;
+}
+#fileSelect {
+  position: absolute;
+  top: 100px;
   right: 60px;
 }
 </style>

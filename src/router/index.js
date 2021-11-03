@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Login from "../views/Login";
 import Register from "../views/Register";
 import RememberPassword from "../views/RememberPassword";
+import ChangePassword from "../views/ChangePassword";
 import Home from "../views/Home.vue";
 import List from "../views/ListView.vue";
 import Mod from "../views/Modify.vue";
@@ -25,6 +26,11 @@ const routes = [
     path: "/rememberPassword",
     name: "rememberPassword",
     component: RememberPassword,
+  },
+  {
+    path: "/changePassword",
+    name: "changePassword",
+    component: ChangePassword,
   },
   {
     path: "/home",

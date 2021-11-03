@@ -1,18 +1,38 @@
 <template>
   <div class="remember-password">
     <h1 class="title">Recupera tu cuenta</h1>
-    <form action class="form" @submit.prevent="emailRegistered">
-      <label class="form-label" for="#email">Email:</label>
+    <form action class="form" @submit.prevent="changePassword">
+      <label class="form-label" for="#code">Código:</label>
       <input
-        v-model="email"
+        v-model="code"
         class="form-input"
-        type="email"
-        id="email"
+        type="code"
+        id="code"
         required
-        placeholder="Email"
+        placeholder="Codigo"
       />
-      <p class="error" v-if="!emailIsValid">Formato de email no valido</p>
-      <p class="error" v-if="error === 1">Email no registrado en la BD</p>
+      <label class="form-label" for="#password">Contraseña:</label>
+      <input
+        v-model="user.password"
+        class="form-input"
+        type="password"
+        id="password"
+        required
+        placeholder="Password"
+      />
+      <label class="form-label" for="#password-repeat"
+        >Repite la contraeña:</label
+      >
+      <input
+        v-model="passwordRepeat"
+        class="form-input"
+        type="password"
+        id="password-repeat"
+        required
+        placeholder="Password"
+      />
+      <p class="error" v-if="!codeIsValid">Código no valido</p>
+      <p class="error" v-if="!passwordIsValid">Contraseña no valida</p>
       <input
         class="form-submit"
         type="submit"
@@ -34,35 +54,30 @@
 import auth from "@/logic/auth";
 export default {
   data: () => ({
-    email: "",
+    datos: Object,
+    user: {
+      email: "",
+      password: "",
+    },
+    passwordRepeat: "",
     error: false,
-    expressionEmail: /\w+@\w+\.+[a-z]/,
     aux: {},
-    code: "",
+    code: 0,
   }),
   computed: {
-    emailIsValid() {
-      return this.expressionEmail.test(this.email);
+    codeIsValid() {
+      return this.datos.code === this.code;
+    },
+    passwordIsValid() {
+      return this.user.password === this.passwordRepeat;
     },
   },
   methods: {
-    async emailRegistered() {
-      this.aux = await auth.checkEmail(this.email);
+    async changePassword() {
+      this.user.email = this.datos.email;
+      this.aux = await auth.updatePassword(this.user);
       this.aux = this.aux.data;
-      if (this.aux.code === 400) {
-        console.log("error");
-        this.error = 1;
-      } else if (this.aux.code === 200) {
-        console.log("OK");
-        this.code = Math.floor(Math.random() * 9999);
-        console.log(this.code);
-        // enviar correo con el codigo
-        // mirar que se pasan bien las cosas
-        this.$router.push({
-          name: "ChangePassword",
-          params: { email: this.email, code: this.code },
-        });
-      }
+      // mirar lo que devuelve
     },
   },
 };

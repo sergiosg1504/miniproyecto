@@ -24,8 +24,13 @@ export default {
   },
 
   post(user) {
-    //let usuario = {}
-    return axios.post(API + "update?id=" + user.id, user);
+    let usuario = {
+      nombre: user.name,
+      apellidos: user.surnames,
+      email: user.email,
+      role: user.role,
+    };
+    return axios.post(API + "update?id=" + user.id, usuario);
   },
   get() {
     let response = axios.get(API + "retrieve_all");

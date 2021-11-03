@@ -15,7 +15,7 @@ export default {
   components: {},
   data: () => ({}),
   props: {
-    usuario: Array,
+    usuario: Object,
   },
   created() {
     console.log(this.usuario);
@@ -25,7 +25,7 @@ export default {
       this.$router.push("list");
     },
     perfil() {
-      this.$router.push({ name: "profile", params: { user: this.usuario } });
+      this.$router.push({ name: "profile", params: { users: this.usuario } });
     },
   },
 };

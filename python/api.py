@@ -265,19 +265,17 @@ def delete():
         if cursor.arraysize != 0:
             try:
                 cursor.execute(
-                    "DELETE FROM users WHERE id={}".format(param["id"]))
-                con.commit()
-            except mysql.connector.Error as err:
-                js = {"msg": "Error interno en la eliminación del usuario", "code": 500}
-                con.close()
-                cursor.close()
-                return jsonify(js)
-            try:
-                cursor.execute(
                     "DELETE FROM logins WHERE id_user={}".format(param["id"]))
                 con.commit()
             except mysql.connector.Error as err:
                 js = {"msg": "Usario eliminado no habia hecho login", "code": 500}
+
+            try:
+                cursor.execute(
+                    "DELETE FROM users WHERE id={}".format(param["id"]))
+                con.commit()
+            except mysql.connector.Error as err:
+                js = {"msg": "Error interno en la eliminación del usuario", "code": 500}
                 con.close()
                 cursor.close()
                 return jsonify(js)

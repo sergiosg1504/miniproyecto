@@ -30,7 +30,14 @@
 <script>
 export default {
   name: "Profile",
-  data: () => ({ nombre: "", apellidos: "", role: "", emai: "" }),
+  data: () => ({
+    user: {
+      nombre: "",
+      apellidos: "",
+      role: "",
+      email: "",
+    },
+  }),
   methods: {
     cambiarImagen() {
       if (this.role === 1) {
@@ -39,30 +46,27 @@ export default {
         document.getElementById("profesor").src = "/img/alumno.9ea70eaa.png";
     },
     change() {
-      this.$router.push("Home");
+      this.$router.push({ name: "Home", params: { usuario: this.user } });
     },
   },
   created() {
-    this.nombre = this.user[1];
-    this.apellidos = this.user[2];
-    this.role = this.user[3];
-    this.emai = this.user[4];
+    this.user = this.users;
   },
   props: {
-    user: Array,
+    users: Object,
   },
   computed: {
     Name() {
-      return this.nombre;
+      return this.user.nombre;
     },
     Surname() {
-      return this.apellidos;
+      return this.user.apellidos;
     },
     Email() {
-      return this.email;
+      return this.user.email;
     },
     Role() {
-      return this.role;
+      return this.user.role;
     },
   },
 };
@@ -105,5 +109,21 @@ a {
 #p {
   max-width: 30%;
   max-height: 30%;
+}
+button {
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  margin: 3px 10px;
+  background: #ecce4d;
+  margin: 15px 0;
+  color: rgb(37, 34, 34);
+  font-family: monospace;
+}
+
+.perfil {
+  position: absolute;
+  top: 40px;
+  right: 60px;
 }
 </style>

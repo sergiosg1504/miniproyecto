@@ -46,23 +46,28 @@ export default {
       password: "",
     },
     error: 0,
-    aux: {},
-    aux2: {},
+    aux: { id: "", nombre: "", apellidos: "", email: "", role: "" },
   }),
   methods: {
     async login() {
-      this.aux = await auth.login(this.userLogin);
-      this.aux = this.aux.data;
-      this.aux2 = this.aux.datos;
+      let aux = await auth.login(this.userLogin);
+      aux = aux.data;
+      console.log(aux);
+      this.aux.email = aux.datos[4];
+      this.aux.nombre = aux.datos[1];
+      this.aux.id = aux.datos[0];
+      this.aux.apellidos = aux.datos[2];
+      this.aux.role = aux.datos[3];
+
       //const user = {
       //email: this.email,
       //};
       //auth.setUserLogged(user);
-      if (this.aux.code === 400) {
+      if (aux.code === 400) {
         this.error = true;
         console.log("Credenciales incorrectas");
-      } else if (this.aux.code === 200) {
-        this.$router.push({ name: "Home", params: { usuario: this.aux2 } });
+      } else if (aux.code === 200) {
+        this.$router.push({ name: "Home", params: { usuario: this.aux } });
         console.log("OK");
       } else {
         this.error = true;

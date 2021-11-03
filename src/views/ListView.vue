@@ -36,6 +36,9 @@ export default {
   components: {
     User,
   },
+  props: {
+    userLog: Object,
+  },
   data: () => ({
     result: [],
     texto: "",
@@ -56,6 +59,9 @@ export default {
       aux2.forEach((element) => {
         this.result[i++] = element;
       });
+      if (this.userLog.id === 1) {
+        this.result = this.result.filter((element) => element.id === 1);
+      }
       this.result.sort((a, b) => (a.surnames > b.surnames ? 1 : -1));
     },
     async del(data) {
@@ -90,6 +96,7 @@ export default {
     },
   },
   created() {
+    console.log(this.userLog);
     this.getAlumnos();
     this.arrayFiltrado = this.result;
   },

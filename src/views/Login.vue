@@ -47,11 +47,13 @@ export default {
     },
     error: 0,
     aux: {},
+    aux2: {},
   }),
   methods: {
     async login() {
       this.aux = await auth.login(this.userLogin);
       this.aux = this.aux.data;
+      this.aux2 = this.aux.datos;
       //const user = {
       //email: this.email,
       //};
@@ -60,7 +62,7 @@ export default {
         this.error = true;
         console.log("Credenciales incorrectas");
       } else if (this.aux.code === 200) {
-        this.$router.push("/home");
+        this.$router.push({ name: "Home", params: { usuario: this.aux2 } });
         console.log("OK");
       } else {
         this.error = true;

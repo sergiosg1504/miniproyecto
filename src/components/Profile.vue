@@ -1,26 +1,27 @@
 <template>
   <div class="todo">
+    <button class="perfil" @click="change">Volver al menú principal</button>
     <span class="container">
       <img
         class="imagen"
         id="alumno"
         src="../assets/alumno.png"
-        v-if="user.role === 1"
+        v-if="Role === 1"
         @click.prevent="cambiarImagen"
       />
       <img
         class="imagen"
         id="profesor"
         src="@/assets/Profesor.png"
-        v-if="user.role === 2"
+        v-if="Role === 2"
         @click.prevent="cambiarImagen"
       />
     </span>
     <div>
-      <p>Me llamo {{ name }} {{ surname }}</p>
+      <p>Me llamo {{ Name }} {{ Surname }}</p>
       <p>
-        Podeis contactar conmigo a través de mi email: {{ email }} y mi rol es
-        {{ role }}
+        Podeis contactar conmigo a través de mi email: {{ Email }} y mi rol es
+        {{ Role }}
       </p>
     </div>
   </div>
@@ -29,30 +30,39 @@
 <script>
 export default {
   name: "Profile",
-  data: () => ({}),
+  data: () => ({ nombre: "", apellidos: "", role: "", emai: "" }),
   methods: {
     cambiarImagen() {
-      if (this.user.role === 1) {
+      if (this.role === 1) {
         document.getElementById("alumno").src = "/img/Profesor.34a14eab.png";
       } else
         document.getElementById("profesor").src = "/img/alumno.9ea70eaa.png";
     },
+    change() {
+      this.$router.push("Home");
+    },
+  },
+  created() {
+    this.nombre = this.user[1];
+    this.apellidos = this.user[2];
+    this.role = this.user[3];
+    this.emai = this.user[4];
   },
   props: {
-    user: Object,
+    user: Array,
   },
   computed: {
-    name() {
-      return this.user.nombre;
+    Name() {
+      return this.nombre;
     },
-    surname() {
-      return this.user.apellidos;
+    Surname() {
+      return this.apellidos;
     },
-    email() {
-      return this.user.email;
+    Email() {
+      return this.email;
     },
-    role() {
-      return this.user.role;
+    Role() {
+      return this.role;
     },
   },
 };

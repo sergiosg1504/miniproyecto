@@ -1,4 +1,5 @@
 import re
+from typing import List
 import flask
 from flask import request, jsonify
 from flask_cors import CORS
@@ -82,7 +83,10 @@ def login():
                 con.commit()
                 cursor.close()
                 con.close()
-                js = {"msg": "Los datos de login son correctos", "code": 200}
+                results = list(results)
+                results.remove(results[5])
+                js = {"msg": "Los datos de login son correctos",
+                      "code": 200, "datos": results}
                 return jsonify(js)
             except mysql.connector.Error as err:
                 js = {"msg": "Ha ocurrido un error interno ", "code": 500}

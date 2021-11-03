@@ -16,6 +16,7 @@ const routes = [
     path: "/",
     name: "login",
     component: Login,
+    props: true,
   },
   {
     path: "/register",
@@ -36,6 +37,7 @@ const routes = [
     path: "/home",
     name: "Home",
     component: Home,
+    props: true,
   },
   {
     path: "/profile",

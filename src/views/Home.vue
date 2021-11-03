@@ -13,20 +13,19 @@
 export default {
   name: "Home",
   components: {},
-  data: () => ({
-    prueba: {
-      nombre: "JuanJosé",
-      apellidos: "López",
-      email: "jjlopez19@usal.es",
-      role: 1,
-    },
-  }),
+  data: () => ({}),
+  props: {
+    usuario: Array,
+  },
+  created() {
+    console.log(this.usuario);
+  },
   methods: {
     listado() {
       this.$router.push("list");
     },
     perfil() {
-      this.$router.push({ name: "profile", params: { user: this.prueba } });
+      this.$router.push({ name: "profile", params: { user: this.usuario } });
     },
   },
 };

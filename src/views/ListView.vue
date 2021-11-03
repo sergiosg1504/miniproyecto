@@ -47,7 +47,7 @@ export default {
   }),
   methods: {
     modify(data) {
-      this.$router.push({ name: "Modify", params: { usu: data } });
+      this.$router.push({ name: "Modify", params: { usu: data, log: this.userLog } });
     },
     rol(data) {
       if (data === 1) return "Estudiante";

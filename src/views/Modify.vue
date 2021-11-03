@@ -28,13 +28,14 @@ export default {
   components: {},
   props: {
     usu: Object,
+    log: Object
   },
   data: () => ({
     selected: "",
   }),
   methods: {
     cancel() {
-      this.$router.go(-1);
+      this.$router.push({ name: "ListView", params: { userLog: this.log } });
     },
     async guardar() {
       if (this.selected === "Estudiante") {
@@ -44,7 +45,7 @@ export default {
       }
       let response = await auth.post(this.usu);
       console.log(response.data);
-      this.$router.go(-1);
+      this.$router.push({ name: "ListView", params: { userLog: this.log } });
     },
   },
 

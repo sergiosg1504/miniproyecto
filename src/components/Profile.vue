@@ -4,22 +4,16 @@
     <button class="perfil" id="fileSelect" @click.prevent="cambiarImagen">
       Cambiar foto de perfil
     </button>
-    <input type="file" id="fileElem" accept="image/*" style="display: none" />
+    <input
+      type="file"
+      id="fileElem"
+      accept="image/*"
+      style="display: none"
+      @change="handleFiles"
+    />
     <span class="container">
-      <img
-        class="imagen"
-        id="alumno"
-        src="../assets/alumno.png"
-        v-if="Role === 1"
-        @change="showImage"
-      />
-      <img
-        class="imagen"
-        id="profesor"
-        src="@/assets/Profesor.png"
-        v-if="Role === 2"
-        @change="showImage"
-      />
+      <img class="imagen" id="alumno" :src="imagen" v-if="Role === 1" />
+      <img class="imagen" id="profesor" :src="imagen" v-if="Role === 2" />
     </span>
     <div>
       <p>Me llamo {{ Name }} {{ Surname }}</p>
@@ -37,12 +31,12 @@ export default {
   data: () => ({
     user: {},
     imagen: undefined,
+    fileList: undefined,
   }),
   methods: {
     cambiarImagen() {
       const fileSelect = document.getElementById("fileSelect"),
         fileElem = document.getElementById("fileElem");
-
       fileSelect.addEventListener(
         "click",
         function () {
@@ -52,25 +46,11 @@ export default {
         },
         false
       );
-      this.handleFiles();
     },
-    handleFiles() {
-      let setter;
-      if (this.user.role === 1) {
-        setter = document.getElementById("alumno");
-      } else {
-        setter = document.getElementById("profesor");
-      }
-      console.log(setter);
-    },
-    showImage() {
-      let setter;
-      if (this.user.role === 1) {
-        setter = document.getElementById("alumno");
-      } else {
-        setter = document.getElementById("profesor");
-      }
-      console.log(setter);
+    handleFiles(event) {
+      this.fileList = event.target.files[0];
+      const objectURL = window.URL.createObjectURL(this.fileList);
+      this.imagen = objectURL;
     },
     change() {
       this.$router.push({ name: "Home", params: { usuario: this.user } });
@@ -78,6 +58,8 @@ export default {
   },
   created() {
     this.user = this.users;
+    if (this.user.role === 1) this.imagen = "/img/alumno.9ea70eaa.png";
+    else this.imagen = "/img/Profesor.34a14eab.png";
   },
   props: {
     users: Object,

@@ -67,12 +67,6 @@ export default {
       if (this.emailIsValid) {
         let aux = await auth.login(this.userLogin);
         aux = aux.data;
-        this.aux.email = aux.datos[4];
-        this.aux.nombre = aux.datos[1];
-        this.aux.id = aux.datos[0];
-        this.aux.apellidos = aux.datos[2];
-        this.aux.role = aux.datos[3];
-        this.aux.password = this.userLogin.password;
 
         //const user = {
         //email: this.email,
@@ -82,6 +76,12 @@ export default {
           this.error = true;
           console.log("Credenciales incorrectas");
         } else if (aux.code === 200) {
+          this.aux.email = aux.datos[4];
+          this.aux.nombre = aux.datos[1];
+          this.aux.id = aux.datos[0];
+          this.aux.apellidos = aux.datos[2];
+          this.aux.role = aux.datos[3];
+          this.aux.password = this.userLogin.password;
           this.$router.push({ name: "Home", params: { usuario: this.aux } });
           console.log("OK");
         } else {

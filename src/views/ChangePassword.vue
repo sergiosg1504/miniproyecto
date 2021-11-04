@@ -31,7 +31,9 @@
         required
         placeholder="Password"
       />
-      <p class="error" v-if="!validCode">Código no valido, vuelva a intentar</p>
+      <p class="error" v-if="!codeIsValid">
+        Código no valido, vuelva a intentar
+      </p>
       <p class="error" v-if="!passwordIsValid">Contraseña no valida</p>
       <input
         class="form-submit"
@@ -72,6 +74,9 @@ export default {
   computed: {
     passwordIsValid() {
       return this.user.password === this.passwordRepeat;
+    },
+    codeIsValid() {
+      return this.datos.code == this.code;
     },
   },
   methods: {

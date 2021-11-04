@@ -43,7 +43,12 @@ export default {
       email: em,
       password: pas,
     };
-    console.log(user);
     return axios.post(API + "logout", user);
+  },
+  save(image) {
+    return axios.post(API + "save_image", image);
+  },
+  recover(email) {
+    return axios.post(API + "recover_image", email);
   },
 };

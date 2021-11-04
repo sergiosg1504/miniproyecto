@@ -31,14 +31,14 @@
 </template>
 
 <script>
-import auth from "@/logic/auth";
+//import auth from "@/logic/auth";
 export default {
   data: () => ({
     email: "",
     error: false,
     expressionEmail: /\w+@\w+\.+[a-z]/,
     aux: {},
-    code: "",
+    code: 0,
   }),
   computed: {
     emailIsValid() {
@@ -47,22 +47,25 @@ export default {
   },
   methods: {
     async emailRegistered() {
-      this.aux = await auth.checkEmail(this.email);
-      this.aux = this.aux.data;
-      if (this.aux.code === 400) {
-        console.log("error");
-        this.error = 1;
-      } else if (this.aux.code === 200) {
-        console.log("OK");
-        this.code = Math.floor(Math.random() * 9999);
-        console.log(this.code);
-        // enviar correo con el codigo
-        // mirar que se pasan bien las cosas
-        this.$router.push({
-          name: "ChangePassword",
-          params: { email: this.email, code: this.code },
-        });
-      }
+      //this.aux = await auth.checkEmail(this.email);
+      //this.aux = this.aux.data;
+      //if (this.aux.code === 400) {
+      //console.log("Error email no registrado");
+      //this.error = 1;
+      //} else if (this.aux.code === 500) {
+      //console.log("Error con la conexion a base de datos");
+      //} else if (this.aux.code === 200) {
+      console.log("OK");
+      this.code = Math.floor(Math.random() * 9999);
+      console.log(this.code);
+      // enviar correo con el codigo
+      this.$router.push({
+        name: "changePassword",
+        params: { datos: { email: this.email, code: this.code } },
+      });
+      //} else {
+      //console.log("Error desconocido");
+      //}
     },
   },
 };

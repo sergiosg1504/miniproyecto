@@ -6,7 +6,7 @@
       <label class="form-label" for="#email">Email: </label>
       <input
         v-model="userLogin.email"
-        class="from_input"
+        class="form-input"
         type="email"
         id="email"
         placeholder="Email"
@@ -46,7 +46,14 @@ export default {
       password: "",
     },
     error: 0,
-    aux: { id: "", nombre: "", apellidos: "", email: "", role: "" },
+    aux: {
+      id: "",
+      nombre: "",
+      apellidos: "",
+      email: "",
+      role: "",
+      password: "",
+    },
   }),
   methods: {
     async login() {
@@ -57,6 +64,7 @@ export default {
       this.aux.id = aux.datos[0];
       this.aux.apellidos = aux.datos[2];
       this.aux.role = aux.datos[3];
+      this.aux.password = this.userLogin.password;
 
       //const user = {
       //email: this.email,

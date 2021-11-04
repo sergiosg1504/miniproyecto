@@ -16,11 +16,10 @@ export default {
     return axios.post(API + "login", userLogin);
   },
   checkEmail(email) {
-    return axios.post(API, email);
+    return axios.post(API + "check_email", email);
   },
   updatePassword(user) {
-    // mirar que nombre de funcion de api esta bien
-    return axios.post(API + "upadatePassword", user);
+    return axios.post(API + "update_password", user);
   },
 
   post(user) {

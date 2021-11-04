@@ -26,12 +26,14 @@
 </template>
 
 <script>
+import auth from "../logic/auth";
 export default {
   name: "Profile",
   data: () => ({
     user: {},
     imagen: undefined,
     fileList: undefined,
+    flag: false,
   }),
   methods: {
     cambiarImagen() {
@@ -51,15 +53,35 @@ export default {
       this.fileList = event.target.files[0];
       const objectURL = window.URL.createObjectURL(this.fileList);
       this.imagen = objectURL;
+      this.flag = true;
     },
-    change() {
-      this.$router.push({ name: "Home", params: { usuario: this.user } });
+    async change() {
+      if (this.flag) {
+        let data = { email: this.user.email, imagen: this.imagen };
+        console.log(data);
+        let aux = await auth.save(data);
+        aux = aux.data;
+        console.log(aux);
+        if (aux.code === 200) {
+          alert("Se ha almacenado la foto de perfil");
+          this.$router.push({ name: "Home", params: { usuario: this.user } });
+        } else alert("No se pudo almancenar la foto de perfil");
+      } else
+        this.$router.push({ name: "Home", params: { usuario: this.user } });
     },
   },
-  created() {
+  async created() {
+    this.flag = false;
     this.user = this.users;
-    if (this.user.role === 1) this.imagen = "/img/alumno.9ea70eaa.png";
-    else this.imagen = "/img/Profesor.34a14eab.png";
+    let data = { email: this.user.email };
+    let aux = await auth.recover(data);
+    aux = aux.data;
+    if (aux.code === 200) {
+      console.log("kk");
+    } else if (aux.code === 400) {
+      if (this.user.role === 1) this.imagen = "/img/alumno.9ea70eaa.png";
+      else this.imagen = "/img/Profesor.34a14eab.png";
+    } else console.log("Pues la he liado");
   },
   props: {
     users: Object,

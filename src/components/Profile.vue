@@ -11,21 +11,21 @@
         id="alumno"
         src="../assets/alumno.png"
         v-if="Role === 1"
-        @click.prevent="cambiarImagen"
+        @change="showImage"
       />
       <img
         class="imagen"
         id="profesor"
         src="@/assets/Profesor.png"
         v-if="Role === 2"
-        @click.prevent="cambiarImagen"
+        @change="showImage"
       />
     </span>
     <div>
       <p>Me llamo {{ Name }} {{ Surname }}</p>
       <p>
         Podeis contactar conmigo a través de mi email: {{ Email }} y mi rol es
-        {{ Role }}
+        {{ Role_Name }}
       </p>
     </div>
   </div>
@@ -52,24 +52,26 @@ export default {
         },
         false
       );
+      this.handleFiles();
     },
-    handleFiles(files) {
+    handleFiles() {
       let setter;
       if (this.user.role === 1) {
         setter = document.getElementById("alumno");
       } else {
         setter = document.getElementById("profesor");
       }
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        if (!file.type.startsWith("image/")) {
-          continue;
-        }
-        setter.file = file;
-        break;
-      }
+      console.log(setter);
     },
-
+    showImage() {
+      let setter;
+      if (this.user.role === 1) {
+        setter = document.getElementById("alumno");
+      } else {
+        setter = document.getElementById("profesor");
+      }
+      console.log(setter);
+    },
     change() {
       this.$router.push({ name: "Home", params: { usuario: this.user } });
     },
@@ -92,6 +94,10 @@ export default {
     },
     Role() {
       return this.user.role;
+    },
+    Role_Name() {
+      if (this.user.role === 1) return "Alumno";
+      else return "Profesor";
     },
   },
 };

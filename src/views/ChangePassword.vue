@@ -63,7 +63,7 @@ export default {
     passwordRepeat: "",
     error: false,
     aux: {},
-    code: 0,
+    code: "",
     validCode: true,
   }),
   props: {

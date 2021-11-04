@@ -30,7 +30,7 @@
         placeholder="Email"
       />
       <p class="error" v-if="!emailIsValid">Email no valido</p>
-      <label class="form-label" for="#rol">Rol:</label>
+      <label class="form-label" for="#rol" required>Rol:</label>
       <select class="form-input" v-model="user.role" id="role" required>
         <option value="1">Estudiante</option>
         <option value="2">Profesor</option>
@@ -95,7 +95,7 @@ export default {
   },
   methods: {
     async register() {
-      if (this.user.password === this.passwordRepeat) {
+      if (this.user.password === this.passwordRepeat && this.emailIsValid) {
         this.aux = await auth.register(this.user);
         this.aux = this.aux.data;
         if (this.aux.code === 409) {

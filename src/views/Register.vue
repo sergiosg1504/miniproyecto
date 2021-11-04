@@ -171,4 +171,9 @@ export default {
   margin: 1rem 0 0;
   color: #ff4a96;
 }
+
+option {
+  background: white;
+  color: black;
+}
 </style>

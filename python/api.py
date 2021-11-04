@@ -116,6 +116,7 @@ def logout():
         con.close()
         cursor.close()
         js = {"msg": "El usuario no existe en la bd", "code": 400}
+        
         return jsonify(js)
     else:
         if param["email"] == results[4] and param["password"] == results[5]:
@@ -131,11 +132,13 @@ def logout():
             except mysql.connector.Error as err:
                 js = {
                     "msg": "Un error interno ha ocurrido al hacer el logout", "code": 500}
+               
                 con.close()
                 cursor.close()
                 return jsonify(js)
         else:
             js = {"msg": "Los datos no coinciden", "code": 400}
+           
             con.close()
             cursor.close()
             return jsonify(js)

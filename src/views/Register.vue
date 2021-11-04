@@ -95,14 +95,18 @@ export default {
   },
   methods: {
     async register() {
-      this.aux = await auth.register(this.user);
-      this.aux = this.aux.data;
-      if (this.aux.code === 409) {
-        this.error = 1;
-        console.log("error");
-      } else if (this.aux.code === 500) this.error = 2;
-      else if (this.aux.code === 200) this.$router.push("/");
-      else this.error = 1;
+      if (this.user.password === this.passwordRepeat) {
+        this.aux = await auth.register(this.user);
+        this.aux = this.aux.data;
+        if (this.aux.code === 409) {
+          this.error = 1;
+          console.log("error");
+        } else if (this.aux.code === 500) this.error = 2;
+        else if (this.aux.code === 200) this.$router.push("/");
+        else this.error = 1;
+      } else {
+        console.log("Contraseñas distintas");
+      }
     },
   },
 };

@@ -394,6 +394,7 @@ def recover_image():
         results = cursor.fetchone()
         if results:
             if results[0]:
+                print(results[0])
                 js = {"msg": "Foto recuperada correctamente",
                       "code": 200, "datos": results[0]}
                 con.close()
@@ -412,4 +413,4 @@ def recover_image():
         return jsonify(js)
 
 
-app.run()
+app.run(host="0.0.0.0")

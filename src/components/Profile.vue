@@ -33,6 +33,7 @@ export default {
     imagen: undefined,
     fileList: undefined,
     flag: false,
+    aux: undefined,
   }),
   methods: {
     cambiarImagen() {
@@ -50,13 +51,14 @@ export default {
     },
     handleFiles(event) {
       this.fileList = event.target.files[0];
+      this.aux = this.fileList;
       const objectURL = window.URL.createObjectURL(this.fileList);
       this.imagen = objectURL;
       this.flag = true;
     },
     async change() {
       if (this.flag) {
-        let data = { email: this.user.email, imagen: this.imagen };
+        let data = { email: this.user.email, imagen: this.aux };
         let aux = await auth.save(data);
         aux = aux.data;
         if (aux.code === 200) {
@@ -78,9 +80,14 @@ export default {
     let aux = await auth.recover(data);
     aux = aux.data;
     if (aux.code === 200) {
-      /*let blob = new Blob([aux.datos],{type:"image/png"})
-      console.log(blob);
-      let f = new File([blob],"imagen",{type:"image/png"})
+      const reader = new FileReader();
+      let blob = new Blob([aux.datos], { type: "image/png" });
+      //console.log(blob);
+      reader.readAsDataURL(blob);
+      reader.onloadend = () => {
+        this.imagen = reader.result;
+      };
+      /*let f = new File([blob],"imagen",{type:"image/png"})
       console.log(f);
       let src=URL.createObjectURL(f);
       this.imagen=src*/

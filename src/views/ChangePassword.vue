@@ -83,7 +83,7 @@ export default {
     async changePassword() {
       if (
         this.user.password === this.passwordRepeat &&
-        this.datos.code === this.code
+        this.datos.code == this.code
       ) {
         console.log(this.datos.email);
         console.log(this.code);

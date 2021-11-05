@@ -67,6 +67,21 @@ export default {
         console.log("Error desconocido");
       }
     },
+    /* async sendEmail(){
+      // luego quitar
+      console.log("OK");
+      this.code = Math.floor(Math.random() * 9999);
+      console.log(this.code);
+      this.aux = await auth.sendEmail({ email: this.email, code: this.code});
+      this.aux = this.aux.data;
+      if(this.aux.code === 400){
+        console.log("Error en el envio del email");
+      } else if (this.aux.code === 200) {
+        console.log("Email enviado")
+      } else {
+        console.log("Error indefinido");
+      }
+    } */
   },
 };
 </script>

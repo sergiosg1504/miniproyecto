@@ -21,7 +21,7 @@
         placeholder="Password"
       />
       <p v-if="error" class="error">
-        Combinación email-contraseña introducida no válida
+        Combinación email-contraseña introducida no válida, vuelve a intentarlo
       </p>
       <input class="form-submit" type="submit" value="Login" />
       <hr class="form-hr" />

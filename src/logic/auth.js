@@ -3,6 +3,8 @@ import Cookies from "js-cookie";
 //import mail from "../../node/index.js";
 
 const API = "http://127.0.0.1:5000/";
+const API_node = "http://localhost:3000/";
+
 export default {
   setUserLogged(userLogged) {
     Cookies.set("userLogged", userLogged);
@@ -52,7 +54,7 @@ export default {
   recover(email) {
     return axios.post(API + "recover_image", email);
   },
-  /*enviarEmail() {
-    mail.EnviarCorreoConfirmacion();
-  },*/
+  sendEmail(data) {
+    return axios.post(API_node, data);
+  },
 };

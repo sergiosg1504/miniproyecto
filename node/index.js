@@ -2,7 +2,7 @@
 const express = require("express");
 const app = express();
 //const path = require('path')
-const nodemailer = require("nodemailer");
+//const nodemailer = require("nodemailer");
 
 // settings
 app.set("port", 3000);
@@ -20,35 +20,32 @@ app.get("/", (req, res) => {
 
 app.listen(app.get("port"), () => {
   console.log(`Aplicacion corriendo en el puerto ${app.get("port")}`);
+  /*function sendEmail(data) {
+    var transport = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: "correo",
+        pass: "contraseña",
+      },
+    });
+    var mailOptions = {
+      from: "sergiosg@usal.es",
+      to: "robertomergon@usal.es",
+      subject: "Please read me ",
+      text: "Hola",
+    };
+    transport.sendMail(mailOptions, function (error) {
+      console.log("Enviando correo");
+      if (error) {
+        console.log("Envio fallido");
+        callback(true);
+        return 400;
+      } else {
+        console.log("Envio correcto");
+        callback(false);
+        return 200;
+      }
+      console.log("Finalizacon envio de correo");
+    });
+  }*/
 });
-
-EnviarCorreoConfirmacion();
-
-function EnviarCorreoConfirmacion(callback) {
-  var transport = nodemailer.createTransport({
-    service: "Gmail",
-    auth: {
-      user: "correo",
-      pass: "contraseña",
-    },
-  });
-
-  var mailOptions = {
-    from: "sergiosg@usal.es",
-    to: "robertomergon@usal.es",
-    subject: "Please read me ",
-    text: "Hola",
-  };
-
-  transport.sendMail(mailOptions, function (error) {
-    //console.log(msg_str_altervpn_ini);
-    if (error) {
-      //console.log(msg_str_mail_error + msg_str_mail_respu + error);
-      callback(true);
-    } else {
-      //console.log(msg_str_mail_envia + msg_str_mail_respu + info.response);
-      callback(false);
-    }
-    //console.log(msg_str_altervpn_fin);
-  });
-}

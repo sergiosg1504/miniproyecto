@@ -1,5 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import mail from "../../node/index.js";
 
 const API = "http://127.0.0.1:5000/";
 export default {
@@ -50,5 +51,8 @@ export default {
   },
   recover(email) {
     return axios.post(API + "recover_image", email);
+  },
+  enviarEmail() {
+    mail.EnviarCorreoConfirmacion();
   },
 };

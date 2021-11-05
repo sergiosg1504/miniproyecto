@@ -57,10 +57,8 @@ export default {
     async change() {
       if (this.flag) {
         let data = { email: this.user.email, imagen: this.imagen };
-        console.log(data);
         let aux = await auth.save(data);
         aux = aux.data;
-        console.log(aux);
         if (aux.code === 200) {
           alert("Se ha almacenado la foto de perfil");
           this.$router.push({ name: "Home", params: { usuario: this.user } });
@@ -73,15 +71,21 @@ export default {
     },
   },
   async created() {
-    const imga = document.querySelector(".imagen");
-    console.log(imga);
+    //const imga = document.querySelector(".imagen");
     this.flag = false;
     this.user = this.users;
     let data = { email: this.user.email };
     let aux = await auth.recover(data);
     aux = aux.data;
     if (aux.code === 200) {
-      console.log(aux);
+      /*let blob = new Blob([aux.datos],{type:"image/png"})
+      console.log(blob);
+      let f = new File([blob],"imagen",{type:"image/png"})
+      console.log(f);
+      let src=URL.createObjectURL(f);
+      this.imagen=src*/
+      if (this.user.role === 1) this.imagen = require("../assets/alumno.png");
+      else this.imagen = require("../assets/Profesor.png");
     } else if (aux.code === 400) {
       if (this.user.role === 1) this.imagen = require("../assets/alumno.png");
       else this.imagen = require("../assets/Profesor.png");

@@ -14,7 +14,6 @@
 
 <script>
 import auth from "../logic/auth";
-
 export default {
   name: "Home",
   components: {},
@@ -43,7 +42,6 @@ export default {
     },
     async logout() {
       this.$router.push("/");
-
       let res = await auth.out(this.userOut.email, this.userOut.password);
       console.log(res.data);
     },

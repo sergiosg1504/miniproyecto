@@ -40,6 +40,7 @@
 
 <script>
 import auth from "@/logic/auth.js";
+import { Encrypt } from "@/logic/aes.js";
 export default {
   data: () => ({
     userLogin: {
@@ -65,13 +66,11 @@ export default {
   methods: {
     async login() {
       if (this.emailIsValid) {
+        console.log(this.userLogin.password);
+        this.userLogin.password = Encrypt(this.userLogin.password);
+        console.log(this.userLogin.password);
         let aux = await auth.login(this.userLogin);
         aux = aux.data;
-
-        //const user = {
-        //email: this.email,
-        //};
-        //auth.setUserLogged(user);
         if (aux.code === 400) {
           this.error = true;
           console.log("Credenciales incorrectas");

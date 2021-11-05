@@ -4,45 +4,41 @@
     <button class="perfil" id="fileSelect" @click.prevent="cambiarImagen">
       Cambiar foto de perfil
     </button>
-    <input type="file" id="fileElem" accept="image/*" style="display: none" />
+    <input
+      type="file"
+      id="fileElem"
+      accept="image/*"
+      style="display: none"
+      @change="handleFiles"
+    />
     <span class="container">
-      <img
-        class="imagen"
-        id="alumno"
-        src="../assets/alumno.png"
-        v-if="Role === 1"
-        @click.prevent="cambiarImagen"
-      />
-      <img
-        class="imagen"
-        id="profesor"
-        src="@/assets/Profesor.png"
-        v-if="Role === 2"
-        @click.prevent="cambiarImagen"
-      />
+      <img class="imagen" id="alumno" :src="imagen" v-if="Role === 1" />
+      <img class="imagen" id="profesor" :src="imagen" v-if="Role === 2" />
     </span>
     <div>
       <p>Me llamo {{ Name }} {{ Surname }}</p>
       <p>
         Podeis contactar conmigo a través de mi email: {{ Email }} y mi rol es
-        {{ Role }}
+        {{ Role_Name }}
       </p>
     </div>
   </div>
 </template>
 
 <script>
+import auth from "../logic/auth";
 export default {
   name: "Profile",
   data: () => ({
     user: {},
     imagen: undefined,
+    fileList: undefined,
+    flag: false,
   }),
   methods: {
     cambiarImagen() {
       const fileSelect = document.getElementById("fileSelect"),
         fileElem = document.getElementById("fileElem");
-
       fileSelect.addEventListener(
         "click",
         function () {
@@ -53,29 +49,39 @@ export default {
         false
       );
     },
-    handleFiles(files) {
-      let setter;
-      if (this.user.role === 1) {
-        setter = document.getElementById("alumno");
-      } else {
-        setter = document.getElementById("profesor");
-      }
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        if (!file.type.startsWith("image/")) {
-          continue;
-        }
-        setter.file = file;
-        break;
-      }
+    handleFiles(event) {
+      this.fileList = event.target.files[0];
+      const objectURL = window.URL.createObjectURL(this.fileList);
+      this.imagen = objectURL;
+      this.flag = true;
     },
-
-    change() {
-      this.$router.push({ name: "Home", params: { usuario: this.user } });
+    async change() {
+      if (this.flag) {
+        let data = { email: this.user.email, imagen: this.imagen };
+        console.log(data);
+        let aux = await auth.save(data);
+        aux = aux.data;
+        console.log(aux);
+        if (aux.code === 200) {
+          alert("Se ha almacenado la foto de perfil");
+          this.$router.push({ name: "Home", params: { usuario: this.user } });
+        } else alert("No se pudo almancenar la foto de perfil");
+      } else
+        this.$router.push({ name: "Home", params: { usuario: this.user } });
     },
   },
-  created() {
+  async created() {
+    this.flag = false;
     this.user = this.users;
+    let data = { email: this.user.email };
+    let aux = await auth.recover(data);
+    aux = aux.data;
+    if (aux.code === 200) {
+      console.log("kk");
+    } else if (aux.code === 400) {
+      if (this.user.role === 1) this.imagen = "/img/alumno.9ea70eaa.png";
+      else this.imagen = "/img/Profesor.34a14eab.png";
+    } else console.log("Pues la he liado");
   },
   props: {
     users: Object,
@@ -92,6 +98,10 @@ export default {
     },
     Role() {
       return this.user.role;
+    },
+    Role_Name() {
+      if (this.user.role === 1) return "Alumno";
+      else return "Profesor";
     },
   },
 };

@@ -11,7 +11,7 @@
         required
         placeholder="Codigo"
       />
-      <label class="form-label" for="#password">Nueva contraseña:</label>
+      <label class="form-label" for="#password">Contraseña:</label>
       <input
         v-model="user.password"
         class="form-input"
@@ -31,9 +31,7 @@
         required
         placeholder="Password"
       />
-      <p class="error" v-if="!codeIsValid">
-        Código no valido, vuelva a intentar
-      </p>
+      <p class="error" v-if="!codeIsValid">Código no valido</p>
       <p class="error" v-if="!passwordIsValid">Contraseña no valida</p>
       <input
         class="form-submit"
@@ -55,9 +53,8 @@
 <script>
 import auth from "@/logic/auth";
 export default {
-  name: "ChangePassword",
-  components: {},
   data: () => ({
+    datos: Object,
     user: {
       email: "",
       password: "",
@@ -65,50 +62,22 @@ export default {
     passwordRepeat: "",
     error: false,
     aux: {},
-    code: "",
-    validCode: true,
+    code: 0,
   }),
-  props: {
-    datos: Object,
-  },
   computed: {
+    codeIsValid() {
+      return this.datos.code === this.code;
+    },
     passwordIsValid() {
       return this.user.password === this.passwordRepeat;
-    },
-    codeIsValid() {
-      return this.datos.code == this.code;
     },
   },
   methods: {
     async changePassword() {
-      if (
-        this.user.password === this.passwordRepeat &&
-        this.datos.code === this.code
-      ) {
-        console.log(this.datos.email);
-        console.log(this.code);
-        console.log(this.datos.code);
-        this.user.email = this.datos.email;
-        this.aux = await auth.updatePassword(this.user);
-        this.aux = this.aux.data;
-        if (this.aux.code === 400) {
-          console.log("Error datos no recibidos correctamente");
-          this.error = 1;
-        } else if (this.aux.code === 500) {
-          console.log("Error con la conexion a base de datos");
-        } else if (this.aux.code === 200) {
-          this.$router.push({ name: "login" });
-          console.log("OK");
-        } else {
-          console.log("Error desconocido");
-        }
-      } else {
-        if (this.code !== this.datos.code) {
-          this.validCode = false;
-          console.log("Codigos no iguales");
-        }
-        console.log("Contraseñas no iguales");
-      }
+      this.user.email = this.datos.email;
+      this.aux = await auth.updatePassword(this.user);
+      this.aux = this.aux.data;
+      // mirar lo que devuelve
     },
   },
 };

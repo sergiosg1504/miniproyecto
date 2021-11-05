@@ -116,7 +116,6 @@ def logout():
         con.close()
         cursor.close()
         js = {"msg": "El usuario no existe en la bd", "code": 400}
-
         return jsonify(js)
     else:
         if param["email"] == results[4] and param["password"] == results[5]:
@@ -132,13 +131,11 @@ def logout():
             except mysql.connector.Error as err:
                 js = {
                     "msg": "Un error interno ha ocurrido al hacer el logout", "code": 500}
-
                 con.close()
                 cursor.close()
                 return jsonify(js)
         else:
             js = {"msg": "Los datos no coinciden", "code": 400}
-
             con.close()
             cursor.close()
             return jsonify(js)
@@ -347,63 +344,6 @@ def update_password():
     con.close()
     cursor.close()
     return jsonify(js)
-
-
-@app.route("/save_image", methods=["POST"])
-def save_Image():
-    request_data = request.get_json()
-    param = dict(request_data)
-    try:
-        con = mysql.connector.connect(**config)
-    except mysql.connector.Error as err:
-        js = {
-            "msg": "Un error ha ocurrido en la conexión a la base de datos" + err.msg, "code": 500}
-        return jsonify(js)
-    cursor = con.cursor()
-    query = "UPDATE users SET Profile_Image='{}' WHERE email='{}'".format(
-        param["imagen"], param["email"])
-    try:
-        cursor.execute(query)
-        con.commit()
-    except mysql.connector.Error as err:
-        js = {"msg": "Error al actualizar la base de datos" +
-              err.msg, "code": 500}
-        con.close()
-        cursor.close()
-        return jsonify(js)
-    js = {"msg": "Foto de perfil almacenada correctamente", "code": 200}
-    con.close()
-    cursor.close()
-    return jsonify(js)
-
-
-@app.route("/recover_image", methods=["POST"])
-def recover_image():
-    request_data = request.get_json()
-    param = dict(request_data)
-    try:
-        con = mysql.connector.connect(**config)
-    except mysql.connector.Error as err:
-        js = {
-            "msg": "Un error ha ocurrido en la conexión a la base de datos" + err.msg, "code": 500}
-        return jsonify(js)
-    cursor = con.cursor()
-    query = "SELECT profile_image from USERS WHERE email='{}'".format(
-        param["email"])
-    try:
-        cursor.execute(query)
-        results = cursor.fetchone()
-        if results:
-            js = {"msg": "papo", "code": 500, "datos": results[0].toString()}
-            con.close()
-            cursor.close()
-            return jsonify(js)
-    except mysql.connector.Error as err:
-        js = {"msg": "Error interno" +
-              err.msg, "code": 500}
-        con.close()
-        cursor.close()
-        return jsonify(js)
 
 
 app.run()

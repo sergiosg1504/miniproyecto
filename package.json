@@ -10,8 +10,11 @@
   "dependencies": {
     "axios": "^0.24.0",
     "core-js": "^3.6.5",
+<<<<<<< HEAD
     "dns": "^0.2.2",
     "emailjs-com": "^3.2.0",
+=======
+>>>>>>> parent of cf66dcd (Merge branch 'vue_unido_def' of https://github.com/robertomergon/miniproyecto into vue_unido_def)
     "js-cookie": "^3.0.1",
     "nodemailer": "^6.7.0",
     "vue-router": "^3.2.0"

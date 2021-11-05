@@ -6,12 +6,11 @@
       <label class="form-label" for="#email">Email: </label>
       <input
         v-model="userLogin.email"
-        class="form-input"
+        class="from_input"
         type="email"
         id="email"
         placeholder="Email"
       />
-      <p class="error" v-if="!emailIsValid">Email no valido</p>
       <label class="form-label" for="#password">Password:</label>
       <input
         v-model="userLogin.password"
@@ -47,48 +46,30 @@ export default {
       password: "",
     },
     error: 0,
-    expressionEmail: /\w+@\w+\.+[a-z]/,
-    aux: {
-      id: "",
-      nombre: "",
-      apellidos: "",
-      email: "",
-      role: "",
-      password: "",
-    },
+    aux: { id: "", nombre: "", apellidos: "", email: "", role: "" },
   }),
-  computed: {
-    emailIsValid() {
-      return this.expressionEmail.test(this.userLogin.email);
-    },
-  },
   methods: {
     async login() {
-      if (this.emailIsValid) {
-        let aux = await auth.login(this.userLogin);
-        aux = aux.data;
+      let aux = await auth.login(this.userLogin);
+      aux = aux.data;
+      this.aux.email = aux.datos[4];
+      this.aux.nombre = aux.datos[1];
+      this.aux.id = aux.datos[0];
+      this.aux.apellidos = aux.datos[2];
+      this.aux.role = aux.datos[3];
 
-        //const user = {
-        //email: this.email,
-        //};
-        //auth.setUserLogged(user);
-        if (aux.code === 400) {
-          this.error = true;
-          console.log("Credenciales incorrectas");
-        } else if (aux.code === 200) {
-          this.aux.email = aux.datos[4];
-          this.aux.nombre = aux.datos[1];
-          this.aux.id = aux.datos[0];
-          this.aux.apellidos = aux.datos[2];
-          this.aux.role = aux.datos[3];
-          this.aux.password = this.userLogin.password;
-          this.$router.push({ name: "Home", params: { usuario: this.aux } });
-          console.log("OK");
-        } else {
-          this.error = true;
-        }
+      //const user = {
+      //email: this.email,
+      //};
+      //auth.setUserLogged(user);
+      if (aux.code === 400) {
+        this.error = true;
+        console.log("Credenciales incorrectas");
+      } else if (aux.code === 200) {
+        this.$router.push({ name: "Home", params: { usuario: this.aux } });
+        console.log("OK");
       } else {
-        console.log("Email no valido");
+        this.error = true;
       }
     },
   },

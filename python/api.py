@@ -1,10 +1,9 @@
-import re
-from typing import List
 import flask
 from flask import request, jsonify
 from flask_cors import CORS
 
 import mysql.connector
+
 
 app = flask.Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
@@ -394,10 +393,17 @@ def recover_image():
         cursor.execute(query)
         results = cursor.fetchone()
         if results:
-            js = {"msg": "papo", "code": 500, "datos": results[0].toString()}
-            con.close()
-            cursor.close()
-            return jsonify(js)
+            if results[0]:
+                js = {"msg": "Foto recuperada correctamente",
+                      "code": 200, "datos": results[0]}
+                con.close()
+                cursor.close()
+                return jsonify(js)
+            else:
+                js = {"msg": "No hay foto de perfil almacenada", "code": 400}
+                con.close()
+                cursor.close()
+                return jsonify(js)
     except mysql.connector.Error as err:
         js = {"msg": "Error interno" +
               err.msg, "code": 500}

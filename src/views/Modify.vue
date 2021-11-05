@@ -28,7 +28,7 @@ export default {
   components: {},
   props: {
     usu: Object,
-    log: Object
+    log: Object,
   },
   data: () => ({
     selected: "",
@@ -40,8 +40,14 @@ export default {
     async guardar() {
       if (this.selected === "Estudiante") {
         this.usu.role = 1;
+        if (this.usu.email === this.log.email) {
+          this.log.role = this.usu.role;
+        }
       } else {
         this.usu.role = 2;
+        if (this.usu.email === this.log.email) {
+          this.log.role = this.usu.role;
+        }
       }
       let response = await auth.post(this.usu);
       console.log(response.data);

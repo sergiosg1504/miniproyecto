@@ -5,7 +5,11 @@
     <div class="filt">
       <form>
         <p>Filtro por nombre</p>
-        <input class="filter" type="text" v-model="filtro" />
+        <input class="filter" type="text" v-model="filtroN" />
+        <p>Filtro por apellido</p>
+        <input class="filter" type="text" v-model="filtroA" />
+        <p>Filtro por email</p>
+        <input class="filter" type="text" v-model="filtroE" />
       </form>
     </div>
     <table>
@@ -47,7 +51,10 @@ export default {
   }),
   methods: {
     modify(data) {
-      this.$router.push({ name: "Modify", params: { usu: data, log: this.userLog } });
+      this.$router.push({
+        name: "Modify",
+        params: { usu: data, log: this.userLog },
+      });
     },
     rol(data) {
       if (data === 1) return "Estudiante";
@@ -89,7 +96,7 @@ export default {
     },
   },
   computed: {
-    filtro: {
+    filtroN: {
       get() {
         return this.texto;
       },
@@ -97,6 +104,30 @@ export default {
         value = value.toLowerCase();
         this.arrayFiltrado = this.result.filter(
           (item) => item.name.toLowerCase().indexOf(value) !== -1
+        );
+        this.texto = value;
+      },
+    },
+    filtroA: {
+      get() {
+        return this.texto;
+      },
+      set(value) {
+        value = value.toLowerCase();
+        this.arrayFiltrado = this.result.filter(
+          (item) => item.surnames.toLowerCase().indexOf(value) !== -1
+        );
+        this.texto = value;
+      },
+    },
+    filtroE: {
+      get() {
+        return this.texto;
+      },
+      set(value) {
+        value = value.toLowerCase();
+        this.arrayFiltrado = this.result.filter(
+          (item) => item.email.toLowerCase().indexOf(value) !== -1
         );
         this.texto = value;
       },
@@ -141,10 +172,11 @@ h1 {
 }
 
 .filt {
+  position: absolute;
   text-align: center;
   margin: 0 40px;
   background: white;
-  height: 70px;
+  height: 270px;
   width: 250px;
   border-radius: 5px;
   box-shadow: 0 3px 5px 2px rgba(0, 0, 0, 0.3);
@@ -161,7 +193,7 @@ h1 {
 
 .back {
   position: absolute;
-  top: 40px;
+  top: 20px;
   right: 60px;
   width: 90px;
   height: 40px;

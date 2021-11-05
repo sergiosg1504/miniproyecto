@@ -17,11 +17,10 @@ export default {
     return axios.post(API + "login", userLogin);
   },
   checkEmail(email) {
-    return axios.post(API, email);
+    return axios.post(API + "check_email", email);
   },
   updatePassword(user) {
-    // mirar que nombre de funcion de api esta bien
-    return axios.post(API + "upadatePassword", user);
+    return axios.post(API + "update_password", user);
   },
 
   post(user) {
@@ -40,10 +39,13 @@ export default {
   del(user) {
     return axios.get(API + "delete?id=" + user.id);
   },
-  out(user) {
+  out(em, pas) {
+    let user = {
+      email: em,
+      password: pas,
+    };
     return axios.post(API + "logout", user);
   },
-<<<<<<< HEAD
   save(image) {
     return axios.post(API + "save_image", image);
   },
@@ -53,6 +55,4 @@ export default {
   enviarEmail() {
     mail.EnviarCorreoConfirmacion();
   },
-=======
->>>>>>> parent of cf66dcd (Merge branch 'vue_unido_def' of https://github.com/robertomergon/miniproyecto into vue_unido_def)
 };

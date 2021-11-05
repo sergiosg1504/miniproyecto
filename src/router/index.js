@@ -27,11 +27,13 @@ const routes = [
     path: "/rememberPassword",
     name: "rememberPassword",
     component: RememberPassword,
+    props: true,
   },
   {
     path: "/changePassword",
     name: "changePassword",
     component: ChangePassword,
+    props: true,
   },
   {
     path: "/home",

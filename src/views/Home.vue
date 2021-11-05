@@ -20,15 +20,16 @@ export default {
   components: {},
   data: () => ({
     userOut: {
-      email: this.usuario.email,
-      password: this.usuario.password,
+      email: "",
+      password: "",
     },
   }),
   props: {
     usuario: Object,
   },
   created() {
-    console.log(this.usuario);
+    this.userOut.email = this.usuario.email;
+    this.userOut.password = this.usuario.password;
   },
   methods: {
     listado() {
@@ -42,8 +43,9 @@ export default {
     },
     async logout() {
       this.$router.push("/");
-      let res = await auth.out(this.userOut);
-      console.log(res);
+
+      let res = await auth.out(this.userOut.email, this.userOut.password);
+      console.log(res.data);
     },
   },
 };

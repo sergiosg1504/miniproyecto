@@ -12,13 +12,12 @@
       @change="handleFiles"
     />
     <span class="container">
-      <img class="imagen" id="alumno" :src="imagen" v-if="Role === 1" />
-      <img class="imagen" id="profesor" :src="imagen" v-if="Role === 2" />
+      <img class="imagen" :src="imagen" />
     </span>
     <div>
       <p>Me llamo {{ Name }} {{ Surname }}</p>
       <p>
-        Podeis contactar conmigo a través de mi email: {{ Email }} y mi rol es
+        Podeis contactar conmigo a través de mi email: {{ Email }} y soy
         {{ Role_Name }}
       </p>
     </div>
@@ -65,22 +64,27 @@ export default {
         if (aux.code === 200) {
           alert("Se ha almacenado la foto de perfil");
           this.$router.push({ name: "Home", params: { usuario: this.user } });
-        } else alert("No se pudo almancenar la foto de perfil");
+        } else {
+          alert("No se pudo almancenar la foto de perfil");
+          this.$router.push({ name: "Home", params: { usuario: this.user } });
+        }
       } else
         this.$router.push({ name: "Home", params: { usuario: this.user } });
     },
   },
   async created() {
+    const imga = document.querySelector(".imagen");
+    console.log(imga);
     this.flag = false;
     this.user = this.users;
     let data = { email: this.user.email };
     let aux = await auth.recover(data);
     aux = aux.data;
     if (aux.code === 200) {
-      console.log("kk");
+      console.log(aux);
     } else if (aux.code === 400) {
-      if (this.user.role === 1) this.imagen = "/img/alumno.9ea70eaa.png";
-      else this.imagen = "/img/Profesor.34a14eab.png";
+      if (this.user.role === 1) this.imagen = require("../assets/alumno.png");
+      else this.imagen = require("../assets/Profesor.png");
     } else console.log("Pues la he liado");
   },
   props: {

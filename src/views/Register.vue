@@ -103,12 +103,14 @@ export default {
         this.aux = this.aux.data;
         if (this.aux.code === 409) {
           this.error = 1;
-          console.log("error");
+          console.log("Error el usuario ya existe en la DB");
         } else if (this.aux.code === 500) {
           this.error = 2;
+          console.log("Error en la base de datos");
+        } else if (this.aux.code === 200) {
           console.log("OK");
-        } else if (this.aux.code === 200) this.$router.push("/");
-        else this.error = 1;
+          this.$router.push("/");
+        } else this.error = 1;
       } else {
         console.log("Contraseñas distintas");
       }

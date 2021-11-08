@@ -14,7 +14,7 @@
       <p class="error" v-if="!emailIsValid">Email no valido</p>
       <label class="form-label" for="#password">Password:</label>
       <input
-        v-model="userLogin.password"
+        v-model="aux.password"
         class="form-input"
         type="password"
         id="password"
@@ -67,7 +67,7 @@ export default {
     async login() {
       if (this.emailIsValid) {
         console.log(this.userLogin.password);
-        this.userLogin.password = Encrypt(this.userLogin.password);
+        this.userLogin.password = Encrypt(this.aux.password);
         let aux = await auth.login(this.userLogin);
         aux = aux.data;
         if (aux.code === 400) {
@@ -79,11 +79,11 @@ export default {
           this.aux.id = aux.datos[0];
           this.aux.apellidos = aux.datos[2];
           this.aux.role = aux.datos[3];
-          this.aux.password = this.userLogin.password;
           this.$router.push({ name: "Home", params: { usuario: this.aux } });
           console.log("OK");
         } else {
           this.error = true;
+          console.log("Error desconocido");
         }
       } else {
         console.log("Email no valido");

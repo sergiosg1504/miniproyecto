@@ -5,6 +5,7 @@ import Register from "../views/Register";
 import RememberPassword from "../views/RememberPassword";
 import ChangePassword from "../views/ChangePassword";
 import Home from "../views/Home.vue";
+import Meeting from "../views/Meeting.vue";
 import List from "../views/ListView.vue";
 import Mod from "../views/Modify.vue";
 import Profile from "../components/Profile.vue";
@@ -57,6 +58,12 @@ const routes = [
     path: "/mod",
     name: "Modify",
     component: Mod,
+    props: true,
+  },
+  {
+    path: "/meetingRoom",
+    name: "meeting",
+    component: Meeting,
     props: true,
   },
 ];

@@ -1,9 +1,11 @@
 <template>
   <div class="home">
+    <p class="bien">¡Bienvenido a la pagina de inicio!</p>
     <div>
-      <p class="bien">¡Bienvenido a la pagina de inicio!</p>
       <p>Aqui puedes ver el listado de alumnos:</p>
       <button @click="listado()">Ver listado usuarios</button>
+      <p>Ir a la sala de reuiniones</p>
+      <button @click="meeting()">Reunirse</button>
     </div>
     <div class="arriba">
       <button class="out" @click="logout()">Log out</button>
@@ -14,6 +16,7 @@
 
 <script>
 import auth from "../logic/auth";
+import { Encrypt } from "@/logic/aes.js";
 export default {
   name: "Home",
   components: {},
@@ -40,8 +43,12 @@ export default {
     perfil() {
       this.$router.push({ name: "profile", params: { users: this.usuario } });
     },
+    meeting() {
+      this.$router.push({ name: "meeting", params: { users: this.usuario } });
+    },
     async logout() {
       this.$router.push("/");
+      this.userOut.password = Encrypt(this.userOut.password);
       let res = await auth.out(this.userOut.email, this.userOut.password);
       console.log(res.data);
     },
@@ -56,7 +63,7 @@ export default {
   text-align: center;
   margin: 200px auto;
   width: 500px;
-  height: 200px;
+  height: 300px;
   padding: 10px;
 }
 .bien {

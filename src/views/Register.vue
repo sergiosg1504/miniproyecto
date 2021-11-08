@@ -37,7 +37,7 @@
       </select>
       <label class="form-label" for="#password">Password:</label>
       <input
-        v-model="user.password"
+        v-model="password"
         class="form-input"
         type="password"
         id="password"
@@ -81,6 +81,7 @@ export default {
       password: "",
       role: 0,
     },
+    password: "",
     passwordRepeat: "",
     expressionEmail: /\w+@\w+\.+[a-z]/,
     error: 0,
@@ -91,14 +92,14 @@ export default {
       return this.expressionEmail.test(this.user.email);
     },
     passwordIsValid() {
-      return this.user.password === this.passwordRepeat;
+      return this.password === this.passwordRepeat;
     },
   },
   methods: {
     async register() {
-      if (this.user.password === this.passwordRepeat && this.emailIsValid) {
+      if (this.password === this.passwordRepeat && this.emailIsValid) {
         // encriptacion contraseña
-        this.user.password = Encrypt(this.user.password);
+        this.user.password = Encrypt(this.password);
         this.aux = await auth.register(this.user);
         this.aux = this.aux.data;
         if (this.aux.code === 409) {

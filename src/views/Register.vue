@@ -71,7 +71,7 @@
 
 <script>
 import auth from "@/logic/auth";
-import { Encrypt } from "@/logic/aes.js";
+//import { Encrypt } from "@/logic/aes.js";
 export default {
   data: () => ({
     user: {
@@ -99,7 +99,7 @@ export default {
       if (this.user.password === this.passwordRepeat && this.emailIsValid) {
         // encriptacion contraseña
         console.log(this.user.password);
-        this.user.password = Encrypt(this.user.password);
+        //this.user.password = Encrypt(this.user.password);
         console.log(this.user.password);
         this.aux = await auth.register(this.user);
         this.aux = this.aux.data;

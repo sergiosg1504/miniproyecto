@@ -98,16 +98,16 @@ export default {
     async register() {
       if (this.user.password === this.passwordRepeat && this.emailIsValid) {
         // encriptacion contraseña
-        console.log(this.user.password);
         this.user.password = Encrypt(this.user.password);
-        console.log(this.user.password);
         this.aux = await auth.register(this.user);
         this.aux = this.aux.data;
         if (this.aux.code === 409) {
           this.error = 1;
           console.log("error");
-        } else if (this.aux.code === 500) this.error = 2;
-        else if (this.aux.code === 200) this.$router.push("/");
+        } else if (this.aux.code === 500) {
+          this.error = 2;
+          console.log("OK");
+        } else if (this.aux.code === 200) this.$router.push("/");
         else this.error = 1;
       } else {
         console.log("Contraseñas distintas");

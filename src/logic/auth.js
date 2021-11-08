@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 //import mail from "../../node/index.js";
 
-const API = "http://172.28.199.92:5000/";
+const API = "http://172.28.238.132:5000/";
 const API_node = "http://localhost:3000/";
 
 export default {

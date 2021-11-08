@@ -1,4 +1,4 @@
-//const { UV_FS_O_FILEMAP } = require('constants')
+//const { send } = require("emailjs-com");
 const express = require("express");
 const app = express();
 //const path = require('path')
@@ -20,32 +20,33 @@ app.get("/", (req, res) => {
 
 app.listen(app.get("port"), () => {
   console.log(`Aplicacion corriendo en el puerto ${app.get("port")}`);
-  /*function sendEmail(data) {
-    var transport = nodemailer.createTransport({
-      service: "Gmail",
-      auth: {
-        user: "correo",
-        pass: "contraseña",
-      },
-    });
-    var mailOptions = {
-      from: "sergiosg@usal.es",
-      to: "robertomergon@usal.es",
-      subject: "Please read me ",
-      text: "Hola",
-    };
-    transport.sendMail(mailOptions, function (error) {
-      console.log("Enviando correo");
-      if (error) {
-        console.log("Envio fallido");
-        callback(true);
-        return 400;
-      } else {
-        console.log("Envio correcto");
-        callback(false);
-        return 200;
-      }
-      console.log("Finalizacon envio de correo");
-    });
-  }*/
+  //sendEmail(data);
 });
+
+/*function sendEmail(data) {
+  var transport = nodemailer.createTransport({
+    service: "Gmail",
+    auth: {
+      user: "correo",
+      pass: "contraseña",
+    },
+  });
+  var mailOptions = {
+    from: "sergiosg@usal.es",
+    to: "robertomergon@usal.es",
+    subject: "Please read me ",
+    text: "Hola",
+  };
+  transport.sendMail(mailOptions, function (error) {
+    console.log("Enviando correo");
+    if (error) {
+      console.log("Envio fallido");
+      callback(true);
+      return 400;
+    } else {
+      console.log("Envio correcto");
+      callback(false);
+      return 200;
+    }
+  });
+}*/

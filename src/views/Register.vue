@@ -71,7 +71,7 @@
 
 <script>
 import auth from "@/logic/auth";
-//import { Encrypt } from "@/logic/aes.js";
+import { Encrypt } from "@/logic/aes.js";
 export default {
   data: () => ({
     user: {
@@ -98,17 +98,19 @@ export default {
     async register() {
       if (this.user.password === this.passwordRepeat && this.emailIsValid) {
         // encriptacion contraseña
-        console.log(this.user.password);
-        //this.user.password = Encrypt(this.user.password);
-        console.log(this.user.password);
+        this.user.password = Encrypt(this.user.password);
         this.aux = await auth.register(this.user);
         this.aux = this.aux.data;
         if (this.aux.code === 409) {
           this.error = 1;
-          console.log("error");
-        } else if (this.aux.code === 500) this.error = 2;
-        else if (this.aux.code === 200) this.$router.push("/");
-        else this.error = 1;
+          console.log("Error el usuario ya existe en la DB");
+        } else if (this.aux.code === 500) {
+          this.error = 2;
+          console.log("Error en la base de datos");
+        } else if (this.aux.code === 200) {
+          console.log("OK");
+          this.$router.push("/");
+        } else this.error = 1;
       } else {
         console.log("Contraseñas distintas");
       }

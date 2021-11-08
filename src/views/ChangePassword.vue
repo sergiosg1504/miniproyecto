@@ -54,6 +54,7 @@
 
 <script>
 import auth from "@/logic/auth";
+import { Encrypt } from "@/logic/aes.js";
 export default {
   name: "ChangePassword",
   components: {},
@@ -89,6 +90,7 @@ export default {
         console.log(this.code);
         console.log(this.datos.code);
         this.user.email = this.datos.email;
+        this.user.password = Encrypt(this.user.password);
         this.aux = await auth.updatePassword(this.user);
         this.aux = this.aux.data;
         if (this.aux.code === 400) {

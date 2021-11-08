@@ -419,4 +419,4 @@ def recover_image():
         return jsonify(js)
 
 
-app.run(host="0.0.0.0", port="5000")
+app.run(port="5000")

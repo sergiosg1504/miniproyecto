@@ -15,7 +15,8 @@
     "emailjs-com": "^3.2.0",
     "js-cookie": "^3.0.1",
     "nodemailer": "^6.7.0",
-    "vue-router": "^3.2.0"
+    "vue-router": "^3.2.0",
+    "vuescroll": "^4.17.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

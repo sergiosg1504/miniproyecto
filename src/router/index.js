@@ -9,6 +9,7 @@ import Meeting from "../views/Meeting.vue";
 import List from "../views/ListView.vue";
 import Mod from "../views/Modify.vue";
 import Profile from "../components/Profile.vue";
+import MeetConfig from "../views/MeetConfig.vue";
 
 Vue.use(VueRouter);
 
@@ -64,6 +65,12 @@ const routes = [
     path: "/meetingRoom",
     name: "meeting",
     component: Meeting,
+    props: true,
+  },
+  {
+    path: "/meetConfig",
+    name: "meetConfig",
+    component: MeetConfig,
     props: true,
   },
 ];

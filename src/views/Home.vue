@@ -44,7 +44,10 @@ export default {
       this.$router.push({ name: "profile", params: { users: this.usuario } });
     },
     meeting() {
-      this.$router.push({ name: "reuniones", params: { users: this.usuario } });
+      this.$router.push({
+        name: "meetReuniones",
+        params: { users: this.usuario },
+      });
     },
     async logout() {
       this.$router.push("/");

@@ -15,16 +15,16 @@
 export default {
   methods: {
     click_Reuniones() {
-      this.$router.push({ name: "reuniones" });
+      this.$router.push({ name: "meetReuniones" });
     },
     click_Seminarios() {
-      this.$router.push({ name: "seminarios" });
+      this.$router.push({ name: "meetSeminarios" });
     },
     click_Grabaciones() {
-      this.$router.push({ name: "grabaciones" });
+      this.$router.push({ name: "meetGrabaciones" });
     },
     click_Configuracion() {
-      this.$router.push({ name: "configuracion" });
+      this.$router.push({ name: "meetConfiguracion" });
     },
   },
 };

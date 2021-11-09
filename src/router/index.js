@@ -5,9 +5,10 @@ import Register from "../views/Register";
 import RememberPassword from "../views/RememberPassword";
 import ChangePassword from "../views/ChangePassword";
 import Home from "../views/Home.vue";
-import Meeting from "../views/Meeting.vue";
+import Reuniones from "../views/Reuniones.vue";
 import List from "../views/ListView.vue";
 import Mod from "../views/Modify.vue";
+import NavigationBar from "../components/NavigationBar.vue";
 import Profile from "../components/Profile.vue";
 
 Vue.use(VueRouter);
@@ -61,9 +62,15 @@ const routes = [
     props: true,
   },
   {
-    path: "/meetingRoom",
-    name: "meeting",
-    component: Meeting,
+    path: "/navigationBar",
+    name: "NaviagationBar",
+    component: NavigationBar,
+    props: true,
+  },
+  {
+    path: "/reuniones",
+    name: "reuniones",
+    component: Reuniones,
     props: true,
   },
 ];

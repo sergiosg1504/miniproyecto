@@ -1,13 +1,9 @@
 <template>
   <div class="topnav">
-    <button :class="estado[0]" @click="changeStatus(0)">Reunión</button>
-    <button :class="estado[1]" @click="changeStatus(1)">Grabación</button>
-    <button :class="estado[2]" @click="changeStatus(2)">
-      Audioconferencia
-    </button>
-    <button :class="estado[3]" @click="changeStatus(3)">
-      Dispositivos de colaboración
-    </button>
+    <v-btn>Reunión</v-btn>
+    <v-btn>Grabación</v-btn>
+    <v-btn>Audioconferencia</v-btn>
+    <v-btn>Dispositivos de colaboración</v-btn>
   </div>
 </template>
 
@@ -17,18 +13,9 @@
     */
 export default {
   data: () => ({
-    estado: ["active", "non", "non", "non"],
+    clicked: false,
   }),
-  methods: {
-    changeStatus(clicked) {
-      this.estado.forEach((elemento) => {
-        elemento = "non";
-        console.log(elemento);
-      });
-      this.estado[clicked] = "active";
-      console.log(this.estado[clicked]);
-    },
-  },
+  methods: {},
 };
 </script>
 
@@ -51,12 +38,12 @@ export default {
 }
 
 /* Change the color of links on hover */
-.topnav button:hover {
+.topnav v-btn:hover {
   color: lightskyblue;
 }
 
 /* Add a color to the active/current link */
-.topnav button.active {
+.active {
   background-color: lightskyblue;
   color: white;
 }

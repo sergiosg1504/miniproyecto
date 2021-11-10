@@ -15,8 +15,10 @@
     "emailjs-com": "^3.2.0",
     "js-cookie": "^3.0.1",
     "nodemailer": "^6.7.0",
+    "vue-navigation-bar": "^4.1.0",
     "vue-router": "^3.2.0",
-    "vuescroll": "^4.17.3"
+    "vuescroll": "^4.17.3",
+    "vuetify": "^2.5.14"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

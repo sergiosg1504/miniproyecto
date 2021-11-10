@@ -10,6 +10,8 @@ import Mod from "../views/Modify.vue";
 import NavigationBar from "../components/NavigationBar.vue";
 import Profile from "../components/Profile.vue";
 import MeetReuniones from "../views/MeetReuniones.vue";
+import Proximos from "../views/MeetProximos.vue";
+import Anteriores from "../views/MeetAnteriores.vue";
 import MeetConfig from "../views/MeetConfig.vue";
 
 Vue.use(VueRouter);
@@ -72,6 +74,18 @@ const routes = [
     path: "/meetReuniones",
     name: "meetReuniones",
     component: MeetReuniones,
+    props: true,
+  },
+  {
+    path: "/proximos",
+    name: "proximos",
+    component: Proximos,
+    props: true,
+  },
+  {
+    path: "/anteriores",
+    name: "anteriores",
+    component: Anteriores,
     props: true,
   },
   {

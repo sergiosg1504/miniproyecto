@@ -1,50 +1,64 @@
 <template>
-  <div class="topnav">
-    <v-btn>Reunión</v-btn>
-    <v-btn>Grabación</v-btn>
-    <v-btn>Audioconferencia</v-btn>
-    <v-btn>Dispositivos de colaboración</v-btn>
+  <div>
+    <div class="topnav">
+      <v-bottom-navigation :value="valor" height="40" grow>
+        <v-btn @click="setMeet">Reunión </v-btn>
+        <v-btn @click="setRec">Grabación </v-btn>
+        <v-btn @click="setAudio">Audioconferencia </v-btn>
+        <v-btn @click="setDisp">Dispositivos de colaboracón</v-btn>
+      </v-bottom-navigation>
+    </div>
+    <div class="reunion" v-if="content === 1">
+      <p>Reuniones</p>
+    </div>
+    <div class="rec" v-if="content === 2">
+      <p>Grabación</p>
+    </div>
+    <div class="audio" v-if="content === 3">
+      <p>Audioconferencia</p>
+    </div>
+    <div class="disp" v-if="content === 4">
+      <p>Grabación</p>
+    </div>
   </div>
 </template>
 
 <script>
-/*import Vue from 'vue';
-    import vuescroll from 'vuescroll';
-    */
+import Vue from "vue";
+//import vuescroll from 'vuescroll';
+import Vuetify from "vuetify/lib/";
+Vue.use(Vuetify);
 export default {
   data: () => ({
-    clicked: false,
+    content: 1,
+    valor: 1,
   }),
-  methods: {},
+  methods: {
+    setMeet() {
+      this.content = 1;
+      console.log(this.content);
+    },
+    setRec() {
+      this.content = 2;
+      console.log(this.content);
+    },
+    setAudio() {
+      this.content = 3;
+      console.log(this.content);
+    },
+    setDisp() {
+      this.content = 4;
+      console.log(this.content);
+    },
+  },
 };
 </script>
 
 <style>
-.topnav {
-  background-color: #333;
-  overflow: hidden;
-}
-
-/* Style the links inside the navigation bar */
-.topnav button {
-  float: left;
-  color: #f2f2f2;
+p {
+  font-size: 28px;
+  font-weight: bold;
   text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-  background: transparent;
-  border: none;
-}
-
-/* Change the color of links on hover */
-.topnav v-btn:hover {
-  color: lightskyblue;
-}
-
-/* Add a color to the active/current link */
-.active {
-  background-color: lightskyblue;
-  color: white;
+  margin: 20px;
 }
 </style>

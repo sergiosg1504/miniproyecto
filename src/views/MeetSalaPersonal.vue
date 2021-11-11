@@ -2,7 +2,7 @@
   <div>
     <div><navigation-bar /></div>
     <div>
-      <h1>Próximos</h1>
+      <h1>Sala Personal</h1>
     </div>
   </div>
 </template>

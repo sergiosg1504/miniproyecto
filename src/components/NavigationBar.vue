@@ -5,9 +5,9 @@
         Reuniones<i class="fa fa-caret-down"></i>
       </button>
       <div class="subnav-content">
-        <a href="{ name : MeetReunionesProximos}">Próximos</a>
-        <a href="">Anteriores</a>
-        <a href="">Sala personal</a>
+        <a href="/proximos">Próximos</a>
+        <a href="/anteriores">Anteriores</a>
+        <a href="/salaPersonal">Sala personal</a>
       </div>
     </div>
     <div class="subnav">
@@ -15,9 +15,9 @@
         Próximos<i class="fa fa-carret-down"></i>
       </button>
       <div class="subnav-content">
-        <a href="">Reunión</a>
-        <a href="">Grabación</a>
-        <a href="">Audioconferencia</a>
+        <a href="/reunion">Reunión</a>
+        <a href="/grabacion">Grabación</a>
+        <a href="/audioconferencia">Audioconferencia</a>
       </div>
     </div>
   </div>

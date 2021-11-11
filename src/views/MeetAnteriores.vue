@@ -1,7 +1,9 @@
 <template>
   <div>
     <div><navigation-bar /></div>
-    <div></div>
+    <div>
+      <h1>Anteriores</h1>
+    </div>
   </div>
 </template>
 
@@ -15,35 +17,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.general {
-  float: left;
-}
-#caja1,
-#caja2 {
-  border: 1px solid black;
-  width: 200px;
-  height: 160px;
-  margin: 20px;
-  float: left;
-  vertical-align: middle;
-}
-.navigation {
-  position: absolute;
-  vertical-align: top;
-}
-.header {
-  text-align: center;
-}
-button {
-  height: 60px;
-  border-radius: 20px;
-  border: none;
-  margin: 3px 10px;
-  background: white;
-  margin: 15px 0;
-  color: gray;
-  font-family: monospace;
-  font-size: 15px;
-}
-</style>
+<style scoped></style>

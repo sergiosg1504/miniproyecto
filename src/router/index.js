@@ -9,9 +9,9 @@ import List from "../views/ListView.vue";
 import Mod from "../views/Modify.vue";
 import NavigationBar from "../components/NavigationBar.vue";
 import Profile from "../components/Profile.vue";
-import MeetReuniones from "../views/MeetReuniones.vue";
-import Proximos from "../views/MeetProximos.vue";
-import Anteriores from "../views/MeetAnteriores.vue";
+import MeetProximos from "../views/MeetProximos.vue";
+import MeetAnteriores from "../views/MeetAnteriores.vue";
+import MeetSalaPersonal from "../views/MeetSalaPersonal.vue";
 import MeetConfig from "../views/MeetConfig.vue";
 
 Vue.use(VueRouter);
@@ -71,21 +71,21 @@ const routes = [
     props: true,
   },
   {
-    path: "/meetReuniones",
-    name: "meetReuniones",
-    component: MeetReuniones,
-    props: true,
-  },
-  {
     path: "/proximos",
     name: "proximos",
-    component: Proximos,
+    component: MeetProximos,
     props: true,
   },
   {
     path: "/anteriores",
     name: "anteriores",
-    component: Anteriores,
+    component: MeetAnteriores,
+    props: true,
+  },
+  {
+    path: "/salaPersonal",
+    name: "salaPersonal",
+    component: MeetSalaPersonal,
     props: true,
   },
   {

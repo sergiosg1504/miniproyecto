@@ -1,6 +1,17 @@
 <template>
-  <div class="navbar">
-    <div class="subnav">
+  <div>
+    <v-app>
+      <v-card>
+        <v-tabs v-model="tab" background-color="#4cc4ec" dark>
+          <v-tab @click="click_Reuniones">Reuniones</v-tab>
+          <v-tab @click="click_SeminariosWeb">Seminarios web</v-tab>
+          <v-tab @click="click_Grabaciones">Grabaciones</v-tab>
+          <v-tab @click="click_Configuracion">Configuración</v-tab>
+        </v-tabs>
+      </v-card>
+    </v-app>
+  </div>
+  <!--<div class="navbar">
       <button class="subnavbtn">
         Reuniones<i class="fa fa-caret-down"></i>
       </button>
@@ -20,78 +31,29 @@
         <a href="/audioconferencia">Audioconferencia</a>
       </div>
     </div>
-  </div>
+  </div>-->
 </template>
 
 <script>
-export default {};
+export default {
+  data: () => ({
+    button: 0,
+  }),
+  methods: {
+    click_Reuniones() {
+      this.$router.push({ name: "Reuniones" });
+    },
+    click_SeminariosWeb() {
+      this.$router.push({ name: "SeminariosWeb" });
+    },
+    click_Grabaciones() {
+      this.$router.push({ name: "Grabaciones" });
+    },
+    click_Configuracion() {
+      this.$router.push({ name: "Configuracion" });
+    },
+  },
+};
 </script>
 
-<style scoped>
-.navbar {
-  overflow: hidden;
-  background-color: lightskyblue;
-}
-
-/* Navigation links */
-.navbar a {
-  float: left;
-  font-size: 16px;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-/* The subnavigation menu */
-.subnav {
-  float: left;
-  overflow: hidden;
-}
-
-/* Subnav button */
-.subnav .subnavbtn {
-  font-size: 16px;
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
-}
-
-/* Add a red background color to navigation links on hover */
-.navbar a:hover,
-.subnav:hover .subnavbtn {
-  background-color: lightgray;
-}
-
-/* Style the subnav content - positioned absolute */
-.subnav-content {
-  display: none;
-  position: absolute;
-  left: 0;
-  background-color: lightgray;
-  width: 100%;
-  z-index: 1;
-}
-
-/* Style the subnav links */
-.subnav-content a {
-  float: left;
-  color: white;
-  text-decoration: none;
-}
-
-/* Add a grey background color on hover */
-.subnav-content a:hover {
-  background-color: #eee;
-  color: black;
-}
-
-/* When you move the mouse over the subnav container, open the subnav content */
-.subnav:hover .subnav-content {
-  display: block;
-}
-</style>
+<style scoped></style>

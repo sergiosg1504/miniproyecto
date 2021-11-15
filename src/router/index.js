@@ -10,6 +10,7 @@ import Mod from "../views/Modify.vue";
 import Profile from "../components/Profile.vue";
 import NavigationBar from "../components/NavigationBar.vue";
 import MeetReuniones from "../views/MeetReuniones.vue";
+import MeetSeminariosWeb from "../views/MeetSeminariosWeb.vue";
 import MeetConfig from "../views/MeetConfig.vue";
 
 Vue.use(VueRouter);
@@ -72,6 +73,12 @@ const routes = [
     path: "/reuniones",
     name: "Reuniones",
     component: MeetReuniones,
+    props: true,
+  },
+  {
+    path: "/seminariosWeb",
+    name: "SeminariosWeb",
+    component: MeetSeminariosWeb,
     props: true,
   },
   {

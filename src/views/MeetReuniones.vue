@@ -1,125 +1,59 @@
 <template>
   <div>
     <div><navigation-bar /></div>
+    <h1 class="header">REUNIONES</h1>
     <div>
-      <h1 class="header">Anteriores</h1>
-      <div>
-        <v-app>
-          <v-data-table :headers="headers" :items="desserts" hide-actions>
-          </v-data-table>
-        </v-app>
-      </div>
+      <v-app id="inspire">
+        <v-card>
+          <v-tabs v-model="tab" background-color="#4cc4ec" dark>
+            <v-tab @click="click_Proximos">Próximos</v-tab>
+            <v-tab @click="click_Anterior">Anterior</v-tab>
+            <v-tab @click="click_SalaPersonal">Sala personal</v-tab>
+          </v-tabs>
+          <div v-if="menu === 0">
+            <h1>Próximos</h1>
+          </div>
+          <div v-if="menu === 1">
+            <h1>Anterior</h1>
+          </div>
+          <div v-if="menu === 2">
+            <h1>Sala personal</h1>
+          </div>
+        </v-card>
+      </v-app>
     </div>
   </div>
 </template>
+
 <script>
 import NavigationBar from "@/components/NavigationBar.vue";
-//import auth from "../logic/auth";
-import Vue from "vue";
-import Vuetify from "vuetify";
-Vue.use(Vuetify);
 export default {
-  components: { NavigationBar },
+  components: {
+    NavigationBar,
+  },
   data: () => ({
-    search: "",
-    calories: "",
-    desserts: [
-      {
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        carbs: 24,
-        protein: 4.0,
-        iron: "1%",
-      },
-      {
-        name: "Ice cream sandwich",
-        calories: 237,
-        fat: 9.0,
-        carbs: 37,
-        protein: 4.3,
-        iron: "1%",
-      },
-      {
-        name: "Eclair",
-        calories: 262,
-        fat: 16.0,
-        carbs: 23,
-        protein: 6.0,
-        iron: "7%",
-      },
-      {
-        name: "Cupcake",
-        calories: 305,
-        fat: 3.7,
-        carbs: 67,
-        protein: 4.3,
-        iron: "8%",
-      },
-      {
-        name: "Gingerbread",
-        calories: 356,
-        fat: 16.0,
-        carbs: 49,
-        protein: 3.9,
-        iron: "16%",
-      },
-      {
-        name: "Jelly bean",
-        calories: 375,
-        fat: 0.0,
-        carbs: 94,
-        protein: 0.0,
-        iron: "0%",
-      },
-      {
-        name: "Lollipop",
-        calories: 392,
-        fat: 0.2,
-        carbs: 98,
-        protein: 0,
-        iron: "2%",
-      },
-      {
-        name: "Honeycomb",
-        calories: 408,
-        fat: 3.2,
-        carbs: 87,
-        protein: 6.5,
-        iron: "45%",
-      },
-      {
-        name: "Donut",
-        calories: 452,
-        fat: 25.0,
-        carbs: 51,
-        protein: 4.9,
-        iron: "22%",
-      },
-      {
-        name: "KitKat",
-        calories: 518,
-        fat: 26.0,
-        carbs: 65,
-        protein: 7,
-        iron: "6%",
-      },
-    ],
+    menu: 0,
   }),
-  computed: {
-    headers() {
-      return [{ text: "Algo", value: "desserts" }];
+  methods: {
+    click_Proximos() {
+      this.menu = 0;
+    },
+    click_Anterior() {
+      this.menu = 1;
+    },
+    click_SalaPersonal() {
+      this.menu = 2;
     },
   },
-  methods: {},
 };
 </script>
+
 <style scoped>
 .header {
-  padding: 40px;
+  padding: 20px;
   text-align: center;
-  background: skyblue;
-  color: white;
+  background: white;
+  color: #4cc4ec;
   font-size: 40px;
   font-family: Georgia, "Times New Roman", Times, serif;
 }

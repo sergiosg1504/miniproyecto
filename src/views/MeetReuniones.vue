@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div><navigation-bar /></div>
+    <navigation-bar />
     <h1 class="header">REUNIONES</h1>
     <div>
       <v-app id="inspire">

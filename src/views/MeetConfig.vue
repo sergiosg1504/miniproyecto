@@ -1,5 +1,7 @@
 <template>
   <div>
+    <navigation-bar />
+    <h1 class="header">REUNIONES</h1>
     <div class="topnav">
       <v-app id="inspire">
         <v-card>
@@ -146,10 +148,10 @@
 import Vue from "vue";
 import Vuetify from "vuetify";
 Vue.use(Vuetify);
-//import NavigationBar from '../components/NavigationBar.vue';
+import NavigationBar from "../components/NavigationBar.vue";
 
 export default {
-  //components: { NavigationBar },
+  components: { NavigationBar },
   data: () => ({
     content: 1,
     op1: false,
@@ -184,6 +186,14 @@ export default {
 </script>
 
 <style scoped>
+.header {
+  padding: 20px;
+  text-align: center;
+  background: white;
+  color: #4cc4ec;
+  font-size: 40px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
 header {
   font-size: 28px;
   font-weight: bold;

@@ -16,6 +16,28 @@
           <div v-if="menu === 1">
             <h1>Anterior</h1>
           </div>
+          <div v-if="menu !== 2">
+            <div class="filt">
+              <form>
+                <p>Filtro por fecha</p>
+                <input class="filter" type="text" v-model="filtroFecha" />
+                <p>Filtro por hora</p>
+                <input class="filter" type="text" v-model="filtroHora" />
+              </form>
+            </div>
+            <table>
+              <tr>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Nombre</th>
+              </tr>
+              <tr v-for="(item, i) in arrayFiltrado" :key="i">
+                <td>{{ item.fecha }}</td>
+                <td>{{ item.hora }}</td>
+                <td>{{ item.nombre }}</td>
+              </tr>
+            </table>
+          </div>
           <div v-if="menu === 2">
             <h1>Sala personal</h1>
           </div>
@@ -33,17 +55,129 @@ export default {
   },
   data: () => ({
     menu: 0,
+    texto: "",
+    ahora: new Date(),
+    fechaPC: { fecha: "", hora: "" },
+    arrayFiltrado: [],
+    result: [
+      { fecha: "01-01-0001", hora: "00:00", nombre: "a" },
+      { fecha: "01-01-0002", hora: "01:00", nombre: "b" },
+      { fecha: "01-01-0003", hora: "02:00", nombre: "c" },
+      { fecha: "01-01-0004", hora: "03:00", nombre: "d" },
+      { fecha: "01-01-0005", hora: "04:00", nombre: "e" },
+      { fecha: "01-01-0006", hora: "05:00", nombre: "f" },
+      { fecha: "02-01-0001", hora: "00:00", nombre: "a" },
+      { fecha: "03-01-0001", hora: "01:00", nombre: "b" },
+      { fecha: "01-02-0001", hora: "02:00", nombre: "c" },
+      { fecha: "01-03-0001", hora: "03:00", nombre: "d" },
+      { fecha: "01-01-4001", hora: "04:00", nombre: "e" },
+      { fecha: "01-01-5001", hora: "05:00", nombre: "f" },
+      { fecha: "03-01-6001", hora: "01:00", nombre: "b" },
+      { fecha: "01-02-7001", hora: "02:00", nombre: "c" },
+      { fecha: "01-03-8001", hora: "03:00", nombre: "d" },
+      { fecha: "01-01-9001", hora: "04:00", nombre: "e" },
+      { fecha: "01-01-9901", hora: "05:00", nombre: "f" },
+    ],
+    resultFiltradoHoraPC: [],
   }),
   methods: {
     click_Proximos() {
       this.menu = 0;
+      this.result.forEach(function (element) {
+        //la fecha es mayor que la del PC
+        if (this.sortFechaHora([element, this.fechaPC])) {
+          console.log(element);
+          this.resultFiltradoHoraPC.push(element);
+          //this.resultFiltradoHoraPC = this.resultFiltradoHoraPC + element;
+        }
+      });
     },
     click_Anterior() {
       this.menu = 1;
+      this.result.forEach(function (element) {
+        //la fecha es menor que la del PC
+        if (!this.sortFechaHora([element, this.fechaPC])) {
+          this.resultFiltradoHoraPC.push(element);
+          //this.resultFiltradoHoraPC = this.resultFiltradoHoraPC + element;
+        }
+      });
     },
     click_SalaPersonal() {
       this.menu = 2;
     },
+    sortFechaHora(result) {
+      result.sort(function (a, b) {
+        if (a.fecha.substring(6, 10) < b.fecha.substring(6, 10)) {
+          return -1;
+        } else if (a.fecha.substring(6, 10) > b.fecha.substring(6, 10)) {
+          return 1;
+        } else {
+          if (a.fecha.substring(3, 5) < b.fecha.substring(3, 5)) {
+            return -1;
+          } else if (a.fecha.substring(3, 5) > b.fecha.substring(3, 5)) {
+            return 1;
+          } else {
+            if (a.fecha.substring(0, 2) < b.fecha.substring(0, 2)) {
+              return -1;
+            } else if (a.fecha.substring(0, 2) > b.fecha.substring(0, 2)) {
+              return 1;
+            } else {
+              if (a.hora < b.hora) {
+                return -1;
+              } else if (a.hora > b.hora) {
+                return 1;
+              } else {
+                return 0;
+              }
+            }
+          }
+        }
+      });
+      return result;
+    },
+  },
+  computed: {
+    filtroFecha: {
+      get() {
+        return this.texto;
+      },
+      set(value) {
+        this.arrayFiltrado = this.resultFiltradoHoraPC.filter(
+          (item) => item.fecha.indexOf(value) !== -1
+        );
+        this.texto = value;
+      },
+    },
+    filtroHora: {
+      get() {
+        return this.texto;
+      },
+      set(value) {
+        this.arrayFiltrado = this.resultFiltradoHoraPC.filter(
+          (item) => item.hora.indexOf(value) !== -1
+        );
+        this.texto = value;
+      },
+    },
+  },
+  created() {
+    this.fechaPC.fecha =
+      this.ahora.getDate() +
+      "-" +
+      (this.ahora.getMonth() + 1) +
+      "-" +
+      this.ahora.getFullYear();
+    this.fechaPC.hora = this.ahora.getHours() + ":" + this.ahora.getMinutes();
+    this.result = this.sortFechaHora(this.result);
+    this.arrayFiltrado = this.result;
+    this.result.forEach(function (element) {
+      //la fecha es mayor que la del PC
+      if (this.sortFechaHora([element, this.fechaPC]).bind(this)) {
+        console.log(element);
+        this.resultFiltradoHoraPC.push(element);
+        //this.resultFiltradoHoraPC = this.resultFiltradoHoraPC + element;
+      }
+    });
   },
 };
 </script>
@@ -56,5 +190,51 @@ export default {
   color: #4cc4ec;
   font-size: 40px;
   font-family: Georgia, "Times New Roman", Times, serif;
+}
+th {
+  padding-inline: 70px;
+}
+h1 {
+  text-align: center;
+}
+
+.filt {
+  position: absolute;
+  text-align: center;
+  margin: 0 40px;
+  background: white;
+  height: 270px;
+  width: 250px;
+  border-radius: 5px;
+  box-shadow: 0 3px 5px 2px rgba(0, 0, 0, 0.3);
+  font-weight: bold;
+}
+.filter {
+  border: none;
+  border-radius: 10px;
+  height: 28px;
+  background: lightgrey;
+  font-family: monospace;
+  font-size: 18px;
+}
+table {
+  margin: 0 auto;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 3px 5px 2px rgba(0, 0, 0, 0.3);
+  border-collapse: collapse;
+}
+tr {
+  text-align: center;
+  border: solid;
+  border-width: 1px 0;
+  height: 50px;
+  border-color: rgb(238, 238, 238);
+}
+tr:first-child {
+  border-top: none;
+}
+tr:last-child {
+  border-bottom: none;
 }
 </style>

@@ -5,7 +5,7 @@
     <div>
       <v-app id="inspire">
         <v-card>
-          <v-tabs v-model="tab" background-color="#4cc4ec" dark>
+          <v-tabs background-color="#4cc4ec" dark>
             <v-tab @click="click_Proximos">Próximos</v-tab>
             <v-tab @click="click_Anterior">Anterior</v-tab>
             <v-tab @click="click_SalaPersonal">Sala personal</v-tab>
@@ -84,23 +84,28 @@ export default {
     click_Proximos() {
       this.menu = 0;
       this.result.forEach(function (element) {
-        //la fecha es mayor que la del PC
-        if (this.sortFechaHora([element, this.fechaPC])) {
-          console.log(element);
-          this.resultFiltradoHoraPC.push(element);
-          //this.resultFiltradoHoraPC = this.resultFiltradoHoraPC + element;
+        var elementFormat =
+          element.fecha.substring(6, 10) +
+          element.fecha.substring(3, 5) +
+          element.fecha.substring(0, 2);
+        var PCFormat =
+          this.fechaPC.fecha.substring(6, 10) +
+          this.fechaPC.fecha.substring(3, 5) +
+          this.fechaPC.fecha.substring(0, 2);
+        if (elementFormat >= PCFormat) {
+          this.resultFiltradoHoraPC.push(elementFormat);
         }
       });
     },
     click_Anterior() {
       this.menu = 1;
-      this.result.forEach(function (element) {
+      /*this.result.forEach(function (element) {
         //la fecha es menor que la del PC
         if (!this.sortFechaHora([element, this.fechaPC])) {
           this.resultFiltradoHoraPC.push(element);
           //this.resultFiltradoHoraPC = this.resultFiltradoHoraPC + element;
         }
-      });
+      });*/
     },
     click_SalaPersonal() {
       this.menu = 2;
@@ -170,14 +175,8 @@ export default {
     this.fechaPC.hora = this.ahora.getHours() + ":" + this.ahora.getMinutes();
     this.result = this.sortFechaHora(this.result);
     this.arrayFiltrado = this.result;
-    this.result.forEach(function (element) {
-      //la fecha es mayor que la del PC
-      if (this.sortFechaHora([element, this.fechaPC]).bind(this)) {
-        console.log(element);
-        this.resultFiltradoHoraPC.push(element);
-        //this.resultFiltradoHoraPC = this.resultFiltradoHoraPC + element;
-      }
-    });
+    this.resultFiltradoHoraPC = this.result;
+    //this.arrayFiltrado = this.result;
   },
 };
 </script>

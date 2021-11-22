@@ -1,7 +1,7 @@
 <template>
   <div>
     <div><navigation-bar /></div>
-    <h1>Holaa</h1>
+    <p>No se que poner aqui la verdad asi que asi se va a quedar</p>
   </div>
 </template>
 

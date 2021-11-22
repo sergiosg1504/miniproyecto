@@ -38,8 +38,16 @@
               </tr>
             </table>
           </div>
-          <div v-if="menu === 2">
+          <div class="sala" v-if="menu === 2">
             <h1>Sala personal</h1>
+            <p>Topic:</p>
+            <p>Meet ID:</p>
+            <p>
+              Security: <span>Password: ****** </span>
+              <span>Waiting room ✅</span>
+            </p>
+            <p>Invite link: <a>ssdd</a></p>
+            <v-btn>Start</v-btn>
           </div>
         </v-card>
       </v-app>
@@ -235,5 +243,10 @@ tr:first-child {
 }
 tr:last-child {
   border-bottom: none;
+}
+
+.sala {
+  text-align: center;
+  height: 800px;
 }
 </style>

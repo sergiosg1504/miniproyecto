@@ -1,7 +1,7 @@
 <template>
   <div>
     <navigation-bar />
-    <h1 class="header">REUNIONES</h1>
+    <h1 class="header">CONFIGURACIÓN</h1>
     <div class="topnav">
       <v-app id="inspire">
         <v-card>

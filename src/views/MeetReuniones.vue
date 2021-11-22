@@ -19,7 +19,7 @@
           <div v-if="menu !== 2">
             <div class="filt">
               <form>
-                <p>Filtro por fecha</p>
+                <p class="white">Filtro por fecha</p>
                 <input class="filter" type="text" v-model="filtroFecha" />
                 <p>Filtro por hora</p>
                 <input class="filter" type="text" v-model="filtroHora" />
@@ -35,6 +35,32 @@
                 <td>{{ item.fecha }}</td>
                 <td>{{ item.hora }}</td>
                 <td>{{ item.nombre }}</td>
+
+                <v-menu transition="slide-y-transition">
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      color="#4cc4ec"
+                      class="ma-2"
+                      v-bind="attrs"
+                      v-on="on"
+                    >
+                      <p class="whitea">Mas informacion</p>
+                    </v-btn>
+                  </template>
+                  <v-list>
+                    <v-list-item v-for="n in 3" :key="n" link>
+                      <v-list-item-title
+                        v-if="n === 1"
+                        v-text="`Acceder a la sala`"
+                      />
+                      <v-list-item-title v-if="n === 2" v-text="`Eliminar`" />
+                      <v-list-item-title
+                        v-if="n === 3"
+                        v-text="`Datos de la reunion`"
+                      />
+                    </v-list-item>
+                  </v-list>
+                </v-menu>
               </tr>
             </table>
           </div>
@@ -280,5 +306,10 @@ tr:last-child {
 .sala {
   text-align: center;
   height: 800px;
+}
+
+.whitea {
+  background: transparent;
+  color: white;
 }
 </style>

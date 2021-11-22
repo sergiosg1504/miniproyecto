@@ -58,6 +58,7 @@ export default {
     texto: "",
     ahora: new Date(),
     fechaPC: { fecha: "", hora: "" },
+    PCFormat: { fecha: "", hora: "" },
     arrayFiltrado: [],
     result: [
       { fecha: "01-01-0001", hora: "00:00", nombre: "a" },
@@ -66,46 +67,72 @@ export default {
       { fecha: "01-01-0004", hora: "03:00", nombre: "d" },
       { fecha: "01-01-0005", hora: "04:00", nombre: "e" },
       { fecha: "01-01-0006", hora: "05:00", nombre: "f" },
-      { fecha: "02-01-0001", hora: "00:00", nombre: "a" },
-      { fecha: "03-01-0001", hora: "01:00", nombre: "b" },
-      { fecha: "01-02-0001", hora: "02:00", nombre: "c" },
-      { fecha: "01-03-0001", hora: "03:00", nombre: "d" },
-      { fecha: "01-01-4001", hora: "04:00", nombre: "e" },
-      { fecha: "01-01-5001", hora: "05:00", nombre: "f" },
-      { fecha: "03-01-6001", hora: "01:00", nombre: "b" },
-      { fecha: "01-02-7001", hora: "02:00", nombre: "c" },
-      { fecha: "01-03-8001", hora: "03:00", nombre: "d" },
-      { fecha: "01-01-9001", hora: "04:00", nombre: "e" },
-      { fecha: "01-01-9901", hora: "05:00", nombre: "f" },
+      { fecha: "02-01-0001", hora: "00:00", nombre: "g" },
+      { fecha: "03-01-0001", hora: "01:00", nombre: "h" },
+      { fecha: "01-02-0001", hora: "02:00", nombre: "i" },
+      { fecha: "01-03-0001", hora: "03:00", nombre: "j" },
+      { fecha: "01-01-4001", hora: "04:00", nombre: "k" },
+      { fecha: "01-01-5001", hora: "05:00", nombre: "l" },
+      { fecha: "03-01-6001", hora: "01:00", nombre: "m" },
+      { fecha: "01-02-7001", hora: "02:00", nombre: "n" },
+      { fecha: "01-03-8001", hora: "03:00", nombre: "o" },
+      { fecha: "01-01-9001", hora: "04:00", nombre: "p" },
+      { fecha: "01-01-9901", hora: "05:00", nombre: "q" },
+      { fecha: "22-11-2021", hora: "05:00", nombre: "r" },
+      { fecha: "22-11-2021", hora: "22:00", nombre: "s" },
     ],
     resultFiltradoHoraPC: [],
   }),
   methods: {
     click_Proximos() {
       this.menu = 0;
-      this.result.forEach(function (element) {
-        var elementFormat =
-          element.fecha.substring(6, 10) +
-          element.fecha.substring(3, 5) +
-          element.fecha.substring(0, 2);
-        var PCFormat =
-          this.fechaPC.fecha.substring(6, 10) +
-          this.fechaPC.fecha.substring(3, 5) +
-          this.fechaPC.fecha.substring(0, 2);
-        if (elementFormat >= PCFormat) {
-          this.resultFiltradoHoraPC.push(elementFormat);
+      this.resultFiltradoHoraPC = [];
+      for (var i = 0; i < this.result.length; i++) {
+        var fechaFormat =
+          this.result[i].fecha.substring(6, 10) +
+          this.result[i].fecha.substring(3, 5) +
+          this.result[i].fecha.substring(0, 2);
+        var horaFormat =
+          this.result[i].hora.substring(0, 2) +
+          this.result[i].hora.substring(3, 5);
+        if (parseInt(fechaFormat, 10) >= parseInt(this.PCFormat.fecha, 10)) {
+          if (
+            parseInt(fechaFormat, 10) === parseInt(this.PCFormat.fecha, 10) &&
+            parseInt(horaFormat, 10) < parseInt(this.PCFormat.hora, 10)
+          ) {
+            continue;
+          }
+          this.resultFiltradoHoraPC = this.resultFiltradoHoraPC.concat(
+            this.result[i]
+          );
         }
-      });
+      }
+      this.arrayFiltrado = this.resultFiltradoHoraPC;
     },
     click_Anterior() {
       this.menu = 1;
-      /*this.result.forEach(function (element) {
-        //la fecha es menor que la del PC
-        if (!this.sortFechaHora([element, this.fechaPC])) {
-          this.resultFiltradoHoraPC.push(element);
-          //this.resultFiltradoHoraPC = this.resultFiltradoHoraPC + element;
+      this.resultFiltradoHoraPC = [];
+      for (var i = 0; i < this.result.length; i++) {
+        var fechaFormat =
+          this.result[i].fecha.substring(6, 10) +
+          this.result[i].fecha.substring(3, 5) +
+          this.result[i].fecha.substring(0, 2);
+        var horaFormat =
+          this.result[i].hora.substring(0, 2) +
+          this.result[i].hora.substring(3, 5);
+        if (parseInt(fechaFormat, 10) <= parseInt(this.PCFormat.fecha, 10)) {
+          if (
+            parseInt(fechaFormat, 10) === parseInt(this.PCFormat.fecha, 10) &&
+            parseInt(horaFormat, 10) > parseInt(this.PCFormat.hora)
+          ) {
+            continue;
+          }
+          this.resultFiltradoHoraPC = this.resultFiltradoHoraPC.concat(
+            this.result[i]
+          );
         }
-      });*/
+      }
+      this.arrayFiltrado = this.resultFiltradoHoraPC;
     },
     click_SalaPersonal() {
       this.menu = 2;
@@ -174,9 +201,14 @@ export default {
       this.ahora.getFullYear();
     this.fechaPC.hora = this.ahora.getHours() + ":" + this.ahora.getMinutes();
     this.result = this.sortFechaHora(this.result);
-    this.arrayFiltrado = this.result;
-    this.resultFiltradoHoraPC = this.result;
-    //this.arrayFiltrado = this.result;
+    this.PCFormat.fecha =
+      this.fechaPC.fecha.substring(6, 10) +
+      this.fechaPC.fecha.substring(3, 5) +
+      this.fechaPC.fecha.substring(0, 2);
+    this.PCFormat.hora =
+      this.fechaPC.hora.substring(0, 2) + this.fechaPC.hora.substring(3, 5);
+    this.click_Proximos();
+    this.arrayFiltrado = this.resultFiltradoHoraPC;
   },
 };
 </script>

@@ -1,82 +1,170 @@
 <template>
   <div>
     <navigation-bar />
-    <h1 class="header">REUNIONES</h1>
-    <div>
-      <v-app id="inspire">
-        <v-card>
-          <v-tabs background-color="#4cc4ec" dark>
-            <v-tab @click="click_Proximos">Próximos</v-tab>
-            <v-tab @click="click_Anterior">Anterior</v-tab>
-            <v-tab @click="click_SalaPersonal">Sala personal</v-tab>
-          </v-tabs>
-          <div v-if="menu === 0">
-            <h1>Próximos</h1>
-          </div>
-          <div v-if="menu === 1">
-            <h1>Anterior</h1>
-          </div>
-          <div v-if="menu !== 2">
-            <div class="filt">
-              <form>
-                <p>Filtro por fecha</p>
-                <input class="filter" type="text" v-model="filtroFecha" />
-                <p>Filtro por hora</p>
-                <input class="filter" type="text" v-model="filtroHora" />
-              </form>
+    <div v-if="!programarReunion">
+      <h1 class="header">REUNIONES</h1>
+      <div>
+        <v-app id="inspire">
+          <v-card>
+            <v-tabs background-color="#4cc4ec" dark>
+              <v-tab @click="click_Proximos">Próximos</v-tab>
+              <v-tab @click="click_Anterior">Anterior</v-tab>
+              <v-tab @click="click_SalaPersonal">Sala personal</v-tab>
+            </v-tabs>
+            <div v-if="menu === 0">
+              <h1>Próximos</h1>
             </div>
-            <table>
-              <tr>
-                <th>Fecha</th>
-                <th>Hora</th>
-                <th>Nombre</th>
-              </tr>
-              <tr v-for="(item, i) in arrayFiltrado" :key="i">
-                <td>{{ item.fecha }}</td>
-                <td>{{ item.hora }}</td>
-                <td>{{ item.nombre }}</td>
+            <div v-if="menu === 1">
+              <h1>Anterior</h1>
+            </div>
+            <button @click="click_ProgramarReunion">Programar Reunion</button>
+            <div v-if="menu !== 2">
+              <div class="filt">
+                <form>
+                  <p>Filtro por fecha</p>
+                  <input class="filter" type="text" v-model="filtroFecha" />
+                  <p>Filtro por hora</p>
+                  <input class="filter" type="text" v-model="filtroHora" />
+                </form>
+              </div>
+              <table>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Hora</th>
+                  <th>Nombre</th>
+                </tr>
+                <tr v-for="(item, i) in arrayFiltrado" :key="i">
+                  <td>{{ item.fecha }}</td>
+                  <td>{{ item.hora }}</td>
+                  <td>{{ item.nombre }}</td>
 
-                <v-menu transition="slide-y-transition">
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-btn
-                      color="#4cc4ec"
-                      class="ma-2"
-                      v-bind="attrs"
-                      v-on="on"
-                    >
-                      <p class="whitea">Mas informacion</p>
-                    </v-btn>
-                  </template>
-                  <v-list>
-                    <v-list-item v-for="n in 3" :key="n" link>
-                      <v-list-item-title
-                        v-if="n === 1"
-                        v-text="`Acceder a la sala`"
-                      />
-                      <v-list-item-title v-if="n === 2" v-text="`Eliminar`" />
-                      <v-list-item-title
-                        v-if="n === 3"
-                        v-text="`Datos de la reunion`"
-                      />
-                    </v-list-item>
-                  </v-list>
-                </v-menu>
-              </tr>
-            </table>
-          </div>
-          <div class="sala" v-if="menu === 2">
-            <h1>Sala personal</h1>
-            <p>Topic:</p>
-            <p>Meet ID:</p>
+                  <v-menu transition="slide-y-transition">
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn
+                        color="#4cc4ec"
+                        class="ma-2"
+                        v-bind="attrs"
+                        v-on="on"
+                      >
+                        <p class="whitea">Mas informacion</p>
+                      </v-btn>
+                    </template>
+                    <v-list>
+                      <v-list-item v-for="n in 3" :key="n" link>
+                        <v-list-item-title
+                          v-if="n === 1"
+                          v-text="`Acceder a la sala`"
+                        />
+                        <v-list-item-title v-if="n === 2" v-text="`Eliminar`" />
+                        <v-list-item-title
+                          v-if="n === 3"
+                          v-text="`Datos de la reunion`"
+                        />
+                      </v-list-item>
+                    </v-list>
+                  </v-menu>
+                </tr>
+              </table>
+            </div>
+            <div class="sala" v-if="menu === 2">
+              <h1>Sala personal</h1>
+              <p>Topic:</p>
+              <p>Meet ID:</p>
+              <p>
+                Security: <span>Password: ****** </span>
+                <span>Waiting room ✅</span>
+              </p>
+              <p>Invite link: <a>ssdd</a></p>
+              <v-btn>Start</v-btn>
+            </div>
+          </v-card>
+        </v-app>
+      </div>
+    </div>
+    <div v-if="programarReunion">
+      <button class="volver" @click="click_ProgramarReunion">
+        🡰 Volver a las reuniones
+      </button>
+      <p class="header2">Programar Reunion</p>
+      <div class="container">
+        <div class="item">
+          <p class="gris">Tema</p>
+        </div>
+        <div class="item">
+          <input v-model="nuevaReunion.tema" class="form-input" />
+        </div>
+      </div>
+      <div class="container">
+        <div class="item">
+          <p class="gris">Cuándo</p>
+        </div>
+        <div class="item">
+          <input v-model="nuevaReunion.fecha" class="form-input" type="date" />
+        </div>
+        <div class="item">
+          <input v-model="nuevaReunion.hora" class="form-input" type="time" />
+        </div>
+      </div>
+      <div class="container">
+        <div class="item">
+          <p class="gris">Video anfitrión</p>
+        </div>
+        <div class="item">
+          <form target="_blank">
             <p>
-              Security: <span>Password: ****** </span>
-              <span>Waiting room ✅</span>
+              <input
+                type="radio"
+                name="videoAnfitrion"
+                v-model="nuevaReunion.videoAnfitrion"
+                checked
+                value="true"
+              />
+              Encendido<br /><br />
+              <input
+                type="radio"
+                name="videoAnfitrion"
+                v-model="nuevaReunion.videoAnfitrion"
+                value="false"
+              />
+              Apagado<br />
             </p>
-            <p>Invite link: <a>ssdd</a></p>
-            <v-btn>Start</v-btn>
-          </div>
-        </v-card>
-      </v-app>
+          </form>
+        </div>
+      </div>
+      <div class="container">
+        <div class="item">
+          <p class="gris">Video participante</p>
+        </div>
+        <div class="item">
+          <form target="_blank">
+            <p>
+              <input
+                type="radio"
+                name="videoParticipante"
+                v-model="nuevaReunion.videoParticipante"
+                checked
+                value="true"
+              />
+              Encendido<br /><br />
+              <input
+                type="radio"
+                name="videoParticipante"
+                v-model="nuevaReunion.videoParticipante"
+                value="false"
+              />
+              Apagado<br />
+            </p>
+          </form>
+        </div>
+      </div>
+      <div class="container">
+        <div class="item">
+          <button class="boton" @click="click_CrearReunion">Guardar</button>
+        </div>
+        <div class="item">
+          <button class="boton" @click="click_Cancelar">Cancelar</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -89,7 +177,15 @@ export default {
   },
   data: () => ({
     menu: 0,
+    programarReunion: true,
     texto: "",
+    nuevaReunion: {
+      tema: "Mi reunión",
+      fecha: "",
+      hora: "",
+      videoAnfitrion: true,
+      videoParticipante: true,
+    },
     ahora: new Date(),
     fechaPC: { fecha: "", hora: "" },
     PCFormat: { fecha: "", hora: "" },
@@ -118,6 +214,14 @@ export default {
     resultFiltradoHoraPC: [],
   }),
   methods: {
+    click_ProgramarReunion() {
+      if (this.programarReunion === false) {
+        this.programarReunion = true;
+      } else {
+        this.programarReunion = false;
+      }
+      console.log(this.programarReunion);
+    },
     click_Proximos() {
       this.menu = 0;
       this.resultFiltradoHoraPC = [];
@@ -170,6 +274,31 @@ export default {
     },
     click_SalaPersonal() {
       this.menu = 2;
+    },
+    click_CrearReunion() {
+      if (this.fechaPC.fecha !== this.nuevaReunion.fecha) {
+        this.nuevaReunion.fecha =
+          this.nuevaReunion.fecha.substring(8, 10) +
+          "-" +
+          this.nuevaReunion.fecha.substring(5, 7) +
+          "-" +
+          this.nuevaReunion.fecha.substring(0, 4);
+      }
+      console.log(this.nuevaReunion.tema);
+      console.log(this.nuevaReunion.fecha);
+      console.log(this.nuevaReunion.hora);
+      console.log(this.nuevaReunion.videoAnfitrion);
+      console.log(this.nuevaReunion.videoParticipante);
+
+      // Guardar los datos como sea
+    },
+    click_Cancelar() {
+      this.nuevaReunion.tema = "Mi reunión";
+      this.nuevaReunion.fecha = this.fechaPC.fecha;
+      this.nuevaReunion.hora = this.fechaPC.hora;
+      this.videoAnfitrion = true;
+      this.videoParticipante = true;
+      this.click_ProgramarReunion();
     },
     sortFechaHora(result) {
       result.sort(function (a, b) {
@@ -227,13 +356,14 @@ export default {
     },
   },
   created() {
-    this.fechaPC.fecha =
+    this.nuevaReunion.fecha = this.fechaPC.fecha =
       this.ahora.getDate() +
       "-" +
       (this.ahora.getMonth() + 1) +
       "-" +
       this.ahora.getFullYear();
-    this.fechaPC.hora = this.ahora.getHours() + ":" + this.ahora.getMinutes();
+    this.nuevaReunion.hora = this.fechaPC.hora =
+      this.ahora.getHours() + ":" + this.ahora.getMinutes();
     this.result = this.sortFechaHora(this.result);
     this.PCFormat.fecha =
       this.fechaPC.fecha.substring(6, 10) +
@@ -311,5 +441,53 @@ tr:last-child {
 .whitea {
   background: transparent;
   color: white;
+}
+.volver {
+  margin: 20px;
+  text-decoration-line: underline;
+  color: blue;
+}
+.header2 {
+  margin: 20px;
+  font-weight: bold;
+  font-size: 20px;
+}
+.container {
+  margin: 20px;
+  overflow: hidden;
+}
+.item {
+  margin: 0 40px 0 0;
+  float: left;
+}
+.form {
+  margin: 3rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 20%;
+  min-width: 350px;
+  max-width: 100%;
+  background: rgba(19, 35, 47, 0.9);
+  border-radius: 5px;
+  padding: 40px;
+  box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
+}
+.form-input {
+  padding: 6px;
+  border: 1px solid gray;
+  color: black;
+}
+.gris {
+  margin: 6px 0 0 0;
+  color: gray;
+}
+.boton {
+  background: #4cc4ec;
+  text-align: center;
+  width: 100px;
+  height: 40px;
+  color: white;
+  cursor: pointer;
 }
 </style>

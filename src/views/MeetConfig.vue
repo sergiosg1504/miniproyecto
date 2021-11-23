@@ -73,6 +73,35 @@
                   style="float: right"
                 />
               </p>
+
+              <p class="titulo_op">Chat</p>
+              <p style="float: left">
+                Permitir que los participantes envien mensajes por el chat
+                <v-switch
+                  v-model="op9"
+                  inset
+                  color="#4cc4ec"
+                  dense
+                  style="float: right"
+                />
+                <span v-if="op9 === true">
+                  <br /><br />
+                  <input class="check" type="checkbox" v-model="check" />
+                  <label
+                    >Permitir a los usuarios guardar chats de la reunion</label
+                  >
+                  <br /><br />
+                  <div v-if="check === true">
+                    <input type="radio" name="chat" v-model="radio" value="1" />
+                    <label
+                      >Todos
+                      <tr></tr
+                    ></label>
+                    <input type="radio" name="chat" v-model="radio" value="2" />
+                    <label>Solo anfitriones</label>
+                  </div>
+                </span>
+              </p>
             </v-sheet>
           </div>
           <div class="rec" v-if="content === 2">
@@ -162,6 +191,8 @@ export default {
     op6: false,
     op7: false,
     op8: true,
+    op9: true,
+    check: true,
     NavigationBarvalor: 1,
   }),
   methods: {

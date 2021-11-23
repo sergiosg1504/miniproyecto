@@ -102,6 +102,19 @@
                   </div>
                 </span>
               </p>
+              <p class="titulo_op">Auto guardado de del chat</p>
+              <p style="float: left">
+                Guarde automaticamente todos los chats de la reunion para que
+                los anfitriones no tengan que guardar manualmente el texto del
+                chat de que comience la reunion.
+                <v-switch
+                  v-model="op11"
+                  inset
+                  color="#4cc4ec"
+                  dense
+                  style="float: right"
+                />
+              </p>
             </v-sheet>
           </div>
           <div class="rec" v-if="content === 2">
@@ -138,6 +151,18 @@
               la nube mediante este enlace.
               <v-switch
                 v-model="op7"
+                inset
+                color="#4cc4ec"
+                dense
+                style="float: right"
+              />
+            </p>
+            <p class="titulo_op">Control de acceso a la IP</p>
+            <p style="float: left">
+              Permitir el acceso a la grabacion en la nube solo desde rangos de
+              direcciones IP especificos.
+              <v-switch
+                v-model="op10"
                 inset
                 color="#4cc4ec"
                 dense
@@ -192,6 +217,8 @@ export default {
     op7: false,
     op8: true,
     op9: true,
+    op10: false,
+    op11: false,
     check: true,
     NavigationBarvalor: 1,
   }),

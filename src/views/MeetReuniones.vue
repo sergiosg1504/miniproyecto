@@ -19,7 +19,7 @@
           <div v-if="menu !== 2">
             <div class="filt">
               <form>
-                <p class="white">Filtro por fecha</p>
+                <p>Filtro por fecha</p>
                 <input class="filter" type="text" v-model="filtroFecha" />
                 <p>Filtro por hora</p>
                 <input class="filter" type="text" v-model="filtroHora" />

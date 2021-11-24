@@ -4,7 +4,7 @@
     <div v-if="!programarReunion">
       <h1 class="header">REUNIONES</h1>
       <div>
-        <v-app id="inspire">
+        <v-app>
           <v-card>
             <v-tabs background-color="#4cc4ec" dark>
               <v-tab @click="click_Proximos">Próximos</v-tab>
@@ -441,7 +441,6 @@ h1 {
   border-radius: 10px;
   height: 28px;
   background: lightgrey;
-  font-family: monospace;
   font-size: 18px;
 }
 table {
@@ -463,10 +462,6 @@ tr:first-child {
 }
 tr:last-child {
   border-bottom: none;
-}
-.sala {
-  text-align: center;
-  height: 800px;
 }
 .whitea {
   background: transparent;
@@ -490,24 +485,6 @@ tr:last-child {
   width: 100px;
   margin: 0 60px 0 0;
   float: left;
-}
-.form {
-  margin: 3rem auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 20%;
-  min-width: 350px;
-  max-width: 100%;
-  background: rgba(19, 35, 47, 0.9);
-  border-radius: 5px;
-  padding: 40px;
-  box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
-}
-.form-input {
-  padding: 6px;
-  border: 1px solid gray;
-  color: black;
 }
 .gris {
   margin: 6px 0 0 0;

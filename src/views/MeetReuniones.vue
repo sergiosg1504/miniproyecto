@@ -17,7 +17,11 @@
             <div v-if="menu === 1">
               <h1>Anterior</h1>
             </div>
-            <button @click="click_ProgramarReunion">Programar Reunion</button>
+            <h1 class="h1_reunion">
+              <button class="boton_reunion" @click="click_ProgramarReunion">
+                Programar Reunion
+              </button>
+            </h1>
             <div v-if="menu !== 2">
               <div class="filt">
                 <form>
@@ -88,10 +92,31 @@
       <p class="header2">Programar Reunion</p>
       <div class="container">
         <div class="item">
-          <p class="gris">Tema</p>
+          <p class="gris">Nombre</p>
         </div>
         <div class="item">
-          <input v-model="nuevaReunion.tema" class="form-input" />
+          <input v-model="nuevaReunion.nombre" class="form-input" />
+        </div>
+      </div>
+      <div class="container">
+        <div class="item">
+          <p class="gris">Descripcion</p>
+        </div>
+        <div class="item">
+          <input v-model="nuevaReunion.descripcion" class="form-input" />
+        </div>
+      </div>
+      <div class="container">
+        <div class="item">
+          <p class="gris">Contraseña</p>
+        </div>
+        <div class="item">
+          <input
+            v-model="auxpassword"
+            class="form-input"
+            type="password"
+            id="password"
+          />
         </div>
       </div>
       <div class="container">
@@ -171,16 +196,20 @@
 
 <script>
 import NavigationBar from "@/components/NavigationBar.vue";
+import { Encrypt } from "@/logic/aes.js";
 export default {
   components: {
     NavigationBar,
   },
   data: () => ({
     menu: 0,
-    programarReunion: true,
+    programarReunion: false,
     texto: "",
+    auxpassword: "",
     nuevaReunion: {
-      tema: "Mi reunión",
+      nombre: "Mi reunión",
+      descripcion: "",
+      password: "",
       fecha: "",
       hora: "",
       videoAnfitrion: true,
@@ -220,7 +249,6 @@ export default {
       } else {
         this.programarReunion = false;
       }
-      console.log(this.programarReunion);
     },
     click_Proximos() {
       this.menu = 0;
@@ -284,7 +312,10 @@ export default {
           "-" +
           this.nuevaReunion.fecha.substring(0, 4);
       }
-      console.log(this.nuevaReunion.tema);
+      this.nuevaReunion.password = Encrypt(this.auxpassword);
+      console.log(this.nuevaReunion.nombre);
+      console.log(this.nuevaReunion.descripcion);
+      console.log(this.nuevaReunion.password);
       console.log(this.nuevaReunion.fecha);
       console.log(this.nuevaReunion.hora);
       console.log(this.nuevaReunion.videoAnfitrion);
@@ -293,7 +324,8 @@ export default {
       // Guardar los datos como sea
     },
     click_Cancelar() {
-      this.nuevaReunion.tema = "Mi reunión";
+      this.nuevaReunion.nombre = "Mi reunión";
+      this.nuevaReunion.descripcion = "";
       this.nuevaReunion.fecha = this.fechaPC.fecha;
       this.nuevaReunion.hora = this.fechaPC.hora;
       this.videoAnfitrion = true;
@@ -391,8 +423,8 @@ th {
 }
 h1 {
   text-align: center;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
-
 .filt {
   position: absolute;
   text-align: center;
@@ -432,12 +464,10 @@ tr:first-child {
 tr:last-child {
   border-bottom: none;
 }
-
 .sala {
   text-align: center;
   height: 800px;
 }
-
 .whitea {
   background: transparent;
   color: white;
@@ -457,7 +487,8 @@ tr:last-child {
   overflow: hidden;
 }
 .item {
-  margin: 0 40px 0 0;
+  width: 100px;
+  margin: 0 60px 0 0;
   float: left;
 }
 .form {
@@ -488,6 +519,18 @@ tr:last-child {
   width: 100px;
   height: 40px;
   color: white;
-  cursor: pointer;
+  border-radius: 5px;
+}
+.h1_reunion {
+  font-size: 16px;
+  margin: 20px 0 20px;
+  font-weight: normal;
+}
+.boton_reunion {
+  height: 30px;
+  width: 200px;
+  border-radius: 5px;
+  background: #4cc4ec;
+  color: white;
 }
 </style>

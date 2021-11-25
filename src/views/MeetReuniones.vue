@@ -26,9 +26,9 @@
               <div class="filt">
                 <form>
                   <p>Filtro por fecha</p>
-                  <input class="filter" type="text" v-model="filtroFecha" />
-                  <p>Filtro por hora</p>
-                  <input class="filter" type="text" v-model="filtroHora" />
+
+                  <input class="filter" type="date" v-model="filtroFecha" />
+                  <!--<input class="filter" type="text" v-model="filtroFecha" />-->
                 </form>
               </div>
               <table>
@@ -239,6 +239,7 @@ export default {
       { fecha: "01-01-9901", hora: "05:00", nombre: "q" },
       { fecha: "22-11-2021", hora: "05:00", nombre: "r" },
       { fecha: "22-11-2021", hora: "22:00", nombre: "s" },
+      { fecha: "01-01-2022", hora: "22:00", nombre: "t" },
     ],
     resultFiltradoHoraPC: [],
   }),
@@ -366,34 +367,38 @@ export default {
   computed: {
     filtroFecha: {
       get() {
-        return this.texto;
+        return (
+          this.texto.substring(6, 10) +
+          "-" +
+          this.texto.substring(3, 5) +
+          "-" +
+          this.texto.substring(0, 2)
+        );
       },
       set(value) {
+        value =
+          value.substring(8, 10) +
+          "-" +
+          value.substring(5, 7) +
+          "-" +
+          value.substring(0, 4);
+        console.log(value);
         this.arrayFiltrado = this.resultFiltradoHoraPC.filter(
           (item) => item.fecha.indexOf(value) !== -1
         );
         this.texto = value;
       },
     },
-    filtroHora: {
-      get() {
-        return this.texto;
-      },
-      set(value) {
-        this.arrayFiltrado = this.resultFiltradoHoraPC.filter(
-          (item) => item.hora.indexOf(value) !== -1
-        );
-        this.texto = value;
-      },
-    },
   },
   created() {
-    this.nuevaReunion.fecha = this.fechaPC.fecha =
-      this.ahora.getDate() +
-      "-" +
-      (this.ahora.getMonth() + 1) +
-      "-" +
-      this.ahora.getFullYear();
+    this.texto =
+      this.nuevaReunion.fecha =
+      this.fechaPC.fecha =
+        this.ahora.getDate() +
+        "-" +
+        (this.ahora.getMonth() + 1) +
+        "-" +
+        this.ahora.getFullYear();
     this.nuevaReunion.hora = this.fechaPC.hora =
       this.ahora.getHours() + ":" + this.ahora.getMinutes();
     this.result = this.sortFechaHora(this.result);

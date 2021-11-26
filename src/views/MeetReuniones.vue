@@ -76,14 +76,14 @@
             </div>
             <div class="sala" v-if="menu === 2">
               <h1>Sala personal</h1>
-              <p>Topic:</p>
-              <p>Meet ID:</p>
-              <p>
+              <p class="sp">Topic:</p>
+              <p class="sp">Meet ID:</p>
+              <p class="sp">
                 Security: <span>Password: ****** </span>
                 <span>Waiting room ✅</span>
               </p>
-              <p>Invite link: <a>ssdd</a></p>
-              <v-btn>Start</v-btn>
+              <p class="sp">Invite link: <a>ssdd</a></p>
+              <button class="boton">Start</button>
             </div>
           </v-card>
         </v-app>
@@ -312,7 +312,12 @@ export default {
       console.log("Yendo a la sala");
     },
     click_eliminar(item) {
-      console.log(`Eliminar` + item.nombre);
+      var i = this.result.indexOf(item);
+      if (i !== -1) {
+        this.result.splice(i, 1);
+      }
+      if (this.menu === 0) this.click_Proximos();
+      if (this.menu === 1) this.click_Anterior();
     },
     click_datos(item) {
       console.log(item.nombre);
@@ -534,5 +539,8 @@ tr:last-child {
   border-radius: 5px;
   background: #4cc4ec;
   color: white;
+}
+.sp {
+  margin: 20px;
 }
 </style>

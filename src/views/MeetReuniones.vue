@@ -26,9 +26,7 @@
               <div class="filt">
                 <form>
                   <p>Filtro por fecha</p>
-
                   <input class="filter" type="date" v-model="filtroFecha" />
-                  <!--<input class="filter" type="text" v-model="filtroFecha" />-->
                 </form>
               </div>
               <table>
@@ -57,11 +55,17 @@
                       <v-list-item v-for="n in 3" :key="n" link>
                         <v-list-item-title
                           v-if="n === 1"
+                          @click="click_irASala"
                           v-text="`Acceder a la sala`"
                         />
-                        <v-list-item-title v-if="n === 2" v-text="`Eliminar`" />
+                        <v-list-item-title
+                          v-if="n === 2"
+                          @click="click_eliminar(item)"
+                          v-text="`Eliminar`"
+                        />
                         <v-list-item-title
                           v-if="n === 3"
+                          @click="click_datos(item)"
                           v-text="`Datos de la reunion`"
                         />
                       </v-list-item>
@@ -304,6 +308,21 @@ export default {
     click_SalaPersonal() {
       this.menu = 2;
     },
+    click_irASala() {
+      console.log("Yendo a la sala");
+    },
+    click_eliminar(item) {
+      console.log(`Eliminar` + item.nombre);
+    },
+    click_datos(item) {
+      console.log(item.nombre);
+      console.log(item.descripcion);
+      console.log(item.password);
+      console.log(item.fecha);
+      console.log(item.hora);
+      console.log(item.videoAnfitrion);
+      console.log(item.videoParticipante);
+    },
     click_CrearReunion() {
       if (this.fechaPC.fecha !== this.nuevaReunion.fecha) {
         this.nuevaReunion.fecha =
@@ -433,15 +452,16 @@ h1 {
 .filt {
   position: absolute;
   text-align: center;
-  margin: 0 40px;
+  margin: 40px;
   background: white;
-  height: 270px;
+  height: 150px;
   width: 250px;
   border-radius: 5px;
   box-shadow: 0 3px 5px 2px rgba(0, 0, 0, 0.3);
   font-weight: bold;
 }
 .filter {
+  margin: 20px 20px 20px 20px;
   border: none;
   border-radius: 10px;
   height: 28px;

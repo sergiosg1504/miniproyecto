@@ -22,7 +22,7 @@
                 Programar Reunion
               </button>
             </h1>
-            <div v-if="menu !== 2">
+            <div class="container" v-if="menu !== 2">
               <div class="filt">
                 <form>
                   <p>Filtro por fecha</p>
@@ -455,7 +455,7 @@ h1 {
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 .filt {
-  position: absolute;
+  float: left;
   text-align: center;
   margin: 40px;
   background: white;
@@ -466,6 +466,7 @@ h1 {
   font-weight: bold;
 }
 .filter {
+  float: center;
   margin: 20px 20px 20px 20px;
   border: none;
   border-radius: 10px;
@@ -474,6 +475,7 @@ h1 {
   font-size: 18px;
 }
 table {
+  float: none;
   margin: 0 auto;
   background: white;
   border-radius: 5px;

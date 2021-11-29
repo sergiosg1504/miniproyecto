@@ -65,7 +65,7 @@
                           <v-list-item-title
                             v-if="n === 2"
                             @click="click_eliminar(item)"
-                            v-text="`🗑️ Eliminar`"
+                            v-text="`Eliminar`"
                           />
                           <v-list-item-title
                             v-if="n === 3"
@@ -397,7 +397,6 @@ export default {
           value.substring(5, 7) +
           "-" +
           value.substring(0, 4);
-        console.log(value);
         this.arrayFiltrado = this.resultFiltradoHoraPC.filter(
           (item) => item.fecha.indexOf(value) !== -1
         );
@@ -554,7 +553,7 @@ tr:last-child {
   border-radius: 4px;
 }
 .item4 {
-  width: 58px;
+  width: 72px;
   float: left;
   border: 2px solid gray;
   border-radius: 4px;

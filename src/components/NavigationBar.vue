@@ -2,17 +2,22 @@
   <div class="navbar">
     <div class="subnav">
       <button class="subnavbtn1" @click="reuniones()">
-        <p>REUNIONES</p>
+        <p class="p">REUNIONES</p>
       </button>
     </div>
     <div class="subnav">
-      <button class="subnavbtn2" @click="seminarios()">
-        <p>SEMINARIOS WEB</p>
+      <button class="subnavbtn1" @click="seminarios()">
+        <p class="p">SEMINARIOS WEB</p>
       </button>
     </div>
     <div class="subnav">
-      <button class="subnavbtn3" @click="config()">
-        <p>CONFIGURACIÓN</p>
+      <button class="subnavbtn1" @click="config()">
+        <p class="p">CONFIGURACIÓN</p>
+      </button>
+    </div>
+    <div class="subnav2">
+      <button class="subnavbtn2" @click="salirReuniones()">
+        <p class="volver">Volver</p>
       </button>
     </div>
   </div>
@@ -22,13 +27,16 @@
 export default {
   methods: {
     reuniones() {
-      this.$router.push("/reuniones");
+      this.$router.push({ name: "Reuniones" });
     },
     seminarios() {
-      this.$router.push("/seminariosWeb");
+      this.$router.push({ name: "SeminariosWeb" });
     },
     config() {
-      this.$router.push("/configuracion");
+      this.$router.push({ name: "Configuracion" });
+    },
+    salirReuniones() {
+      this.$router.push({ name: "Home" });
     },
   },
 };
@@ -39,7 +47,7 @@ export default {
   overflow: hidden;
   background-color: #4cc4ec;
 }
-.navbar p {
+.p {
   float: left;
   font-size: 14px;
   color: white;
@@ -49,19 +57,22 @@ export default {
 .subnav {
   float: left;
 }
+.subnav:hover {
+  background-color: lightgray;
+}
+.subnav2 {
+  float: right;
+}
 .subnavbtn1 {
   padding: 14px 16px;
 }
-
 .subnavbtn2 {
-  padding: 14px 16px;
+  border: 1px solid white;
+  border-radius: 4px;
+  background-color: white;
+  padding: 12px 14px;
 }
-
-.subnavbtn3 {
-  padding: 14px 16px;
-}
-
-.subnav:hover {
-  background-color: lightgray;
+.volver {
+  color: #4cc4ec;
 }
 </style>

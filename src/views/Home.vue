@@ -45,7 +45,7 @@ export default {
     },
     meeting() {
       this.$router.push({
-        name: "meetReuniones",
+        name: "Reuniones",
         params: { users: this.usuario },
       });
     },

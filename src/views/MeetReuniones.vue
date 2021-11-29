@@ -8,82 +8,76 @@
           <v-card>
             <v-tabs background-color="#4cc4ec" dark>
               <v-tab @click="click_Proximos">Próximos</v-tab>
-              <v-tab @click="click_Anterior">Anterior</v-tab>
-              <v-tab @click="click_SalaPersonal">Sala personal</v-tab>
+              <v-tab @click="click_Anterior">Anteriores</v-tab>
             </v-tabs>
-            <div v-if="menu === 0">
-              <h1>Próximos</h1>
-            </div>
-            <div v-if="menu === 1">
-              <h1>Anterior</h1>
-            </div>
-            <h1 class="h1_reunion">
-              <button class="boton_reunion" @click="click_ProgramarReunion">
-                Programar Reunion
-              </button>
-            </h1>
-            <div class="container" v-if="menu !== 2">
-              <div class="filt">
-                <form>
-                  <p>Filtro por fecha</p>
-                  <input class="filter" type="date" v-model="filtroFecha" />
-                </form>
+            <div class="grid-container">
+              <div class="grid-item1" v-if="menu === 0">
+                <h1>Próximos</h1>
               </div>
-              <table>
-                <tr>
-                  <th>Fecha</th>
-                  <th>Hora</th>
-                  <th>Nombre</th>
-                </tr>
-                <tr v-for="(item, i) in arrayFiltrado" :key="i">
-                  <td>{{ item.fecha }}</td>
-                  <td>{{ item.hora }}</td>
-                  <td>{{ item.nombre }}</td>
+              <div class="grid-item1" v-if="menu === 1">
+                <h1>Anterior</h1>
+              </div>
+              <div class="grid-item2">
+                <h1 class="h1_reunion">
+                  <button class="boton_reunion" @click="click_ProgramarReunion">
+                    Programar Reunion
+                  </button>
+                </h1>
+              </div>
+              <div class="grid-item3">
+                <div class="filt">
+                  <form>
+                    <p>📆 Búsqueda por fecha</p>
+                    <input class="filter" type="date" v-model="filtroFecha" />
+                  </form>
+                </div>
+              </div>
+              <div class="grid-item4">
+                <table>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Nombre</th>
+                  </tr>
+                  <tr v-for="(item, i) in arrayFiltrado" :key="i">
+                    <td>{{ item.fecha }}</td>
+                    <td>{{ item.hora }}</td>
+                    <td>{{ item.nombre }}</td>
 
-                  <v-menu transition="slide-y-transition">
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-btn
-                        color="#4cc4ec"
-                        class="ma-2"
-                        v-bind="attrs"
-                        v-on="on"
-                      >
-                        <p class="whitea">Mas informacion</p>
-                      </v-btn>
-                    </template>
-                    <v-list>
-                      <v-list-item v-for="n in 3" :key="n" link>
-                        <v-list-item-title
-                          v-if="n === 1"
-                          @click="click_irASala"
-                          v-text="`Acceder a la sala`"
-                        />
-                        <v-list-item-title
-                          v-if="n === 2"
-                          @click="click_eliminar(item)"
-                          v-text="`Eliminar`"
-                        />
-                        <v-list-item-title
-                          v-if="n === 3"
-                          @click="click_datos(item)"
-                          v-text="`Datos de la reunion`"
-                        />
-                      </v-list-item>
-                    </v-list>
-                  </v-menu>
-                </tr>
-              </table>
-            </div>
-            <div class="sala" v-if="menu === 2">
-              <h1>Sala personal</h1>
-              <p class="sp">Topic:</p>
-              <p class="sp">Meet ID:</p>
-              <p class="sp">
-                Security: <span>Password: ****** </span>
-                <span>Waiting room ✅</span>
-              </p>
-              <p class="sp">Invite link: <a>ssdd</a></p>
-              <button class="boton">Start</button>
+                    <v-menu transition="slide-y-transition">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                          color="#4cc4ec"
+                          class="ma-2"
+                          v-bind="attrs"
+                          v-on="on"
+                        >
+                          <p class="whitea">ℹ Mas informacion</p>
+                        </v-btn>
+                      </template>
+                      <v-list>
+                        <v-list-item v-for="n in 3" :key="n" link>
+                          <v-list-item-title
+                            v-if="n === 1"
+                            @click="click_irASala"
+                            v-text="`Acceder a la sala`"
+                          />
+                          <v-list-item-title
+                            v-if="n === 2"
+                            @click="click_eliminar(item)"
+                            v-text="`🗑️ Eliminar`"
+                          />
+                          <v-list-item-title
+                            v-if="n === 3"
+                            @click="click_datos(item)"
+                            v-text="`Datos de la reunion`"
+                          />
+                        </v-list-item>
+                      </v-list>
+                    </v-menu>
+                  </tr>
+                </table>
+              </div>
             </div>
           </v-card>
         </v-app>
@@ -98,7 +92,7 @@
         <div class="item">
           <p class="gris">Nombre</p>
         </div>
-        <div class="item">
+        <div class="item2">
           <input v-model="nuevaReunion.nombre" class="form-input" />
         </div>
       </div>
@@ -106,7 +100,7 @@
         <div class="item">
           <p class="gris">Descripcion</p>
         </div>
-        <div class="item">
+        <div class="item2">
           <input v-model="nuevaReunion.descripcion" class="form-input" />
         </div>
       </div>
@@ -114,7 +108,7 @@
         <div class="item">
           <p class="gris">Contraseña</p>
         </div>
-        <div class="item">
+        <div class="item2">
           <input
             v-model="auxpassword"
             class="form-input"
@@ -125,12 +119,12 @@
       </div>
       <div class="container">
         <div class="item">
-          <p class="gris">Cuándo</p>
+          <p class="gris">Fecha</p>
         </div>
-        <div class="item">
+        <div class="item3">
           <input v-model="nuevaReunion.fecha" class="form-input" type="date" />
         </div>
-        <div class="item">
+        <div class="item4">
           <input v-model="nuevaReunion.hora" class="form-input" type="time" />
         </div>
       </div>
@@ -188,10 +182,10 @@
       </div>
       <div class="container">
         <div class="item">
-          <button class="boton" @click="click_CrearReunion">Guardar</button>
+          <button class="boton" @click="click_CrearReunion">✅ Guardar</button>
         </div>
         <div class="item">
-          <button class="boton" @click="click_Cancelar">Cancelar</button>
+          <button class="boton" @click="click_Cancelar">❌ Cancelar</button>
         </div>
       </div>
     </div>
@@ -304,9 +298,6 @@ export default {
         }
       }
       this.arrayFiltrado = this.resultFiltradoHoraPC;
-    },
-    click_SalaPersonal() {
-      this.menu = 2;
     },
     click_irASala() {
       console.log("Yendo a la sala");
@@ -454,13 +445,37 @@ h1 {
   text-align: center;
   font-family: Georgia, "Times New Roman", Times, serif;
 }
+.grid-container {
+  display: grid;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  grid-template-columns: 25% 50% 25%;
+  grid-template-rows: 15% 15% 70%;
+  justify-content: space-between;
+}
+.grid-item1 {
+  grid-row-start: 1;
+  grid-column-start: 2;
+}
+.grid-item2 {
+  grid-row-start: 2;
+  grid-column-start: 2;
+}
+.grid-item3 {
+  grid-row-start: 3;
+  grid-column-start: 1;
+}
+.grid-item4 {
+  grid-row-start: 3;
+  grid-column-start: 2;
+}
 .filt {
   float: left;
   text-align: center;
-  margin: 40px;
+  margin: 20px;
   background: white;
   height: 150px;
-  width: 250px;
+  width: 200px;
   border-radius: 5px;
   box-shadow: 0 3px 5px 2px rgba(0, 0, 0, 0.3);
   font-weight: bold;
@@ -470,13 +485,10 @@ h1 {
   margin: 20px 20px 20px 20px;
   border: none;
   border-radius: 10px;
-  height: 28px;
   background: lightgrey;
   font-size: 18px;
 }
 table {
-  float: none;
-  margin: 0 auto;
   background: white;
   border-radius: 5px;
   box-shadow: 0 3px 5px 2px rgba(0, 0, 0, 0.3);
@@ -498,11 +510,17 @@ tr:last-child {
 .whitea {
   background: transparent;
   color: white;
+  text-align: center;
+  margin: 2px 2px 2px 2px;
 }
 .volver {
   margin: 20px;
   text-decoration-line: underline;
   color: blue;
+  transition: 0.25s linear;
+}
+.volver:hover {
+  color: red;
 }
 .header2 {
   margin: 20px;
@@ -513,14 +531,33 @@ tr:last-child {
   margin: 20px;
   overflow: hidden;
 }
+.gris {
+  margin: 6px 0 0 0;
+  color: gray;
+}
 .item {
   width: 100px;
   margin: 0 60px 0 0;
   float: left;
 }
-.gris {
-  margin: 6px 0 0 0;
-  color: gray;
+.item2 {
+  width: 172px;
+  float: left;
+  border: 2px solid gray;
+  border-radius: 4px;
+}
+.item3 {
+  width: 126px;
+  margin: 0 40px 0 0;
+  float: left;
+  border: 2px solid gray;
+  border-radius: 4px;
+}
+.item4 {
+  width: 58px;
+  float: left;
+  border: 2px solid gray;
+  border-radius: 4px;
 }
 .boton {
   background: #4cc4ec;
@@ -529,6 +566,10 @@ tr:last-child {
   height: 40px;
   color: white;
   border-radius: 5px;
+  transition: 0.25s linear;
+}
+.boton:hover {
+  box-shadow: 4px 4px 4px 4px gray;
 }
 .h1_reunion {
   font-size: 16px;
@@ -541,6 +582,10 @@ tr:last-child {
   border-radius: 5px;
   background: #4cc4ec;
   color: white;
+  transition: 0.25s linear;
+}
+.boton_reunion:hover {
+  box-shadow: 4px 4px 4px 4px gray;
 }
 .sp {
   margin: 20px;

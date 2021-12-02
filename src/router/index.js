@@ -13,6 +13,11 @@ import MeetReuniones from "../views/MeetReuniones.vue";
 import MeetSeminariosWeb from "../views/MeetSeminariosWeb.vue";
 import MeetConfig from "../views/MeetConfig.vue";
 
+// Font awesome
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+library.add(faArrowLeft);
+
 Vue.use(VueRouter);
 
 const routes = [

@@ -17,7 +17,7 @@
     </div>
     <div class="subnav2">
       <button class="subnavbtn2" @click="salirReuniones()">
-        <p class="volver">Volver</p>
+        <p class="volver">🡨 Volver</p>
       </button>
     </div>
   </div>

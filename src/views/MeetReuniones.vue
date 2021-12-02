@@ -85,7 +85,7 @@
     </div>
     <div v-if="programarReunion">
       <button class="volver" @click="click_ProgramarReunion">
-        🡰 Volver a las reuniones
+        🡨 Volver a las reuniones
       </button>
       <p class="header2">Programar Reunion</p>
       <div class="container">
@@ -515,7 +515,7 @@ tr:last-child {
 .volver {
   margin: 20px;
   text-decoration-line: underline;
-  color: blue;
+  color: #4cc4ec;
   transition: 0.25s linear;
 }
 .volver:hover {

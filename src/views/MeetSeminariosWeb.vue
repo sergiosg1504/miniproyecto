@@ -1,30 +1,41 @@
 <template>
   <div id="#app">
-    <div><navigation-bar /></div>
+    <navigation-bar />
     <div class="main-container">
       <a href="/home" class="btn btn-secondary float-right">
-        <!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-arrow-left fa-w-14">
-                    <path fill="currentColor" d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z" class=""/>
-                  </svg>-->
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          data-prefix="fas"
+          data-icon="arrow-left"
+          role="img"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 448 512"
+          class="svg-inline--fa fa-arrow-left fa-w-14"
+        >
+          <path
+            fill="currentColor"
+            d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"
+            class=""
+          />
+        </svg>
         Back to modules
       </a>
       <h4>Seminarios web</h4>
-      <div class="sem">
-        <div class="aviso">
-          <div>
-            <img class="imagen" src="../images/info.png" />
-          </div>
-          <div>
-            ¡Puede celebrar un seminario web gratuito de 30 minutos hoy en
-            <a href="https://on.zoom.us/">OnZoom</a>! Póngase en contacto con su
-            administrador de TI para que le habilite como anfitrión.
-            <br />Obtenga más información sobre cómo empezar
-            <a
-              href="https://support.zoom.us/hc/en-us/
+      <div class="aviso">
+        <div>
+          <img class="imagen" src="../images/info.png" />
+        </div>
+        <div>
+          ¡Puede celebrar un seminario web gratuito de 30 minutos hoy en
+          <a href="https://on.zoom.us/">OnZoom</a>! Póngase en contacto con su
+          administrador de TI para que le habilite como anfitrión. <br />Obtenga
+          más información sobre cómo empezar
+          <a
+            href="https://support.zoom.us/hc/en-us/
             articles/360049497492-Getting-started-with-hosting-OnZoom-events"
-              >aquí</a
-            >
-          </div>
+            >aquí</a
+          >
         </div>
         <div class="parrafo">
           <p class="titulo_op">¿Qué es un seminario web?</p>
@@ -193,6 +204,26 @@ a {
   color: #0d6efd;
   text-decoration: underline;
 }
+svg:not(:root).svg-inline--fa {
+  overflow: visible;
+}
+.svg-inline--fa.fa-w-18 {
+  width: 1.125em;
+}
+.svg-inline--fa {
+  color: #62c4e4 !important;
+}
+.svg-inline--fa {
+  display: inline-block;
+  font-size: inherit;
+  height: 1em;
+  overflow: visible;
+  vertical-align: -0.125em;
+}
+img,
+svg {
+  vertical-align: middle;
+}
 *,
 ::before,
 ::after {
@@ -213,9 +244,6 @@ a {
   margin: 50px 0 10px 0;
   text-align: left;
   font-weight: bold;
-}
-.sem {
-  margin: 0 40px;
 }
 .parrafo {
   display: inline-block;

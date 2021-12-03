@@ -1,7 +1,358 @@
 <template>
-  <div>
+  <div id="app">
     <navigation-bar />
-    <div v-if="!programarReunion">
+    <div class="col-md-12 bg-white full-height full-width">
+      <div class="col-sm-12 main-container">
+        <div class="col-sm-6">
+          <!--proximos-->
+          <div class="table-container">
+            <h4>Proximos</h4>
+            <div class="row">
+              <div class="col-sm-2">
+                <ul
+                  class="pagination b-pagination"
+                  role="menubar"
+                  aria-disabled="false"
+                  aria-label="Pagination"
+                >
+                  <li
+                    class="page-item disabled"
+                    role="presentation"
+                    aria-hidden="true"
+                  >
+                    <span
+                      class="page-link"
+                      role="menuitem"
+                      aria-label="Go to first page"
+                      aria-controls="usersAnalyses"
+                      aria-disabled="true"
+                      >«</span
+                    >
+                  </li>
+                  <li
+                    class="page-item disabled"
+                    role="presentation"
+                    aria-hidden="true"
+                  >
+                    <span
+                      class="page-link"
+                      role="menuitem"
+                      aria-label="Go to previous page"
+                      aria-controls="usersAnalyses"
+                      aria-disabled="true"
+                      >‹</span
+                    >
+                  </li>
+                  <li class="page-item disabled" role="presentation">
+                    <button
+                      class="page-link"
+                      role="menuitemradio"
+                      type="button"
+                      aria-controls="usersAnalyses"
+                      aria-label="Go to page 1"
+                      aria-checked="true"
+                      aria-posinset="1"
+                      aria-setsize="1"
+                      tabindex="0"
+                    >
+                      1
+                    </button>
+                  </li>
+                  <li
+                    class="page-item disabled"
+                    role="presentation"
+                    aria-hidden="true"
+                  >
+                    <span
+                      class="page-link"
+                      role="menuitem"
+                      aria-label="Go to first page"
+                      aria-controls="usersAnalyses"
+                      aria-disabled="true"
+                      >›</span
+                    >
+                  </li>
+                  <li
+                    class="page-item disabled"
+                    role="presentation"
+                    aria-hidden="true"
+                  >
+                    <span
+                      class="page-link"
+                      role="menuitem"
+                      aria-label="Go to previous page"
+                      aria-controls="usersAnalyses"
+                      aria-disabled="true"
+                      >»</span
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div class="col-sm-7">
+                <select
+                  id="__BVID__34"
+                  class="numPerPage paginationSelectorTable custom-select"
+                >
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="50">50</option>
+                  <option value="9007199254740991">Show all</option>
+                </select>
+              </div>
+              <div class="col-sm-3">
+                <input
+                  v-model="filtroFecha"
+                  id="filter-input"
+                  class="form-control"
+                  type="date"
+                  placeholder="Type to search"
+                />
+              </div>
+            </div>
+            <div class="table-responsive-sm">
+              <table
+                id="meetingAnalyses"
+                class="table b-table"
+                role="table"
+                aria-busy="false"
+                aria-colcount="3"
+              >
+                <thead class="" role="rowgroup">
+                  <tr class="" role="row">
+                    <th
+                      class=""
+                      role="columnheader"
+                      scope="col"
+                      tabindex="0"
+                      aria-colindex="1"
+                      aria-sort="ascending"
+                    >
+                      <div>Fecha</div>
+                      <span class="sr-only">(Click to sort Descending)</span>
+                    </th>
+                    <th
+                      class=""
+                      role="columnheader"
+                      scope="col"
+                      tabindex="0"
+                      aria-colindex="1"
+                      aria-sort="ascending"
+                    >
+                      <div>Hora</div>
+                      <span class="sr-only">(Click to sort Descending)</span>
+                    </th>
+                    <th
+                      class=""
+                      role="columnheader"
+                      scope="col"
+                      tabindex="0"
+                      aria-colindex="1"
+                      aria-sort="ascending"
+                    >
+                      <div>Nombre</div>
+                      <span class="sr-only">(Click to sort Descending)</span>
+                    </th>
+                    <th
+                      class=""
+                      role="columnheader"
+                      scope="col"
+                      tabindex="0"
+                      aria-colindex="1"
+                      aria-sort="ascending"
+                    >
+                      <div>Options</div>
+                      <span class="sr-only">(Click to sort Descending)</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody role="rowgroup"></tbody>
+                <!--event-->
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <!--anteriores-->
+          <div class="links-container">
+            <a class="btn btn-secondary float-right" href="/home">
+              <!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-arrow-left fa-w-14">
+                <path fill="currentColor" d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z" class=""/>
+              </svg>-->
+              Back to modules
+            </a>
+          </div>
+          <div class="table-container">
+            <h4>Anteriores</h4>
+            <div class="row">
+              <div class="col-sm-3">
+                <ul
+                  class="pagination b-pagination"
+                  role="menubar"
+                  aria-disabled="false"
+                  aria-label="Pagination"
+                >
+                  <li
+                    class="page-item disabled"
+                    role="presentation"
+                    aria-hidden="true"
+                  >
+                    <span
+                      class="page-link"
+                      role="menuitem"
+                      aria-label="Go to first page"
+                      aria-controls="usersAnalyses"
+                      aria-disabled="true"
+                      >«</span
+                    >
+                  </li>
+                  <li
+                    class="page-item disabled"
+                    role="presentation"
+                    aria-hidden="true"
+                  >
+                    <span
+                      class="page-link"
+                      role="menuitem"
+                      aria-label="Go to previous page"
+                      aria-controls="usersAnalyses"
+                      aria-disabled="true"
+                      >‹</span
+                    >
+                  </li>
+                  <li class="page-item disabled" role="presentation">
+                    <button
+                      class="page-link"
+                      role="menuitemradio"
+                      type="button"
+                      aria-controls="usersAnalyses"
+                      aria-label="Go to page 1"
+                      aria-checked="true"
+                      aria-posinset="1"
+                      aria-setsize="1"
+                      tabindex="0"
+                    >
+                      1
+                    </button>
+                  </li>
+                  <li
+                    class="page-item disabled"
+                    role="presentation"
+                    aria-hidden="true"
+                  >
+                    <span
+                      class="page-link"
+                      role="menuitem"
+                      aria-label="Go to first page"
+                      aria-controls="usersAnalyses"
+                      aria-disabled="true"
+                      >›</span
+                    >
+                  </li>
+                  <li
+                    class="page-item disabled"
+                    role="presentation"
+                    aria-hidden="true"
+                  >
+                    <span
+                      class="page-link"
+                      role="menuitem"
+                      aria-label="Go to previous page"
+                      aria-controls="usersAnalyses"
+                      aria-disabled="true"
+                      >»</span
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div class="col-sm-4">
+                <select
+                  id="__BVID__49"
+                  class="numPerPage paginationSelectorTable custom-select"
+                >
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="50">50</option>
+                  <option value="9007199254740991">Show all</option>
+                </select>
+              </div>
+              <div class="col-sm-5">
+                <input
+                  v-model="filtroFecha"
+                  id="filter-input"
+                  class="form-control"
+                  type="date"
+                  placeholder="Type to search"
+                />
+              </div>
+            </div>
+            <div class="table-responsive-sm clickable">
+              <table
+                id="meetingAnalyses"
+                class="table b-table"
+                role="table"
+                aria-busy="false"
+                aria-colcount="3"
+              >
+                <thead class="" role="rowgroup">
+                  <tr class="" role="row">
+                    <th
+                      class=""
+                      role="columnheader"
+                      scope="col"
+                      tabindex="0"
+                      aria-colindex="1"
+                      aria-sort="ascending"
+                    >
+                      <div>Fecha</div>
+                      <span class="sr-only">(Click to sort Descending)</span>
+                    </th>
+                    <th
+                      class=""
+                      role="columnheader"
+                      scope="col"
+                      tabindex="0"
+                      aria-colindex="1"
+                      aria-sort="ascending"
+                    >
+                      <div>Hora</div>
+                      <span class="sr-only">(Click to sort Descending)</span>
+                    </th>
+                    <th
+                      class=""
+                      role="columnheader"
+                      scope="col"
+                      tabindex="0"
+                      aria-colindex="1"
+                      aria-sort="ascending"
+                    >
+                      <div>Nombre</div>
+                      <span class="sr-only">(Click to sort Descending)</span>
+                    </th>
+                    <th
+                      class=""
+                      role="columnheader"
+                      scope="col"
+                      tabindex="0"
+                      aria-colindex="1"
+                      aria-sort="ascending"
+                    >
+                      <div>Options</div>
+                      <span class="sr-only">(Click to sort Descending)</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody role="rowgroup"></tbody>
+                <!--event-->
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--   <div v-if="!programarReunion">
       <h1 class="header">REUNIONES</h1>
       <div>
         <v-app>
@@ -10,12 +361,24 @@
               <v-tab @click="click_Proximos">Próximos</v-tab>
               <v-tab @click="click_Anterior">Anteriores</v-tab>
             </v-tabs>
-            <div class="grid-container">
+            <div class="main-container grid-container">
               <div class="grid-item1" v-if="menu === 0">
-                <h1>Próximos</h1>
+                <a href="/home" class="btn btn-secondary float-right">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-arrow-left fa-w-14">
+                    <path fill="currentColor" d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z" class=""/>
+                  </svg>
+                  Back to modules
+                </a>
+                <h4>Próximos</h4>
               </div>
               <div class="grid-item1" v-if="menu === 1">
-                <h1>Anterior</h1>
+                <a href="/home" class="btn btn-secondary float-right">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-arrow-left fa-w-14">
+                    <path fill="currentColor" d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z" class=""/>
+                  </svg>
+                  Back to modules
+                </a>
+                <h4>Anterior</h4>
               </div>
               <div class="grid-item2">
                 <h1 class="h1_reunion">
@@ -23,67 +386,99 @@
                     Programar Reunion
                   </button>
                 </h1>
-              </div>
-              <div class="grid-item3">
-                <div class="filt">
-                  <form>
-                    <p>📆 Búsqueda por fecha</p>
-                    <input class="filter" type="date" v-model="filtroFecha" />
-                  </form>
+                <div class="row">
+                <div class="col-sm-2">
+                  <ul role="menubar" aria-disabled="false" aria-label="Pagination" class="pagination b-pagination">
+                    <li role="presentation" aria-hidden="true" class="page-item disabled">
+                      <span role="menuitem" aria-label="Go to first page" aria-controls="usersAnalyses" aria-disabled="true" class="page-link">«</span>
+                    </li>
+                    <li role="presentation" aria-hidden="true" class="page-item disabled">
+                      <span role="menuitem" aria-label="Go to previous page" aria-controls="usersAnalyses" aria-disabled="true" class="page-link">‹</span>
+                    </li>
+                    <li role="presentation" class="page-item active">
+                      <button role="menuitemradio" type="button" aria-controls="usersAnalyses" aria-label="Go to page 1" aria-checked="true" 
+                      aria-posinset="1" aria-setsize="1" tabindex="0" class="page-link">1</button>
+                    </li>
+                    <li role="presentation" aria-hidden="true" class="page-item disabled">
+                      <span role="menuitem" aria-label="Go to next page" aria-controls="usersAnalyses" aria-disabled="true" class="page-link">›</span>
+                    </li>
+                    <li role="presentation" aria-hidden="true" class="page-item disabled">
+                      <span role="menuitem" aria-label="Go to last page" aria-controls="usersAnalyses" aria-disabled="true" class="page-link">»</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-sm-7">
+                  <select class="numPerPage paginationSelectorTable custom-select" id="__BVID__71">
+                    <option value="5">5</option><option value="10">10</option>
+                    <option value="20">20</option><option value="50">50</option>
+                    <option value="9007199254740991">Show all</option>
+                  </select>
+                </div>
+                <div class="col-sm-3">
+                  <input id="filter-input" type="date" v-model="filtroFecha" class="form-control">
+                </div>
                 </div>
               </div>
               <div class="grid-item4">
-                <table>
-                  <tr>
-                    <th>Fecha</th>
-                    <th>Hora</th>
-                    <th>Nombre</th>
+                <div class="table-responsive-sm">
+                <table id="userAnalyses" class="table b-table" role="table" aria-busy="false" aria-colcount="3">
+                  <thead class="" role="rowgroup">
+                    <tr class="" role="row">
+                    <th class="" role="columnheader" scope="col" tabindex="0" aria-colindex="1" aria-sort="ascending">
+                      <div>Fecha</div>
+                      <span class="sr-only">(Click to sort Descending)</span>
+                    </th>
+                    <th class="" role="columnheader" scope="col" tabindex="0" aria-colindex="1" aria-sort="ascending">
+                      <div>Hora</div>
+                      <span class="sr-only">(Click to sort Descending)</span>
+                    </th>
+                    <th class="" role="columnheader" scope="col" tabindex="0" aria-colindex="1" aria-sort="ascending">
+                      <div>Nombre</div>
+                      <span class="sr-only">(Click to sort Descending)</span>
+                    </th>
+                    <th class="" role="columnheader" scope="col" tabindex="0" aria-colindex="1" aria-sort="ascending">
+                      <div>Options</div>
+                      <span class="sr-only">(Click to sort Descending)</span>
+                    </th>
                   </tr>
-                  <tr v-for="(item, i) in arrayFiltrado" :key="i">
-                    <td>{{ item.fecha }}</td>
-                    <td>{{ item.hora }}</td>
-                    <td>{{ item.nombre }}</td>
+                  </thead>
+                  <tbody role="rowgroup">
+                  <tr class="" role="row" aria-rowindex="1" v-for="(item, i) in arrayFiltrado" :key="i">
+                    <td class="" aria-colindex="1" role="cell">{{ item.fecha }}</td>
+                    <td class="" aria-colindex="2" role="cell">{{ item.hora }}</td>
+                    <td class="" aria-colindex="3" role="cell">{{ item.nombre }}</td>
+                    <td class="" aria-colindex="4" role="cell">
+                      <button class="btn btn-secondary" @click="click_irASala" title="Acceder a la sala" type="button">
+                        📹
+                        <svg>
+                          <path></path>
+                        </svg>
+                      </button>
+                      <button class="btn btn-secondary" @click="click_eliminar(item)" title="Eliminar" type="button">
+                        🗑️
+                        <svg>
+                          <path></path>
+                        </svg>
+                      </button>
+                      <button class="btn btn-secondary" @click="click_datos(item)" title="Datos de la reunión" type="button">
+                        📈
+                        <svg>
+                          <path></path>
+                        </svg>
+                      </button>
+                    </td>
 
-                    <v-menu transition="slide-y-transition">
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-btn
-                          color="#4cc4ec"
-                          class="ma-2"
-                          v-bind="attrs"
-                          v-on="on"
-                        >
-                          <p class="whitea">ℹ Mas informacion</p>
-                        </v-btn>
-                      </template>
-                      <v-list>
-                        <v-list-item v-for="n in 3" :key="n" link>
-                          <v-list-item-title
-                            v-if="n === 1"
-                            @click="click_irASala"
-                            v-text="`Acceder a la sala`"
-                          />
-                          <v-list-item-title
-                            v-if="n === 2"
-                            @click="click_eliminar(item)"
-                            v-text="`Eliminar`"
-                          />
-                          <v-list-item-title
-                            v-if="n === 3"
-                            @click="click_datos(item)"
-                            v-text="`Datos de la reunion`"
-                          />
-                        </v-list-item>
-                      </v-list>
-                    </v-menu>
                   </tr>
+                  </tbody>
                 </table>
+                </div>
               </div>
             </div>
           </v-card>
         </v-app>
       </div>
     </div>
-    <div v-if="programarReunion">
+    <div v-if="programarReunion" class="main-container">
       <button class="volver" @click="click_ProgramarReunion">
         🡨 Volver a las reuniones
       </button>
@@ -188,7 +583,7 @@
           <button class="boton" @click="click_Cancelar">❌ Cancelar</button>
         </div>
       </div>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -429,15 +824,561 @@ export default {
 </script>
 
 <style scoped>
-.header {
-  padding: 20px;
+/* Estilos de progradum*/
+#app {
+  font-family: Myriad Pro Regular, Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background: white;
-  color: #4cc4ec;
-  font-size: 40px;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  color: #2c3e50;
+  background-color: #f2f2f2;
+  height: 100vh;
+}
+#app > .bg-white {
+  padding-left: 0px;
+}
+#app > .bg-white .main-container {
+  max-width: 100%;
+  float: none;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 0.7rem;
+}
+#app .logged-navbar.collapsed-sidebar ~ .bg-white {
+  padding-left: 85px;
+}
+#app h4 {
+  font-weight: 900 !important;
+  text-align: left;
+  border-bottom: 5px solid;
+  padding-bottom: 10px;
+  margin-bottom: 35px;
+}
+.full-height {
+  height: 100%;
+}
+.full-width {
+  width: 100%;
+}
+.main-container {
+  position: relative;
+  overflow: hidden;
+  max-width: 88%;
+  float: right;
+  width: 100%;
+}
+legend.col-form-label {
+  float: left;
+  text-align: left;
+  font-weight: bold;
+  color: #000;
+}
+.table-container {
+  margin: 0;
+  max-width: 100%;
+}
+.form-row {
+  position: relative;
+  overflow: hidden;
+}
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+[type="search"] {
+  outline-offset: -2px;
+  -webkit-appearance: textfield;
+}
+/*Responsive*/
+
+@media (min-width: 576px) {
+  .col-sm-6,
+  .col-sm-4,
+  .col-sm-10,
+  .col-sm-2,
+  .col-sm-3 {
+    float: left;
+  }
+  .col-sm-12 {
+    position: relative;
+    overflow: hidden;
+  }
+}
+.col-sm-6 {
+  padding: 20px;
+}
+.col-sm-2 {
+  flex: 0 0 auto;
+  width: 16.6666666667%;
+}
+.col-sm-7 {
+  flex: 0 0 auto;
+  width: 58.3333333333%;
+}
+.col-sm-3 {
+  flex: 0 0 auto;
+  width: 25%;
+}
+.row {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+}
+.row {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(var(--bs-gutter-y) * -1);
+  margin-right: calc(var(--bs-gutter-x) / -2);
+  margin-left: calc(var(--bs-gutter-x) / -2);
+}
+.row > * {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: calc(var(--bs-gutter-x) / 2);
+  padding-left: calc(var(--bs-gutter-x) / 2);
+  margin-top: var(--bs-gutter-y);
+}
+.chart-container .col-sm-6 {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 50%;
+  float: left;
+}
+.chart-container .col-sm-6 div:first-of-type {
+  width: 100%;
+  max-width: 65%;
+  margin: 0 auto;
+  float: none;
+}
+
+h4,
+.h4 {
+  font-size: calc(1.275rem + 0.3vw);
+}
+h6,
+.h6,
+h5,
+.h5,
+h4,
+.h4,
+h3,
+.h3,
+h2,
+.h2,
+h1,
+.h1 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #13283b;
+  text-align: left;
+  font-weight: bold !important;
+}
+.align-left {
+  text-align: left !important;
+  color: #212529;
+}
+.custom-control {
+  position: relative;
+  overflow: hidden;
+  float: left;
+}
+.custom-control input[type="radio"] {
+  width: 15px;
+  float: left;
+  margin-top: 5px;
+  margin-right: 5px;
+}
+.custom-radio {
+  width: 10%;
+  float: left;
+}
+.custom-checkbox {
+  margin-right: 15px;
+}
+.page-item.active .page-link {
+  color: #fff !important;
+  background-color: #2c3e50 !important;
+  border-color: #2c3e50 !important;
+}
+.pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+}
+.paginationSelectorTable {
+  float: left;
+  height: 67%;
+}
+.page-item:first-child .page-link {
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+.page-item.disabled .page-link {
+  color: #6c757d;
+  pointer-events: none;
+  background-color: #fff;
+  border-color: #dee2e6;
+}
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+.page-item.active .page-link {
+  color: #fff !important;
+  background-color: #2c3e50 !important;
+  border-color: #2c3e50 !important;
+}
+.page-item:not(:first-child) .page-link {
+  margin-left: -1px;
+}
+.page-link {
+  padding: 0.375rem 0.75rem;
+}
+.page-link {
+  position: relative;
+  display: block;
+  color: #0d6efd;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-top-color: rgb(222, 226, 230);
+  border-right-color: rgb(222, 226, 230);
+  border-bottom-color: rgb(222, 226, 230);
+  border-left-color: rgb(222, 226, 230);
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.page-link {
+  color: #2c3e50 !important;
+}
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.table {
+  --bs-table-bg: transparent;
+  --bs-table-accent-bg: transparent;
+  --bs-table-striped-color: #212529;
+  --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+  --bs-table-active-color: #212529;
+  --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+  --bs-table-hover-color: #212529;
+  --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+  vertical-align: top;
+  border-color: #dee2e6;
+}
+.table > thead {
+  vertical-align: bottom;
+}
+.table.b-table > thead > tr > [aria-sort]:not(.b-table-sort-icon-left),
+.table.b-table > tfoot > tr > [aria-sort]:not(.b-table-sort-icon-left) {
+  background-position: right calc(0.75rem / 2) center;
+  padding-right: calc(0.75rem + 0.65em);
+}
+.table.b-table > thead > tr > [aria-sort="ascending"],
+.table.b-table > tfoot > tr > [aria-sort="ascending"] {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='101' height='101' view-box='0 0 101 101' preserveAspectRatio='none'%3e%3cpath fill='black' d='M51 1l25 23 24 22H1l25-22z'/%3e%3cpath fill='black' opacity='.3' d='M51 101l25-23 24-22H1l25 22z'/%3e%3c/svg%3e");
+}
+.table.b-table > thead > tr > [aria-sort],
+.table.b-table > tfoot > tr > [aria-sort] {
+  cursor: pointer;
+  background-image: none;
+  background-repeat: no-repeat;
+  background-size: 0.65em 1em;
+}
+.table-responsive-sm .table td {
+  padding: 3px;
+}
+.table > tbody {
+  vertical-align: inherit;
+}
+.table > :not(:last-child) > :last-child > * {
+  border-bottom-color: currentColor;
+}
+.table > :not(caption) > * > * {
+  padding: 0.5rem 0.5rem;
+  padding-right: 0.5rem;
+  background-color: var(--bs-table-bg);
+  border-bottom-width: 1px;
+  box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+}
+.table th {
+  color: #2c3e50 !important;
+}
+.table-responsive-sm {
+  webkit-box-shadow: 3px 3px 9px -2px rgb(0 0 0 / 18%);
+  -moz-box-shadow: 3px 3px 9px -2px rgba(0, 0, 0, 0.18);
+  box-shadow: 3px 3px 9px -2px rgb(0 0 0 / 18%);
+  border-radius: 30px;
+  padding: 30px;
+  border: 1px solid rgb(0 0 0 / 3%);
+  padding-bottom: 5px;
+  padding-top: 20px;
+}
+.table-responsive-sm tbody tr:last-child td {
+  border: 0 !important;
+}
+.table-responsive-sm thead th {
+  border-bottom: 3px solid #dee2e6 !important;
+}
+.table-responsive-sm .table td {
+  padding: 3px;
+}
+table.table td {
+  vertical-align: middle;
+  text-align: left;
+}
+table.table .html_container p {
+  margin-top: 1px !important;
+  margin-bottom: 1px !important;
+}
+table.table .tags-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 50%;
+  margin: 0 auto;
+}
+.analysis-profile-container table.table {
+  width: 100%;
+  max-width: 97%;
+  margin: 0 auto;
+  margin-bottom: 2%;
+}
+table.table ul.inline-tags {
+  margin-bottom: 0% !important;
+}
+.clickable table.table tr:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
+.b-table-sticky-header,
+.table-responsive,
+[class*="table-responsive-"] {
+  margin-bottom: 1rem;
+}
+.b-table-sticky-header > .table,
+.table-responsive > .table,
+[class*="table-responsive-"] > .table {
+  margin-bottom: 0;
+}
+table {
+  caption-side: bottom;
+  border-collapse: collapse;
+}
+thead,
+tbody,
+tfoot,
+tr,
+td,
+th {
+  border-color: inherit;
+  border-style: solid;
+  border-width: 0;
 }
 th {
+  text-align: inherit;
+  text-align: -webkit-match-parent;
+}
+svg:not(:root).svg-inline--fa {
+  overflow: visible;
+}
+.svg-inline--fa.fa-w-18 {
+  width: 1.125em;
+}
+.svg-inline--fa {
+  color: #62c4e4 !important;
+}
+.svg-inline--fa {
+  display: inline-block;
+  font-size: inherit;
+  height: 1em;
+  overflow: visible;
+  vertical-align: -0.125em;
+}
+img,
+svg {
+  vertical-align: middle;
+}
+.links-container {
+  /*width: 100%;
+    position: relative;
+    z-index: 1;*/
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  overflow: hidden;
+  right: 0;
+  margin-right: 27px;
+}
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.btn:hover {
+  color: #212529;
+}
+.btn:hover,
+a:hover {
+  opacity: 0.8;
+}
+.btn:focus {
+  box-shadow: none !important;
+}
+.btn-primary {
+  color: #fff !important;
+  background-color: #62c4e4 !important;
+  border-color: #62c4e4 !important;
+  border-radius: 12px !important;
+  min-width: 120px;
+
+  text-transform: uppercase;
+  font-weight: bold !important;
+
+  -webkit-box-shadow: 3px 3px 9px -2px rgb(0 0 0 / 18%);
+  -moz-box-shadow: 3px 3px 9px -2px rgba(0, 0, 0, 0.18);
+  box-shadow: 3px 3px 9px -2px rgb(0 0 0 / 18%);
+}
+.btn-secondary {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+.btn-secondary:hover {
+  color: #fff;
+  background-color: #5c636a;
+  border-color: #565e64;
+}
+.btn-secondary {
+  color: #62c4e4 !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+  font-weight: bold !important;
+}
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+select {
+  word-wrap: normal;
+}
+button,
+select {
+  text-transform: none;
+}
+input,
+button,
+select,
+optgroup,
+textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+button:not(:disabled),
+[type="button"]:not(:disabled),
+[type="reset"]:not(:disabled),
+[type="submit"]:not(:disabled) {
+  cursor: pointer;
+}
+button {
+  border-radius: 0;
+}
+a {
+  color: #0d6efd;
+  text-decoration: underline;
+}
+a:hover {
+  color: #0a58ca;
+}
+a:hover {
+  cursor: pointer;
+}
+.float-right {
+  float: right;
+}
+ol,
+ul,
+dl {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+ol,
+ul {
+  padding-left: 2rem;
+}
+ul li {
+  list-style: none;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+/* Otros estilos */
+/*th {
   padding-inline: 70px;
 }
 h1 {
@@ -467,31 +1408,6 @@ h1 {
 .grid-item4 {
   grid-row-start: 3;
   grid-column-start: 2;
-}
-.filt {
-  float: left;
-  text-align: center;
-  margin: 20px;
-  background: white;
-  height: 150px;
-  width: 200px;
-  border-radius: 5px;
-  box-shadow: 0 3px 5px 2px rgba(0, 0, 0, 0.3);
-  font-weight: bold;
-}
-.filter {
-  float: center;
-  margin: 20px 20px 20px 20px;
-  border: none;
-  border-radius: 10px;
-  background: lightgrey;
-  font-size: 18px;
-}
-table {
-  background: white;
-  border-radius: 5px;
-  box-shadow: 0 3px 5px 2px rgba(0, 0, 0, 0.3);
-  border-collapse: collapse;
 }
 tr {
   text-align: center;
@@ -589,4 +1505,13 @@ tr:last-child {
 .sp {
   margin: 20px;
 }
+/* Estilos de navegacion*/
+/*.header {
+  padding: 20px;
+  text-align: center;
+  background: white;
+  color: #4cc4ec;
+  font-size: 40px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}*/
 </style>

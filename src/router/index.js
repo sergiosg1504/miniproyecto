@@ -12,16 +12,28 @@ import NavigationBar from "../components/NavigationBar.vue";
 import MeetReuniones from "../views/MeetReuniones.vue";
 import MeetSeminariosWeb from "../views/MeetSeminariosWeb.vue";
 import MeetConfig from "../views/MeetConfig.vue";
-
-// Font awesome
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faArrowLeft,
   faVideo,
   faTrash,
-  faTable,
+  faInfoCircle,
+  faPlus,
+  faCheckCircle,
+  faTimesCircle,
 } from "@fortawesome/free-solid-svg-icons";
-library.add(faArrowLeft, faVideo, faTrash, faTable);
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+library.add(
+  faArrowLeft,
+  faVideo,
+  faTrash,
+  faInfoCircle,
+  faPlus,
+  faCheckCircle,
+  faTimesCircle
+);
+Vue.component("icon", FontAwesomeIcon);
+Vue.config.productionTip = false;
 
 Vue.use(VueRouter);
 

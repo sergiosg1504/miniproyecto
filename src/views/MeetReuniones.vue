@@ -581,7 +581,7 @@ export default {
   },
   data: () => ({
     menu: 0,
-    programarReunion: true,
+    programarReunion: false,
     texto: "",
     auxpassword: "",
     nuevaReunion: {
@@ -1368,134 +1368,6 @@ ul li {
   grid-template-rows: 15% 15% 70%;
   justify-content: space-between;
 }
-
-/*th {
-  padding-inline: 70px;
-}
-h1 {
-  text-align: center;
-  font-family: Georgia, "Times New Roman", Times, serif;
-}
-.grid-container {
-  display: grid;
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
-  grid-template-columns: 25% 50% 25%;
-  grid-template-rows: 15% 15% 70%;
-  justify-content: space-between;
-}
-.grid-item1 {
-  grid-row-start: 1;
-  grid-column-start: 2;
-}
-.grid-item2 {
-  grid-row-start: 2;
-  grid-column-start: 2;
-}
-.grid-item3 {
-  grid-row-start: 3;
-  grid-column-start: 1;
-}
-.grid-item4 {
-  grid-row-start: 3;
-  grid-column-start: 2;
-}
-tr {
-  text-align: center;
-  border: solid;
-  border-width: 1px 0;
-  height: 50px;
-  border-color: rgb(238, 238, 238);
-}
-tr:first-child {
-  border-top: none;
-}
-tr:last-child {
-  border-bottom: none;
-}
-.whitea {
-  background: transparent;
-  color: white;
-  text-align: center;
-  margin: 2px 2px 2px 2px;
-}
-.volver {
-  margin: 20px;
-  text-decoration-line: underline;
-  color: #4cc4ec;
-  transition: 0.25s linear;
-}
-.volver:hover {
-  color: red;
-}
-.header2 {
-  margin: 20px;
-  font-weight: bold;
-  font-size: 20px;
-}
-.container {
-  margin: 20px;
-  overflow: hidden;
-}
-.gris {
-  margin: 6px 0 0 0;
-  color: gray;
-}
-.item {
-  width: 100px;
-  margin: 0 60px 0 0;
-  float: left;
-}
-.item2 {
-  width: 172px;
-  float: left;
-  border: 2px solid gray;
-  border-radius: 4px;
-}
-.item3 {
-  width: 126px;
-  margin: 0 40px 0 0;
-  float: left;
-  border: 2px solid gray;
-  border-radius: 4px;
-}
-.item4 {
-  width: 72px;
-  float: left;
-  border: 2px solid gray;
-  border-radius: 4px;
-}
-.boton {
-  background: #4cc4ec;
-  text-align: center;
-  width: 100px;
-  height: 40px;
-  color: white;
-  border-radius: 5px;
-  transition: 0.25s linear;
-}
-.boton:hover {
-  box-shadow: 4px 4px 4px 4px gray;
-}
-.h1_reunion {
-  font-size: 16px;
-  margin: 20px 0 20px;
-  font-weight: normal;
-}
-.boton_reunion {
-  height: 30px;
-  width: 200px;
-  border-radius: 5px;
-  background: #4cc4ec;
-  color: white;
-  transition: 0.25s linear;
-}
-.boton_reunion:hover {
-  box-shadow: 4px 4px 4px 4px gray;
-}
-.sp {
-  margin: 20px;
-}*/
 .container {
   margin: 20px;
   overflow: hidden;

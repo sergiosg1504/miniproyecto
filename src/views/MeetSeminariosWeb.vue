@@ -37,40 +37,38 @@
             >aquí</a
           >
         </div>
-        <div class="parrafo">
-          <p class="titulo_op">¿Qué es un seminario web?</p>
-          <p style="align-left">
-            Los seminarios web de vídeo de Zoom le permite realizar con
-            facilidad grandes eventos en línea con vídeo, audio y pantalla
-            compartida con hasta 100 participantes de vídeo y 10 000 asistentes
-            Las funciones en los seminarios web están adaptadas para grandes
-            audiencias con marcación, inscripción, controles de anfitrión,
-            encuestas, pregunta y respuesta, levantar la mano, chat, grabación e
-            información Monetizar sus seminarios web con nuestra integración de
-            Paypal (<a
-              href="https://usal-es.zoom.us/zendesk/sso?return_to=https://
+      </div>
+      <div class="parrafo">
+        <p class="titulo_op">¿Qué es un seminario web?</p>
+        <p style="align-left">
+          Los seminarios web de vídeo de Zoom le permite realizar con facilidad
+          grandes eventos en línea con vídeo, audio y pantalla compartida con
+          hasta 100 participantes de vídeo y 10 000 asistentes Las funciones en
+          los seminarios web están adaptadas para grandes audiencias con
+          marcación, inscripción, controles de anfitrión, encuestas, pregunta y
+          respuesta, levantar la mano, chat, grabación e información Monetizar
+          sus seminarios web con nuestra integración de Paypal (<a
+            href="https://usal-es.zoom.us/zendesk/sso?return_to=https://
             support.zoom.us/hc/es/articles/205260649-How-To-Use-Zapier"
-            >
-              a través de Zapier</a
-            >)
-          </p>
-        </div>
-        <div class="parrafo">
-          <p class="titulo_op">¿Qué es un seminario web?</p>
-          <p style="align-left">
-            El seminario web se puede agregar a cualquier plan pago, como Pro,
-            Business o Edu Diríjase a su plan adicional de seminarios web o
-            contacte a su representante de ventas
-          </p>
-        </div>
-        <div class="parrafo">
-          <p class="titulo_op">¿Cómo comienzo?</p>
-          <p style="align-left">
-            En la página de Administración de usuario, el administrador puede
-            habilitar seminarios web para determinados usuarios con Editar
-            usuario
-          </p>
-        </div>
+          >
+            a través de Zapier</a
+          >)
+        </p>
+      </div>
+      <div class="parrafo">
+        <p class="titulo_op">¿Qué es un seminario web?</p>
+        <p style="align-left">
+          El seminario web se puede agregar a cualquier plan pago, como Pro,
+          Business o Edu Diríjase a su plan adicional de seminarios web o
+          contacte a su representante de ventas
+        </p>
+      </div>
+      <div class="parrafo">
+        <p class="titulo_op">¿Cómo comienzo?</p>
+        <p>
+          En la página de Administración de usuario, el administrador puede
+          habilitar seminarios web para determinados usuarios con Editar usuario
+        </p>
       </div>
     </div>
   </div>
@@ -246,11 +244,10 @@ svg {
   font-weight: bold;
 }
 .parrafo {
+  margin: 20px 12% 0 12%;
+  padding: 20px 0px 20px 0px;
+  text-align: left;
   display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: auto;
-  margin-bottom: auto;
 }
 .imagen {
   width: 60px;
@@ -258,16 +255,5 @@ svg {
 }
 a {
   text-decoration-line: none;
-}
-
-/* Estilos de navegacion*/
-.header {
-  padding: 20px;
-  text-align: center;
-  background: white;
-  color: #4cc4ec;
-  font-size: 40px;
-  font-family: Georgia, "Times New Roman", Times, serif;
-  box-shadow: 0 0 0 2px #4cc4ec;
 }
 </style>

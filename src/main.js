@@ -4,17 +4,32 @@ import router from "./router";
 import vuetify from "@/logic/vuetify";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faVideo,
+  faTrash,
+  faInfoCircle,
+  faPlus,
+  faCheckCircle,
+  faTimesCircle,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+library.add(
+  faArrowLeft,
+  faVideo,
+  faTrash,
+  faInfoCircle,
+  faPlus,
+  faCheckCircle,
+  faTimesCircle
+);
+Vue.component("icon", FontAwesomeIcon);
+Vue.config.productionTip = false;
+
 import VueGoodTablePlugin from "vue-good-table";
-library.add(faUserSecret);
-Vue.component("font-awesome-icon", FontAwesomeIcon);
-Vue.config.productionTip = false;
-
 import "vue-good-table/dist/vue-good-table.css";
-Vue.use(VueGoodTablePlugin);
 
-Vue.config.productionTip = false;
+Vue.use(VueGoodTablePlugin);
 
 new Vue({
   router,

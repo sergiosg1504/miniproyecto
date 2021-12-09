@@ -2,13 +2,13 @@
   <div id="app">
     <navigation-bar />
     <div class="col-md-12 bg-white full-height full-width">
-      <div class="col-sm-12 main-container">
+      <div class="col-sm-12 main-container" v-if="!programarReunion">
         <div class="col-sm-6">
           <!--proximos-->
           <div class="table-container">
             <h4>Proximos</h4>
             <div class="row">
-              <div class="col-sm-2">
+              <div class="col-sm-3">
                 <ul
                   class="pagination b-pagination"
                   role="menubar"
@@ -88,7 +88,7 @@
                   </li>
                 </ul>
               </div>
-              <div class="col-sm-7">
+              <div class="col-sm-4">
                 <select
                   id="__BVID__34"
                   class="numPerPage paginationSelectorTable custom-select"
@@ -100,7 +100,7 @@
                   <option value="9007199254740991">Show all</option>
                 </select>
               </div>
-              <div class="col-sm-3">
+              <div class="col-sm-5">
                 <input
                   v-model="filtroFecha"
                   id="filter-input"
@@ -166,7 +166,51 @@
                     </th>
                   </tr>
                 </thead>
-                <tbody role="rowgroup"></tbody>
+                <tbody role="rowgroup">
+                  <tr
+                    class=""
+                    role="row"
+                    aria-rowindex="1"
+                    v-for="(item, i) in arrayFiltrado"
+                    :key="i"
+                  >
+                    <td class="" aria-colindex="1" role="cell">
+                      {{ item.fecha }}
+                    </td>
+                    <td class="" aria-colindex="2" role="cell">
+                      {{ item.hora }}
+                    </td>
+                    <td class="" aria-colindex="3" role="cell">
+                      {{ item.nombre }}
+                    </td>
+                    <td class="" aria-colindex="4" role="cell">
+                      <button
+                        class="btn btn-secondary"
+                        @click="click_irASala"
+                        title="Acceder a la sala"
+                        type="button"
+                      >
+                        <icon icon="video" />
+                      </button>
+                      <button
+                        class="btn btn-secondary"
+                        @click="click_eliminar(item)"
+                        title="Eliminar"
+                        type="button"
+                      >
+                        <icon icon="trash" />
+                      </button>
+                      <button
+                        class="btn btn-secondary"
+                        @click="click_datos(item)"
+                        title="Datos de la reunión"
+                        type="button"
+                      >
+                        <icon icon="info-circle" />
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
                 <!--event-->
               </table>
             </div>
@@ -176,10 +220,15 @@
           <!--anteriores-->
           <div class="links-container">
             <a class="btn btn-secondary float-right" href="/home">
-              <!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-arrow-left fa-w-14">
-                <path fill="currentColor" d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z" class=""/>
-              </svg>-->
+              <icon icon="arrow-left" />
               Back to modules
+            </a>
+            <a
+              class="btn btn-secondary float-right"
+              @click="click_ProgramarReunion"
+            >
+              <icon icon="plus" />
+              Add reunion
             </a>
           </div>
           <div class="table-container">
@@ -343,247 +392,183 @@
                     </th>
                   </tr>
                 </thead>
-                <tbody role="rowgroup"></tbody>
+                <tbody role="rowgroup">
+                  <tr
+                    class=""
+                    role="row"
+                    aria-rowindex="1"
+                    v-for="(item, i) in arrayFiltrado"
+                    :key="i"
+                  >
+                    <td class="" aria-colindex="1" role="cell">
+                      {{ item.fecha }}
+                    </td>
+                    <td class="" aria-colindex="2" role="cell">
+                      {{ item.hora }}
+                    </td>
+                    <td class="" aria-colindex="3" role="cell">
+                      {{ item.nombre }}
+                    </td>
+                    <td class="" aria-colindex="4" role="cell">
+                      <button
+                        class="btn btn-secondary"
+                        @click="click_irASala"
+                        title="Acceder a la sala"
+                        type="button"
+                      >
+                        <icon icon="video" />
+                      </button>
+                      <button
+                        class="btn btn-secondary"
+                        @click="click_eliminar(item)"
+                        title="Eliminar"
+                        type="button"
+                      >
+                        <icon icon="trash" />
+                      </button>
+                      <button
+                        class="btn btn-secondary"
+                        @click="click_datos(item)"
+                        title="Datos de la reunión"
+                        type="button"
+                      >
+                        <icon icon="info-circle" />
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
                 <!--event-->
               </table>
             </div>
           </div>
         </div>
       </div>
-    </div>
-
-    <!--   <div v-if="!programarReunion">
-      <h1 class="header">REUNIONES</h1>
-      <div>
-        <v-app>
-          <v-card>
-            <v-tabs background-color="#4cc4ec" dark>
-              <v-tab @click="click_Proximos">Próximos</v-tab>
-              <v-tab @click="click_Anterior">Anteriores</v-tab>
-            </v-tabs>
-            <div class="main-container grid-container">
-              <div class="grid-item1" v-if="menu === 0">
-                <a href="/home" class="btn btn-secondary float-right">
-                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-arrow-left fa-w-14">
-                    <path fill="currentColor" d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z" class=""/>
-                  </svg>
-                  Back to modules
-                </a>
-                <h4>Próximos</h4>
-              </div>
-              <div class="grid-item1" v-if="menu === 1">
-                <a href="/home" class="btn btn-secondary float-right">
-                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-arrow-left fa-w-14">
-                    <path fill="currentColor" d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z" class=""/>
-                  </svg>
-                  Back to modules
-                </a>
-                <h4>Anterior</h4>
-              </div>
-              <div class="grid-item2">
-                <h1 class="h1_reunion">
-                  <button class="boton_reunion" @click="click_ProgramarReunion">
-                    Programar Reunion
-                  </button>
-                </h1>
-                <div class="row">
-                <div class="col-sm-2">
-                  <ul role="menubar" aria-disabled="false" aria-label="Pagination" class="pagination b-pagination">
-                    <li role="presentation" aria-hidden="true" class="page-item disabled">
-                      <span role="menuitem" aria-label="Go to first page" aria-controls="usersAnalyses" aria-disabled="true" class="page-link">«</span>
-                    </li>
-                    <li role="presentation" aria-hidden="true" class="page-item disabled">
-                      <span role="menuitem" aria-label="Go to previous page" aria-controls="usersAnalyses" aria-disabled="true" class="page-link">‹</span>
-                    </li>
-                    <li role="presentation" class="page-item active">
-                      <button role="menuitemradio" type="button" aria-controls="usersAnalyses" aria-label="Go to page 1" aria-checked="true" 
-                      aria-posinset="1" aria-setsize="1" tabindex="0" class="page-link">1</button>
-                    </li>
-                    <li role="presentation" aria-hidden="true" class="page-item disabled">
-                      <span role="menuitem" aria-label="Go to next page" aria-controls="usersAnalyses" aria-disabled="true" class="page-link">›</span>
-                    </li>
-                    <li role="presentation" aria-hidden="true" class="page-item disabled">
-                      <span role="menuitem" aria-label="Go to last page" aria-controls="usersAnalyses" aria-disabled="true" class="page-link">»</span>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-sm-7">
-                  <select class="numPerPage paginationSelectorTable custom-select" id="__BVID__71">
-                    <option value="5">5</option><option value="10">10</option>
-                    <option value="20">20</option><option value="50">50</option>
-                    <option value="9007199254740991">Show all</option>
-                  </select>
-                </div>
-                <div class="col-sm-3">
-                  <input id="filter-input" type="date" v-model="filtroFecha" class="form-control">
-                </div>
-                </div>
-              </div>
-              <div class="grid-item4">
-                <div class="table-responsive-sm">
-                <table id="userAnalyses" class="table b-table" role="table" aria-busy="false" aria-colcount="3">
-                  <thead class="" role="rowgroup">
-                    <tr class="" role="row">
-                    <th class="" role="columnheader" scope="col" tabindex="0" aria-colindex="1" aria-sort="ascending">
-                      <div>Fecha</div>
-                      <span class="sr-only">(Click to sort Descending)</span>
-                    </th>
-                    <th class="" role="columnheader" scope="col" tabindex="0" aria-colindex="1" aria-sort="ascending">
-                      <div>Hora</div>
-                      <span class="sr-only">(Click to sort Descending)</span>
-                    </th>
-                    <th class="" role="columnheader" scope="col" tabindex="0" aria-colindex="1" aria-sort="ascending">
-                      <div>Nombre</div>
-                      <span class="sr-only">(Click to sort Descending)</span>
-                    </th>
-                    <th class="" role="columnheader" scope="col" tabindex="0" aria-colindex="1" aria-sort="ascending">
-                      <div>Options</div>
-                      <span class="sr-only">(Click to sort Descending)</span>
-                    </th>
-                  </tr>
-                  </thead>
-                  <tbody role="rowgroup">
-                  <tr class="" role="row" aria-rowindex="1" v-for="(item, i) in arrayFiltrado" :key="i">
-                    <td class="" aria-colindex="1" role="cell">{{ item.fecha }}</td>
-                    <td class="" aria-colindex="2" role="cell">{{ item.hora }}</td>
-                    <td class="" aria-colindex="3" role="cell">{{ item.nombre }}</td>
-                    <td class="" aria-colindex="4" role="cell">
-                      <button class="btn btn-secondary" @click="click_irASala" title="Acceder a la sala" type="button">
-                        📹
-                        <svg>
-                          <path></path>
-                        </svg>
-                      </button>
-                      <button class="btn btn-secondary" @click="click_eliminar(item)" title="Eliminar" type="button">
-                        🗑️
-                        <svg>
-                          <path></path>
-                        </svg>
-                      </button>
-                      <button class="btn btn-secondary" @click="click_datos(item)" title="Datos de la reunión" type="button">
-                        📈
-                        <svg>
-                          <path></path>
-                        </svg>
-                      </button>
-                    </td>
-
-                  </tr>
-                  </tbody>
-                </table>
-                </div>
-              </div>
-            </div>
-          </v-card>
-        </v-app>
+      <!--crear reunion-->
+      <div class="col-sm-12 main-container" v-if="programarReunion">
+        <a class="btn btn-secondary float-right" href="/home">
+          <icon icon="arrow-left" />
+          Back to modules
+        </a>
+        <a
+          class="btn btn-secondary float-right"
+          @click="click_ProgramarReunion"
+        >
+          <icon icon="plus" />
+          Back to reuniones
+        </a>
+        <h4>Programar Reunion</h4>
+        <div class="container">
+          <div class="item">
+            <p class="gris">Nombre</p>
+          </div>
+          <div class="item2">
+            <input v-model="nuevaReunion.nombre" class="form-input" />
+          </div>
+        </div>
+        <div class="container">
+          <div class="item">
+            <p class="gris">Descripcion</p>
+          </div>
+          <div class="item2">
+            <input v-model="nuevaReunion.descripcion" class="form-input" />
+          </div>
+        </div>
+        <div class="container">
+          <div class="item">
+            <p class="gris">Contraseña</p>
+          </div>
+          <div class="item2">
+            <input
+              v-model="auxpassword"
+              class="form-input"
+              type="password"
+              id="password"
+            />
+          </div>
+        </div>
+        <div class="container">
+          <div class="item">
+            <p class="gris">Fecha</p>
+          </div>
+          <div class="item3">
+            <input
+              v-model="nuevaReunion.fecha"
+              class="form-input"
+              type="date"
+            />
+          </div>
+          <div class="item4">
+            <input v-model="nuevaReunion.hora" class="form-input" type="time" />
+          </div>
+        </div>
+        <div class="container">
+          <div class="item">
+            <p class="gris">Video anfitrión</p>
+          </div>
+          <div class="item">
+            <form target="_blank">
+              <p>
+                <input
+                  type="radio"
+                  name="videoAnfitrion"
+                  v-model="nuevaReunion.videoAnfitrion"
+                  checked
+                  value="true"
+                />
+                Encendido<br /><br />
+                <input
+                  type="radio"
+                  name="videoAnfitrion"
+                  v-model="nuevaReunion.videoAnfitrion"
+                  value="false"
+                />
+                Apagado<br />
+              </p>
+            </form>
+          </div>
+        </div>
+        <div class="container">
+          <div class="item">
+            <p class="gris">Video participante</p>
+          </div>
+          <div class="item">
+            <form target="_blank">
+              <p>
+                <input
+                  type="radio"
+                  name="videoParticipante"
+                  v-model="nuevaReunion.videoParticipante"
+                  checked
+                  value="true"
+                />
+                Encendido<br /><br />
+                <input
+                  type="radio"
+                  name="videoParticipante"
+                  v-model="nuevaReunion.videoParticipante"
+                  value="false"
+                />
+                Apagado<br />
+              </p>
+            </form>
+          </div>
+        </div>
+        <div class="container">
+          <div class="item">
+            <button class="boton" @click="click_CrearReunion">
+              <icon icon="check-circle" />
+              Guardar
+            </button>
+          </div>
+          <div class="item">
+            <button class="boton" @click="click_Cancelar">
+              <icon icon="times-circle"></icon>
+              Cancelar
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-    <div v-if="programarReunion" class="main-container">
-      <button class="volver" @click="click_ProgramarReunion">
-        🡨 Volver a las reuniones
-      </button>
-      <p class="header2">Programar Reunion</p>
-      <div class="container">
-        <div class="item">
-          <p class="gris">Nombre</p>
-        </div>
-        <div class="item2">
-          <input v-model="nuevaReunion.nombre" class="form-input" />
-        </div>
-      </div>
-      <div class="container">
-        <div class="item">
-          <p class="gris">Descripcion</p>
-        </div>
-        <div class="item2">
-          <input v-model="nuevaReunion.descripcion" class="form-input" />
-        </div>
-      </div>
-      <div class="container">
-        <div class="item">
-          <p class="gris">Contraseña</p>
-        </div>
-        <div class="item2">
-          <input
-            v-model="auxpassword"
-            class="form-input"
-            type="password"
-            id="password"
-          />
-        </div>
-      </div>
-      <div class="container">
-        <div class="item">
-          <p class="gris">Fecha</p>
-        </div>
-        <div class="item3">
-          <input v-model="nuevaReunion.fecha" class="form-input" type="date" />
-        </div>
-        <div class="item4">
-          <input v-model="nuevaReunion.hora" class="form-input" type="time" />
-        </div>
-      </div>
-      <div class="container">
-        <div class="item">
-          <p class="gris">Video anfitrión</p>
-        </div>
-        <div class="item">
-          <form target="_blank">
-            <p>
-              <input
-                type="radio"
-                name="videoAnfitrion"
-                v-model="nuevaReunion.videoAnfitrion"
-                checked
-                value="true"
-              />
-              Encendido<br /><br />
-              <input
-                type="radio"
-                name="videoAnfitrion"
-                v-model="nuevaReunion.videoAnfitrion"
-                value="false"
-              />
-              Apagado<br />
-            </p>
-          </form>
-        </div>
-      </div>
-      <div class="container">
-        <div class="item">
-          <p class="gris">Video participante</p>
-        </div>
-        <div class="item">
-          <form target="_blank">
-            <p>
-              <input
-                type="radio"
-                name="videoParticipante"
-                v-model="nuevaReunion.videoParticipante"
-                checked
-                value="true"
-              />
-              Encendido<br /><br />
-              <input
-                type="radio"
-                name="videoParticipante"
-                v-model="nuevaReunion.videoParticipante"
-                value="false"
-              />
-              Apagado<br />
-            </p>
-          </form>
-        </div>
-      </div>
-      <div class="container">
-        <div class="item">
-          <button class="boton" @click="click_CrearReunion">✅ Guardar</button>
-        </div>
-        <div class="item">
-          <button class="boton" @click="click_Cancelar">❌ Cancelar</button>
-        </div>
-      </div>
-    </div>-->
   </div>
 </template>
 
@@ -596,7 +581,7 @@ export default {
   },
   data: () => ({
     menu: 0,
-    programarReunion: false,
+    programarReunion: true,
     texto: "",
     auxpassword: "",
     nuevaReunion: {
@@ -1237,9 +1222,6 @@ svg {
   vertical-align: middle;
 }
 .links-container {
-  /*width: 100%;
-    position: relative;
-    z-index: 1;*/
   width: 100%;
   position: absolute;
   z-index: 1;
@@ -1378,6 +1360,15 @@ ul li {
 }
 
 /* Otros estilos */
+.grid-container {
+  display: grid;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  grid-template-columns: 25% 50% 25%;
+  grid-template-rows: 15% 15% 70%;
+  justify-content: space-between;
+}
+
 /*th {
   padding-inline: 70px;
 }
@@ -1504,14 +1495,37 @@ tr:last-child {
 }
 .sp {
   margin: 20px;
-}
-/* Estilos de navegacion*/
-/*.header {
-  padding: 20px;
-  text-align: center;
-  background: white;
-  color: #4cc4ec;
-  font-size: 40px;
-  font-family: Georgia, "Times New Roman", Times, serif;
 }*/
+.container {
+  margin: 20px;
+  overflow: hidden;
+}
+.gris {
+  margin: 6px 0 0 0;
+  color: gray;
+}
+.item {
+  width: 100px;
+  margin: 0 60px 0 0;
+  float: left;
+}
+.item2 {
+  width: 172px;
+  float: left;
+  border: 2px solid gray;
+  border-radius: 4px;
+}
+.item3 {
+  width: 126px;
+  margin: 0 40px 0 0;
+  float: left;
+  border: 2px solid gray;
+  border-radius: 4px;
+}
+.item4 {
+  width: 72px;
+  float: left;
+  border: 2px solid gray;
+  border-radius: 4px;
+}
 </style>

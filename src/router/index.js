@@ -15,8 +15,13 @@ import MeetConfig from "../views/MeetConfig.vue";
 
 // Font awesome
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-library.add(faArrowLeft);
+import {
+  faArrowLeft,
+  faVideo,
+  faTrash,
+  faTable,
+} from "@fortawesome/free-solid-svg-icons";
+library.add(faArrowLeft, faVideo, faTrash, faTable);
 
 Vue.use(VueRouter);
 

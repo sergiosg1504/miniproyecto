@@ -453,7 +453,7 @@
           class="btn btn-secondary float-right"
           @click="click_ProgramarReunion"
         >
-          <icon icon="plus" />
+          <icon icon="arrow-left" />
           Back to reuniones
         </a>
         <h4>Programar Reunion</h4>

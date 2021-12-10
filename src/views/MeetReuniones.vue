@@ -102,7 +102,7 @@
               </div>
               <div class="col-sm-5">
                 <input
-                  v-model="filtroFecha"
+                  v-model="filtroFechaProximos"
                   id="filter-input"
                   class="form-control"
                   type="date"
@@ -171,7 +171,7 @@
                     class=""
                     role="row"
                     aria-rowindex="1"
-                    v-for="(item, i) in arrayFiltrado"
+                    v-for="(item, i) in arrayFiltradoProximos"
                     :key="i"
                   >
                     <td class="" aria-colindex="1" role="cell">
@@ -328,7 +328,7 @@
               </div>
               <div class="col-sm-5">
                 <input
-                  v-model="filtroFecha"
+                  v-model="filtroFechaAnteriores"
                   id="filter-input"
                   class="form-control"
                   type="date"
@@ -597,6 +597,7 @@ export default {
     ahora: new Date(),
     fechaPC: { fecha: "", hora: "" },
     PCFormat: { fecha: "", hora: "" },
+    arrayFiltradoProximos: [],
     arrayFiltrado: [],
     result: [
       { fecha: "01-01-0001", hora: "00:00", nombre: "a" },
@@ -653,6 +654,7 @@ export default {
           );
         }
       }
+      this.arrayFiltradoProximos = this.resultFiltradoHoraPC;
       this.arrayFiltrado = this.resultFiltradoHoraPC;
     },
     click_Anterior() {
@@ -678,6 +680,7 @@ export default {
           );
         }
       }
+      this.arrayFiltradoProximos = this.resultFiltradoHoraPC;
       this.arrayFiltrado = this.resultFiltradoHoraPC;
     },
     click_irASala() {
@@ -761,7 +764,7 @@ export default {
     },
   },
   computed: {
-    filtroFecha: {
+    filtroFechaProximos: {
       get() {
         return (
           this.texto.substring(6, 10) +
@@ -774,6 +777,7 @@ export default {
       set(value) {
         console.log(value);
         if (value === this.empty) {
+          this.arrayFiltradoProximos = this.resultFiltradoHoraPC;
           this.arrayFiltrado = this.resultFiltradoHoraPC;
         } else {
           value =
@@ -782,6 +786,41 @@ export default {
             value.substring(5, 7) +
             "-" +
             value.substring(0, 4);
+          this.arrayFiltradoProximos = this.resultFiltradoHoraPC.filter(
+            (item) => item.fecha.indexOf(value) !== -1
+          );
+          this.arrayFiltrado = this.resultFiltradoHoraPC.filter(
+            (item) => item.fecha.indexOf(value) !== -1
+          );
+          this.texto = value;
+        }
+      },
+    },
+    filtroFechaAnteriores: {
+      get() {
+        return (
+          this.texto.substring(6, 10) +
+          "-" +
+          this.texto.substring(3, 5) +
+          "-" +
+          this.texto.substring(0, 2)
+        );
+      },
+      set(value) {
+        console.log(value);
+        if (value === this.empty) {
+          this.arrayFiltradoProximos = this.resultFiltradoHoraPC;
+          this.arrayFiltrado = this.resultFiltradoHoraPC;
+        } else {
+          value =
+            value.substring(8, 10) +
+            "-" +
+            value.substring(5, 7) +
+            "-" +
+            value.substring(0, 4);
+          this.arrayFiltradoProximos = this.resultFiltradoHoraPC.filter(
+            (item) => item.fecha.indexOf(value) !== -1
+          );
           this.arrayFiltrado = this.resultFiltradoHoraPC.filter(
             (item) => item.fecha.indexOf(value) !== -1
           );
@@ -794,11 +833,11 @@ export default {
     this.texto =
       this.nuevaReunion.fecha =
       this.fechaPC.fecha =
-        this.ahora.getDate() +
+        new Date.getDate() +
         "-" +
-        (this.ahora.getMonth() + 1) +
+        (new Date.getMonth() + 1) +
         "-" +
-        this.ahora.getFullYear();
+        new Date.getFullYear();
     this.nuevaReunion.hora = this.fechaPC.hora =
       this.ahora.getHours() + ":" + this.ahora.getMinutes();
     this.result = this.sortFechaHora(this.result);
@@ -809,6 +848,7 @@ export default {
     this.PCFormat.hora =
       this.fechaPC.hora.substring(0, 2) + this.fechaPC.hora.substring(3, 5);
     this.click_Proximos();
+    this.arrayFiltradoProximos = this.resultFiltradoHoraPC;
     this.arrayFiltrado = this.resultFiltradoHoraPC;
   },
 };

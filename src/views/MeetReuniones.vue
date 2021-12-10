@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="#app">
     <navigation-bar />
     <div class="col-md-12 bg-white full-height full-width">
       <div class="col-sm-12 main-container" v-if="!programarReunion">
@@ -593,6 +593,7 @@ export default {
       videoAnfitrion: true,
       videoParticipante: true,
     },
+    empty: "",
     ahora: new Date(),
     fechaPC: { fecha: "", hora: "" },
     PCFormat: { fecha: "", hora: "" },
@@ -771,16 +772,21 @@ export default {
         );
       },
       set(value) {
-        value =
-          value.substring(8, 10) +
-          "-" +
-          value.substring(5, 7) +
-          "-" +
-          value.substring(0, 4);
-        this.arrayFiltrado = this.resultFiltradoHoraPC.filter(
-          (item) => item.fecha.indexOf(value) !== -1
-        );
-        this.texto = value;
+        console.log(value);
+        if (value === this.empty) {
+          this.arrayFiltrado = this.resultFiltradoHoraPC;
+        } else {
+          value =
+            value.substring(8, 10) +
+            "-" +
+            value.substring(5, 7) +
+            "-" +
+            value.substring(0, 4);
+          this.arrayFiltrado = this.resultFiltradoHoraPC.filter(
+            (item) => item.fecha.indexOf(value) !== -1
+          );
+          this.texto = value;
+        }
       },
     },
   },
@@ -848,7 +854,6 @@ export default {
 .main-container {
   position: relative;
   overflow: hidden;
-  max-width: 88%;
   float: right;
   width: 100%;
 }
@@ -951,7 +956,6 @@ legend.col-form-label {
   margin: 0 auto;
   float: none;
 }
-
 h4,
 .h4 {
   font-size: calc(1.275rem + 0.3vw);
@@ -1352,7 +1356,6 @@ ul {
 ul li {
   list-style: none;
 }
-
 *,
 ::before,
 ::after {
@@ -1372,10 +1375,6 @@ ul li {
   margin: 20px;
   overflow: hidden;
 }
-.gris {
-  margin: 6px 0 0 0;
-  color: gray;
-}
 .item {
   width: 100px;
   margin: 0 60px 0 0;
@@ -1384,20 +1383,20 @@ ul li {
 .item2 {
   width: 172px;
   float: left;
-  border: 2px solid gray;
+  border: 2px solid;
   border-radius: 4px;
 }
 .item3 {
   width: 126px;
   margin: 0 40px 0 0;
   float: left;
-  border: 2px solid gray;
+  border: 2px solid;
   border-radius: 4px;
 }
 .item4 {
   width: 72px;
   float: left;
-  border: 2px solid gray;
+  border: 2px solid;
   border-radius: 4px;
 }
 </style>

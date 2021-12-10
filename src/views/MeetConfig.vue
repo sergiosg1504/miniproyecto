@@ -5,7 +5,7 @@
     <div class="topnav">
       <v-app id="inspire">
         <v-card>
-          <v-tabs v-model="tab" background-color="#4cc4ec" dark>
+          <v-tabs background-color="#4cc4ec" dark>
             <v-tab @click="setMeet">Reunión</v-tab>
             <v-tab @click="setRec">Grabación</v-tab>
             <v-tab @click="setAudio">Audioconferencia</v-tab>
@@ -106,16 +106,16 @@
                 <span v-if="op9 === true">
                   <br /><br />
                   <input class="check" type="checkbox" v-model="check" />
-                  <label
-                    >Permitir a los usuarios guardar chats de la reunion</label
+                  <label>
+                    Permitir a los usuarios guardar chats de la reunion</label
                   >
                   <br /><br />
                   <div v-if="check === true">
                     <input type="radio" name="chat" v-model="radio" value="1" />
-                    <label>Todos</label>
+                    <label> Todos</label>
                     <tr />
                     <input type="radio" name="chat" v-model="radio" value="2" />
-                    <label>Solo anfitriones</label>
+                    <label> Solo anfitriones</label>
                   </div>
                 </span>
               </p>
@@ -268,6 +268,7 @@ export default {
     op10: false,
     op11: false,
     check: true,
+    radio: 0,
     NavigationBarvalor: 1,
   }),
   methods: {

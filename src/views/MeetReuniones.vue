@@ -102,7 +102,7 @@
               </div>
               <div class="col-sm-5">
                 <input
-                  v-model="filtroFechaProximos"
+                  v-model="filtroProximos"
                   id="filter-input"
                   class="form-control"
                   type="date"
@@ -171,7 +171,7 @@
                     class=""
                     role="row"
                     aria-rowindex="1"
-                    v-for="(item, i) in arrayFiltradoProximos"
+                    v-for="(item, i) in arrayProximosBusqueda"
                     :key="i"
                   >
                     <td class="" aria-colindex="1" role="cell">
@@ -328,7 +328,7 @@
               </div>
               <div class="col-sm-5">
                 <input
-                  v-model="filtroFechaAnteriores"
+                  v-model="filtroAnteriores"
                   id="filter-input"
                   class="form-control"
                   type="date"
@@ -397,7 +397,7 @@
                     class=""
                     role="row"
                     aria-rowindex="1"
-                    v-for="(item, i) in arrayFiltrado"
+                    v-for="(item, i) in arrayAnterioresBusqueda"
                     :key="i"
                   >
                     <td class="" aria-colindex="1" role="cell">
@@ -580,9 +580,9 @@ export default {
     NavigationBar,
   },
   data: () => ({
-    menu: 0,
     programarReunion: false,
-    texto: "",
+    inputProximos: "",
+    inputAnteriores: "",
     auxpassword: "",
     nuevaReunion: {
       nombre: "Mi reunión",
@@ -594,11 +594,14 @@ export default {
       videoParticipante: true,
     },
     empty: "",
-    ahora: new Date(),
+    date: new Date(),
     fechaPC: { fecha: "", hora: "" },
     PCFormat: { fecha: "", hora: "" },
-    arrayFiltradoProximos: [],
-    arrayFiltrado: [],
+    arrayProximos: [],
+    arrayProximosBusqueda: [],
+    arrayAnteriores: [],
+    arrayAnterioresBusqueda: [],
+    // datos
     result: [
       { fecha: "01-01-0001", hora: "00:00", nombre: "a" },
       { fecha: "01-01-0002", hora: "01:00", nombre: "b" },
@@ -621,6 +624,7 @@ export default {
       { fecha: "22-11-2021", hora: "22:00", nombre: "s" },
       { fecha: "01-01-2022", hora: "22:00", nombre: "t" },
     ],
+    reunionesOrdenado: [],
     resultFiltradoHoraPC: [],
   }),
   methods: {
@@ -631,17 +635,16 @@ export default {
         this.programarReunion = false;
       }
     },
-    click_Proximos() {
-      this.menu = 0;
-      this.resultFiltradoHoraPC = [];
-      for (var i = 0; i < this.result.length; i++) {
+    proximos() {
+      this.arrayProximos = [];
+      for (var i = 0; i < this.reunionesOrdenado.length; i++) {
         var fechaFormat =
-          this.result[i].fecha.substring(6, 10) +
-          this.result[i].fecha.substring(3, 5) +
-          this.result[i].fecha.substring(0, 2);
+          this.reunionesOrdenado[i].fecha.substring(6, 10) +
+          this.reunionesOrdenado[i].fecha.substring(3, 5) +
+          this.reunionesOrdenado[i].fecha.substring(0, 2);
         var horaFormat =
-          this.result[i].hora.substring(0, 2) +
-          this.result[i].hora.substring(3, 5);
+          this.reunionesOrdenado[i].hora.substring(0, 2) +
+          this.reunionesOrdenado[i].hora.substring(3, 5);
         if (parseInt(fechaFormat, 10) >= parseInt(this.PCFormat.fecha, 10)) {
           if (
             parseInt(fechaFormat, 10) === parseInt(this.PCFormat.fecha, 10) &&
@@ -649,25 +652,22 @@ export default {
           ) {
             continue;
           }
-          this.resultFiltradoHoraPC = this.resultFiltradoHoraPC.concat(
-            this.result[i]
+          this.arrayProximos = this.arrayProximos.concat(
+            this.reunionesOrdenado[i]
           );
         }
       }
-      this.arrayFiltradoProximos = this.resultFiltradoHoraPC;
-      this.arrayFiltrado = this.resultFiltradoHoraPC;
     },
-    click_Anterior() {
-      this.menu = 1;
-      this.resultFiltradoHoraPC = [];
-      for (var i = 0; i < this.result.length; i++) {
+    anteriores() {
+      this.arrayAnteriores = [];
+      for (var i = 0; i < this.reunionesOrdenado.length; i++) {
         var fechaFormat =
-          this.result[i].fecha.substring(6, 10) +
-          this.result[i].fecha.substring(3, 5) +
-          this.result[i].fecha.substring(0, 2);
+          this.reunionesOrdenado[i].fecha.substring(6, 10) +
+          this.reunionesOrdenado[i].fecha.substring(3, 5) +
+          this.reunionesOrdenado[i].fecha.substring(0, 2);
         var horaFormat =
-          this.result[i].hora.substring(0, 2) +
-          this.result[i].hora.substring(3, 5);
+          this.reunionesOrdenado[i].hora.substring(0, 2) +
+          this.reunionesOrdenado[i].hora.substring(3, 5);
         if (parseInt(fechaFormat, 10) <= parseInt(this.PCFormat.fecha, 10)) {
           if (
             parseInt(fechaFormat, 10) === parseInt(this.PCFormat.fecha, 10) &&
@@ -675,24 +675,21 @@ export default {
           ) {
             continue;
           }
-          this.resultFiltradoHoraPC = this.resultFiltradoHoraPC.concat(
-            this.result[i]
+          this.arrayAnteriores = this.arrayAnteriores.concat(
+            this.reunionesOrdenado[i]
           );
         }
       }
-      this.arrayFiltradoProximos = this.resultFiltradoHoraPC;
-      this.arrayFiltrado = this.resultFiltradoHoraPC;
     },
     click_irASala() {
       console.log("Yendo a la sala");
     },
     click_eliminar(item) {
-      var i = this.result.indexOf(item);
+      var i = this.reunionesOrdenado.indexOf(item);
       if (i !== -1) {
-        this.result.splice(i, 1);
+        this.reunionesOrdenado.splice(i, 1);
       }
-      if (this.menu === 0) this.click_Proximos();
-      if (this.menu === 1) this.click_Anterior();
+      this.programarReunion = false;
     },
     click_datos(item) {
       console.log(item.nombre);
@@ -720,7 +717,6 @@ export default {
       console.log(this.nuevaReunion.hora);
       console.log(this.nuevaReunion.videoAnfitrion);
       console.log(this.nuevaReunion.videoParticipante);
-
       // Guardar los datos como sea
     },
     click_Cancelar() {
@@ -733,7 +729,7 @@ export default {
       this.click_ProgramarReunion();
     },
     sortFechaHora(result) {
-      result.sort(function (a, b) {
+      return result.sort(function (a, b) {
         if (a.fecha.substring(6, 10) < b.fecha.substring(6, 10)) {
           return -1;
         } else if (a.fecha.substring(6, 10) > b.fecha.substring(6, 10)) {
@@ -760,57 +756,54 @@ export default {
           }
         }
       });
-      return result;
     },
   },
   computed: {
-    filtroFechaProximos: {
+    filtroProximos: {
       get() {
         return (
-          this.texto.substring(6, 10) +
+          this.inputProximos.substring(6, 10) +
           "-" +
-          this.texto.substring(3, 5) +
+          this.inputProximos.substring(3, 5) +
           "-" +
-          this.texto.substring(0, 2)
+          this.inputProximos.substring(0, 2)
         );
       },
       set(value) {
         console.log(value);
         if (value === this.empty) {
-          this.arrayFiltradoProximos = this.resultFiltradoHoraPC;
-          this.arrayFiltrado = this.resultFiltradoHoraPC;
+          console.log("empty");
+          this.arrayProximosBusqueda = this.arrayProximos;
         } else {
+          console.log("miau");
           value =
             value.substring(8, 10) +
             "-" +
             value.substring(5, 7) +
             "-" +
             value.substring(0, 4);
-          this.arrayFiltradoProximos = this.resultFiltradoHoraPC.filter(
+          console.log(value);
+          this.arrayProximosBusqueda = this.arrayProximos.filter(
             (item) => item.fecha.indexOf(value) !== -1
           );
-          this.arrayFiltrado = this.resultFiltradoHoraPC.filter(
-            (item) => item.fecha.indexOf(value) !== -1
-          );
-          this.texto = value;
+          this.inputProximos = value;
         }
       },
     },
-    filtroFechaAnteriores: {
+    filtroAnteriores: {
       get() {
         return (
-          this.texto.substring(6, 10) +
+          this.inputAnteriores.substring(6, 10) +
           "-" +
-          this.texto.substring(3, 5) +
+          this.inputAnteriores.substring(3, 5) +
           "-" +
-          this.texto.substring(0, 2)
+          this.inputAnteriores.substring(0, 2)
         );
       },
       set(value) {
         console.log(value);
         if (value === this.empty) {
-          this.arrayFiltradoProximos = this.resultFiltradoHoraPC;
-          this.arrayFiltrado = this.resultFiltradoHoraPC;
+          this.arrayAnterioresBusqueda = this.arrayAnteriores;
         } else {
           value =
             value.substring(8, 10) +
@@ -818,38 +811,38 @@ export default {
             value.substring(5, 7) +
             "-" +
             value.substring(0, 4);
-          this.arrayFiltradoProximos = this.resultFiltradoHoraPC.filter(
+          this.arrayAnterioresBusqueda = this.arrayAnteriores.filter(
             (item) => item.fecha.indexOf(value) !== -1
           );
-          this.arrayFiltrado = this.resultFiltradoHoraPC.filter(
-            (item) => item.fecha.indexOf(value) !== -1
-          );
-          this.texto = value;
+          this.inputAnteriores = value;
         }
       },
     },
   },
   created() {
-    this.texto =
+    this.inputProximos =
+      this.texto =
       this.nuevaReunion.fecha =
       this.fechaPC.fecha =
-        new Date.getDate() +
+        this.date.getDate() +
         "-" +
-        (new Date.getMonth() + 1) +
+        (this.date.getMonth() + 1) +
         "-" +
-        new Date.getFullYear();
+        this.date.getFullYear();
     this.nuevaReunion.hora = this.fechaPC.hora =
-      this.ahora.getHours() + ":" + this.ahora.getMinutes();
-    this.result = this.sortFechaHora(this.result);
+      this.date.getHours() + ":" + this.date.getMinutes();
     this.PCFormat.fecha =
       this.fechaPC.fecha.substring(6, 10) +
       this.fechaPC.fecha.substring(3, 5) +
       this.fechaPC.fecha.substring(0, 2);
     this.PCFormat.hora =
       this.fechaPC.hora.substring(0, 2) + this.fechaPC.hora.substring(3, 5);
-    this.click_Proximos();
-    this.arrayFiltradoProximos = this.resultFiltradoHoraPC;
-    this.arrayFiltrado = this.resultFiltradoHoraPC;
+    this.reunionesOrdenado = this.sortFechaHora(this.result);
+    this.proximos();
+    this.arrayProximosBusqueda = this.arrayProximos;
+    this.anteriores();
+    this.arrayAnterioresBusqueda = this.arrayAnteriores;
+    //this.arrayProximos = this.arrayAnteriores = this.resultFiltradoHoraPC;
   },
 };
 </script>

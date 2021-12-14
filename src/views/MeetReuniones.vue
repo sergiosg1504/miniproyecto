@@ -670,16 +670,12 @@ export default {
     },
     click_eliminar(item) {
       console.log("eliminar");
-      let confirmacion = confirm("Estas seguro de que quieres eliminar ");
-      if (confirmacion === true) {
+      if (confirm("Estas seguro de que quieres eliminar la reunión")) {
         // llamada a la API
         let index = this.reunionesOrdenado.findIndex(
           (element) => element.nombre === item.nombre
         );
-        console.log(index);
-        console.log(this.reunionesOrdenado[index].nombre);
         this.reunionesOrdenado.splice(index, 1);
-        console.log(this.reunionesOrdenado[index].nombre);
       }
     },
     click_datos(item) {
@@ -761,12 +757,11 @@ export default {
         );
       },
       set(value) {
-        console.log(value);
-        if (value === this.empty) {
+        if (value.length === 0) {
           console.log("empty");
           this.arrayProximosBusqueda = this.arrayProximos;
         } else {
-          console.log("miau");
+          console.log("not empty");
           value =
             value.substring(8, 10) +
             "-" +
@@ -777,8 +772,8 @@ export default {
           this.arrayProximosBusqueda = this.arrayProximos.filter(
             (item) => item.fecha.indexOf(value) !== -1
           );
-          this.inputProximos = value;
         }
+        this.inputProximos = value;
       },
     },
     filtroAnteriores: {
@@ -792,8 +787,7 @@ export default {
         );
       },
       set(value) {
-        console.log(value);
-        if (value === this.empty) {
+        if (value.length === 0) {
           this.arrayAnterioresBusqueda = this.arrayAnteriores;
         } else {
           value =
@@ -805,21 +799,18 @@ export default {
           this.arrayAnterioresBusqueda = this.arrayAnteriores.filter(
             (item) => item.fecha.indexOf(value) !== -1
           );
-          this.inputAnteriores = value;
         }
+        this.inputAnteriores = value;
       },
     },
   },
   created() {
-    this.inputProximos =
-      this.texto =
-      this.nuevaReunion.fecha =
-      this.fechaPC.fecha =
-        this.date.getDate() +
-        "-" +
-        (this.date.getMonth() + 1) +
-        "-" +
-        this.date.getFullYear();
+    this.nuevaReunion.fecha = this.fechaPC.fecha =
+      this.date.getDate() +
+      "-" +
+      (this.date.getMonth() + 1) +
+      "-" +
+      this.date.getFullYear();
     this.nuevaReunion.hora = this.fechaPC.hora =
       this.date.getHours() + ":" + this.date.getMinutes();
     this.PCFormat.fecha =
@@ -1402,23 +1393,21 @@ ul li {
   margin: 0 60px 0 0;
   float: left;
 }
+.item2,
+.item3,
+.item4 {
+  float: left;
+  border: 1px solid;
+  border-radius: 4px;
+}
 .item2 {
   width: 172px;
-  float: left;
-  border: 2px solid;
-  border-radius: 4px;
 }
 .item3 {
   width: 126px;
   margin: 0 40px 0 0;
-  float: left;
-  border: 2px solid;
-  border-radius: 4px;
 }
 .item4 {
   width: 72px;
-  float: left;
-  border: 2px solid;
-  border-radius: 4px;
 }
 </style>

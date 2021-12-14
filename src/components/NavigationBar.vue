@@ -27,13 +27,19 @@
 export default {
   methods: {
     reuniones() {
-      this.$router.push({ name: "Reuniones" });
+      this.$router.push({ name: "Reuniones" }).catch((err) => {
+        return err;
+      });
     },
     seminarios() {
-      this.$router.push({ name: "SeminariosWeb" });
+      this.$router.push({ name: "SeminariosWeb" }).catch((err) => {
+        return err;
+      });
     },
     config() {
-      this.$router.push({ name: "Configuracion" });
+      this.$router.push({ name: "Configuracion" }).catch((err) => {
+        return err;
+      });
     },
     salirReuniones() {
       this.$router.push({ name: "Home" });

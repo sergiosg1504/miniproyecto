@@ -483,7 +483,14 @@
               class="form-input"
               type="password"
               id="password"
+              name="input_password"
             />
+          </div>
+          <div class="item5">
+            <button @click="cambioVisibilidadPassword()">
+              <icon v-if="visibilidadPassword" icon="eye" />
+              <icon v-if="!visibilidadPassword" icon="eye-slash" />
+            </button>
           </div>
         </div>
         <div class="container">
@@ -581,6 +588,7 @@ export default {
   },
   data: () => ({
     programarReunion: false,
+    visibilidadPassword: true,
     auxpassword: "",
     nuevaReunion: {
       nombre: "Mi reunión",
@@ -627,6 +635,16 @@ export default {
     ],
   }),
   methods: {
+    cambioVisibilidadPassword() {
+      var aux = document.getElementById("password");
+      if (aux.type === "password") {
+        aux.type = "text";
+        this.visibilidadPassword = false;
+      } else {
+        aux.type = "password";
+        this.visibilidadPassword = true;
+      }
+    },
     click_ProgramarReunion() {
       if (!this.programarReunion) {
         this.programarReunion = true;
@@ -1409,5 +1427,9 @@ ul li {
 }
 .item4 {
   width: 72px;
+}
+.item5 {
+  float: left;
+  margin: 0 10px 0;
 }
 </style>

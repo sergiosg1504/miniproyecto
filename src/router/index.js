@@ -21,6 +21,8 @@ import {
   faPlus,
   faCheckCircle,
   faTimesCircle,
+  faEye,
+  faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 library.add(
@@ -30,7 +32,9 @@ library.add(
   faInfoCircle,
   faPlus,
   faCheckCircle,
-  faTimesCircle
+  faTimesCircle,
+  faEye,
+  faEyeSlash
 );
 Vue.component("icon", FontAwesomeIcon);
 Vue.config.productionTip = false;

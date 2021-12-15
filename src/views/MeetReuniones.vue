@@ -477,20 +477,22 @@
           <div class="item">
             <p class="gris">Contraseña</p>
           </div>
-          <div class="item2">
-            <input
-              v-model="auxpassword"
-              class="form-input"
-              type="password"
-              id="password"
-              name="input_password"
-            />
-          </div>
-          <div class="item5">
-            <button @click="cambioVisibilidadPassword()">
-              <icon v-if="visibilidadPassword" icon="eye" />
-              <icon v-if="!visibilidadPassword" icon="eye-slash" />
-            </button>
+          <div class="item2 container2">
+            <div class="hola">
+              <input
+                v-model="auxpassword"
+                class="form-input"
+                type="password"
+                id="password"
+                name="input_password"
+              />
+            </div>
+            <div class="hola">
+              <button @click="cambioVisibilidadPassword()">
+                <icon v-if="visibilidadPassword" icon="eye" />
+                <icon v-if="!visibilidadPassword" icon="eye-slash" />
+              </button>
+            </div>
           </div>
         </div>
         <div class="container">
@@ -1406,6 +1408,9 @@ ul li {
   margin: 20px;
   overflow: hidden;
 }
+.container2 {
+  overflow: hidden;
+}
 .item {
   width: 100px;
   margin: 0 60px 0 0;
@@ -1419,7 +1424,7 @@ ul li {
   border-radius: 4px;
 }
 .item2 {
-  width: 172px;
+  width: 192px;
 }
 .item3 {
   width: 126px;
@@ -1431,5 +1436,8 @@ ul li {
 .item5 {
   float: left;
   margin: 0 10px 0;
+}
+.hola {
+  float: left;
 }
 </style>

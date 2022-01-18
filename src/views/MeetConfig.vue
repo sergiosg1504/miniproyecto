@@ -135,6 +135,7 @@
             </div>
             <div class="topnav-element" v-if="content === 2">
               <a href="/home" class="btn btn-secondary float-right">
+                <icon icon="arrow-left" />
                 Back to modules
               </a>
               <h4>Grabación</h4>

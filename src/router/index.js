@@ -37,9 +37,14 @@ library.add(
   faEye,
   faEyeSlash
 );
+
+import { BootstrapVue } from "bootstrap-vue";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
+
 Vue.component("icon", FontAwesomeIcon);
 Vue.config.productionTip = false;
-
+Vue.use(BootstrapVue);
 Vue.use(VueRouter);
 
 const routes = [

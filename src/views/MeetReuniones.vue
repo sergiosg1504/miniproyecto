@@ -1,13 +1,21 @@
 <template>
-  <div id="#app">
+  <div class="col-sm-12">
+    <div class="secondNavbar">
+      <navigation-bar></navigation-bar>
+    </div>
+
+    <div class="col-sm-6">
+      <incoming-meetings />
+    </div>
+  </div>
+
+  <!--<div id="#app">
     <navigation-bar />
     <div class="col-md-12 bg-white full-height full-width">
       <div class="col-sm-12 main-container" v-if="!programarReunion">
         <div class="col-sm-6">
-          <!--proximos-->
-          <h4>Proximos</h4>
           <incoming-meetings />
-          <!--<div class="table-container">
+          <div class="table-container">
             <h4>Proximos2</h4>
             <div class="row">
               <div class="col-sm-3">
@@ -215,10 +223,9 @@
                 </tbody>
               </table>
             </div>
-          </div>-->
+          </div>
         </div>
         <div class="col-sm-6">
-          <!--anteriores-->
           <div class="links-container">
             <a class="btn btn-secondary float-right" href="/home">
               <icon icon="arrow-left" />
@@ -438,13 +445,11 @@
                     </td>
                   </tr>
                 </tbody>
-                <!--event-->
               </table>
             </div>
           </div>
         </div>
       </div>
-      <!--crear reunion-->
       <div class="col-sm-12 main-container" v-if="programarReunion">
         <a class="btn btn-secondary float-right" href="/home">
           <icon icon="arrow-left" />
@@ -577,7 +582,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div>-->
 </template>
 
 <script>

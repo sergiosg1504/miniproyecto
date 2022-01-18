@@ -5,8 +5,10 @@
       <div class="col-sm-12 main-container" v-if="!programarReunion">
         <div class="col-sm-6">
           <!--proximos-->
-          <div class="table-container">
-            <h4>Proximos</h4>
+          <h4>Proximos</h4>
+          <incoming-meetings />
+          <!--<div class="table-container">
+            <h4>Proximos2</h4>
             <div class="row">
               <div class="col-sm-3">
                 <ul
@@ -211,10 +213,9 @@
                     </td>
                   </tr>
                 </tbody>
-                <!--event-->
               </table>
             </div>
-          </div>
+          </div>-->
         </div>
         <div class="col-sm-6">
           <!--anteriores-->
@@ -581,10 +582,12 @@
 
 <script>
 import NavigationBar from "@/components/NavigationBar.vue";
+import IncomingMeetings from "@/components/IncomingMeetings.vue";
 import { Encrypt } from "@/logic/aes.js";
 export default {
   components: {
     NavigationBar,
+    IncomingMeetings,
   },
   data: () => ({
     programarReunion: false,
@@ -612,26 +615,26 @@ export default {
     reunionesOrdenado: [],
     // datos
     reuniones: [
-      { fecha: "01-01-0001", hora: "00:00", nombre: "a" },
-      { fecha: "01-01-0002", hora: "01:00", nombre: "b" },
-      { fecha: "01-01-0003", hora: "02:00", nombre: "c" },
-      { fecha: "01-01-0004", hora: "03:00", nombre: "d" },
-      { fecha: "01-01-0005", hora: "04:00", nombre: "e" },
-      { fecha: "01-01-0006", hora: "05:00", nombre: "f" },
-      { fecha: "02-01-0001", hora: "00:00", nombre: "g" },
-      { fecha: "03-01-0001", hora: "01:00", nombre: "h" },
-      { fecha: "01-02-0001", hora: "02:00", nombre: "i" },
-      { fecha: "01-03-0001", hora: "03:00", nombre: "j" },
-      { fecha: "01-01-4001", hora: "04:00", nombre: "k" },
-      { fecha: "01-01-5001", hora: "05:00", nombre: "l" },
-      { fecha: "03-01-6001", hora: "01:00", nombre: "m" },
-      { fecha: "01-02-7001", hora: "02:00", nombre: "n" },
-      { fecha: "01-03-8001", hora: "03:00", nombre: "o" },
-      { fecha: "01-01-9001", hora: "04:00", nombre: "p" },
-      { fecha: "01-01-9901", hora: "05:00", nombre: "q" },
-      { fecha: "22-11-2021", hora: "05:00", nombre: "r" },
-      { fecha: "22-11-2021", hora: "22:00", nombre: "s" },
-      { fecha: "01-01-2022", hora: "22:00", nombre: "t" },
+      { id: 1, fecha: "01-01-0001", hora: "00:00", nombre: "a" },
+      { id: 2, fecha: "01-01-0002", hora: "01:00", nombre: "b" },
+      { id: 3, fecha: "01-01-0003", hora: "02:00", nombre: "c" },
+      { id: 4, fecha: "01-01-0004", hora: "03:00", nombre: "d" },
+      { id: 5, fecha: "01-01-0005", hora: "04:00", nombre: "e" },
+      { id: 6, fecha: "01-01-0006", hora: "05:00", nombre: "f" },
+      { id: 7, fecha: "02-01-0001", hora: "00:00", nombre: "g" },
+      { id: 8, fecha: "03-01-0001", hora: "01:00", nombre: "h" },
+      { id: 9, fecha: "01-02-0001", hora: "02:00", nombre: "i" },
+      { id: 10, fecha: "01-03-0001", hora: "03:00", nombre: "j" },
+      { id: 11, fecha: "01-01-4001", hora: "04:00", nombre: "k" },
+      { id: 12, fecha: "01-01-5001", hora: "05:00", nombre: "l" },
+      { id: 13, fecha: "03-01-6001", hora: "01:00", nombre: "m" },
+      { id: 14, fecha: "01-02-7001", hora: "02:00", nombre: "n" },
+      { id: 15, fecha: "01-03-8001", hora: "03:00", nombre: "o" },
+      { id: 16, fecha: "01-01-9001", hora: "04:00", nombre: "p" },
+      { id: 17, fecha: "01-01-9901", hora: "05:00", nombre: "q" },
+      { id: 18, fecha: "22-11-2021", hora: "05:00", nombre: "r" },
+      { id: 19, fecha: "22-11-2021", hora: "22:00", nombre: "s" },
+      { id: 20, fecha: "01-01-2022", hora: "22:00", nombre: "t" },
     ],
   }),
   methods: {

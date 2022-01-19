@@ -146,6 +146,7 @@ export default {
       videoParticipante: true,
     },
     auxpassword: "",
+    visibilidadPassword: false,
   }),
   methods: {
     cambioVisibilidadPassword() {

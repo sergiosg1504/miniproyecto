@@ -64,13 +64,9 @@
           ><font-awesome-icon icon="trash" />
         </b-button>
       </template>
-      <template #row-details="arrayAnterioresBusqueda">
-        <div
-          class="col-sm-12 card profile-card"
-          v-for="(item, index) in arrayAnterioresBusqueda"
-          v-bind:key="item.id"
-        >
-          <p>Hola {{ index }}</p>
+      <template v-if="showInfo()">
+        <div class="col-sm-12 card profile-card">
+          <p>Hola</p>
         </div>
       </template>
     </b-table>
@@ -79,7 +75,6 @@
 
 <script>
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { Encrypt } from "@/logic/aes.js";
 export default {
   name: "PreviousMeetings",
   components: {
@@ -93,24 +88,12 @@ export default {
         { key: "name", sortable: true, label: "Name" },
         { key: "options", sortable: true, label: "Options" },
       ],
+      flagInfo: false,
       perPage: 10,
       pageOptions: this.$paginationOptions,
       currentPage: 1,
       selectedId: null,
       // mis variables
-      programarReunion: false,
-      visibilidadPassword: true,
-      auxpassword: "",
-      nuevaReunion: {
-        nombre: "Mi reunión",
-        descripcion: "",
-        password: "",
-        fecha: "",
-        hora: "",
-        videoAnfitrion: true,
-        videoParticipante: true,
-      },
-      empty: "",
       date: new Date(),
       fechaPC: { fecha: "", hora: "" },
       PCFormat: { fecha: "", hora: "" },
@@ -149,22 +132,21 @@ export default {
   },
   mounted() {
     if (this.date.getMonth() + 1 < 10) {
-      this.nuevaReunion.fecha = this.fechaPC.fecha =
+      this.fechaPC.fecha =
         this.date.getDate() +
         "-0" +
         (this.date.getMonth() + 1) +
         "-" +
         this.date.getFullYear();
     } else {
-      this.nuevaReunion.fecha = this.fechaPC.fecha =
+      this.fechaPC.fecha =
         this.date.getDate() +
         "-" +
         (this.date.getMonth() + 1) +
         "-" +
         this.date.getFullYear();
     }
-    this.nuevaReunion.hora = this.fechaPC.hora =
-      this.date.getHours() + ":" + this.date.getMinutes();
+    this.fechaPC.hora = this.date.getHours() + ":" + this.date.getMinutes();
     this.PCFormat.fecha =
       this.fechaPC.fecha.substring(6, 10) +
       this.fechaPC.fecha.substring(3, 5) +
@@ -208,32 +190,16 @@ export default {
     },
   },
   methods: {
-    onAnalysisSelected(id) {
-      this.$router.push("/profile-analysis?id=" + id);
-    },
-    showSendModal(id) {
-      this.selectedId = id;
-      this.$refs["send-modal"].show();
-    },
-    close() {
-      document.getElementById("message").style.display = "none";
-    },
     // mis metodos
-    cambioVisibilidadPassword() {
-      var aux = document.getElementById("password");
-      if (aux.type === "password") {
-        aux.type = "text";
-        this.visibilidadPassword = false;
+    showInfo() {
+      if (this.showInfo) {
+        this.flagInfo = false;
+        console.log("falgInfo");
+        return true;
       } else {
-        aux.type = "password";
-        this.visibilidadPassword = true;
-      }
-    },
-    click_ProgramarReunion() {
-      if (!this.programarReunion) {
-        this.programarReunion = true;
-      } else {
-        this.programarReunion = false;
+        this.flagInfo = true;
+        console.log("falgInfo");
+        return false;
       }
     },
     calculoProximosYAnteriores() {
@@ -280,34 +246,6 @@ export default {
       console.log(item.hora);
       console.log(item.videoAnfitrion);
       console.log(item.videoParticipante);
-    },
-    click_CrearReunion() {
-      if (this.fechaPC.fecha !== this.nuevaReunion.fecha) {
-        this.nuevaReunion.fecha =
-          this.nuevaReunion.fecha.substring(8, 10) +
-          "-" +
-          this.nuevaReunion.fecha.substring(5, 7) +
-          "-" +
-          this.nuevaReunion.fecha.substring(0, 4);
-      }
-      this.nuevaReunion.password = Encrypt(this.auxpassword);
-      console.log(this.nuevaReunion.nombre);
-      console.log(this.nuevaReunion.descripcion);
-      console.log(this.nuevaReunion.password);
-      console.log(this.nuevaReunion.fecha);
-      console.log(this.nuevaReunion.hora);
-      console.log(this.nuevaReunion.videoAnfitrion);
-      console.log(this.nuevaReunion.videoParticipante);
-      // LLamada a API para crear reunion
-    },
-    click_Cancelar() {
-      this.nuevaReunion.nombre = "Mi reunión";
-      this.nuevaReunion.descripcion = "";
-      this.nuevaReunion.fecha = this.fechaPC.fecha;
-      this.nuevaReunion.hora = this.fechaPC.hora;
-      this.videoAnfitrion = true;
-      this.videoParticipante = true;
-      this.click_ProgramarReunion();
     },
     sortFechaHora(reuniones) {
       return reuniones.sort(function (a, b) {

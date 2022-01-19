@@ -1,20 +1,20 @@
 <template>
   <div class="col-sm-12 main-container">
-    <!--  <div class="secondNavbar">
-			<div  class="links-container">
-				<router-link :to="{path: '/home'}" class="btn btn-secondary float-right"><font-awesome-icon icon="arrow-left" /> {{$t('dashboards.general.back-modules-title')}}</router-link>
-				<router-link :to="{path: '/reuniones'}" class="btn btn-secondary float-right"><font-awesome-icon icon="arrow-left" /> Back to reuniones</router-link>
-			</div>
-      </div> -->
-
-    <a class="btn btn-secondary float-right" href="/home">
-      <icon icon="arrow-left" />
-      Back to modules
-    </a>
-    <a class="btn btn-secondary float-right" @click="click_ProgramarReunion">
-      <icon icon="arrow-left" />
-      Back to reuniones
-    </a>
+    <div class="secondNavbar">
+      <div class="links-container">
+        <router-link
+          :to="{ path: '/home' }"
+          class="btn btn-secondary float-right"
+          ><font-awesome-icon icon="arrow-left" /> Back to modules</router-link
+        >
+        <router-link
+          :to="{ path: '/reuniones' }"
+          class="btn btn-secondary float-right"
+          ><font-awesome-icon icon="arrow-left" /> Back to
+          reuniones</router-link
+        >
+      </div>
+    </div>
     <h4>Programar Reunion</h4>
     <div class="container">
       <div class="item">
@@ -47,8 +47,8 @@
       </div>
       <div class="item5">
         <button @click="cambioVisibilidadPassword()">
-          <icon v-if="visibilidadPassword" icon="eye" />
-          <icon v-if="!visibilidadPassword" icon="eye-slash" />
+          <font-awesome-icon v-if="visibilidadPassword" icon="eye" />
+          <font-awesome-icon v-if="!visibilidadPassword" icon="eye-slash" />
         </button>
       </div>
     </div>
@@ -118,13 +118,13 @@
     <div class="container">
       <div class="item">
         <button class="boton" @click="click_CrearReunion">
-          <icon icon="check-circle" />
+          <font-awesome-icon icon="check-circle" />
           Guardar
         </button>
       </div>
       <div class="item">
         <button class="boton" @click="click_Cancelar">
-          <icon icon="times-circle"></icon>
+          <font-awesome-icon icon="times-circle" />
           Cancelar
         </button>
       </div>

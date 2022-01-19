@@ -7,6 +7,10 @@
     <div class="col-sm-6">
       <incoming-meetings />
     </div>
+
+    <div class="col-sm-6">
+      <previous-meetings />
+    </div>
   </div>
 
   <!--<div id="#app">
@@ -589,10 +593,12 @@
 import NavigationBar from "@/components/NavigationBar.vue";
 import IncomingMeetings from "@/components/IncomingMeetings.vue";
 import { Encrypt } from "@/logic/aes.js";
+import PreviousMeetings from "../components/PreviousMeetings.vue";
 export default {
   components: {
     NavigationBar,
     IncomingMeetings,
+    PreviousMeetings,
   },
   data: () => ({
     programarReunion: false,

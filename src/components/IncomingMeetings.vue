@@ -55,9 +55,16 @@
         <b-button
           v-b-tooltip.hover
           title="Show information"
-          v-else
+          v-if="!data.detailsShowing"
           @click="click_datos(item)"
           ><font-awesome-icon icon="info-circle" />
+        </b-button>
+        <b-button
+          v-b-tooltip.hover
+          title="Delete element"
+          v-if="!data.detailsShowing"
+          @click="click_eliminar(item)"
+          ><font-awesome-icon icon="trash" />
         </b-button>
       </template>
       <template #row-details="arrayAnterioresBusqueda">
@@ -74,9 +81,13 @@
 </template>
 
 <script>
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { Encrypt } from "@/logic/aes.js";
 export default {
   name: "IncomingMeetings",
+  components: {
+    FontAwesomeIcon,
+  },
   data() {
     return {
       headers: [

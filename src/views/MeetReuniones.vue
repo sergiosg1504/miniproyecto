@@ -3,16 +3,19 @@
     <div class="secondNavbar">
       <navigation-bar></navigation-bar>
     </div>
-
+    <!--<div class="secondNavbar"> 
+			<div  class="links-container">
+				<router-link :to="{path: '/home'}" class="btn btn-secondary float-right"><font-awesome-icon icon="arrow-left" /> {{$t('dashboards.general.back-modules-title')}}</router-link>
+				<router-link :to="{path: '/addMeeting'}" class="btn btn-secondary float-right"><font-awesome-icon icon="plus" /> Add meeting</router-link>
+      </div>
+		</div>-->
     <div class="col-sm-6">
       <incoming-meetings />
     </div>
-
     <div class="col-sm-6">
       <previous-meetings />
     </div>
   </div>
-
   <!--<div id="#app">
     <navigation-bar />
     <div class="col-md-12 bg-white full-height full-width">
@@ -592,7 +595,6 @@
 <script>
 import NavigationBar from "@/components/NavigationBar.vue";
 import IncomingMeetings from "@/components/IncomingMeetings.vue";
-import { Encrypt } from "@/logic/aes.js";
 import PreviousMeetings from "../components/PreviousMeetings.vue";
 export default {
   components: {
@@ -601,19 +603,6 @@ export default {
     PreviousMeetings,
   },
   data: () => ({
-    programarReunion: false,
-    visibilidadPassword: true,
-    auxpassword: "",
-    nuevaReunion: {
-      nombre: "Mi reunión",
-      descripcion: "",
-      password: "",
-      fecha: "",
-      hora: "",
-      videoAnfitrion: true,
-      videoParticipante: true,
-    },
-    empty: "",
     date: new Date(),
     fechaPC: { fecha: "", hora: "" },
     PCFormat: { fecha: "", hora: "" },
@@ -649,23 +638,6 @@ export default {
     ],
   }),
   methods: {
-    cambioVisibilidadPassword() {
-      var aux = document.getElementById("password");
-      if (aux.type === "password") {
-        aux.type = "text";
-        this.visibilidadPassword = false;
-      } else {
-        aux.type = "password";
-        this.visibilidadPassword = true;
-      }
-    },
-    click_ProgramarReunion() {
-      if (!this.programarReunion) {
-        this.programarReunion = true;
-      } else {
-        this.programarReunion = false;
-      }
-    },
     calculoProximosYAnteriores() {
       this.arrayProximos = [];
       this.arrayAnteriores = [];
@@ -718,34 +690,6 @@ export default {
       console.log(item.hora);
       console.log(item.videoAnfitrion);
       console.log(item.videoParticipante);
-    },
-    click_CrearReunion() {
-      if (this.fechaPC.fecha !== this.nuevaReunion.fecha) {
-        this.nuevaReunion.fecha =
-          this.nuevaReunion.fecha.substring(8, 10) +
-          "-" +
-          this.nuevaReunion.fecha.substring(5, 7) +
-          "-" +
-          this.nuevaReunion.fecha.substring(0, 4);
-      }
-      this.nuevaReunion.password = Encrypt(this.auxpassword);
-      console.log(this.nuevaReunion.nombre);
-      console.log(this.nuevaReunion.descripcion);
-      console.log(this.nuevaReunion.password);
-      console.log(this.nuevaReunion.fecha);
-      console.log(this.nuevaReunion.hora);
-      console.log(this.nuevaReunion.videoAnfitrion);
-      console.log(this.nuevaReunion.videoParticipante);
-      // LLamada a API para crear reunion
-    },
-    click_Cancelar() {
-      this.nuevaReunion.nombre = "Mi reunión";
-      this.nuevaReunion.descripcion = "";
-      this.nuevaReunion.fecha = this.fechaPC.fecha;
-      this.nuevaReunion.hora = this.fechaPC.hora;
-      this.videoAnfitrion = true;
-      this.videoParticipante = true;
-      this.click_ProgramarReunion();
     },
     sortFechaHora(reuniones) {
       return reuniones.sort(function (a, b) {
@@ -937,6 +881,17 @@ legend.col-form-label {
   outline-offset: -2px;
   -webkit-appearance: textfield;
 }
+.links-container {
+  /*width: 100%;
+    position: relative;
+    z-index: 1;*/
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  overflow: hidden;
+  right: 0;
+  margin-right: 27px;
+}
 /*Responsive*/
 
 @media (min-width: 576px) {
@@ -1121,6 +1076,10 @@ h6 {
   padding: 0;
   position: absolute;
   width: 1px;
+}
+.secondNavbar {
+  background-color: #13283b;
+  box-sizing: content-box;
 }
 .table {
   --bs-table-bg: transparent;

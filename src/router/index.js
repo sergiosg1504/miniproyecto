@@ -11,6 +11,7 @@ import Profile from "../components/Profile.vue";
 import NavigationBar from "../components/NavigationBar.vue";
 import IncomingMeetings from "../components/IncomingMeetings.vue";
 import PreviousMeetings from "../components/PreviousMeetings.vue";
+import AddMeeting from "../views/AddMeeting.vue";
 import MeetReuniones from "../views/MeetReuniones.vue";
 import MeetSeminariosWeb from "../views/MeetSeminariosWeb.vue";
 import MeetConfig from "../views/MeetConfig.vue";
@@ -100,6 +101,12 @@ const routes = [
     path: "/navigationBar",
     name: "NaviagationBar",
     component: NavigationBar,
+    props: true,
+  },
+  {
+    path: "/addMeeting",
+    name: "AddMeeting",
+    component: AddMeeting,
     props: true,
   },
   {

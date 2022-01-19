@@ -44,38 +44,34 @@
       <template #cell(name)="data">
         {{ data.item.nombre }}
       </template>
-      <template #cell(options)="data">
+      <template #cell(options)>
         <b-button
           v-b-tooltip.hover
           title="Go to meeting room"
-          v-if="!data.detailsShowing"
           @click="click_irASala"
           ><font-awesome-icon icon="video" />
         </b-button>
         <b-button
           v-b-tooltip.hover
           title="Show information"
-          v-if="!data.detailsShowing"
           @click="click_datos(item)"
           ><font-awesome-icon icon="info-circle" />
         </b-button>
         <b-button
           v-b-tooltip.hover
           title="Delete element"
-          v-if="!data.detailsShowing"
           @click="click_eliminar(item)"
           ><font-awesome-icon icon="trash" />
         </b-button>
       </template>
-      <template #row-details="arrayProximosBusqueda">
+      <!--<template #row-details="data">
         <div
           class="col-sm-12 card profile-card"
-          v-for="(item, index) in arrayProximosBusqueda"
-          v-bind:key="item.id"
+          v-for="(item, index) in data.arrayProximosBusqueda"
         >
-          <p>Hola {{ index }}</p>
+          <p>Nombre {{ data.item.nombre }}</p>
         </div>
-      </template>
+      </template>-->
     </b-table>
   </div>
 </template>
@@ -101,6 +97,7 @@ export default {
       currentPage: 1,
       selectedId: null,
       // mis variables
+      shwoDetails: false,
       programarReunion: false,
       visibilidadPassword: true,
       auxpassword: "",
@@ -281,6 +278,8 @@ export default {
       }
     },
     click_datos(item) {
+      if (this.shwoDetails) this.shwoDetails = false;
+      else this.shwoDetails = true;
       console.log(item.nombre);
       console.log(item.descripcion);
       console.log(item.password);

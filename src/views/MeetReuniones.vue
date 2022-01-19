@@ -3,12 +3,20 @@
     <div class="secondNavbar">
       <navigation-bar></navigation-bar>
     </div>
-    <!--<div class="secondNavbar"> 
-			<div  class="links-container">
-				<router-link :to="{path: '/home'}" class="btn btn-secondary float-right"><font-awesome-icon icon="arrow-left" /> {{$t('dashboards.general.back-modules-title')}}</router-link>
-				<router-link :to="{path: '/addMeeting'}" class="btn btn-secondary float-right"><font-awesome-icon icon="plus" /> Add meeting</router-link>
+    <div class="secondNavbar">
+      <div class="links-container">
+        <router-link
+          :to="{ path: '/home' }"
+          class="btn btn-secondary float-right"
+          ><font-awesome-icon icon="arrow-left" /> Back to modules</router-link
+        >
+        <router-link
+          :to="{ path: '/addMeeting' }"
+          class="btn btn-secondary float-right"
+          ><font-awesome-icon icon="plus" /> Add meeting</router-link
+        >
       </div>
-		</div>-->
+    </div>
     <div class="col-sm-6">
       <incoming-meetings />
     </div>

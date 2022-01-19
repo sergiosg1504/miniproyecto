@@ -2,32 +2,27 @@
   <div class="table-container">
     <h4>Incoming meetings</h4>
     <div class="row">
-      <p>asd</p>
       <div class="col-sm-2">
-        <p>asd</p>
-        <!--<b-pagination
+        <b-pagination
           v-model="currentPage"
           :total-rows="rows"
           :per-page="perPage"
           aria-controls="usersAnalyses"
-        ></b-pagination>-->
+        ></b-pagination>
       </div>
       <div class="col-sm-7">
-        <p>sss</p>
-        <!--b-form-select
+        <b-form-select
           class="numPerPage paginationSelectorTable"
           v-model="perPage"
           :options="pageOptions"
-        ></b-form-select>-->
+        ></b-form-select>
       </div>
       <div class="col-sm-3">
-        <p>zzz</p>
-        <!--<b-form-input
+        <b-form-input
           id="filter-input"
           v-model="filtroProximos"
           type="date"
-          :placeholder="$t('others.search-placeholder-msg')"
-        ></b-form-input>-->
+        ></b-form-input>
       </div>
     </div>
 
@@ -141,6 +136,7 @@ export default {
         { fecha: "22-11-2021", hora: "22:00", nombre: "s" },
         { fecha: "01-01-2022", hora: "22:00", nombre: "t" },
       ],
+      rows: this.rows_total,
     };
   },
   props: {
@@ -179,7 +175,7 @@ export default {
     this.arrayAnterioresBusqueda = this.arrayAnteriores;
   },
   computed: {
-    rows() {
+    rows_total() {
       return this.users.length;
     },
     filtroProximos: {

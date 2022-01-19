@@ -143,26 +143,28 @@ export default {
     home: Boolean,
   },
   mounted() {
-    this.nuevaReunion.fecha = this.fechaPC.fecha =
-      this.date.getDate() +
-      "-" +
-      (this.date.getMonth() + 1) +
-      "-" +
-      this.date.getFullYear();
+    if (this.date.getMonth() + 1 < 10) {
+      this.nuevaReunion.fecha = this.fechaPC.fecha =
+        this.date.getDate() +
+        "-0" +
+        (this.date.getMonth() + 1) +
+        "-" +
+        this.date.getFullYear();
+    } else {
+      this.nuevaReunion.fecha = this.fechaPC.fecha =
+        this.date.getDate() +
+        "-" +
+        (this.date.getMonth() + 1) +
+        "-" +
+        this.date.getFullYear();
+    }
     console.log(this.fechaPC.fecha);
     this.nuevaReunion.hora = this.fechaPC.hora =
       this.date.getHours() + ":" + this.date.getMinutes();
-    if (this.date.getMonth() + 1 < 10) {
-      this.PCFormat.fecha =
-        this.fechaPC.fecha.substring(5, 9) +
-        this.fechaPC.fecha.substring(3, 4) +
-        this.fechaPC.fecha.substring(0, 2);
-    } else {
-      this.PCFormat.fecha =
-        this.fechaPC.fecha.substring(6, 10) +
-        this.fechaPC.fecha.substring(3, 5) +
-        this.fechaPC.fecha.substring(0, 2);
-    }
+    this.PCFormat.fecha =
+      this.fechaPC.fecha.substring(6, 10) +
+      this.fechaPC.fecha.substring(3, 5) +
+      this.fechaPC.fecha.substring(0, 2);
     console.log(this.PCFormat.fecha);
     this.PCFormat.hora =
       this.fechaPC.hora.substring(0, 2) + this.fechaPC.hora.substring(3, 5);

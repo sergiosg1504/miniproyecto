@@ -10,6 +10,7 @@ import Mod from "../views/Modify.vue";
 import Profile from "../components/Profile.vue";
 import NavigationBar from "../components/NavigationBar.vue";
 import IncomingMeetings from "../components/IncomingMeetings.vue";
+import PreviousMeetings from "../components/PreviousMeetings.vue";
 import MeetReuniones from "../views/MeetReuniones.vue";
 import MeetSeminariosWeb from "../views/MeetSeminariosWeb.vue";
 import MeetConfig from "../views/MeetConfig.vue";
@@ -105,6 +106,12 @@ const routes = [
     path: "/incomingMeetings",
     name: "IncomingMeetings",
     component: IncomingMeetings,
+    props: true,
+  },
+  {
+    path: "/previousMeetings",
+    name: "PreviousMeetings",
+    component: PreviousMeetings,
     props: true,
   },
   {

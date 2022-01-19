@@ -153,12 +153,21 @@ export default {
       (this.date.getMonth() + 1) +
       "-" +
       this.date.getFullYear();
+    console.log(this.fechaPC.fecha);
     this.nuevaReunion.hora = this.fechaPC.hora =
       this.date.getHours() + ":" + this.date.getMinutes();
-    this.PCFormat.fecha =
-      this.fechaPC.fecha.substring(6, 10) +
-      this.fechaPC.fecha.substring(3, 5) +
-      this.fechaPC.fecha.substring(0, 2);
+    if (this.date.getMonth() + 1 < 10) {
+      this.PCFormat.fecha =
+        this.fechaPC.fecha.substring(5, 9) +
+        this.fechaPC.fecha.substring(3, 4) +
+        this.fechaPC.fecha.substring(0, 2);
+    } else {
+      this.PCFormat.fecha =
+        this.fechaPC.fecha.substring(6, 10) +
+        this.fechaPC.fecha.substring(3, 5) +
+        this.fechaPC.fecha.substring(0, 2);
+    }
+    console.log(this.PCFormat.fecha);
     this.PCFormat.hora =
       this.fechaPC.hora.substring(0, 2) + this.fechaPC.hora.substring(3, 5);
     this.reunionesOrdenado = this.sortFechaHora(this.reuniones);
@@ -244,6 +253,7 @@ export default {
         var horaFormat =
           this.reunionesOrdenado[i].hora.substring(0, 2) +
           this.reunionesOrdenado[i].hora.substring(3, 5);
+        console.log(this.fechaFormat + ` vs ` + this.PCFormat.fecha);
         if (parseInt(fechaFormat, 10) >= parseInt(this.PCFormat.fecha, 10)) {
           if (
             parseInt(fechaFormat, 10) === parseInt(this.PCFormat.fecha, 10) &&
@@ -252,13 +262,15 @@ export default {
             this.arrayAnteriores = this.arrayAnteriores.concat(
               this.reunionesOrdenado[i]
             );
-            continue;
+            console.log(`add anteriores` + this.reunionesOrdenado[i].fecha);
+          } else {
+            console.log(`add proximos` + this.reunionesOrdenado[i].fecha);
+            this.arrayProximos = this.arrayProximos.concat(
+              this.reunionesOrdenado[i]
+            );
           }
-          console.log(`añadiendo` + this.reunionesOrdenado[i].fecha);
-          this.arrayProximos = this.arrayProximos.concat(
-            this.reunionesOrdenado[i]
-          );
         } else {
+          console.log(`add anteriores` + this.reunionesOrdenado[i].fecha);
           this.arrayAnteriores = this.arrayAnteriores.concat(
             this.reunionesOrdenado[i]
           );

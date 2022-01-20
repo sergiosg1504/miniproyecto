@@ -1,5 +1,5 @@
 <template>
-  <div class="table-container">
+  <div v-bind:class="{ 'table-container': !home, 'col-sm-12': home }">
     <h4>Incoming meetings</h4>
     <div class="row">
       <div class="col-sm-2">
@@ -44,7 +44,7 @@
       <template #cell(name)="data">
         {{ data.item.nombre }}
       </template>
-      <template #cell(options)>
+      <template #cell(options)="data">
         <b-button
           v-b-tooltip.hover
           title="Go to meeting room"
@@ -54,13 +54,13 @@
         <b-button
           v-b-tooltip.hover
           title="Show information"
-          @click="click_datos(item)"
+          @click="click_datos(data.item)"
           ><font-awesome-icon icon="info-circle" />
         </b-button>
         <b-button
           v-b-tooltip.hover
           title="Delete element"
-          @click="click_eliminar(item)"
+          @click="click_eliminar(data.item)"
           ><font-awesome-icon icon="trash" />
         </b-button>
       </template>
@@ -96,6 +96,7 @@ export default {
       currentPage: 1,
       selectedId: null,
       // mis variables
+      showDetails: false,
       date: new Date(),
       fechaPC: { fecha: "", hora: "" },
       PCFormat: { fecha: "", hora: "" },
@@ -235,8 +236,9 @@ export default {
       }
     },
     click_datos(item) {
-      if (this.shwoDetails) this.shwoDetails = false;
-      else this.shwoDetails = true;
+      if (this.howDetails) this.showDetails = false;
+      else this.showDetails = true;
+      console.log(item);
       console.log(item.nombre);
       console.log(item.descripcion);
       console.log(item.password);

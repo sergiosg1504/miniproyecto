@@ -1,8 +1,8 @@
 <template>
-  <div class="table-container">
+  <div v-bind:class="{ 'table-container': !home, 'col-sm-12': home }">
     <h4>Previous meetings</h4>
     <div class="row">
-      <div class="col-sm-2">
+      <div class="col-sm-3">
         <b-pagination
           v-model="currentPage"
           :total-rows="rows"
@@ -10,14 +10,14 @@
           aria-controls="usersAnalyses"
         ></b-pagination>
       </div>
-      <div class="col-sm-7">
+      <div class="col-sm-4">
         <b-form-select
           class="numPerPage paginationSelectorTable"
           v-model="perPage"
           :options="pageOptions"
         ></b-form-select>
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-5">
         <b-form-input
           id="filter-input"
           v-model="filtroAnteriores"
@@ -44,7 +44,7 @@
       <template #cell(name)="data">
         {{ data.item.nombre }}
       </template>
-      <template #cell(options)>
+      <template #cell(options)="data">
         <b-button
           v-b-tooltip.hover
           title="Go to meeting room"
@@ -54,21 +54,21 @@
         <b-button
           v-b-tooltip.hover
           title="Show information"
-          @click="click_datos(item)"
+          @click="click_datos(data.item)"
           ><font-awesome-icon icon="info-circle" />
         </b-button>
         <b-button
           v-b-tooltip.hover
           title="Delete element"
-          @click="click_eliminar(item)"
+          @click="click_eliminar(data.item)"
           ><font-awesome-icon icon="trash" />
         </b-button>
       </template>
-      <template v-if="showInfo()">
+      <!--<template v-if="showInfo()">
         <div class="col-sm-12 card profile-card">
           <p>Hola</p>
         </div>
-      </template>
+      </template>-->
     </b-table>
   </div>
 </template>
@@ -94,6 +94,7 @@ export default {
       currentPage: 1,
       selectedId: null,
       // mis variables
+      showDetails: false,
       date: new Date(),
       fechaPC: { fecha: "", hora: "" },
       PCFormat: { fecha: "", hora: "" },
@@ -239,6 +240,8 @@ export default {
       }
     },
     click_datos(item) {
+      if (this.showDetails) this.showDetails = false;
+      else this.showDetails = true;
       console.log(item.nombre);
       console.log(item.descripcion);
       console.log(item.password);

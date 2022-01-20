@@ -49,6 +49,18 @@ Vue.config.productionTip = false;
 Vue.use(BootstrapVue);
 Vue.use(VueRouter);
 
+Vue.prototype.$paginationOptions = [
+  5,
+  10,
+  20,
+  50,
+  {
+    /* Number.MAX_SAFE_INTEGER = 9007199254740991 */
+    value: Number.MAX_SAFE_INTEGER,
+    text: "Show all",
+  },
+];
+
 const routes = [
   {
     path: "/",

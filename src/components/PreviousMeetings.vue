@@ -2,7 +2,7 @@
   <div v-bind:class="{ 'table-container': !home, 'col-sm-12': home }">
     <h4>Previous meetings</h4>
     <div class="row">
-      <div class="col-sm-3">
+      <div class="col-sm-1">
         <b-pagination
           v-model="currentPage"
           :total-rows="rows"
@@ -17,7 +17,7 @@
           :options="pageOptions"
         ></b-form-select>
       </div>
-      <div class="col-sm-5">
+      <div class="col-sm-4">
         <b-form-input
           id="filter-input"
           v-model="filtroAnteriores"

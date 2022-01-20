@@ -2,7 +2,7 @@
   <div v-bind:class="{ 'table-container': !home, 'col-sm-12': home }">
     <h4>Incoming meetings</h4>
     <div class="row">
-      <div class="col-sm-2">
+      <div class="col-sm-1">
         <b-pagination
           v-model="currentPage"
           :total-rows="rows"
@@ -10,14 +10,14 @@
           aria-controls="usersAnalyses"
         ></b-pagination>
       </div>
-      <div class="col-sm-7">
+      <div class="col-sm-4">
         <b-form-select
           class="numPerPage paginationSelectorTable"
           v-model="perPage"
           :options="pageOptions"
         ></b-form-select>
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-4">
         <b-form-input
           id="filter-input"
           v-model="filtroProximos"

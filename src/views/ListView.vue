@@ -201,7 +201,7 @@ h1 {
   border: none;
   margin: 3px 10px;
   background: #f46a65;
-  color: whitesmoke;
+  color: white;
   font-family: monospace;
 }
 

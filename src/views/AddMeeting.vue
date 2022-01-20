@@ -206,7 +206,7 @@ export default {
   overflow: hidden;
 }
 .item {
-  width: 100px;
+  width: 120px;
   margin: 0 60px 0 0;
   float: left;
 }
@@ -221,11 +221,11 @@ export default {
   width: 172px;
 }
 .item3 {
-  width: 126px;
+  width: 170px;
   margin: 0 40px 0 0;
 }
 .item4 {
-  width: 72px;
+  width: 80px;
 }
 .item5 {
   float: left;

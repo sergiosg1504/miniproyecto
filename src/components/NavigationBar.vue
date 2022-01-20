@@ -17,7 +17,7 @@
     </div>
     <div class="subnav2">
       <button class="subnavbtn2" @click="salirReuniones()">
-        <p class="volver">🡨 Volver</p>
+        <p class="volver"><font-awesome-icon icon="arrow-left" /> Volver</p>
       </button>
     </div>
   </div>
@@ -62,9 +62,6 @@ export default {
 }
 .subnav {
   float: left;
-}
-.subnav:hover {
-  background-color: lightgray;
 }
 .subnav2 {
   float: right;

@@ -21,15 +21,15 @@
         <p class="gris">Nombre</p>
       </div>
       <div class="item2">
-        <input v-model="nuevaReunion.nombre" class="form-input" />
+        <input v-model="newMeeting.nombre" class="form-input" />
       </div>
     </div>
     <div class="container">
       <div class="item">
-        <p class="gris">Descripcion</p>
+        <p class="gris">description</p>
       </div>
       <div class="item2">
-        <input v-model="nuevaReunion.descripcion" class="form-input" />
+        <input v-model="newMeeting.description" class="form-input" />
       </div>
     </div>
     <div class="container">
@@ -46,21 +46,21 @@
         />
       </div>
       <div class="item5">
-        <button @click="cambioVisibilidadPassword()">
-          <font-awesome-icon v-if="visibilidadPassword" icon="eye" />
-          <font-awesome-icon v-if="!visibilidadPassword" icon="eye-slash" />
+        <button @click="changePasswordVisibility()">
+          <font-awesome-icon v-if="passwordVisibility" icon="eye" />
+          <font-awesome-icon v-if="!passwordVisibility" icon="eye-slash" />
         </button>
       </div>
     </div>
     <div class="container">
       <div class="item">
-        <p class="gris">Fecha</p>
+        <p class="gris">date</p>
       </div>
       <div class="item3">
-        <input v-model="nuevaReunion.fecha" class="form-input" type="date" />
+        <input v-model="newMeeting.date" class="form-input" type="date" />
       </div>
       <div class="item4">
-        <input v-model="nuevaReunion.hora" class="form-input" type="time" />
+        <input v-model="newMeeting.hour" class="form-input" type="time" />
       </div>
     </div>
     <div class="container">
@@ -73,7 +73,7 @@
             <input
               type="radio"
               name="videoAnfitrion"
-              v-model="nuevaReunion.videoAnfitrion"
+              v-model="newMeeting.videoAnfitrion"
               checked
               value="true"
             />
@@ -81,7 +81,7 @@
             <input
               type="radio"
               name="videoAnfitrion"
-              v-model="nuevaReunion.videoAnfitrion"
+              v-model="newMeeting.videoAnfitrion"
               value="false"
             />
             Apagado<br />
@@ -99,7 +99,7 @@
             <input
               type="radio"
               name="videoParticipante"
-              v-model="nuevaReunion.videoParticipante"
+              v-model="newMeeting.videoParticipante"
               checked
               value="true"
             />
@@ -107,7 +107,7 @@
             <input
               type="radio"
               name="videoParticipante"
-              v-model="nuevaReunion.videoParticipante"
+              v-model="newMeeting.videoParticipante"
               value="false"
             />
             Apagado<br />
@@ -117,13 +117,13 @@
     </div>
     <div class="container">
       <div class="item">
-        <button class="boton" @click="click_CrearReunion">
+        <button class="boton" @click="click_CreateMeeting">
           <font-awesome-icon icon="check-circle" />
           Guardar
         </button>
       </div>
       <div class="item">
-        <button class="boton" @click="click_Cancelar">
+        <button class="boton" @click="click_Cancell">
           <font-awesome-icon icon="times-circle" />
           Cancelar
         </button>
@@ -136,53 +136,53 @@
 import { Encrypt } from "@/logic/aes.js";
 export default {
   data: () => ({
-    nuevaReunion: {
+    newMeeting: {
       nombre: "Mi reunión",
-      descripcion: "",
+      description: "",
       password: "",
-      fecha: "",
-      hora: "",
-      videoAnfitrion: true,
-      videoParticipante: true,
+      date: "",
+      hour: "",
+      videoHost: true,
+      videoGuest: true,
     },
     auxpassword: "",
-    visibilidadPassword: false,
+    passwordVisibility: false,
   }),
   methods: {
-    cambioVisibilidadPassword() {
+    changePasswordVisibility() {
       var aux = document.getElementById("password");
       if (aux.type === "password") {
         aux.type = "text";
-        this.visibilidadPassword = false;
+        this.passwordVisibility = false;
       } else {
         aux.type = "password";
-        this.visibilidadPassword = true;
+        this.passwordVisibility = true;
       }
     },
-    click_CrearReunion() {
-      if (this.fechaPC.fecha !== this.nuevaReunion.fecha) {
-        this.nuevaReunion.fecha =
-          this.nuevaReunion.fecha.substring(8, 10) +
+    click_CreateMeeting() {
+      if (this.datePC.date !== this.newMeeting.date) {
+        this.newMeeting.date =
+          this.newMeeting.date.substring(8, 10) +
           "-" +
-          this.nuevaReunion.fecha.substring(5, 7) +
+          this.newMeeting.date.substring(5, 7) +
           "-" +
-          this.nuevaReunion.fecha.substring(0, 4);
+          this.newMeeting.date.substring(0, 4);
       }
-      this.nuevaReunion.password = Encrypt(this.auxpassword);
-      console.log(this.nuevaReunion.nombre);
-      console.log(this.nuevaReunion.descripcion);
-      console.log(this.nuevaReunion.password);
-      console.log(this.nuevaReunion.fecha);
-      console.log(this.nuevaReunion.hora);
-      console.log(this.nuevaReunion.videoAnfitrion);
-      console.log(this.nuevaReunion.videoParticipante);
+      this.newMeeting.password = Encrypt(this.auxpassword);
+      console.log(this.newMeeting.name);
+      console.log(this.newMeeting.description);
+      console.log(this.newMeeting.password);
+      console.log(this.newMeeting.date);
+      console.log(this.newMeeting.hour);
+      console.log(this.newMeeting.videoAnfitrion);
+      console.log(this.newMeeting.videoParticipante);
       // LLamada a API para crear reunion
     },
-    click_Cancelar() {
-      this.nuevaReunion.nombre = "Mi reunión";
-      this.nuevaReunion.descripcion = "";
-      this.nuevaReunion.fecha = this.fechaPC.fecha;
-      this.nuevaReunion.hora = this.fechaPC.hora;
+    click_Cancell() {
+      this.newMeeting.nombre = "Mi reunión";
+      this.newMeeting.description = "";
+      this.newMeeting.date = this.datePC.date;
+      this.newMeeting.hour = this.datePC.hour;
       this.videoAnfitrion = true;
       this.videoParticipante = true;
       this.click_ProgramarReunion();

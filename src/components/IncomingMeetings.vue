@@ -20,7 +20,7 @@
       <div class="col-sm-4">
         <b-form-input
           id="filter-input"
-          v-model="filtroProximos"
+          v-model="filterIncoming"
           type="date"
         ></b-form-input>
       </div>
@@ -32,7 +32,7 @@
       :per-page="perPage"
       :current-page="currentPage"
       :fields="headers"
-      :items="arrayProximosBusqueda"
+      :items="arrayIncomingSearch"
       responsive="sm"
     >
       <template #cell(date)="data">
@@ -48,26 +48,26 @@
         <b-button
           v-b-tooltip.hover
           title="Go to meeting room"
-          @click="click_irASala"
+          @click="click_gotoRoom"
           ><font-awesome-icon icon="video" />
         </b-button>
         <b-button
           v-b-tooltip.hover
           title="Show information"
-          @click="click_datos(data.item)"
+          @click="click_data(data.item)"
           ><font-awesome-icon icon="info-circle" />
         </b-button>
         <b-button
           v-b-tooltip.hover
           title="Delete element"
-          @click="click_eliminar(data.item)"
+          @click="click_delete(data.item)"
           ><font-awesome-icon icon="trash" />
         </b-button>
       </template>
       <!--<template #row-details="data">
         <div
           class="col-sm-12 card profile-card"
-          v-for="(item, index) in data.arrayProximosBusqueda"
+          v-for="(item, index) in data.arrayIncomingSearch"
         >
           <p>Nombre {{ data.item.nombre }}</p>
         </div>
@@ -101,11 +101,11 @@ export default {
       datePC: { date: "", hour: "" },
       PCFormat: { date: "", hour: "" },
       inputProximos: "",
-      arrayProximos: [],
-      arrayProximosBusqueda: [],
-      reunionesOrdenado: [],
+      arrayIncoming: [],
+      arrayIncomingSearch: [],
+      meetingSorted: [],
       // datos
-      reuniones: [
+      meetings: [
         { date: "01-01-0001", hour: "00:00", name: "a" },
         { date: "01-01-0002", hour: "01:00", name: "b" },
         { date: "01-01-0003", hour: "02:00", name: "c" },
@@ -158,17 +158,17 @@ export default {
     console.log(this.PCFormat.date);
     this.PCFormat.hour =
       this.datePC.hour.substring(0, 2) + this.datePC.hour.substring(3, 5);
-    this.reunionesOrdenado = this.sortDateHour(this.reuniones);
-    this.reunionesOrdenado.forEach((element) => console.log(element));
-    this.calculoProximosYAnteriores();
-    this.arrayProximosBusqueda = this.arrayProximos;
-    console.log(`LONGITUD de proximos: ` + this.arrayProximos.length);
+    this.meetingSorted = this.sortDateHour(this.meetings);
+    this.meetingSorted.forEach((element) => console.log(element));
+    this.calculateIncAndPrev();
+    this.arrayIncomingSearch = this.arrayIncoming;
+    console.log(`LONGITUD de proximos: ` + this.arrayIncoming.length);
   },
   computed: {
     rows_total() {
       return this.users.length;
     },
-    filtroProximos: {
+    filterIncoming: {
       get() {
         return (
           this.inputProximos.substring(6, 10) +
@@ -181,7 +181,7 @@ export default {
       set(value) {
         if (value.length === 0) {
           console.log("empty");
-          this.arrayProximosBusqueda = this.arrayProximos;
+          this.arrayIncomingSearch = this.arrayIncoming;
         } else {
           console.log("not empty");
           value =
@@ -191,7 +191,7 @@ export default {
             "-" +
             value.substring(0, 4);
           console.log(value);
-          this.arrayProximosBusqueda = this.arrayProximos.filter(
+          this.arrayIncomingSearch = this.arrayIncoming.filter(
             (item) => item.date.indexOf(value) !== -1
           );
         }
@@ -201,41 +201,39 @@ export default {
   },
   methods: {
     // mis metodos
-    calculoProximosYAnteriores() {
-      this.arrayProximos = [];
-      for (var i = 0; i < this.reunionesOrdenado.length; i++) {
+    calculateIncAndPrev() {
+      this.arrayIncoming = [];
+      for (var i = 0; i < this.meetingSorted.length; i++) {
         var dateFormat =
-          this.reunionesOrdenado[i].date.substring(6, 10) +
-          this.reunionesOrdenado[i].date.substring(3, 5) +
-          this.reunionesOrdenado[i].date.substring(0, 2);
+          this.meetingSorted[i].date.substring(6, 10) +
+          this.meetingSorted[i].date.substring(3, 5) +
+          this.meetingSorted[i].date.substring(0, 2);
         var hourFormat =
-          this.reunionesOrdenado[i].hour.substring(0, 2) +
-          this.reunionesOrdenado[i].hour.substring(3, 5);
+          this.meetingSorted[i].hour.substring(0, 2) +
+          this.meetingSorted[i].hour.substring(3, 5);
         if (
           parseInt(dateFormat, 10) > parseInt(this.PCFormat.date, 10) ||
           (parseInt(dateFormat, 10) === parseInt(this.PCFormat.date, 10) &&
             parseInt(hourFormat, 10) >= parseInt(this.PCFormat.hour, 10))
         ) {
-          this.arrayProximos = this.arrayProximos.concat(
-            this.reunionesOrdenado[i]
-          );
+          this.arrayIncoming = this.arrayIncoming.concat(this.meetingSorted[i]);
         }
       }
     },
-    click_irASala() {
+    click_gotoRoom() {
       console.log("Yendo a la sala");
     },
-    click_eliminar(item) {
+    click_delete(item) {
       console.log("eliminar");
       if (confirm("Estas seguro de que quieres eliminar la reunión")) {
         // llamada a la API
-        let index = this.reunionesOrdenado.findIndex(
+        let index = this.meetingSorted.findIndex(
           (element) => element.name === item.name
         );
-        this.reunionesOrdenado.splice(index, 1);
+        this.meetingSorted.splice(index, 1);
       }
     },
-    click_datos(item) {
+    click_data(item) {
       if (this.howDetails) this.showDetails = false;
       else this.showDetails = true;
       console.log(item);
@@ -244,11 +242,11 @@ export default {
       console.log(item.password);
       console.log(item.date);
       console.log(item.hour);
-      console.log(item.videoAnfitrion);
-      console.log(item.videoParticipante);
+      console.log(item.videoHost);
+      console.log(item.videoGuest);
     },
-    sortDateHour(reuniones) {
-      return reuniones.sort(function (a, b) {
+    sortDateHour(meetings) {
+      return meetings.sort(function (a, b) {
         if (a.date.substring(6, 10) < b.date.substring(6, 10)) {
           return -1;
         } else if (a.date.substring(6, 10) > b.date.substring(6, 10)) {

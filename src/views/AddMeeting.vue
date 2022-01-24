@@ -16,121 +16,123 @@
       </div>
     </div>
     <h4>Schedule a new meeting</h4>
-    <div class="form-group">
-      <label>Name</label>
-      <div class="input-group">
-        <div>
-          <input type="text" v-model="newMeeting.nombre" class="form-input" />
+    <div class="col-sm-4 offset-sm-4">
+      <div class="form-group">
+        <label>Name</label>
+        <div class="input-group">
+          <div>
+            <input type="text" v-model="newMeeting.nombre" class="form-input" />
+          </div>
         </div>
       </div>
-    </div>
-    <div class="form-group">
-      <label>Description</label>
-      <div class="input-group">
-        <div>
-          <input
-            type="text"
-            v-model="newMeeting.description"
-            class="form-input"
-          />
+      <div class="form-group">
+        <label>Description</label>
+        <div class="input-group">
+          <div>
+            <input
+              type="text"
+              v-model="newMeeting.description"
+              class="form-input"
+            />
+          </div>
         </div>
       </div>
-    </div>
-    <div class="form-group">
-      <label>Password</label>
-      <div class="input-group">
-        <div>
-          <input
-            type="password"
-            v-model="auxpassword"
-            class="form-input"
-            id="password"
-            name="input_password"
-          />
+      <div class="form-group">
+        <label>Password</label>
+        <div class="input-group">
+          <div>
+            <input
+              type="password"
+              v-model="auxpassword"
+              class="form-input"
+              id="password"
+              name="input_password"
+            />
+          </div>
+          <div class="item5">
+            <button @click="changePasswordVisibility()">
+              <font-awesome-icon v-if="passwordVisibility" icon="eye" />
+              <font-awesome-icon v-if="!passwordVisibility" icon="eye-slash" />
+            </button>
+          </div>
         </div>
-        <div class="item5">
-          <button @click="changePasswordVisibility()">
-            <font-awesome-icon v-if="passwordVisibility" icon="eye" />
-            <font-awesome-icon v-if="!passwordVisibility" icon="eye-slash" />
+      </div>
+      <div class="form-group">
+        <label>Date</label>
+        <div class="input-group">
+          <div>
+            <input v-model="newMeeting.date" class="form-input" type="date" />
+          </div>
+          <div>
+            <input v-model="newMeeting.hour" class="form-input" type="time" />
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Video anfitrión</label>
+        <div class="input-group">
+          <div>
+            <form target="_blank">
+              <p>
+                <input
+                  type="radio"
+                  name="videoAnfitrion"
+                  v-model="newMeeting.videoAnfitrion"
+                  checked
+                  value="true"
+                />
+                Encendido<br /><br />
+                <input
+                  type="radio"
+                  name="videoAnfitrion"
+                  v-model="newMeeting.videoAnfitrion"
+                  value="false"
+                />
+                Apagado<br />
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Video participante</label>
+        <div class="input-group">
+          <div>
+            <form target="_blank">
+              <p>
+                <input
+                  type="radio"
+                  name="videoAnfitrion"
+                  v-model="newMeeting.videoParticipante"
+                  checked
+                  value="true"
+                />
+                Encendido<br /><br />
+                <input
+                  type="radio"
+                  name="videoAnfitrion"
+                  v-model="newMeeting.videoParticipante"
+                  value="false"
+                />
+                Apagado<br />
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="item">
+          <button class="boton" @click="click_CreateMeeting">
+            <font-awesome-icon icon="check-circle" />
+            Guardar
           </button>
         </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Date</label>
-      <div class="input-group">
-        <div>
-          <input v-model="newMeeting.date" class="form-input" type="date" />
+        <div class="item">
+          <button class="boton" @click="click_Cancell">
+            <font-awesome-icon icon="times-circle" />
+            Cancelar
+          </button>
         </div>
-        <div>
-          <input v-model="newMeeting.hour" class="form-input" type="time" />
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Video anfitrión</label>
-      <div class="input-group">
-        <div>
-          <form target="_blank">
-            <p>
-              <input
-                type="radio"
-                name="videoAnfitrion"
-                v-model="newMeeting.videoAnfitrion"
-                checked
-                value="true"
-              />
-              Encendido<br /><br />
-              <input
-                type="radio"
-                name="videoAnfitrion"
-                v-model="newMeeting.videoAnfitrion"
-                value="false"
-              />
-              Apagado<br />
-            </p>
-          </form>
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Video participante</label>
-      <div class="input-group">
-        <div>
-          <form target="_blank">
-            <p>
-              <input
-                type="radio"
-                name="videoAnfitrion"
-                v-model="newMeeting.videoParticipante"
-                checked
-                value="true"
-              />
-              Encendido<br /><br />
-              <input
-                type="radio"
-                name="videoAnfitrion"
-                v-model="newMeeting.videoParticipante"
-                value="false"
-              />
-              Apagado<br />
-            </p>
-          </form>
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="item">
-        <button class="boton" @click="click_CreateMeeting">
-          <font-awesome-icon icon="check-circle" />
-          Guardar
-        </button>
-      </div>
-      <div class="item">
-        <button class="boton" @click="click_Cancell">
-          <font-awesome-icon icon="times-circle" />
-          Cancelar
-        </button>
       </div>
     </div>
   </div>

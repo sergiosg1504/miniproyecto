@@ -19,7 +19,7 @@
     <div class="form-group">
       <label>Name</label>
       <div class="input-group">
-        <div class="col-11">
+        <div>
           <input type="text" v-model="newMeeting.nombre" class="form-input" />
         </div>
       </div>
@@ -27,7 +27,7 @@
     <div class="form-group">
       <label>Description</label>
       <div class="input-group">
-        <div class="col-11">
+        <div>
           <input
             type="text"
             v-model="newMeeting.description"
@@ -39,7 +39,7 @@
     <div class="form-group">
       <label>Password</label>
       <div class="input-group">
-        <div class="col-11">
+        <div>
           <input
             type="password"
             v-model="auxpassword"
@@ -56,71 +56,70 @@
         </div>
       </div>
     </div>
-
-    <div class="container">
-      <div class="item">
-        <p class="gris">Date</p>
-      </div>
-      <div class="item3">
-        <input v-model="newMeeting.date" class="form-input" type="date" />
-      </div>
-      <div class="item4">
-        <input v-model="newMeeting.hour" class="form-input" type="time" />
-      </div>
-    </div>
-    <div class="container">
-      <div class="item">
-        <p class="gris">Video anfitrión</p>
-      </div>
-      <div class="item">
-        <form target="_blank">
-          <p>
-            <input
-              type="radio"
-              name="videoAnfitrion"
-              v-model="newMeeting.videoAnfitrion"
-              checked
-              value="true"
-            />
-            Encendido<br /><br />
-            <input
-              type="radio"
-              name="videoAnfitrion"
-              v-model="newMeeting.videoAnfitrion"
-              value="false"
-            />
-            Apagado<br />
-          </p>
-        </form>
+    <div class="form-group">
+      <label>Date</label>
+      <div class="input-group">
+        <div>
+          <input v-model="newMeeting.date" class="form-input" type="date" />
+        </div>
+        <div>
+          <input v-model="newMeeting.hour" class="form-input" type="time" />
+        </div>
       </div>
     </div>
-    <div class="container">
-      <div class="item">
-        <p class="gris">Video participante</p>
-      </div>
-      <div class="item">
-        <form target="_blank">
-          <p>
-            <input
-              type="radio"
-              name="videoParticipante"
-              v-model="newMeeting.videoParticipante"
-              checked
-              value="true"
-            />
-            Encendido<br /><br />
-            <input
-              type="radio"
-              name="videoParticipante"
-              v-model="newMeeting.videoParticipante"
-              value="false"
-            />
-            Apagado<br />
-          </p>
-        </form>
+    <div class="form-group">
+      <label>Video anfitrión</label>
+      <div class="input-group">
+        <div>
+          <form target="_blank">
+            <p>
+              <input
+                type="radio"
+                name="videoAnfitrion"
+                v-model="newMeeting.videoAnfitrion"
+                checked
+                value="true"
+              />
+              Encendido<br /><br />
+              <input
+                type="radio"
+                name="videoAnfitrion"
+                v-model="newMeeting.videoAnfitrion"
+                value="false"
+              />
+              Apagado<br />
+            </p>
+          </form>
+        </div>
       </div>
     </div>
-    <div class="container">
+    <div class="form-group">
+      <label>Video participante</label>
+      <div class="input-group">
+        <div>
+          <form target="_blank">
+            <p>
+              <input
+                type="radio"
+                name="videoAnfitrion"
+                v-model="newMeeting.videoParticipante"
+                checked
+                value="true"
+              />
+              Encendido<br /><br />
+              <input
+                type="radio"
+                name="videoAnfitrion"
+                v-model="newMeeting.videoParticipante"
+                value="false"
+              />
+              Apagado<br />
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
       <div class="item">
         <button class="boton" @click="click_CreateMeeting">
           <font-awesome-icon icon="check-circle" />

@@ -47,31 +47,39 @@
       <template #cell(options)="data">
         <b-button
           v-b-tooltip.hover
+          title="Show meeting information"
+          v-if="!data.detailsShowing"
+          @click="data.toggleDetails"
+          ><font-awesome-icon icon="eye" />
+        </b-button>
+        <b-button
+          v-b-tooltip.hover
+          title="Hide meeting information"
+          v-else=""
+          @click="data.toggleDetails"
+          ><font-awesome-icon icon="eye-slash" />
+        </b-button>
+        <b-button
+          v-b-tooltip.hover
           title="Go to meeting room"
           @click="click_gotoRoom"
           ><font-awesome-icon icon="video" />
         </b-button>
-        <b-button
-          v-b-tooltip.hover
-          title="Show information"
-          @click="click_data(data.item)"
-          ><font-awesome-icon icon="info-circle" />
-        </b-button>
-        <b-button
-          v-b-tooltip.hover
-          title="Delete element"
-          @click="click_delete(data.item)"
-          ><font-awesome-icon icon="trash" />
-        </b-button>
       </template>
-      <!--<template #row-details="data">
-        <div
-          class="col-sm-12 card profile-card"
-          v-for="(item, index) in data.arrayIncomingSearch"
-        >
-          <p>Nombre {{ data.item.nombre }}</p>
+      <template #row-details="data">
+        <div class="col-sm-12 card profile-card">
+          <p>
+            Name: {{ data.item.name }}<br />Description:
+            {{ data.item.descripcion }}<br />
+            <b-button
+              v-b-tooltip.hover
+              title="Delete element"
+              @click="click_delete(data.item)"
+              ><font-awesome-icon icon="trash" />
+            </b-button>
+          </p>
         </div>
-      </template>-->
+      </template>
     </b-table>
   </div>
 </template>
@@ -94,9 +102,7 @@ export default {
       perPage: 10,
       pageOptions: this.$paginationOptions,
       currentPage: 1,
-      selectedId: null,
       // mis variables
-      showDetails: false,
       date: new Date(),
       datePC: { date: "", hour: "" },
       PCFormat: { date: "", hour: "" },
@@ -227,8 +233,6 @@ export default {
       }
     },
     click_data(item) {
-      if (this.howDetails) this.showDetails = false;
-      else this.showDetails = true;
       console.log(item);
       console.log(item.name);
       console.log(item.descripcion);

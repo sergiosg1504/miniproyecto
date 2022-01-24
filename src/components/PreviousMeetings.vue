@@ -47,12 +47,6 @@
       <template #cell(options)="data">
         <b-button
           v-b-tooltip.hover
-          title="Go to meeting room"
-          @click="click_irASala"
-          ><font-awesome-icon icon="video" />
-        </b-button>
-        <b-button
-          v-b-tooltip.hover
           title="Show meeting information"
           v-if="!data.detailsShowing"
           @click="data.toggleDetails"
@@ -67,62 +61,34 @@
         </b-button>
         <b-button
           v-b-tooltip.hover
-          title="Delete element"
-          @click="click_eliminar(data.item)"
-          ><font-awesome-icon icon="trash" />
+          title="Go to meeting room"
+          @click="click_irASala"
+          ><font-awesome-icon icon="video" />
         </b-button>
       </template>
       <template #row-details="data">
-        <div
-          class="col-sm-12 card profile-card"
-          v-for="item in data.item.results"
-          v-bind:key="item.id"
-        >
+        <div class="col-sm-12 card profile-card">
           <p>
-            Analysis number
-            <font-awesome-icon icon="trash" />
+            Name: {{ data.item.name }}<br />Description:
+            {{ data.item.descripcion }}<br />
+            <b-button
+              v-b-tooltip.hover
+              title="Delete element"
+              @click="click_delete(data.item)"
+              ><font-awesome-icon icon="trash" />
+            </b-button>
           </p>
         </div>
       </template>
     </b-table>
-    <!--<p>PRUEBAS</p>
-    <template>
-        <vsa-list>
-	        <vsa-item class="col-sm-12 card profile-card">
-            <vsa-heading>
-              <p>HEADER</p>
-            </vsa-heading>
-            <vsa-icon>
-              <span class="open"><font-awesome-icon icon="video" /></span>
-              <span class="close"><font-awesome-icon icon="trash" /></span>
-            </vsa-icon>
-            <vsa-content>
-              <p> contentĀaaaaaaaaa</p>
-            </vsa-content>
-	        </vsa-item>
-	      </vsa-list>
-      </template>-->
   </div>
 </template>
 
 <script>
-/*import {
-		VsaList,
-		VsaItem,
-		VsaHeading,
-		VsaContent,
-		VsaIcon
-	} from 'vue-simple-accordion'
-	import 'vue-simple-accordion/dist/vue-simple-accordion.css'*/
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 export default {
   name: "PreviousMeetings",
   components: {
-    /*VsaList,
-			VsaItem,
-			VsaHeading,
-			VsaContent,
-			VsaIcon,*/
     FontAwesomeIcon,
   },
   data() {
@@ -137,10 +103,7 @@ export default {
       perPage: 10,
       pageOptions: this.$paginationOptions,
       currentPage: 1,
-      selectedId: null,
-      clickable: true,
       // mis variables
-      showDetails: false,
       date: new Date(),
       datePC: { date: "", hour: "" },
       PCFormat: { date: "", hour: "" },
@@ -172,8 +135,6 @@ export default {
         { index: 20, date: "01-01-2022", hour: "22:00", name: "t" },
       ],
       rows: this.rows_total,
-      selectedAnalysis: null,
-      selectedAnalysisIndex: null,
     };
   },
   props: {
@@ -245,17 +206,6 @@ export default {
       this.$refs["delete-modal"].show();
     },
     // mis metodos
-    showInfo() {
-      if (this.showInfo) {
-        this.flagInfo = false;
-        console.log("falgInfo");
-        return true;
-      } else {
-        this.flagInfo = true;
-        console.log("falgInfo");
-        return false;
-      }
-    },
     calculateIncAndPrev() {
       this.arrayPrevious = [];
       for (var i = 0; i < this.meetingsSorted.length; i++) {
@@ -280,7 +230,7 @@ export default {
     click_irASala() {
       console.log("Yendo a la sala");
     },
-    click_eliminar(item) {
+    click_delete(item) {
       console.log("eliminar");
       if (confirm("Estas seguro de que quieres eliminar la reunión")) {
         // llamada a la API
@@ -291,8 +241,6 @@ export default {
       }
     },
     click_datos(item) {
-      if (this.showDetails) this.showDetails = false;
-      else this.showDetails = true;
       console.log(item.name);
       console.log(item.descripcion);
       console.log(item.password);
@@ -394,118 +342,5 @@ export default {
 .item5 {
   float: left;
   margin: 0 10px 0;
-}
-/* borrar */
-.vsa-item {
-  .vsa-item__trigger__icon {
-    .open {
-      display: none;
-    }
-
-    .close {
-      display: block;
-    }
-  }
-  .open {
-    display: block;
-  }
-
-  .close {
-    display: none;
-  }
-}
-.thicker {
-  border: none;
-  height: 2px !important;
-  color: black;
-  background-color: black;
-}
-.caret-off::before {
-  display: none !important;
-}
-.caret-off::after {
-  display: none !important;
-}
-.technology-name {
-  margin-bottom: 15px !important;
-}
-
-.profile-name-div {
-  margin-bottom: 5px !important;
-}
-
-.left-div {
-  position: relative;
-}
-
-.profile-name-title {
-  font-weight: bolder;
-  font-size: 24px;
-}
-
-.profile-name {
-  position: absolute;
-  bottom: 0;
-  margin-bottom: 0px !important;
-}
-
-.edit-button {
-  float: right;
-}
-
-.cancel-button {
-  float: center;
-  margin-left: 5%;
-}
-
-.icon-profile {
-  padding-right: 0px !important;
-}
-
-.title {
-  margin-bottom: 0px !important;
-}
-
-.subtitle {
-  margin-left: 15px;
-}
-
-.added-education,
-.added-frameworks,
-.added-programming-skills,
-.added-other-skills,
-.added-tools,
-.added-certifications {
-  margin-top: 1em;
-  display: inline-block;
-}
-
-.divItems {
-  text-align: left;
-  margin-left: 25px;
-  margin-right: 25px;
-  margin-bottom: 1em;
-}
-
-.vsa-list {
-  --vsa-border-color: white !important;
-  --vsa-highlight-color: #4fc0e8 !important;
-}
-
-.expand-button {
-  margin-left: auto;
-}
-
-.btn-link {
-  font-weight: 600 !important;
-  color: #ffff !important;
-}
-
-.cancelColor {
-  color: rgb(73, 71, 71) !important;
-}
-
-.buttons-to-copy {
-  float: left;
 }
 </style>

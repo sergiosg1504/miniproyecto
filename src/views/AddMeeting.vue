@@ -15,43 +15,48 @@
         >
       </div>
     </div>
-    <h4>Programar Reunion</h4>
-    <div class="container">
-      <div class="item">
-        <p class="gris">Nombre</p>
-      </div>
-      <div class="item2">
-        <input v-model="newMeeting.nombre" class="form-input" />
-      </div>
-    </div>
-    <div class="container">
-      <div class="item">
-        <p class="gris">Description</p>
-      </div>
-      <div class="item2">
-        <input v-model="newMeeting.description" class="form-input" />
+    <h4>Schedule a new meeting</h4>
+    <div class="form-group">
+      <label>Name</label>
+      <div class="input-group">
+        <div class="col-11">
+          <input type="text" v-model="newMeeting.nombre" class="form-input" />
+        </div>
       </div>
     </div>
-    <div class="container">
-      <div class="item">
-        <p class="gris">Contraseña</p>
-      </div>
-      <div class="item2">
-        <input
-          v-model="auxpassword"
-          class="form-input"
-          type="password"
-          id="password"
-          name="input_password"
-        />
-      </div>
-      <div class="item5">
-        <button @click="changePasswordVisibility()">
-          <font-awesome-icon v-if="passwordVisibility" icon="eye" />
-          <font-awesome-icon v-if="!passwordVisibility" icon="eye-slash" />
-        </button>
+    <div class="form-group">
+      <label>Description</label>
+      <div class="input-group">
+        <div class="col-11">
+          <input
+            type="text"
+            v-model="newMeeting.description"
+            class="form-input"
+          />
+        </div>
       </div>
     </div>
+    <div class="form-group">
+      <label>Password</label>
+      <div class="input-group">
+        <div class="col-11">
+          <input
+            type="password"
+            v-model="auxpassword"
+            class="form-input"
+            id="password"
+            name="input_password"
+          />
+        </div>
+        <div class="item5">
+          <button @click="changePasswordVisibility()">
+            <font-awesome-icon v-if="passwordVisibility" icon="eye" />
+            <font-awesome-icon v-if="!passwordVisibility" icon="eye-slash" />
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div class="container">
       <div class="item">
         <p class="gris">Date</p>

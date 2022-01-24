@@ -95,7 +95,7 @@ export default {
     return {
       headers: [
         { key: "date", sortable: true, label: "Date" },
-        { key: "hour", sortable: true, label: "Hour" },
+        { key: "hour", label: "Hour" },
         { key: "name", sortable: true, label: "Name" },
         { key: "options", label: "Options" },
       ],

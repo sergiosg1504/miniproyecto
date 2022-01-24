@@ -26,7 +26,7 @@
     </div>
     <div class="container">
       <div class="item">
-        <p class="gris">description</p>
+        <p class="gris">Description</p>
       </div>
       <div class="item2">
         <input v-model="newMeeting.description" class="form-input" />
@@ -54,7 +54,7 @@
     </div>
     <div class="container">
       <div class="item">
-        <p class="gris">date</p>
+        <p class="gris">Date</p>
       </div>
       <div class="item3">
         <input v-model="newMeeting.date" class="form-input" type="date" />

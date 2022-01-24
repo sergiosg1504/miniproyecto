@@ -149,20 +149,16 @@ export default {
         "-" +
         this.date.getFullYear();
     }
-    console.log(this.datePC.date);
     this.datePC.hour = this.date.getHours() + ":" + this.date.getMinutes();
     this.PCFormat.date =
       this.datePC.date.substring(6, 10) +
       this.datePC.date.substring(3, 5) +
       this.datePC.date.substring(0, 2);
-    console.log(this.PCFormat.date);
     this.PCFormat.hour =
       this.datePC.hour.substring(0, 2) + this.datePC.hour.substring(3, 5);
     this.meetingSorted = this.sortDateHour(this.meetings);
-    this.meetingSorted.forEach((element) => console.log(element));
     this.calculateIncAndPrev();
     this.arrayIncomingSearch = this.arrayIncoming;
-    console.log(`LONGITUD de proximos: ` + this.arrayIncoming.length);
   },
   computed: {
     rows_total() {
@@ -180,17 +176,14 @@ export default {
       },
       set(value) {
         if (value.length === 0) {
-          console.log("empty");
           this.arrayIncomingSearch = this.arrayIncoming;
         } else {
-          console.log("not empty");
           value =
             value.substring(8, 10) +
             "-" +
             value.substring(5, 7) +
             "-" +
             value.substring(0, 4);
-          console.log(value);
           this.arrayIncomingSearch = this.arrayIncoming.filter(
             (item) => item.date.indexOf(value) !== -1
           );

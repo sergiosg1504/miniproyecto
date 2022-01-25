@@ -27,7 +27,7 @@
 export default {
   methods: {
     reuniones() {
-      this.$router.push({ name: "Reuniones" }).catch((err) => {
+      this.$router.push({ name: "MeetingList" }).catch((err) => {
         return err;
       });
     },

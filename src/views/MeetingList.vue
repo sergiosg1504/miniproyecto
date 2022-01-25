@@ -11,7 +11,7 @@
           ><font-awesome-icon icon="arrow-left" /> Back to modules</router-link
         >
         <router-link
-          :to="{ path: '/addMeeting' }"
+          :to="{ path: '/createMeeting' }"
           class="btn btn-secondary float-right"
           ><font-awesome-icon icon="plus" /> Add meeting</router-link
         >

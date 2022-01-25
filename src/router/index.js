@@ -11,8 +11,8 @@ import Profile from "../components/Profile.vue";
 import NavigationBar from "../components/NavigationBar.vue";
 import IncomingMeetings from "../components/IncomingMeetings.vue";
 import PreviousMeetings from "../components/PreviousMeetings.vue";
-import AddMeeting from "../views/AddMeeting.vue";
-import MeetReuniones from "../views/MeetReuniones.vue";
+import CreateMeeting from "../views/CreateMeeting.vue";
+import MeetingList from "../views/MeetingList.vue";
 import MeetSeminariosWeb from "../views/MeetSeminariosWeb.vue";
 import MeetConfig from "../views/MeetConfig.vue";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -114,9 +114,9 @@ const routes = [
     props: true,
   },
   {
-    path: "/addMeeting",
-    name: "AddMeeting",
-    component: AddMeeting,
+    path: "/createMeeting",
+    name: "CreateMeeting",
+    component: CreateMeeting,
     props: true,
   },
   {
@@ -132,9 +132,9 @@ const routes = [
     props: true,
   },
   {
-    path: "/reuniones",
-    name: "Reuniones",
-    component: MeetReuniones,
+    path: "/meetingList",
+    name: "MeetingList",
+    component: MeetingList,
     props: true,
   },
   {

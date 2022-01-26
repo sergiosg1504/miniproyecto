@@ -1,16 +1,14 @@
 <template>
-  <div class="form-container technologiesStyle">
+  <v-app class="form-container technologiesStyle">
     <form action class="form" @submit.prevent="handleCreate">
       <div class="col-sm-12">
         <div class="col-sm-6">
           <div class="form-group">
             <label>Name</label>
             <input
-              class="form-input"
+              class="form-input aux"
               type="text"
               id="name"
-              v-validate="'required'"
-              data-vv-name="name"
               v-model="newMeeting.name"
             />
           </div>
@@ -24,7 +22,6 @@
                   class="form-input"
                   type="password"
                   id="password"
-                  data-vv-name="password"
                   v-model="auxpassword"
                   name="input_password"
                 />
@@ -63,7 +60,6 @@
               class="form-input"
               type="date"
               id="date"
-              v-validate="'required'"
               data-vv-name="date"
               v-model="newMeeting.date"
             />
@@ -95,7 +91,6 @@
               v-model="newMeeting.videoGuest"
               inset
               color="#4cc4ec"
-              dense
               style="float: right"
             />
           </div>
@@ -108,7 +103,6 @@
               v-model="newMeeting.videoHost"
               inset
               color="#4cc4ec"
-              dense
               style="float: right"
             />
           </div>
@@ -137,7 +131,7 @@
         </div>
       </div>
     </form>
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -163,28 +157,30 @@ export default {
   }),
   mounted() {
     if (this.date.getMonth() + 1 < 10) {
-      this.datePC.date =
-        this.date.getDate() +
-        "-0" +
-        (this.date.getMonth() + 1) +
-        "-" +
-        this.date.getFullYear();
+      this.datePC.date = this.newMeeting.date =
+        this.date.getFullYear() + "-" + (this.date.getMonth() + 1) + "0-";
+      console.log(this.datePC.date);
     } else {
-      this.datePC.date =
-        this.date.getDate() +
-        "-" +
-        (this.date.getMonth() + 1) +
-        "-" +
-        this.date.getFullYear();
+      this.datePC.date = this.newMeeting.date =
+        this.date.getFullYear() + "-" + (this.date.getMonth() + 1) + "-";
     }
-    this.newMeeting.hour = this.datePC.hour =
-      this.date.getHours() + ":" + this.date.getMinutes();
-    this.newMeeting.date =
-      this.datePC.date.substring(6, 10) +
-      "-" +
-      this.datePC.date.substring(3, 5) +
-      "-" +
-      this.datePC.date.substring(0, 2);
+    if (this.date.getDate() < 10) {
+      this.newMeeting.date += "0" + this.date.getDate();
+      this.datePC.date = this.newMeeting.date;
+    } else {
+      this.newMeeting.date += this.date.getDate();
+      this.datePC.date = this.newMeeting.date;
+    }
+    if (this.date.getHours() < 10) {
+      this.newMeeting.hour = "0" + this.date.getHours() + ":";
+    } else {
+      this.newMeeting.hour = this.date.getHours() + ":";
+    }
+    if (this.date.getMinutes() < 10) {
+      this.newMeeting.hour += "0" + this.date.getMinutes();
+    } else {
+      this.newMeeting.hour += this.date.getMinutes();
+    }
   },
   methods: {
     changePasswordVisibility() {
@@ -230,6 +226,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.aux {
+  margin: 12px 0 0 0;
+}
 ::v-deep {
   /* Basic editor styles */
   .ProseMirror {

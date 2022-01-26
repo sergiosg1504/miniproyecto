@@ -25,6 +25,7 @@ import {
   faTimesCircle,
   faEye,
   faEyeSlash,
+  faBan,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 library.add(
@@ -35,7 +36,8 @@ library.add(
   faCheckCircle,
   faTimesCircle,
   faEye,
-  faEyeSlash
+  faEyeSlash,
+  faBan
 );
 
 import { BootstrapVue } from "bootstrap-vue";

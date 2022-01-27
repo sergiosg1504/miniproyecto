@@ -2,7 +2,7 @@
   <div v-bind:class="{ 'table-container': !home, 'col-sm-12': home }">
     <h4>Previous meetings</h4>
     <div class="row">
-      <div class="col-sm-1">
+      <div class="col-sm-3">
         <b-pagination
           v-model="currentPage"
           :total-rows="rows"
@@ -17,7 +17,7 @@
           :options="pageOptions"
         ></b-form-select>
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-5">
         <b-form-input
           id="filter-input"
           v-model="filterPrevious"
@@ -34,6 +34,8 @@
       :fields="headers"
       :items="arrayPreviousSearch"
       responsive="sm"
+      @row-clicked="rowClicked"
+      v-bind:class="{ clickable: clickable }"
     >
       <template #cell(date)="data">
         {{ data.item.date }}
@@ -103,6 +105,7 @@ export default {
       perPage: 10,
       pageOptions: this.$paginationOptions,
       currentPage: 1,
+      clickable: true,
       // mis variables
       date: new Date(),
       datePC: { date: "", hour: "" },
@@ -281,66 +284,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.row {
-  --bs-gutter-x: 1.5rem;
-  --bs-gutter-y: 0;
-}
-.row {
-  --bs-gutter-x: 1.5rem;
-  --bs-gutter-y: 0;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: calc(var(--bs-gutter-y) * -1);
-  margin-right: calc(var(--bs-gutter-x) / -2);
-  margin-left: calc(var(--bs-gutter-x) / -2);
-}
-.row > * {
-  flex-shrink: 0;
-  width: 100%;
-  max-width: 100%;
-  padding-right: calc(var(--bs-gutter-x) / 2);
-  padding-left: calc(var(--bs-gutter-x) / 2);
-  margin-top: var(--bs-gutter-y);
-}
-/* Otros estilos */
-.grid-container {
-  display: grid;
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
-  grid-template-columns: 25% 50% 25%;
-  grid-template-rows: 15% 15% 70%;
-  justify-content: space-between;
-}
-.container {
-  margin: 20px;
-  overflow: hidden;
-}
-.item {
-  width: 100px;
-  margin: 0 60px 0 0;
-  float: left;
-}
-.item2,
-.item3,
-.item4 {
-  float: left;
-  border: 1px solid;
-  border-radius: 4px;
-}
-.item2 {
-  width: 172px;
-}
-.item3 {
-  width: 126px;
-  margin: 0 40px 0 0;
-}
-.item4 {
-  width: 72px;
-}
-.item5 {
-  float: left;
-  margin: 0 10px 0;
-}
-</style>

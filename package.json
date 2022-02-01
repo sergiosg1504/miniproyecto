@@ -21,6 +21,7 @@
     "emailjs-com": "^3.2.0",
     "js-cookie": "^3.0.1",
     "nodemailer": "^6.7.0",
+    "vue-add-to-calendar": "^1.0.7",
     "vue-navigation-bar": "^4.1.0",
     "vue-numeric-input": "^2.0.0",
     "vue-router": "^3.2.0",

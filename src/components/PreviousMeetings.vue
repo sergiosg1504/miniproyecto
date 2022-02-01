@@ -34,7 +34,6 @@
       :fields="headers"
       :items="arrayPreviousSearch"
       responsive="sm"
-      @row-clicked="rowClicked"
       v-bind:class="{ clickable: clickable }"
     >
       <template #cell(date)="data">
@@ -72,7 +71,8 @@
         <div class="col-sm-12 card profile-card">
           <p>
             Name: {{ data.item.name }}<br />Description:
-            {{ data.item.descripcion }}<br />
+            {{ data.item.descripcion }}<br />Number of participants:
+            {{ data.item.numParticipants }}<br />
             <b-button
               v-b-tooltip.hover
               title="Delete element"
@@ -116,7 +116,13 @@ export default {
       meetingsSorted: [],
       // datos
       meetings: [
-        { index: 1, date: "01-01-0001", hour: "00:00", name: "a" },
+        {
+          index: 1,
+          date: "01-01-0001",
+          hour: "00:00",
+          name: "a",
+          numParticipants: 10,
+        },
         { index: 2, date: "01-01-0002", hour: "01:00", name: "b" },
         { index: 3, date: "01-01-0003", hour: "02:00", name: "c" },
         { index: 4, date: "01-01-0004", hour: "03:00", name: "d" },
@@ -144,10 +150,26 @@ export default {
     home: Boolean,
   },
   mounted() {
-    if (this.date.getMonth() + 1 < 10) {
+    if (this.date.getDate() < 10 && this.date.getMonth() + 1 < 10) {
+      this.datePC.date =
+        "0" +
+        this.date.getDate() +
+        "-0" +
+        (this.date.getMonth() + 1) +
+        "-" +
+        this.date.getFullYear();
+    } else if (this.date.getDate() >= 10 && this.date.getMonth() + 1 < 10) {
       this.datePC.date =
         this.date.getDate() +
         "-0" +
+        (this.date.getMonth() + 1) +
+        "-" +
+        this.date.getFullYear();
+    } else if (this.date.getDate() < 10 && this.date.getMonth() + 1 >= 10) {
+      this.datePC.date =
+        "0" +
+        this.date.getDate() +
+        "-" +
         (this.date.getMonth() + 1) +
         "-" +
         this.date.getFullYear();

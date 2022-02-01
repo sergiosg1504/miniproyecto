@@ -7,4 +7,8 @@ import "vue-good-table/dist/vue-good-table.css";
 
 Vue.use(VueGoodTablePlugin);
 
+import VueNumericInput from "vue-numeric-input";
+
+Vue.use(VueNumericInput);
+
 new Vue({ router, vuetify, render: (h) => h(App) }).$mount("#app");

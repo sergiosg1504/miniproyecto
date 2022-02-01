@@ -60,6 +60,9 @@
           @click="data.toggleDetails"
           ><font-awesome-icon icon="eye-slash" />
         </b-button>
+        <b-button v-b-tooltip.hover title="Edit" @click="click_edit(data.item)"
+          ><font-awesome-icon icon="edit" />
+        </b-button>
         <b-button
           v-b-tooltip.hover
           title="Go to meeting room"
@@ -115,26 +118,35 @@ export default {
       meetingSorted: [],
       // datos
       meetings: [
-        { date: "01-01-0001", hour: "00:00", name: "a" },
-        { date: "01-01-0002", hour: "01:00", name: "b" },
-        { date: "01-01-0003", hour: "02:00", name: "c" },
-        { date: "01-01-0004", hour: "03:00", name: "d" },
-        { date: "01-01-0005", hour: "04:00", name: "e" },
-        { date: "01-01-0006", hour: "05:00", name: "f" },
-        { date: "02-01-0001", hour: "00:00", name: "g" },
-        { date: "03-01-0001", hour: "01:00", name: "h" },
-        { date: "01-02-0001", hour: "02:00", name: "i" },
-        { date: "01-03-0001", hour: "03:00", name: "j" },
-        { date: "01-01-4001", hour: "04:00", name: "k" },
-        { date: "01-01-5001", hour: "05:00", name: "l" },
-        { date: "03-01-6001", hour: "01:00", name: "m" },
-        { date: "01-02-7001", hour: "02:00", name: "n" },
-        { date: "01-03-8001", hour: "03:00", name: "o" },
-        { date: "01-01-9001", hour: "04:00", name: "p" },
-        { date: "01-01-9901", hour: "05:00", name: "q" },
-        { date: "22-11-2021", hour: "05:00", name: "r" },
-        { date: "22-11-2021", hour: "22:00", name: "s" },
-        { date: "01-01-2022", hour: "22:00", name: "t" },
+        { date: "01-01-0001", hour: "00:00", name: "a", id: 1 },
+        { date: "01-01-0002", hour: "01:00", name: "b", id: 2 },
+        { date: "01-01-0003", hour: "02:00", name: "c", id: 3 },
+        { date: "01-01-0004", hour: "03:00", name: "d", id: 4 },
+        { date: "01-01-0005", hour: "04:00", name: "e", id: 5 },
+        { date: "01-01-0006", hour: "05:00", name: "f", id: 6 },
+        { date: "02-01-0001", hour: "00:00", name: "g", id: 7 },
+        { date: "03-01-0001", hour: "01:00", name: "h", id: 8 },
+        { date: "01-02-0001", hour: "02:00", name: "i", id: 9 },
+        { date: "01-03-0001", hour: "03:00", name: "j", id: 10 },
+        {
+          date: "01-01-4001",
+          hour: "04:00",
+          name: "k",
+          id: 11,
+          description: "kkkkkkkk",
+          numParticipants: 10,
+          password: "kaka",
+          videoGuest: true,
+        },
+        { date: "01-01-5001", hour: "05:00", name: "l", id: 12 },
+        { date: "03-01-6001", hour: "01:00", name: "m", id: 13 },
+        { date: "01-02-7001", hour: "02:00", name: "n", id: 14 },
+        { date: "01-03-8001", hour: "03:00", name: "o", id: 15 },
+        { date: "01-01-9001", hour: "04:00", name: "p", id: 16 },
+        { date: "01-01-9901", hour: "05:00", name: "q", id: 17 },
+        { date: "22-11-2021", hour: "05:00", name: "r", id: 18 },
+        { date: "22-11-2021", hour: "22:00", name: "s", id: 19 },
+        { date: "01-01-2022", hour: "22:00", name: "t", id: 20 },
       ],
       rows: this.rows_total,
     };
@@ -227,7 +239,6 @@ export default {
     calculateIncAndPrev() {
       this.arrayIncoming = [];
       for (var i = 0; i < this.meetingSorted.length; i++) {
-        //console.log(this.PCFormat.date + '    fecha psis');
         var dateFormat =
           this.meetingSorted[i].date.substring(6, 10) +
           this.meetingSorted[i].date.substring(3, 5) +
@@ -235,19 +246,20 @@ export default {
         var hourFormat =
           this.meetingSorted[i].hour.substring(0, 2) +
           this.meetingSorted[i].hour.substring(3, 5);
-        //console.log(dateFormat + '  >  ' + this.PCFormat.date);
         if (
           parseInt(dateFormat, 10) > parseInt(this.PCFormat.date, 10) ||
           (parseInt(dateFormat, 10) === parseInt(this.PCFormat.date, 10) &&
             parseInt(hourFormat, 10) >= parseInt(this.PCFormat.hour, 10))
         ) {
-          //console.log('añadiendo    ' + this.meetingSorted[i].name);
           this.arrayIncoming = this.arrayIncoming.concat(this.meetingSorted[i]);
         }
       }
     },
     click_goToRoom() {
       console.log("Yendo a la sala");
+    },
+    click_edit(meet) {
+      this.$router.push({ name: "UpdateMeeting", params: { meeting: meet } });
     },
     click_delete(item) {
       console.log("eliminar");

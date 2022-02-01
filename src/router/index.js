@@ -12,6 +12,7 @@ import NavigationBar from "../components/NavigationBar.vue";
 import IncomingMeetings from "../components/IncomingMeetings.vue";
 import PreviousMeetings from "../components/PreviousMeetings.vue";
 import CreateMeeting from "../views/CreateMeeting.vue";
+import UpdateMeeting from "../views/UpdateMeeting.vue";
 import MeetingList from "../views/MeetingList.vue";
 import MeetSeminariosWeb from "../views/MeetSeminariosWeb.vue";
 import MeetConfig from "../views/MeetConfig.vue";
@@ -26,6 +27,7 @@ import {
   faEye,
   faEyeSlash,
   faBan,
+  faEdit,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 library.add(
@@ -37,7 +39,8 @@ library.add(
   faTimesCircle,
   faEye,
   faEyeSlash,
-  faBan
+  faBan,
+  faEdit
 );
 
 import { BootstrapVue } from "bootstrap-vue";
@@ -119,6 +122,12 @@ const routes = [
     path: "/createMeeting",
     name: "CreateMeeting",
     component: CreateMeeting,
+    props: true,
+  },
+  {
+    path: "/updateMeeting",
+    name: "UpdateMeeting",
+    component: UpdateMeeting,
     props: true,
   },
   {

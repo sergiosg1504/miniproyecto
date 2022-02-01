@@ -34,7 +34,6 @@
       :fields="headers"
       :items="arrayIncomingSearch"
       responsive="sm"
-      @row-clicked="rowClicked"
       v-bind:class="{ clickable: clickable }"
     >
       <template #cell(date)="data">
@@ -72,7 +71,8 @@
         <div class="col-sm-12 card profile-card">
           <p>
             Name: {{ data.item.name }}<br />Description:
-            {{ data.item.descripcion }}<br />
+            {{ data.item.descripcion }}<br />Number of participants:
+            {{ data.item.numParticipants }}<br />
             <b-button
               v-b-tooltip.hover
               title="Delete element"
@@ -143,10 +143,26 @@ export default {
     home: Boolean,
   },
   mounted() {
-    if (this.date.getMonth() + 1 < 10) {
+    if (this.date.getDate() < 10 && this.date.getMonth() + 1 < 10) {
+      this.datePC.date =
+        "0" +
+        this.date.getDate() +
+        "-0" +
+        (this.date.getMonth() + 1) +
+        "-" +
+        this.date.getFullYear();
+    } else if (this.date.getDate() >= 10 && this.date.getMonth() + 1 < 10) {
       this.datePC.date =
         this.date.getDate() +
         "-0" +
+        (this.date.getMonth() + 1) +
+        "-" +
+        this.date.getFullYear();
+    } else if (this.date.getDate() < 10 && this.date.getMonth() + 1 >= 10) {
+      this.datePC.date =
+        "0" +
+        this.date.getDate() +
+        "-" +
         (this.date.getMonth() + 1) +
         "-" +
         this.date.getFullYear();
@@ -202,10 +218,16 @@ export default {
     },
   },
   methods: {
+    showDeleteModal(id, index) {
+      this.selectedAnalysis = id;
+      this.selectedAnalysisIndex = index;
+      this.$refs["delete-modal"].show();
+    },
     // mis metodos
     calculateIncAndPrev() {
       this.arrayIncoming = [];
       for (var i = 0; i < this.meetingSorted.length; i++) {
+        //console.log(this.PCFormat.date + '    fecha psis');
         var dateFormat =
           this.meetingSorted[i].date.substring(6, 10) +
           this.meetingSorted[i].date.substring(3, 5) +
@@ -213,11 +235,13 @@ export default {
         var hourFormat =
           this.meetingSorted[i].hour.substring(0, 2) +
           this.meetingSorted[i].hour.substring(3, 5);
+        //console.log(dateFormat + '  >  ' + this.PCFormat.date);
         if (
           parseInt(dateFormat, 10) > parseInt(this.PCFormat.date, 10) ||
           (parseInt(dateFormat, 10) === parseInt(this.PCFormat.date, 10) &&
             parseInt(hourFormat, 10) >= parseInt(this.PCFormat.hour, 10))
         ) {
+          //console.log('añadiendo    ' + this.meetingSorted[i].name);
           this.arrayIncoming = this.arrayIncoming.concat(this.meetingSorted[i]);
         }
       }

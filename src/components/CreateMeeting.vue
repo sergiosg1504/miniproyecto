@@ -39,15 +39,33 @@
       </div>
 
       <div class="col-sm-12">
-        <div class="form-group">
-          <label>Description</label>
-          <input
-            class="form-input"
-            type="text"
-            id="descripion"
-            data-vv-name="entity"
-            v-model="newMeeting.description"
-          />
+        <div class="col-sm-10">
+          <div class="form-group">
+            <label>Description</label>
+            <input
+              class="form-input"
+              type="text"
+              id="descripion"
+              data-vv-name="entity"
+              v-model="newMeeting.description"
+            />
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div>
+            <label class="input-label">Number of participants</label>
+            <vue-numeric-input
+              type="text"
+              align="center"
+              id="numParticipants"
+              data-vv-name="entity"
+              :min="2"
+              :max="60"
+              inline
+              controls
+              v-model="newMeeting.numParticipants"
+            ></vue-numeric-input>
+          </div>
         </div>
       </div>
 
@@ -135,11 +153,15 @@
 </template>
 
 <script>
+import VueNumericInput from "vue-numeric-input";
 import { Encrypt } from "@/logic/aes.js";
 import Vue from "vue";
 import Vuetify from "vuetify";
 Vue.use(Vuetify);
 export default {
+  components: {
+    VueNumericInput,
+  },
   data: () => ({
     newMeeting: {
       nombre: "Mi reunión",
@@ -147,6 +169,7 @@ export default {
       password: "",
       date: "",
       hour: "",
+      numParticipants: null,
       videoHost: true,
       videoGuest: true,
     },
@@ -156,21 +179,36 @@ export default {
     datePC: { date: "", hour: "" },
   }),
   mounted() {
-    if (this.date.getMonth() + 1 < 10) {
-      this.datePC.date = this.newMeeting.date =
-        this.date.getFullYear() + "-" + (this.date.getMonth() + 1) + "0-";
-      console.log(this.datePC.date);
+    if (this.date.getMonth() + 1 < 10 && this.date.getDate() < 10) {
+      this.datePC.date =
+        this.date.getFullYear() +
+        "-0" +
+        (this.date.getMonth() + 1) +
+        "-0" +
+        this.date.getDate();
+    } else if (this.date.getMonth() + 1 < 10 && this.date.getDate() > 10) {
+      this.datePC.date =
+        this.date.getFullYear() +
+        "-0" +
+        (this.date.getMonth() + 1) +
+        "-" +
+        this.date.getDate();
+    } else if (this.date.getMonth() + 1 > 10 && this.date.getDate() < 10) {
+      this.datePC.date =
+        this.date.getFullYear() +
+        "-" +
+        (this.date.getMonth() + 1) +
+        "-0" +
+        this.date.getDate();
     } else {
-      this.datePC.date = this.newMeeting.date =
-        this.date.getFullYear() + "-" + (this.date.getMonth() + 1) + "-";
+      this.datePC.date =
+        this.date.getFullYear() +
+        "-" +
+        (this.date.getMonth() + 1) +
+        "-" +
+        this.date.getDate();
     }
-    if (this.date.getDate() < 10) {
-      this.newMeeting.date += "0" + this.date.getDate();
-      this.datePC.date = this.newMeeting.date;
-    } else {
-      this.newMeeting.date += this.date.getDate();
-      this.datePC.date = this.newMeeting.date;
-    }
+    this.newMeeting.date = this.datePC.date;
     if (this.date.getHours() < 10) {
       this.newMeeting.hour = "0" + this.date.getHours() + ":";
     } else {
@@ -194,20 +232,20 @@ export default {
       }
     },
     handleCreate() {
-      if (this.datePC.date !== this.newMeeting.date) {
-        this.newMeeting.date =
-          this.newMeeting.date.substring(8, 10) +
-          "-" +
-          this.newMeeting.date.substring(5, 7) +
-          "-" +
-          this.newMeeting.date.substring(0, 4);
-      }
+      let aux = this.newMeeting.date;
+      this.newMeeting.date =
+        aux.substring(8, 10) +
+        "-" +
+        aux.substring(5, 7) +
+        "-" +
+        aux.substring(0, 4);
       this.newMeeting.password = Encrypt(this.auxpassword);
       console.log(this.newMeeting.name);
       console.log(this.newMeeting.description);
       console.log(this.newMeeting.password);
       console.log(this.newMeeting.date);
       console.log(this.newMeeting.hour);
+      console.log(this.newMeeting.numParticipants);
       console.log(this.newMeeting.videoAnfitrion);
       console.log(this.newMeeting.videoParticipante);
       // LLamada a API para crear reunion
@@ -217,6 +255,7 @@ export default {
       this.newMeeting.description = "";
       this.newMeeting.date = this.datePC.date;
       this.newMeeting.hour = this.datePC.hour;
+      this.newMeeting.numParticipants = null;
       this.videoAnfitrion = true;
       this.videoParticipante = true;
       this.$router.push({ name: "MeetingList" });
@@ -226,6 +265,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.input-label {
+  font-weight: bold;
+}
 .aux {
   margin: 12px 0 0 0;
 }

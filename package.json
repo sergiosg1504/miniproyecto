@@ -26,6 +26,7 @@
     "vue-numeric-input": "^2.0.0",
     "vue-router": "^3.2.0",
     "vue-simple-accordion": "^0.1.0",
+    "vue-web-cam": "^1.9.0",
     "vuescroll": "^4.17.3",
     "vuetify": "^2.5.14"
   },

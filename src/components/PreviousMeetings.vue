@@ -60,10 +60,13 @@
           @click="data.toggleDetails"
           ><font-awesome-icon icon="eye-slash" />
         </b-button>
+        <b-button v-b-tooltip.hover title="Edit" @click="click_edit(data.item)"
+          ><font-awesome-icon icon="edit" />
+        </b-button>
         <b-button
           v-b-tooltip.hover
           title="Go to meeting room"
-          @click="click_irASala"
+          @click="click_goToRoom"
           ><font-awesome-icon icon="video" />
         </b-button>
       </template>
@@ -116,32 +119,35 @@ export default {
       meetingsSorted: [],
       // datos
       meetings: [
+        { date: "01-01-0001", hour: "00:00", name: "a", id: 1 },
+        { date: "01-01-0002", hour: "01:00", name: "b", id: 2 },
+        { date: "01-01-0003", hour: "02:00", name: "c", id: 3 },
+        { date: "01-01-0004", hour: "03:00", name: "d", id: 4 },
+        { date: "01-01-0005", hour: "04:00", name: "e", id: 5 },
+        { date: "01-01-0006", hour: "05:00", name: "f", id: 6 },
+        { date: "02-01-0001", hour: "00:00", name: "g", id: 7 },
+        { date: "03-01-0001", hour: "01:00", name: "h", id: 8 },
+        { date: "01-02-0001", hour: "02:00", name: "i", id: 9 },
+        { date: "01-03-0001", hour: "03:00", name: "j", id: 10 },
         {
-          index: 1,
-          date: "01-01-0001",
-          hour: "00:00",
-          name: "a",
+          date: "01-01-4001",
+          hour: "04:00",
+          name: "k",
+          id: 11,
+          description: "kkkkkkkk",
           numParticipants: 10,
+          password: "kaka",
+          videoGuest: true,
         },
-        { index: 2, date: "01-01-0002", hour: "01:00", name: "b" },
-        { index: 3, date: "01-01-0003", hour: "02:00", name: "c" },
-        { index: 4, date: "01-01-0004", hour: "03:00", name: "d" },
-        { index: 5, date: "01-01-0005", hour: "04:00", name: "e" },
-        { index: 6, date: "01-01-0006", hour: "05:00", name: "f" },
-        { index: 7, date: "02-01-0001", hour: "00:00", name: "g" },
-        { index: 8, date: "03-01-0001", hour: "01:00", name: "h" },
-        { index: 9, date: "01-02-0001", hour: "02:00", name: "i" },
-        { index: 10, date: "01-03-0001", hour: "03:00", name: "j" },
-        { index: 11, date: "01-01-4001", hour: "04:00", name: "k" },
-        { index: 12, date: "01-01-5001", hour: "05:00", name: "l" },
-        { index: 13, date: "03-01-6001", hour: "01:00", name: "m" },
-        { index: 14, date: "01-02-7001", hour: "02:00", name: "n" },
-        { index: 15, date: "01-03-8001", hour: "03:00", name: "o" },
-        { index: 16, date: "01-01-9001", hour: "04:00", name: "p" },
-        { index: 17, date: "01-01-9901", hour: "05:00", name: "q" },
-        { index: 18, date: "22-11-2021", hour: "05:00", name: "r" },
-        { index: 19, date: "22-11-2021", hour: "22:00", name: "s" },
-        { index: 20, date: "01-01-2022", hour: "22:00", name: "t" },
+        { date: "01-01-5001", hour: "05:00", name: "l", id: 12 },
+        { date: "03-01-6001", hour: "01:00", name: "m", id: 13 },
+        { date: "01-02-7001", hour: "02:00", name: "n", id: 14 },
+        { date: "01-03-8001", hour: "03:00", name: "o", id: 15 },
+        { date: "01-01-9001", hour: "04:00", name: "p", id: 16 },
+        { date: "01-01-9901", hour: "05:00", name: "q", id: 17 },
+        { date: "22-11-2021", hour: "05:00", name: "r", id: 18 },
+        { date: "22-11-2021", hour: "22:00", name: "s", id: 19 },
+        { date: "01-01-2022", hour: "22:00", name: "t", id: 20 },
       ],
       rows: this.rows_total,
     };
@@ -252,8 +258,11 @@ export default {
         }
       }
     },
-    click_irASala() {
+    click_goToRoom() {
       console.log("Yendo a la sala");
+    },
+    click_edit(meet) {
+      this.$router.push({ name: "UpdateMeeting", params: { meeting: meet } });
     },
     click_delete(item) {
       console.log("eliminar");

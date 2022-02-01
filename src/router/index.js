@@ -16,6 +16,7 @@ import UpdateMeeting from "../views/UpdateMeeting.vue";
 import MeetingList from "../views/MeetingList.vue";
 import MeetSeminariosWeb from "../views/MeetSeminariosWeb.vue";
 import MeetConfig from "../views/MeetConfig.vue";
+import WaitingRoom from "../views/WaitingRoom.vue";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faArrowLeft,
@@ -158,6 +159,12 @@ const routes = [
     path: "/configuracion",
     name: "Configuracion",
     component: MeetConfig,
+    props: true,
+  },
+  {
+    path: "/waitingRoom",
+    name: "WaitingRoom",
+    component: WaitingRoom,
     props: true,
   },
 ];

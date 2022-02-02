@@ -3,7 +3,7 @@
     <div class="secondNavbar">
       <div class="links-container">
         <router-link
-          :to="{ path: '/meetingList', params: { meeting: item } }"
+          :to="{ path: '/meetingList' }"
           class="btn btn-secondary float-right"
           ><font-awesome-icon icon="arrow-left" /> Back to meetings</router-link
         >

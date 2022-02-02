@@ -66,7 +66,7 @@
         <b-button
           v-b-tooltip.hover
           title="Go to meeting room"
-          @click="click_goToRoom"
+          @click="click_goToRoom(data.item)"
           ><font-awesome-icon icon="video" />
         </b-button>
       </template>
@@ -255,7 +255,8 @@ export default {
         }
       }
     },
-    click_goToRoom() {
+    click_goToRoom(meet) {
+      this.$router.push({ name: "WaitingRoom", params: { meeting: meet } });
       console.log("Yendo a la sala");
     },
     click_edit(meet) {

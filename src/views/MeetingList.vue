@@ -15,6 +15,11 @@
           class="btn btn-secondary float-right"
           ><font-awesome-icon icon="plus" /> Add meeting</router-link
         >
+        <router-link
+          :to="{ path: '/createInterview' }"
+          class="btn btn-secondary float-right"
+          ><font-awesome-icon icon="plus" /> Add interview</router-link
+        >
       </div>
     </div>
     <div class="col-sm-6">

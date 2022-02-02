@@ -13,6 +13,7 @@ import IncomingMeetings from "../components/IncomingMeetings.vue";
 import PreviousMeetings from "../components/PreviousMeetings.vue";
 import CreateMeeting from "../views/CreateMeeting.vue";
 import UpdateMeeting from "../views/UpdateMeeting.vue";
+import CreateInterview from "../views/CreateInterview.vue";
 import MeetingList from "../views/MeetingList.vue";
 import MeetSeminariosWeb from "../views/MeetSeminariosWeb.vue";
 import MeetConfig from "../views/MeetConfig.vue";
@@ -29,6 +30,9 @@ import {
   faEyeSlash,
   faBan,
   faEdit,
+  faVideoSlash,
+  faVolumeUp,
+  faVolumeMute,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 library.add(
@@ -41,7 +45,10 @@ library.add(
   faEye,
   faEyeSlash,
   faBan,
-  faEdit
+  faEdit,
+  faVideoSlash,
+  faVolumeUp,
+  faVolumeMute
 );
 
 import { BootstrapVue } from "bootstrap-vue";
@@ -129,6 +136,12 @@ const routes = [
     path: "/updateMeeting",
     name: "UpdateMeeting",
     component: UpdateMeeting,
+    props: true,
+  },
+  {
+    path: "/createInterview",
+    name: "CreateInterview",
+    component: CreateInterview,
     props: true,
   },
   {

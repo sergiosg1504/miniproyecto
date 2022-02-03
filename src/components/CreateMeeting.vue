@@ -29,7 +29,7 @@
               <span class="input-group-btn">
                 <button @click="changePasswordVisibility()">
                   <font-awesome-icon v-if="passwordVisibility" icon="eye" />
-                  <font-awesome-icon v-else="" icon="eye-slash" />
+                  <font-awesome-icon v-else icon="eye-slash" />
                 </button>
               </span>
               <div class="right"></div>

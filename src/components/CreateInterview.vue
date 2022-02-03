@@ -4,7 +4,14 @@
       <div class="col-sm-12">
         <div class="form-group">
           <label>Active positions in the account</label>
-          <form>
+          <div class="content-select">
+            <select>
+              <option v-for="(item, i) in IDS" :key="i">{{ item.name }}</option>
+            </select>
+            <i></i>
+          </div>
+
+          <!--<form>
             <span v-for="(item, i) in IDS" :key="i">
               <p for="i">
                 {{ item.name }}
@@ -19,6 +26,15 @@
               </p>
             </span>
           </form>
+          
+          
+          <form>
+          <span v-for="(item,i) in IDS" :key="i">
+            <p for=i>
+                {{item.name}} <input type="radio" :class=' "box" + i' name="box" @click="selected(item.id, i)" required/> 
+            </p>
+          </span>
+        </form>-->
         </div>
       </div>
       <div class="col-sm-12">
@@ -54,7 +70,6 @@
               type="text"
               id="phone"
               v-model="inv_phone"
-              required
             />
           </div>
         </div>
@@ -82,23 +97,6 @@
       </div>
     </form>
   </v-app>
-  <!--<div class="graphql-test">
-    <h1>Positions that are active in the account</h1>
-    <form>
-        <span v-for="(item,i) in IDS" :key="i">
-            <p for=i>
-                {{item.name}} <input type="radio" :class=' "box" + i' name="box" @click="selected(item.id, i)" required/> 
-            </p>
-        </span>
-    </form>
-    <h2>Type the following information to invite someone</h2>
-    <form @submit.prevent="invite">
-        <p>Name: <input type="text" v-model="inv_name" required/></p>
-        <p>Email: <input type="text" v-model="inv_email" required/></p>
-        <p>Mobile Phone: <input type="text" v-model="inv_phone"/></p>
-        <input type="submit" value="Invite to selected">
-    </form>
-    </div>-->
 </template>
 
 <script>
@@ -176,6 +174,10 @@ export default {
       }
       return propmt_err;
     },
+
+    click_Cancell() {
+      this.$router.push({ name: "MeetingList" });
+    },
   },
   async mounted() {
     const aux = await this.$apollo.query({ query: GET_ID });
@@ -187,3 +189,32 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.content-input input,
+.content-select select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.content-select {
+  max-width: 225px;
+  position: relative;
+}
+.content-select select {
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+  padding: 1px 10px;
+  height: 30px;
+  border-radius: 0;
+  background: white;
+  border: 1px solid rgba(1, 1, 1, 1);
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.25s ease;
+}
+.content-select select:hover {
+  background: lightgrey;
+}
+</style>

@@ -15,12 +15,20 @@
       <video ref="camera" :width="800" :height="700" autoplay />
       <div>
         <button class="btn" @click="toggleVideo">
-          <span v-if="!isVideoON"><font-awesome-icon icon="video" /></span>
-          <span v-else><font-awesome-icon icon="video-slash" /></span>
+          <span v-if="!isVideoON"
+            ><font-awesome-icon class="fa-2x" icon="video"
+          /></span>
+          <span v-else
+            ><font-awesome-icon class="fa-2x" icon="video-slash"
+          /></span>
         </button>
         <button class="btn" @click="toggleAudio">
-          <span v-if="!isAudioON"><font-awesome-icon icon="volume-up" /></span>
-          <span v-else><font-awesome-icon icon="volume-mute" /></span>
+          <span v-if="!isAudioON"
+            ><font-awesome-icon class="fa-2x" icon="volume-up"
+          /></span>
+          <span v-else
+            ><font-awesome-icon class="fa-2x" icon="volume-mute"
+          /></span>
         </button>
       </div>
     </div>
@@ -54,6 +62,13 @@ export default {
       //required: true,
     },
   },
+  created() {
+    console.log(this.meeting);
+    this.isVideoON = this.meeting.videoHost;
+    this.isAudioON = this.meeting.audioHost;
+    if (this.isVideoON) this.createElement();
+    else if (this.isAudioON) this.createElement();
+  },
   methods: {
     joinNow() {
       console.log("Yendo a jitsi");
@@ -61,22 +76,22 @@ export default {
     toggleVideo() {
       if (this.isVideoON) {
         this.isVideoON = false;
-        this.stopCameraStream();
+        this.stopStream();
       } else {
         this.isVideoON = true;
-        this.createCameraElement();
+        this.createElement();
       }
     },
     toggleAudio() {
       if (this.isAudioON) {
         this.isAudioON = false;
-        this.createCameraElement();
+        this.stopStream();
       } else {
         this.isAudioON = true;
-        this.createCameraElement();
+        this.createElement();
       }
     },
-    createCameraElement() {
+    createElement() {
       const constraints = (window.constraints = {
         audio: this.isAudioON,
         video: this.isVideoON,
@@ -91,11 +106,13 @@ export default {
           console.log(error);
         });
     },
-    stopCameraStream() {
+    stopStream() {
       let tracks = this.$refs.camera.srcObject.getTracks();
       tracks.forEach((track) => {
         track.stop();
       });
+      if (this.isVideoON) this.createElement();
+      else if (this.isAudioON) this.createElement();
     },
   },
 };
@@ -105,28 +122,18 @@ export default {
 .camera-box {
   float: left;
   width: 65%;
-  height: 100%;
+  height: 90%;
   display: grid;
   place-content: center;
-  .camera-shutter {
-    opacity: 0;
-    background-color: #fff;
-    &.flash {
-      opacity: 1;
-    }
-  }
 }
 .information {
-  float: right;
-  width: 35%;
+  width: 25%;
   height: 40%;
   display: grid;
-  bottom: 0;
 }
 .title {
   padding: 300px 0px 0px 0px;
   font-size: 30px;
   font-weight: bold;
-  bottom: 0;
 }
 </style>

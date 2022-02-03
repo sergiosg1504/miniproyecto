@@ -128,6 +128,34 @@
         <div class="col-sm-2" />
       </div>
 
+      <div class="col-sm-12">
+        <div class="col-sm-2" />
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label>Guest audio</label>
+            <v-switch
+              v-model="newMeeting.audioGuest"
+              inset
+              color="#4cc4ec"
+              style="float: right"
+            />
+          </div>
+        </div>
+        <div class="col-sm-2" />
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label>Host audio</label>
+            <v-switch
+              v-model="newMeeting.audioHost"
+              inset
+              color="#4cc4ec"
+              style="float: right"
+            />
+          </div>
+        </div>
+        <div class="col-sm-2" />
+      </div>
+
       <div class="form-group col-lg-4 align-item-center">
         <div class="col-sm-12">
           <div class="col-sm-6">
@@ -172,6 +200,8 @@ export default {
       numParticipants: null,
       videoHost: true,
       videoGuest: true,
+      audioHost: true,
+      audioGuest: true,
     },
     auxpassword: "",
     passwordVisibility: false,
@@ -246,8 +276,10 @@ export default {
       console.log(this.newMeeting.date);
       console.log(this.newMeeting.hour);
       console.log(this.newMeeting.numParticipants);
-      console.log(this.newMeeting.videoAnfitrion);
-      console.log(this.newMeeting.videoParticipante);
+      console.log(this.newMeeting.videoHost);
+      console.log(this.newMeeting.videoGuest);
+      console.log(this.newMeeting.audioHost);
+      console.log(this.newMeeting.audioGuest);
       // LLamada a API para crear reunion
     },
     click_Cancell() {
@@ -256,8 +288,10 @@ export default {
       this.newMeeting.date = this.datePC.date;
       this.newMeeting.hour = this.datePC.hour;
       this.newMeeting.numParticipants = null;
-      this.videoAnfitrion = true;
-      this.videoParticipante = true;
+      this.videoHost = true;
+      this.videoGuest = true;
+      this.audioHost = true;
+      this.audioGuest = true;
       this.$router.push({ name: "MeetingList" });
     },
   },

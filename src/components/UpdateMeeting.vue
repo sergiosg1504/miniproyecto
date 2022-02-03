@@ -128,6 +128,34 @@
         <div class="col-sm-2" />
       </div>
 
+      <div class="col-sm-12">
+        <div class="col-sm-2" />
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label>Guest audio</label>
+            <v-switch
+              v-model="actualMeeting.audioGuest"
+              inset
+              color="#4cc4ec"
+              style="float: right"
+            />
+          </div>
+        </div>
+        <div class="col-sm-2" />
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label>Host audio</label>
+            <v-switch
+              v-model="actualMeeting.audioHost"
+              inset
+              color="#4cc4ec"
+              style="float: right"
+            />
+          </div>
+        </div>
+        <div class="col-sm-2" />
+      </div>
+
       <div class="form-group col-lg-4 align-item-center">
         <div class="col-sm-12">
           <div class="col-sm-6">
@@ -178,6 +206,8 @@ export default {
       numParticipants: null,
       videoHost: true,
       videoGuest: true,
+      audioHost: true,
+      audioGuest: true,
     },
     auxpassword: "",
     passwordVisibility: false,
@@ -199,6 +229,8 @@ export default {
     this.actualMeeting.numParticipants = this.meeting.numParticipants;
     this.actualMeeting.videoHost = this.meeting.videoHost;
     this.actualMeeting.videoGuest = this.meeting.videoGuest;
+    this.actualMeeting.audioHost = this.meeting.audioHost;
+    this.actualMeeting.audioGuest = this.meeting.audioGuest;
   },
   methods: {
     changePasswordVisibility() {
@@ -226,8 +258,10 @@ export default {
       console.log(this.actualMeeting.date);
       console.log(this.actualMeeting.hour);
       console.log(this.actualMeeting.numParticipants);
-      console.log(this.actualMeeting.videoAnfitrion);
-      console.log(this.actualMeeting.videoParticipante);
+      console.log(this.actualMeeting.videoHost);
+      console.log(this.actualMeeting.videoGuest);
+      console.log(this.actualMeeting.audioHost);
+      console.log(this.actualMeeting.audioGuest);
       // LLamada a API para modificar reunion
       this.$router.push({ name: "MeetingList" });
     },

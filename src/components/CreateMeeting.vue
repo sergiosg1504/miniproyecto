@@ -1,131 +1,53 @@
 <template>
   <v-app class="form-container technologiesStyle">
-    <form action class="form" @submit.prevent="handleCreate">
+    <form action class="form" @submit.prevent="invite">
       <div class="col-sm-12">
-        <div class="col-sm-6">
+        <div class="form-group">
+          <label>Active positions in the account</label>
+          <div class="content-select">
+            <select v-model="selected">
+              <option v-for="(item, i) in IDS" :key="i" v-bind:value="item">{{ item.name }}</option>
+            </select>
+            <i></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="col-sm-4">
           <div class="form-group">
             <label>Name</label>
             <input
-              class="form-input aux"
+              class="form-input"
               type="text"
               id="name"
-              v-model="newMeeting.name"
+              v-model="inv_name"
+              required
             />
           </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-4">
           <div class="form-group">
-            <label>Password</label>
-            <div class="input-group">
-              <div class="col-11">
-                <input
-                  class="form-input"
-                  type="password"
-                  id="password"
-                  v-model="auxpassword"
-                  name="input_password"
-                />
-              </div>
-              <span class="input-group-btn">
-                <button @click="changePasswordVisibility()">
-                  <font-awesome-icon v-if="passwordVisibility" icon="eye" />
-                  <font-awesome-icon v-else icon="eye-slash" />
-                </button>
-              </span>
-              <div class="right"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-12">
-        <div class="col-sm-10">
-          <div class="form-group">
-            <label>Description</label>
+            <label>Email</label>
             <input
               class="form-input"
               type="text"
-              id="descripion"
-              data-vv-name="entity"
-              v-model="newMeeting.description"
+              id="email"
+              v-model="inv_email"
+              required
             />
           </div>
         </div>
-        <div class="col-sm-2">
-          <div>
-            <label class="input-label">Number of participants</label>
-            <vue-numeric-input
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label>Mobile phone</label>
+            <input
+              class="form-input"
               type="text"
-              align="center"
-              id="numParticipants"
-              data-vv-name="entity"
-              :min="2"
-              :max="60"
-              inline
-              controls
-              v-model="newMeeting.numParticipants"
-            ></vue-numeric-input>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-12">
-        <div class="col-sm-2" />
-        <div class="col-sm-2">
-          <div class="form-group">
-            <label>Date</label>
-            <input
-              class="form-input"
-              type="date"
-              id="date"
-              data-vv-name="date"
-              v-model="newMeeting.date"
+              id="phone"
+              v-model="inv_phone"
             />
           </div>
         </div>
-        <div class="col-sm-2" />
-        <div class="col-sm-2">
-          <div class="form-group">
-            <label>Hour</label>
-            <input
-              class="form-input"
-              type="time"
-              id="hour"
-              data-vv-name="hour"
-              v-model="newMeeting.hour"
-              name="hour"
-            />
-          </div>
-        </div>
-        <div class="col-sm-2" />
-      </div>
-
-      <div class="col-sm-12">
-        <div class="col-sm-2" />
-        <div class="col-sm-2">
-          <div class="form-group">
-            <label>Guest video</label>
-            <v-switch
-              v-model="newMeeting.videoGuest"
-              inset
-              color="#4cc4ec"
-              style="float: right"
-            />
-          </div>
-        </div>
-        <div class="col-sm-2" />
-        <div class="col-sm-2">
-          <div class="form-group">
-            <label>Host video</label>
-            <v-switch
-              v-model="newMeeting.videoHost"
-              inset
-              color="#4cc4ec"
-              style="float: right"
-            />
-          </div>
-        </div>
-        <div class="col-sm-2" />
       </div>
 
       <div class="form-group col-lg-4 align-item-center">
@@ -143,7 +65,7 @@
             <input
               class="btn btn-primary form-submit"
               type="submit"
-              value="Create"
+              value="Invite"
             />
           </div>
         </div>
@@ -153,157 +75,121 @@
 </template>
 
 <script>
-import VueNumericInput from "vue-numeric-input";
-import { Encrypt } from "@/logic/aes.js";
-import Vue from "vue";
-import Vuetify from "vuetify";
-Vue.use(Vuetify);
+import { GET_INTER, GET_ID, INVITE_TO } from "../graphql/queries/me/interviews";
 export default {
-  components: {
-    VueNumericInput,
-  },
-  data: () => ({
-    newMeeting: {
-      nombre: "Mi reunión",
-      description: "",
-      password: "",
-      date: "",
-      hour: "",
-      numParticipants: null,
-      videoHost: true,
-      videoGuest: true,
-    },
-    auxpassword: "",
-    passwordVisibility: false,
-    date: new Date(),
-    datePC: { date: "", hour: "" },
-  }),
-  mounted() {
-    if (this.date.getMonth() + 1 < 10 && this.date.getDate() < 10) {
-      this.datePC.date =
-        this.date.getFullYear() +
-        "-0" +
-        (this.date.getMonth() + 1) +
-        "-0" +
-        this.date.getDate();
-    } else if (this.date.getMonth() + 1 < 10 && this.date.getDate() > 10) {
-      this.datePC.date =
-        this.date.getFullYear() +
-        "-0" +
-        (this.date.getMonth() + 1) +
-        "-" +
-        this.date.getDate();
-    } else if (this.date.getMonth() + 1 > 10 && this.date.getDate() < 10) {
-      this.datePC.date =
-        this.date.getFullYear() +
-        "-" +
-        (this.date.getMonth() + 1) +
-        "-0" +
-        this.date.getDate();
-    } else {
-      this.datePC.date =
-        this.date.getFullYear() +
-        "-" +
-        (this.date.getMonth() + 1) +
-        "-" +
-        this.date.getDate();
-    }
-    this.newMeeting.date = this.datePC.date;
-    if (this.date.getHours() < 10) {
-      this.newMeeting.hour = "0" + this.date.getHours() + ":";
-    } else {
-      this.newMeeting.hour = this.date.getHours() + ":";
-    }
-    if (this.date.getMinutes() < 10) {
-      this.newMeeting.hour += "0" + this.date.getMinutes();
-    } else {
-      this.newMeeting.hour += this.date.getMinutes();
-    }
+  name: "GraphQLTest",
+  data() {
+    return {
+      interviews: [],
+      IDS: [],
+      flag: false,
+      inv_name: null,
+      inv_email: null,
+      inv_phone: null,
+      selected:{}
+    };
   },
   methods: {
-    changePasswordVisibility() {
-      var aux = document.getElementById("password");
-      if (aux.type === "password") {
-        aux.type = "text";
-        this.passwordVisibility = false;
-      } else {
-        aux.type = "password";
-        this.passwordVisibility = true;
+    async show() {
+      let i; // In this array are saved the ids of every positions in the account
+      for (i = 0; i < this.IDS.data.positions.length; i++) {
+        this.interviews = await this.$apollo.query({
+          query: GET_INTER,
+          variables: { position: this.IDS.data.positions[i].id },
+        }); // In this other array are saved the url of the interviewers, if completed the final one if not the one to record it
+        console.log(this.interviews);
       }
     },
-    handleCreate() {
-      let aux = this.newMeeting.date;
-      this.newMeeting.date =
-        aux.substring(8, 10) +
-        "-" +
-        aux.substring(5, 7) +
-        "-" +
-        aux.substring(0, 4);
-      this.newMeeting.password = Encrypt(this.auxpassword);
-      console.log(this.newMeeting.name);
-      console.log(this.newMeeting.description);
-      console.log(this.newMeeting.password);
-      console.log(this.newMeeting.date);
-      console.log(this.newMeeting.hour);
-      console.log(this.newMeeting.numParticipants);
-      console.log(this.newMeeting.videoAnfitrion);
-      console.log(this.newMeeting.videoParticipante);
-      // LLamada a API para crear reunion
+    /*selected(id, index) {
+      if (id !== this.picked) {
+        this.picked = id; // when a different one is selected the id change
+      } else {
+        this.picked = null; // when the same button is selected the id is delete and unselected
+        const boxes = document.querySelector(".box" + index);
+        boxes.checked = false;
+      }
+    },*/
+
+    invite() {
+      this.$apollo
+        .mutate({
+          mutation: INVITE_TO,
+          variables: {
+            positionId: this.selected.id,
+            candidate: {
+              name: this.inv_name,
+              email: this.inv_email,
+              phone: this.inv_phone,
+            },
+          },
+        })
+        .then(() => {
+          alert("Invitation success");
+        })
+        .catch((error) => {
+          alert(this.customError(error));
+        });
     },
+
+    customError(error) {
+      const code = error.graphQLErrors[0].code;
+      let propmt_err;
+      switch (code) {
+        case 400:
+          propmt_err = "The email was incorrect";
+          break;
+        case 404:
+          propmt_err = "No position selected";
+          break;
+        case 409:
+          propmt_err = "The interviewer is already invited";
+          break;
+        default:
+          propmt_err = "An error has occured";
+      }
+      return propmt_err;
+    },
+
     click_Cancell() {
-      this.newMeeting.nombre = "";
-      this.newMeeting.description = "";
-      this.newMeeting.date = this.datePC.date;
-      this.newMeeting.hour = this.datePC.hour;
-      this.newMeeting.numParticipants = null;
-      this.videoAnfitrion = true;
-      this.videoParticipante = true;
       this.$router.push({ name: "MeetingList" });
     },
+  },
+  async mounted() {
+    const aux = await this.$apollo.query({ query: GET_ID });
+    let i;
+    for (i = 0; i < aux.data.positions.length; i++) {
+      if (aux.data.positions[i].archived == null)
+        this.IDS.push(aux.data.positions[i]);
+    }
   },
 };
 </script>
 
-<style lang="scss" scoped>
-.input-label {
-  font-weight: bold;
+<style scoped>
+.content-input input,
+.content-select select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
-.aux {
-  margin: 12px 0 0 0;
+.content-select {
+  max-width: 225px;
+  position: relative;
 }
-::v-deep {
-  /* Basic editor styles */
-  .ProseMirror {
-    > * + * {
-      margin-top: 0.75em;
-    }
-
-    code {
-      background-color: rgba(#616161, 0.1);
-      color: #616161;
-    }
-  }
-
-  .content {
-    padding: 1rem 0 0;
-
-    h3 {
-      margin: 1rem 0 0.5rem;
-    }
-
-    pre {
-      border-radius: 5px;
-      color: #333;
-    }
-
-    code {
-      display: block;
-      white-space: pre-wrap;
-      font-size: 0.8rem;
-      padding: 0.75rem 1rem;
-      background-color: #e9ecef;
-      color: #495057;
-    }
-  }
+.content-select select {
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+  padding: 1px 10px;
+  height: 30px;
+  border-radius: 0;
+  background: white;
+  border: 1px solid rgba(1, 1, 1, 1);
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.25s ease;
+}
+.content-select select:hover {
+  background: lightgrey;
 }
 </style>

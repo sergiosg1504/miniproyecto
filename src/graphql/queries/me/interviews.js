@@ -28,4 +28,16 @@ export const INVITE_TO = gql
                                 }
                               }
                           `
+
+export const GET_CANDIDATES = gql 
+                              `
+                                query RootQueryType($position: String!) {
+                                  interviews(position: $position) {
+                                    candidate {
+                                      name
+                                      email
+                                    }
+                                  }
+                                }
+                              `
 // Salen las url de todas incluso estando completadas, si no lo están permite realizar la videoentrevista

@@ -16,9 +16,9 @@
           ><font-awesome-icon icon="plus" /> Add meeting</router-link
         >
         <router-link
-          :to="{ path: '/createInterview' }"
+          :to="{ path: '/InvitationInterview' }"
           class="btn btn-secondary float-right"
-          ><font-awesome-icon icon="plus" /> Add interview</router-link
+          ><font-awesome-icon icon="plus" /> Send invitation</router-link
         >
       </div>
     </div>

@@ -9,11 +9,16 @@ import List from "../views/ListView.vue";
 import Mod from "../views/Modify.vue";
 import Profile from "../components/Profile.vue";
 import NavigationBar from "../components/NavigationBar.vue";
+
 import IncomingMeetings from "../components/IncomingMeetings.vue";
 import PreviousMeetings from "../components/PreviousMeetings.vue";
+
 import CreateMeeting from "../views/CreateMeeting.vue";
 import UpdateMeeting from "../views/UpdateMeeting.vue";
+
 import CreateInterview from "../views/CreateInterview.vue";
+import InvitationInterview from "../views/InvitationInterview.vue";
+
 import MeetingList from "../views/MeetingList.vue";
 import MeetSeminariosWeb from "../views/MeetSeminariosWeb.vue";
 import MeetConfig from "../views/MeetConfig.vue";
@@ -142,6 +147,12 @@ const routes = [
     path: "/createInterview",
     name: "CreateInterview",
     component: CreateInterview,
+    props: true,
+  },
+  {
+    path: "/invitationInterview",
+    name: "InvitationInterview",
+    component: InvitationInterview,
     props: true,
   },
   {

@@ -7,20 +7,25 @@
           class="btn btn-secondary float-right"
           ><font-awesome-icon icon="arrow-left" /> Back to meetings</router-link
         >
+        <router-link
+          :to="{ path: '/createInterview' }"
+          class="btn btn-secondary float-right"
+          ><font-awesome-icon icon="plus" /> Create an Interview</router-link
+        >
       </div>
     </div>
-    <h4>Add interview</h4>
-    <create-interview />
+    <h4>Send interview</h4>
+    <invitation-interview />
   </div>
 </template>
 
 <script>
-import CreateInterview from "../components/CreateInterview.vue";
+import InvitationInterview from "../components/InvitationInterview.vue";
 
 export default {
-  name: "CreateInterviewView",
+  name: "InvitationInterviewView",
   components: {
-    CreateInterview,
+    InvitationInterview,
   },
 };
 </script>

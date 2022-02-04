@@ -70,8 +70,7 @@
       </div>
 
       <div class="col-sm-12">
-        <div class="col-sm-2" />
-        <div class="col-sm-2">
+        <div class="col-sm-4">
           <div class="form-group">
             <label>Date</label>
             <input
@@ -83,21 +82,32 @@
             />
           </div>
         </div>
-        <div class="col-sm-2" />
-        <div class="col-sm-2">
+        <div class="col-sm-4">
           <div class="form-group">
-            <label>Hour</label>
+            <label>Start hour</label>
             <input
               class="form-input"
               type="time"
               id="hour"
               data-vv-name="hour"
-              v-model="actualMeeting.hour"
+              v-model="actualMeeting.startHour"
               name="hour"
             />
           </div>
         </div>
-        <div class="col-sm-2" />
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label>End hour</label>
+            <input
+              class="form-input"
+              type="time"
+              id="hour"
+              data-vv-name="hour"
+              v-model="actualMeeting.endHour"
+              name="hour"
+            />
+          </div>
+        </div>
       </div>
 
       <div class="col-sm-12">
@@ -202,7 +212,8 @@ export default {
       description: "",
       password: "",
       date: "",
-      hour: "",
+      startHour: "",
+      endHour: "",
       numParticipants: null,
       videoHost: true,
       videoGuest: true,
@@ -225,7 +236,8 @@ export default {
       this.meeting.date.substring(3, 5) +
       "-" +
       this.meeting.date.substring(0, 2);
-    this.actualMeeting.hour = this.meeting.hour;
+    this.actualMeeting.startHour = this.meeting.startHour;
+    this.actualMeeting.endHour = this.meeting.endHour;
     this.actualMeeting.numParticipants = this.meeting.numParticipants;
     this.actualMeeting.videoHost = this.meeting.videoHost;
     this.actualMeeting.videoGuest = this.meeting.videoGuest;
@@ -256,7 +268,8 @@ export default {
       console.log(this.actualMeeting.description);
       console.log(this.actualMeeting.password);
       console.log(this.actualMeeting.date);
-      console.log(this.actualMeeting.hour);
+      console.log(this.actualMeeting.startHour);
+      console.log(this.actualMeeting.endHour);
       console.log(this.actualMeeting.numParticipants);
       console.log(this.actualMeeting.videoHost);
       console.log(this.actualMeeting.videoGuest);

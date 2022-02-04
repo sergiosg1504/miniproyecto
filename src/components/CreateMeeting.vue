@@ -70,8 +70,7 @@
       </div>
 
       <div class="col-sm-12">
-        <div class="col-sm-2" />
-        <div class="col-sm-2">
+        <div class="col-sm-4">
           <div class="form-group">
             <label>Date</label>
             <input
@@ -83,21 +82,32 @@
             />
           </div>
         </div>
-        <div class="col-sm-2" />
-        <div class="col-sm-2">
+        <div class="col-sm-4">
           <div class="form-group">
-            <label>Hour</label>
+            <label>Start hour</label>
             <input
               class="form-input"
               type="time"
-              id="hour"
+              id="startHour"
               data-vv-name="hour"
-              v-model="newMeeting.hour"
+              v-model="newMeeting.startHour"
               name="hour"
             />
           </div>
         </div>
-        <div class="col-sm-2" />
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label>End hour</label>
+            <input
+              class="form-input"
+              type="time"
+              id="endHour"
+              data-vv-name="hour"
+              v-model="newMeeting.endHour"
+              name="hour"
+            />
+          </div>
+        </div>
       </div>
 
       <div class="col-sm-12">
@@ -196,7 +206,8 @@ export default {
       description: "",
       password: "",
       date: "",
-      hour: "",
+      statHour: "",
+      endHour: "",
       numParticipants: null,
       videoHost: true,
       videoGuest: true,
@@ -240,15 +251,16 @@ export default {
     }
     this.newMeeting.date = this.datePC.date;
     if (this.date.getHours() < 10) {
-      this.newMeeting.hour = "0" + this.date.getHours() + ":";
+      this.newMeeting.startHour = "0" + this.date.getHours() + ":";
     } else {
-      this.newMeeting.hour = this.date.getHours() + ":";
+      this.newMeeting.startHour = this.date.getHours() + ":";
     }
     if (this.date.getMinutes() < 10) {
-      this.newMeeting.hour += "0" + this.date.getMinutes();
+      this.newMeeting.startHour += "0" + this.date.getMinutes();
     } else {
-      this.newMeeting.hour += this.date.getMinutes();
+      this.newMeeting.startHour += this.date.getMinutes();
     }
+    this.newMeeting.endHour = this.newMeeting.startHour;
   },
   methods: {
     changePasswordVisibility() {
@@ -262,8 +274,8 @@ export default {
       }
     },
     handleCreate() {
-      let aux = this.newMeeting.date;
-      this.newMeeting.date =
+      let aux = this.newMeeting.startDate;
+      this.newMeeting.startDate =
         aux.substring(8, 10) +
         "-" +
         aux.substring(5, 7) +
@@ -274,7 +286,8 @@ export default {
       console.log(this.newMeeting.description);
       console.log(this.newMeeting.password);
       console.log(this.newMeeting.date);
-      console.log(this.newMeeting.hour);
+      console.log(this.newMeeting.endDate);
+      console.log(this.newMeeting.endHour);
       console.log(this.newMeeting.numParticipants);
       console.log(this.newMeeting.videoHost);
       console.log(this.newMeeting.videoGuest);
@@ -286,7 +299,7 @@ export default {
       this.newMeeting.nombre = "";
       this.newMeeting.description = "";
       this.newMeeting.date = this.datePC.date;
-      this.newMeeting.hour = this.datePC.hour;
+      this.newMeeting.startHour = this.newMeeting.endHour = this.datePC.hour;
       this.newMeeting.numParticipants = null;
       this.videoHost = true;
       this.videoGuest = true;

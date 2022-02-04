@@ -10,7 +10,6 @@
                 {{ item.name }}
               </option>
             </select>
-            <i></i>
           </div>
         </div>
       </div>

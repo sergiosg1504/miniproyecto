@@ -136,4 +136,8 @@ export default {
   font-size: 30px;
   font-weight: bold;
 }
+video {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
 </style>

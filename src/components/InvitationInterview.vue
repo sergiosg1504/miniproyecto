@@ -1,6 +1,6 @@
 <template>
   <v-app class="form-container technologiesStyle">
-    <form action class="form" @submit.prevent="invite">
+    <form action class="form" @submit="invite">
       <div class="col-sm-12">
         <div class="col-sm-2" />
         <div class="col-sm-4 form-group">

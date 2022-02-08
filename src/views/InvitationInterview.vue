@@ -12,6 +12,11 @@
           class="btn btn-secondary float-right"
           ><font-awesome-icon icon="plus" /> Create an Interview</router-link
         >
+        <router-link
+          :to="{ path: '/calendario' }"
+          class="btn btn-secondary float-right"
+          ><font-awesome-icon icon="plus" /> Calendar</router-link
+        >
       </div>
     </div>
     <h4>Send interview</h4>

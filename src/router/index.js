@@ -19,6 +19,8 @@ import UpdateMeeting from "../views/UpdateMeeting.vue";
 import CreateInterview from "../views/CreateInterview.vue";
 import InvitationInterview from "../views/InvitationInterview.vue";
 
+import Calendario from "../views/Calendario.vue";
+
 import MeetingList from "../views/MeetingList.vue";
 import MeetSeminariosWeb from "../views/MeetSeminariosWeb.vue";
 import MeetConfig from "../views/MeetConfig.vue";
@@ -171,6 +173,12 @@ const routes = [
     path: "/meetingList",
     name: "MeetingList",
     component: MeetingList,
+    props: true,
+  },
+  {
+    path: "/calendario",
+    name: "Calendario",
+    component: Calendario,
     props: true,
   },
   {

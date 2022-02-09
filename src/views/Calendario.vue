@@ -16,6 +16,7 @@
     </div>
     <h4>Calendar</h4>
     <div class="form-container technologiesStyle">
+    
     <vue-cal 
     :events="events" 
     :time-from="8 * 60" 
@@ -45,15 +46,20 @@ import 'vue-cal/dist/i18n/es.js' // This is to put the calendar on english
 import 'vue-cal/dist/i18n/zh-cn.js'
 import "vue-cal/dist/vuecal.css";
 
+
+
 export default {
   name: "Calendar",
   components: {
     "vue-cal": VueCal,
+    
   },
   data: () => ({events:[{start: '2022-02-09 14:00',
       end: '2022-02-09 15:00',
       title: 'Need to go shopping',
-      class: 'leisure'}]}),
+      class: 'leisure'}]}
+  
+),
   methods: {
   },
 };

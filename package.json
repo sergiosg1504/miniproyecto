@@ -29,6 +29,7 @@
     "vue-add-to-calendar": "^1.0.7",
     "vue-apollo": "^3.1.0",
     "vue-cal": "^3.10.1",
+    "vue-google-calendar": "^0.3.4",
     "vue-navigation-bar": "^4.1.0",
     "vue-numeric-input": "^2.0.0",
     "vue-router": "^3.2.0",

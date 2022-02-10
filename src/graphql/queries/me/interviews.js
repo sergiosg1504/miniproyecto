@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-export const GET_ID=gql
+export const GET_ID=gql  //Esta es para recuperar todas y filtrarlas
                     `query ExampleQuery {
                         positions {
                             id
@@ -9,7 +9,7 @@ export const GET_ID=gql
                         }
                     }`
 
-export const GET_INTER = gql
+export const GET_INTER = gql // Esta no se usa, pero recupera los enlaces a las invitaciones, lo que os mostramos en el meet
                          `query ExampleQuery($position: String!) {
                             interviews(position: $position) {
                               url {
@@ -18,7 +18,7 @@ export const GET_INTER = gql
                             }
                            }`
 
-export const INVITE_TO = gql
+export const INVITE_TO = gql // esta es la mutation para invitar
                           `
                             mutation INVITE_TO($candidate: inputCandidate, $positionId: String) {
                               Position(id: $positionId) {
@@ -29,7 +29,7 @@ export const INVITE_TO = gql
                               }
                           `
 
-export const GET_CANDIDATES = gql 
+export const GET_CANDIDATES = gql  // y esta dado un id de una entrevista recupera todos los candidatos con nombre y email
                               `
                                 query RootQueryType($position: String!) {
                                   interviews(position: $position) {

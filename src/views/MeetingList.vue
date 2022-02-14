@@ -15,11 +15,14 @@
           class="btn btn-secondary float-right"
           ><font-awesome-icon icon="plus" /> Add meeting</router-link
         >
-        <router-link
-          :to="{ path: '/InvitationInterview' }"
+        <!--<router-link
+          :to="{ path: '/InvitationInterview', params: { meetingList:'meetingList' } }"
           class="btn btn-secondary float-right"
           ><font-awesome-icon icon="plus" /> Send invitation</router-link
-        >
+        >-->
+        <button class="btn btn-secondary float-right" @click="sendInvitation()">
+          <font-awesome-icon icon="plus" /> Send invitation
+        </button>
       </div>
     </div>
     <div class="col-sm-6">
@@ -194,6 +197,14 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    sendInvitation() {
+      this.$router.push({
+        name: "InvitationInterview",
+        params: { meetingList: this.meetingList },
+      });
+    },
   },
 };
 </script>

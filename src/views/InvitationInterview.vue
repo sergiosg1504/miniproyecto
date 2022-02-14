@@ -12,11 +12,14 @@
           class="btn btn-secondary float-right"
           ><font-awesome-icon icon="plus" /> Create an Interview</router-link
         >
-        <router-link
+        <!--<router-link
           :to="{ path: '/calendario' }"
           class="btn btn-secondary float-right"
           ><font-awesome-icon icon="plus" /> Calendar</router-link
-        >
+        >-->
+        <button class="btn btn-secondary float-right" @click="goToCalendar()">
+          <font-awesome-icon icon="plus" /> Calendar
+        </button>
       </div>
     </div>
     <h4>Send interview</h4>
@@ -31,6 +34,19 @@ export default {
   name: "InvitationInterviewView",
   components: {
     InvitationInterview,
+  },
+  props: {
+    meetingList: {
+      type: Array,
+    },
+  },
+  methods: {
+    goToCalendar() {
+      this.$router.push({
+        name: "Calendario",
+        params: { meetingList: this.meetingList },
+      });
+    },
   },
 };
 </script>

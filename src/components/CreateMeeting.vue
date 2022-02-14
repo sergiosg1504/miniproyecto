@@ -10,6 +10,7 @@
               type="text"
               id="name"
               v-model="newMeeting.name"
+              required
             />
           </div>
         </div>
@@ -206,7 +207,7 @@ export default {
       description: "",
       password: "",
       date: "",
-      statHour: "",
+      startHour: "",
       endHour: "",
       numParticipants: null,
       videoHost: true,
@@ -274,15 +275,17 @@ export default {
       }
     },
     handleCreate() {
-      let aux = this.newMeeting.startDate;
-      this.newMeeting.startDate =
-        aux.substring(8, 10) +
+      let aux = this.newMeeting.date;
+      
+      this.newMeeting.date = 
+       aux.substring(8, 10) +
         "-" +
         aux.substring(5, 7) +
         "-" +
         aux.substring(0, 4);
       this.newMeeting.password = Encrypt(this.auxpassword);
-      console.log(this.newMeeting.name);
+      console.log(this.newMeeting);
+      /*console.log(this.newMeeting.name);
       console.log(this.newMeeting.description);
       console.log(this.newMeeting.password);
       console.log(this.newMeeting.date);
@@ -292,7 +295,7 @@ export default {
       console.log(this.newMeeting.videoHost);
       console.log(this.newMeeting.videoGuest);
       console.log(this.newMeeting.audioHost);
-      console.log(this.newMeeting.audioGuest);
+      console.log(this.newMeeting.audioGuest);*/
       // LLamada a API para crear reunion
     },
     click_Cancell() {

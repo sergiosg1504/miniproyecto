@@ -49,10 +49,10 @@ export default {
     return {
       meetingList: [
         {
-          date: "01-01-0001",
-          startHour: "00:00",
-          endHour: "00:00",
-          name: "a",
+          date: "10-03-2022",
+          startHour: "12:00",
+          endHour: "13:00",
+          name: "ad",
           id: 1,
         },
         {
@@ -161,10 +161,10 @@ export default {
           id: 15,
         },
         {
-          date: "01-01-9001",
-          startHour: "04:00",
-          endHour: "00:00",
-          name: "p",
+          date: "2022-03-10",
+          startHour: "12:00",
+          endHour: "13:00",
+          name: "a",
           id: 16,
         },
         {

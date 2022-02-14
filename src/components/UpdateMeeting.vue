@@ -1,6 +1,6 @@
 <template>
   <v-app class="form-container technologiesStyle">
-    <form action class="form" @submit.prevent="handleCreate">
+    <form action class="form" @submit.prevent="handleUpdate">
       <div class="col-sm-12">
         <div class="col-sm-6">
           <div class="form-group">
@@ -29,7 +29,7 @@
               <span class="input-group-btn">
                 <button @click="changePasswordVisibility()">
                   <font-awesome-icon v-if="passwordVisibility" icon="eye" />
-                  <font-awesome-icon v-else="" icon="eye-slash" />
+                  <font-awesome-icon v-else icon="eye-slash" />
                 </button>
               </span>
               <div class="right"></div>
@@ -263,7 +263,7 @@ export default {
         "-" +
         aux.substring(0, 4);
       this.actualMeeting.password = Encrypt(this.auxpassword);
-      console.log(this.actualMeeting.name);
+      /*console.log(this.actualMeeting.name);
       console.log(this.actualMeeting.description);
       console.log(this.actualMeeting.password);
       console.log(this.actualMeeting.date);
@@ -273,7 +273,7 @@ export default {
       console.log(this.actualMeeting.videoHost);
       console.log(this.actualMeeting.videoGuest);
       console.log(this.actualMeeting.audioHost);
-      console.log(this.actualMeeting.audioGuest);
+      console.log(this.actualMeeting.audioGuest);*/
       // LLamada a API para modificar reunion
       this.$router.push({ name: "MeetingList" });
     },

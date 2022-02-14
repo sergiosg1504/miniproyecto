@@ -78,10 +78,11 @@ export default {
   },
   data() {
     return {
+      meetings: "",
       selectedEvent: {},
       showDialog: false,
       events: [
-        {
+        /*{
           start: "2022-02-10 14:00",
           end: "2022-02-10 18:00",
           title: "Interview name",
@@ -104,7 +105,7 @@ export default {
           content: "Do I need to tell how many holes?",
           contentFull: "Okay.<br>It will be a 18 hole golf course.",
           class: "sport",
-        },
+        },*/
       ],
     };
   },
@@ -118,9 +119,54 @@ export default {
     },
   },
   created() {
-    console.log(this.meetingList);
+    let temp = {
+      start: "",
+      end: "",
+      title: "",
+    }
+    let aux
+    this.meetings = this.meetingList
+    //console.log(this.meetingList);
     this.altura = screen.height - 200;
     this.anchura = screen.width - 40;
+     
+    console.log(this.meetings);
+    for (let i = 0; i<this.meetings.length;i++)
+    {
+      aux = this.meetings[i].date
+      this.meetings[i].date = aux.substring(6, 10) + "-" + aux.substring(3, 5) + "-" + aux.substring(0, 2);
+      //console.log(this.meetings[i].date);
+      temp.start = this.meetings[i].date + " " + this.meetings[i].startHour
+      temp.end = this.meetings[i].date + " " + this.meetings[i].endHour
+      temp.title = this.meetings[i].name
+
+      console.log(i);
+      //console.log(temp);
+      this.events.push(temp)
+      console.log(this.events); // por alguna razon incluso en la primera iteracion se rellena todo entero xd mirar mañana
+    }
+    /*this.meetings.forEach(meet =>{
+        let aux2 = meet.date
+        /*console.log("Incoming date "+ meet.date);
+       
+        meet.date =
+        aux2.substring(6, 10) +
+        "-" +
+        aux2.substring(3, 5) +
+        "-" +
+        aux2.substring(0, 2);
+      //console.log('Date after filter: ' + meet.date);
+
+      aux.start = meet.date + " " + meet.startHour
+      aux.end = meet.date + " " + meet.endHour
+      aux.title = meet.name
+
+      //console.log(aux.end);
+      //console.log(aux.start);
+
+      this.events.push(aux)
+    })
+    console.log(this.events);*/
   },
 };
 </script>

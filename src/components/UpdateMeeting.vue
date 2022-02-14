@@ -226,7 +226,6 @@ export default {
     datePC: { date: "", hour: "" },
   }),
   mounted() {
-    console.log(this.meeting);
     this.actualMeeting.name = this.meeting.name;
     this.actualMeeting.description = this.meeting.description;
     this.auxpassword = this.actualMeeting.password = this.meeting.password;

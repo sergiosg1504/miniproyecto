@@ -71,6 +71,11 @@ export default {
   components: {
     "vue-cal": VueCal,
   },
+  props: {
+    meetingList: {
+      type: Array,
+    },
+  },
   data() {
     return {
       selectedEvent: {},
@@ -113,6 +118,7 @@ export default {
     },
   },
   created() {
+    console.log(this.meetingList);
     this.altura = screen.height - 200;
     this.anchura = screen.width - 40;
   },

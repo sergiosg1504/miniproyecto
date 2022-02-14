@@ -28,10 +28,8 @@
         hide-weekends
         active-view="week"
         locale="es"
-        class="vuecal--blue-theme"
         today-button
         events-on-month-view
-        style="height: 820px"
       />
       <v-dialog v-model="showDialog">
         <v-card>
@@ -121,90 +119,148 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-.vuecal__cell-events-count {
-  width: 18px;
-  height: 2px;
-  color: transparent;
+<style  lang="scss" scoped>
+ .container {
+  height: 700px;
 }
-
-/* Dot indicator */
-.vuecal__cell-events-count {
-  width: 4px;
-  min-width: 0;
-  height: 4px;
-  padding: 0;
-  color: transparent;
+.vuecal__title-bar{background-color: rebeccapurple;}
+/* You can easily set a different style for each split of your days. */
+.vuecal__cell-split.f1 {
+  background-color: rgba(0, 0, 0, 0.5);
 }
-
-/* Cell background indicator */
-/* Green-theme. */
-.vuecal__menu,
-.vuecal__cell-events-count {
-  background-color: #4fc0e8 !important;
+.vuecal__cell-split.f2 {
+  background-color: rgba(253, 0, 211, 0.5);
 }
-.vuecal__title-bar {
-  background-color: #4fc0e8 !important;
+.vuecal__cell-split.f3 {
+  background-color: rgba(15, 255, 143, 0.5);
 }
-.vuecal__cell--today,
-.vuecal__cell--current {
-  background-color: #000000 !important;
+.vuecal__cell-split.f4 {
+  background-color: rgb(255, 234, 0);
 }
-.vuecal:not(.vuecal--day-view) .vuecal__cell--selected {
-  background-color: rgba(235, 255, 245, 0.4);
+.vuecal__cell-split .split-label {
+  color: rgb(255, 0, 0);
+  font-size: 26px;
 }
-.vuecal__cell--selected:before {
-  border-color: rgba(66, 185, 131, 0.5);
+/* Different color for different event types. */
+.vuecal__event.leisure {
+  background-color: rgb(253, 156, 66);
+  border: 1px solid rgb(233, 136, 46);
+  color: #fff;
 }
-/* Cells and buttons get highlighted when an event is dragged over it. */
-.vuecal__cell--highlighted:not(.vuecal__cell--has-splits),
-.vuecal__cell-split--highlighted {
-  background-color: rgba(195, 255, 225, 0.5);
+.vuecal__event {
+  cursor: pointer;
+  background: #77a5e1;
+  border: black 2px solid;
 }
-.vuecal__arrow.vuecal__arrow--highlighted,
-.vuecal__view-btn.vuecal__view-btn--highlighted {
-  background-color: rgba(136, 236, 191, 0.25);
+.vuecal__event-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  background: #528be1;
+  border-bottom: black 1px dashed;
 }
-// Display events on month view
-
-vue-cal {
-  background-color: #4fc0e8 !important;
+.vuecal__event-time {
+  padding-top: 10px;
+  color: white;
+  display: inline-block;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
-
-// Para que se vean los eventos en el mes
-.vuecal--month-view .vuecal__cell {
-  height: 80px;
+.vuecal__event-content {
+  color: white;
+  font-style: italic;
 }
-
-.vuecal--month-view .vuecal__cell-content {
-  justify-content: flex-start;
-  height: 100%;
-  align-items: flex-end;
+.button-wrap{
+  text-align: center;
+  padding-bottom: 2%;
 }
-
-.vuecal--month-view .vuecal__cell-date {
-  padding: 4px;
+.button {
+  background: #528be1;
+  font-size: 80%;
 }
-.vuecal--month-view .vuecal__no-event {
-  display: none;
+.wrap-input {
+  display: block;
+  width: 100%;
+  font-size: 16px;
+  line-height: 16px * 2;
+  margin-bottom: 16px * 2;
+  border: none;
+  border-bottom: 3px solid rgba(0, 0, 0, 1);
+  background: #ffffff;
+  min-width: 250px;
+  padding-left: 5px;
+  outline: none;
+  color: rgba(0, 0, 0, 1);
 }
-
-// estilo lunch
-.vuecal__event.lunch {
-  background: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 10px,
-    #f2f2f2 10px,
-    #f2f2f2 20px
-  ); /* IE 10+ */
-  color: #999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.form__field{
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid #91C9FF;
+  outline: 0;
+  font-size: 1.3rem;
+  color: #000000;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
 }
-.vuecal__event.lunch .vuecal__event-time {
-  display: none;
-  align-items: center;
+.form__label {
+  font-size: 18px;
 }
+button{
+  margin-top: 20px;
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-left: 20px;
+}
+.form{
+  @media (min-width: 1800px){
+    margin-left: 25%;
+    width: 50%;
+  }
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background: #ffffff;
+    padding: 50px 100px;
+    border: 2px solid rgb(222, 207, 207);
+    box-shadow: 15px 15px 1px #41a2e8, 15px 15px 1px 2px rgba(0,0,0,1)
+  }
+.wrap-button{
+  display: block;
+  margin: 0 auto;
+  line-height: 16px * 2;
+  padding: 0 20px;
+  background: #91C9FF;
+  letter-spacing: 2px;
+  transition: .2s all ease-in-out;
+  outline: none;
+  border: 1px solid rgba(0,0,0,1);
+  box-shadow: 3px 3px 1px #2b81f5, 3px 3px 1px 1px rgba(0,0,0,1);
+  text-decoration: none;
+  color: black !important;
+  margin-bottom: 3%;
+}
+.wrap-router-link{
+  display: table;
+  margin: 0 auto;
+  line-height: 16px * 2;
+  padding: 0 20px;
+  background: rgba(0, 0, 0, 0.63);
+  letter-spacing: 2px;
+  transition: .2s all ease-in-out;
+  outline: none;
+  border: 1px solid rgba(0,0,0,1);
+  box-shadow: 3px 3px 1px rgba(255, 255, 255, 0.75), 3px 3px 1px 1px rgba(0,0,0,1);
+  text-decoration: none;
+  color: white !important;
+  text-align: center;
+}
+  
 </style>

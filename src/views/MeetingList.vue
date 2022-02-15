@@ -161,7 +161,7 @@ export default {
           id: 15,
         },
         {
-          date: "2022-03-10",
+          date: "10-03-2022",
           startHour: "12:00",
           endHour: "13:00",
           name: "a",

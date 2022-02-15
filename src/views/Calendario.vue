@@ -125,14 +125,21 @@ export default {
       title: "",
     }
     let aux
+    let vector = []
     this.meetings = this.meetingList
     //console.log(this.meetingList);
     this.altura = screen.height - 200;
     this.anchura = screen.width - 40;
      
-    console.log(this.meetings);
+    //console.log(this.meetings);
     for (let i = 0; i<this.meetings.length;i++)
     {
+      temp.start=""
+      temp.end=""
+      temp.title=""
+      //console.log(temp);
+      //temp.start=this.meetings[i].date
+      //console.log(temp);
       aux = this.meetings[i].date
       this.meetings[i].date = aux.substring(6, 10) + "-" + aux.substring(3, 5) + "-" + aux.substring(0, 2);
       //console.log(this.meetings[i].date);
@@ -140,11 +147,16 @@ export default {
       temp.end = this.meetings[i].date + " " + this.meetings[i].endHour
       temp.title = this.meetings[i].name
 
-      console.log(i);
+      //console.log(i);
       //console.log(temp);
-      this.events.push(temp)
-      console.log(this.events); // por alguna razon incluso en la primera iteracion se rellena todo entero xd mirar mañana
+     
+      vector.push(temp)
+      console.log(temp);
+      //console.log(vector);
+      //console.log(this.events); // por alguna razon incluso en la primera iteracion se rellena todo entero xd mirar mañana*/
     }
+    //console.log(vector);
+    //console.log(this.events);
     /*this.meetings.forEach(meet =>{
         let aux2 = meet.date
         /*console.log("Incoming date "+ meet.date);

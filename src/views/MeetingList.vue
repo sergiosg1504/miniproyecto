@@ -20,8 +20,8 @@
           class="btn btn-secondary float-right"
           ><font-awesome-icon icon="plus" /> Send invitation</router-link
         >-->
-        <button class="btn btn-secondary float-right" @click="sendInvitation()">
-          <font-awesome-icon icon="plus" /> Send invitation
+        <button class="btn btn-secondary float-right" @click="goToInterviews()">
+          <font-awesome-icon icon="plus" /> Interviews
         </button>
       </div>
     </div>
@@ -199,9 +199,9 @@ export default {
     };
   },
   methods: {
-    sendInvitation() {
+    goToInterviews() {
       this.$router.push({
-        name: "InvitationInterview",
+        name: "InterviewList",
         params: { meetingList: this.meetingList },
       });
     },

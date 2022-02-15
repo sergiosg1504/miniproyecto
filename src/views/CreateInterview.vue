@@ -3,9 +3,10 @@
     <div class="secondNavbar">
       <div class="links-container">
         <router-link
-          :to="{ path: '/meetingList' }"
+          :to="{ path: '/interviewList' }"
           class="btn btn-secondary float-right"
-          ><font-awesome-icon icon="arrow-left" /> Back to meetings</router-link
+          ><font-awesome-icon icon="arrow-left" /> Back to
+          interviews</router-link
         >
       </div>
     </div>

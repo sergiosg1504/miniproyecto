@@ -8,10 +8,10 @@
           ><font-awesome-icon icon="arrow-left" /> Back to meetings</router-link
         >
         <router-link
-          :to="{ path: '/InvitationInterview' }"
+          :to="{ path: '/interviewList' }"
           class="btn btn-secondary float-right"
           ><font-awesome-icon icon="arrow-left" /> Back to
-          Interview</router-link
+          interviews</router-link
         >
       </div>
     </div>
@@ -19,6 +19,7 @@
     <div class="form-container technologiesStyle">
       <vue-cal
         ref="vuecal"
+        style="height: 650px"
         :events="events"
         :on-event-click="onEventClick"
         :time-from="8 * 60"
@@ -78,7 +79,7 @@ export default {
   },
   data() {
     return {
-      meetings: "",
+      meetings: null,
       selectedEvent: {},
       showDialog: false,
       events: [
@@ -119,40 +120,40 @@ export default {
     },
   },
   created() {
-    let temp
-    let aux
-    let vector = []
+    let temp;
+    let aux;
+    let vector = [];
 
-    this.meetings = this.meetingList
-
+    this.meetings = this.meetingList;
     this.altura = screen.height - 200;
     this.anchura = screen.width - 40;
-     
-    //console.log(this.meetings);
-    for (let i = 0; i<this.meetings.length;i++)
-    {
-      temp={}
 
-      aux = this.meetings[i].date
-      this.meetings[i].date = aux.substring(6, 10) + "-" + aux.substring(3, 5) + "-" + aux.substring(0, 2);
-
-      temp.start = this.meetings[i].date + " " + this.meetings[i].startHour
-      temp.end = this.meetings[i].date + " " + this.meetings[i].endHour
-      temp.title = this.meetings[i].name
-     
-      vector.push(temp)
-
+    for (let i = 0; i < this.meetings.length; i++) {
+      temp = {};
+      aux = this.meetings[i].date;
+      this.meetings[i].date =
+        aux.substring(6, 10) +
+        "-" +
+        aux.substring(3, 5) +
+        "-" +
+        aux.substring(0, 2);
+      temp.start = this.meetings[i].date + " " + this.meetings[i].startHour;
+      temp.end = this.meetings[i].date + " " + this.meetings[i].endHour;
+      temp.title = this.meetings[i].name;
+      vector.push(temp);
     }
-      this.events = vector
+    this.events = vector;
   },
 };
 </script>
 
-<style  lang="scss" scoped>
- .container {
+<style lang="scss" scoped>
+.container {
   height: 700px;
 }
-.vuecal__title-bar{background-color: rebeccapurple;}
+.vuecal__title-bar {
+  background-color: rebeccapurple;
+}
 /* You can easily set a different style for each split of your days. */
 .vuecal__cell-split.f1 {
   background-color: rgba(0, 0, 0, 0.5);
@@ -200,7 +201,7 @@ export default {
   color: white;
   font-style: italic;
 }
-.button-wrap{
+.button-wrap {
   text-align: center;
   padding-bottom: 2%;
 }
@@ -222,11 +223,11 @@ export default {
   outline: none;
   color: rgba(0, 0, 0, 1);
 }
-.form__field{
+.form__field {
   font-family: inherit;
   width: 100%;
   border: 0;
-  border-bottom: 2px solid #91C9FF;
+  border-bottom: 2px solid #91c9ff;
   outline: 0;
   font-size: 1.3rem;
   color: #000000;
@@ -237,9 +238,9 @@ export default {
 .form__label {
   font-size: 18px;
 }
-button{
+button {
   margin-top: 20px;
-  background-color: #4CAF50; /* Green */
+  background-color: #4caf50; /* Green */
   border: none;
   color: white;
   padding: 15px 32px;
@@ -249,47 +250,47 @@ button{
   font-size: 16px;
   margin-left: 20px;
 }
-.form{
-  @media (min-width: 1800px){
+.form {
+  @media (min-width: 1800px) {
     margin-left: 25%;
     width: 50%;
   }
-    margin-top: 2%;
-    margin-bottom: 2%;
-    background: #ffffff;
-    padding: 50px 100px;
-    border: 2px solid rgb(222, 207, 207);
-    box-shadow: 15px 15px 1px #41a2e8, 15px 15px 1px 2px rgba(0,0,0,1)
-  }
-.wrap-button{
+  margin-top: 2%;
+  margin-bottom: 2%;
+  background: #ffffff;
+  padding: 50px 100px;
+  border: 2px solid rgb(222, 207, 207);
+  box-shadow: 15px 15px 1px #41a2e8, 15px 15px 1px 2px rgba(0, 0, 0, 1);
+}
+.wrap-button {
   display: block;
   margin: 0 auto;
   line-height: 16px * 2;
   padding: 0 20px;
-  background: #91C9FF;
+  background: #91c9ff;
   letter-spacing: 2px;
-  transition: .2s all ease-in-out;
+  transition: 0.2s all ease-in-out;
   outline: none;
-  border: 1px solid rgba(0,0,0,1);
-  box-shadow: 3px 3px 1px #2b81f5, 3px 3px 1px 1px rgba(0,0,0,1);
+  border: 1px solid rgba(0, 0, 0, 1);
+  box-shadow: 3px 3px 1px #2b81f5, 3px 3px 1px 1px rgba(0, 0, 0, 1);
   text-decoration: none;
   color: black !important;
   margin-bottom: 3%;
 }
-.wrap-router-link{
+.wrap-router-link {
   display: table;
   margin: 0 auto;
   line-height: 16px * 2;
   padding: 0 20px;
   background: rgba(0, 0, 0, 0.63);
   letter-spacing: 2px;
-  transition: .2s all ease-in-out;
+  transition: 0.2s all ease-in-out;
   outline: none;
-  border: 1px solid rgba(0,0,0,1);
-  box-shadow: 3px 3px 1px rgba(255, 255, 255, 0.75), 3px 3px 1px 1px rgba(0,0,0,1);
+  border: 1px solid rgba(0, 0, 0, 1);
+  box-shadow: 3px 3px 1px rgba(255, 255, 255, 0.75),
+    3px 3px 1px 1px rgba(0, 0, 0, 1);
   text-decoration: none;
   color: white !important;
   text-align: center;
 }
-  
 </style>

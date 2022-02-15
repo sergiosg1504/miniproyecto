@@ -16,6 +16,7 @@ import PreviousMeetings from "../components/PreviousMeetings.vue";
 import CreateMeeting from "../views/CreateMeeting.vue";
 import UpdateMeeting from "../views/UpdateMeeting.vue";
 
+import InterviewList from "../views/InterviewList.vue";
 import CreateInterview from "../views/CreateInterview.vue";
 import InvitationInterview from "../views/InvitationInterview.vue";
 
@@ -143,6 +144,12 @@ const routes = [
     path: "/updateMeeting",
     name: "UpdateMeeting",
     component: UpdateMeeting,
+    props: true,
+  },
+  {
+    path: "/interviewList",
+    name: "InterviewList",
+    component: InterviewList,
     props: true,
   },
   {

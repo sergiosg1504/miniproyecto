@@ -119,66 +119,31 @@ export default {
     },
   },
   created() {
-    let temp = {
-      start: "",
-      end: "",
-      title: "",
-    }
+    let temp
     let aux
     let vector = []
+
     this.meetings = this.meetingList
-    //console.log(this.meetingList);
+
     this.altura = screen.height - 200;
     this.anchura = screen.width - 40;
      
     //console.log(this.meetings);
     for (let i = 0; i<this.meetings.length;i++)
     {
-      temp.start=""
-      temp.end=""
-      temp.title=""
-      //console.log(temp);
-      //temp.start=this.meetings[i].date
-      //console.log(temp);
+      temp={}
+
       aux = this.meetings[i].date
       this.meetings[i].date = aux.substring(6, 10) + "-" + aux.substring(3, 5) + "-" + aux.substring(0, 2);
-      //console.log(this.meetings[i].date);
+
       temp.start = this.meetings[i].date + " " + this.meetings[i].startHour
       temp.end = this.meetings[i].date + " " + this.meetings[i].endHour
       temp.title = this.meetings[i].name
-
-      //console.log(i);
-      //console.log(temp);
      
       vector.push(temp)
-      console.log(temp);
-      //console.log(vector);
-      //console.log(this.events); // por alguna razon incluso en la primera iteracion se rellena todo entero xd mirar mañana*/
+
     }
-    //console.log(vector);
-    //console.log(this.events);
-    /*this.meetings.forEach(meet =>{
-        let aux2 = meet.date
-        /*console.log("Incoming date "+ meet.date);
-       
-        meet.date =
-        aux2.substring(6, 10) +
-        "-" +
-        aux2.substring(3, 5) +
-        "-" +
-        aux2.substring(0, 2);
-      //console.log('Date after filter: ' + meet.date);
-
-      aux.start = meet.date + " " + meet.startHour
-      aux.end = meet.date + " " + meet.endHour
-      aux.title = meet.name
-
-      //console.log(aux.end);
-      //console.log(aux.start);
-
-      this.events.push(aux)
-    })
-    console.log(this.events);*/
+      this.events = vector
   },
 };
 </script>

@@ -86,6 +86,7 @@
 
 <script>
 //import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { GET_ID } from "../graphql/queries/me/interviews";
 export default {
   name: "IncomingInterviews",
   components: {
@@ -106,23 +107,29 @@ export default {
       rows: this.rows_total,
     };
   },
-  props: {
-    home: Boolean,
-    interviewList: {
-      type: Array,
-    },
-  },
-  mounted() {
-    this.interviews = this.interviewList;
-    console.log(this.interviews);
-    for (let i = 0; i < this.interviews.length; i++) {
-      console.log(this.interviews[i].name);
-    }
-  },
+  props: {},
   computed: {
     rows_total() {
       return this.users.length;
     },
+  },
+  async created() {
+    const aux = await this.$apollo.query({ query: GET_ID });
+    let i;
+    for (i = 0; i < aux.data.positions.length; i++) {
+      if (aux.data.positions[i].archived == null)
+        this.interviews.push(aux.data.positions[i]);
+    }
+    /*for (let i = 0; i < this.interviewList.length; i++) {
+      console.log(this.interviewList[i].name);
+    }*/
+    // separar la interviewList entre previousInterviewList e incomingInterviewList
+    // de momento mando todo a incoming para ver si va xd porque no se va a poder separar
+    /*this.incomingInterviewList = this.interviewList;
+    console.log("incoming interview de la lista vista");
+    for (let i = 0; i < this.incomingInterviewList.length; i++) {
+      console.log(this.incomingInterviewList[i].name);
+    }*/
   },
   methods: {},
 };

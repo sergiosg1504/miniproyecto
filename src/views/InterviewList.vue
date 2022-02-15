@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="col-sm-6">
-      <incoming-interviews :interviewList="incomingInterviewList" />
+      <incoming-interviews />
     </div>
     <!--<div class="col-sm-6">
       <previous-interviews :interviewList="previousInterviewList" />
@@ -29,7 +29,7 @@
 <script>
 import IncomingInterviews from "@/components/IncomingInterviews.vue";
 //import PreviousInterviews from "../components/PreviousInterviews.vue";
-import { GET_ID } from "../graphql/queries/me/interviews";
+//import { GET_ID } from "../graphql/queries/me/interviews";
 export default {
   name: "InterviewListView",
   components: {
@@ -43,21 +43,21 @@ export default {
   },
   data() {
     return {
-      interviewList: [],
+      /*interviewList: [],
       incomingInterviewList: [],
-      previousInterviewList: [],
+      previousInterviewList: [],*/
     };
   },
-  async created() {
+  /*async created() {
     const aux = await this.$apollo.query({ query: GET_ID });
     let i;
     for (i = 0; i < aux.data.positions.length; i++) {
       if (aux.data.positions[i].archived == null)
         this.interviewList.push(aux.data.positions[i]);
     }
-    /*for(let i=0; i<this.interviewList.length; i++){
+    for(let i=0; i<this.interviewList.length; i++){
         console.log(this.interviewList[i].name);
-    }*/
+    }
     // separar la interviewList entre previousInterviewList e incomingInterviewList
     // de momento mando todo a incoming para ver si va xd porque no se va a poder separar
     this.incomingInterviewList = this.interviewList;
@@ -65,7 +65,7 @@ export default {
     for (let i = 0; i < this.incomingInterviewList.length; i++) {
       console.log(this.incomingInterviewList[i].name);
     }
-  },
+  },*/
   methods: {
     goToCalendar() {
       this.$router.push({

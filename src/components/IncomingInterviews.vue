@@ -102,12 +102,15 @@ export default {
       pageOptions: this.$paginationOptions,
       currentPage: 1,
       clickable: true,
+      filter: null,
       // mis variables
       interviews: [],
       rows: this.rows_total,
     };
   },
-  props: {},
+  props: {
+    home: Boolean,
+  },
   computed: {
     rows_total() {
       return this.users.length;

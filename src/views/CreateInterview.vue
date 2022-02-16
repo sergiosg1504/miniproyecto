@@ -34,13 +34,4 @@ export default {
   padding-right: 0px !important;
   padding-top: 0px !important;
 }
-a {
-  color: inherit;
-  text-decoration: none !important;
-}
-a:hover {
-  color: inherit;
-  text-decoration: none !important;
-  cursor: pointer;
-}
 </style>

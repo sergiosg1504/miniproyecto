@@ -1,21 +1,6 @@
 <template>
   <v-app class="form-container technologiesStyle">
-    <form action class="form" @submit="createPosition">
-      <div class="col-sm-12">
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label>API Key</label>
-            <input
-              class="form-input aux"
-              type="text"
-              id="APIKey"
-              v-model="newPosition.name"
-              required
-            />
-          </div>
-        </div>
-      </div>
-
+    <form action class="form" @submit.prevent="createPosition">
       <div class="col-sm-12">
         <div class="col-sm-6">
           <div class="form-group">
@@ -25,7 +10,6 @@
               type="text"
               id="name"
               v-model="newPosition.name"
-              required
             />
           </div>
         </div>
@@ -38,9 +22,15 @@
               accept="video/*"
               id="video"
               @change="onFileChange"
-              required
             />
           </div>
+        </div>
+        <div class="col-sm-6">
+          <input
+            class="btn btn-primary form-submit"
+            type="submit"
+            value="Create"
+          />
         </div>
       </div>
     </form>
@@ -48,30 +38,52 @@
 </template>
 
 <script>
+import { CREATE_POS } from "../graphql/queries/me/interviews";
 export default {
   components: {},
   data() {
     return {
       //altura: null,
       //anchura: null,
-      HIREFLIX_API_URL: "https://api.hireflix.com/me",
-      newPosition: {
-        API_key: "",
-        name: "",
-        video: null,
-        question: {
-          name: "",
-          video: null,
-        },
-      },
+      newPosition: {}, // No hace falta crear los atributos se añaden dinamicamente haciendoles referencia en los inputs pero solo se puede hacer en primer nivel del arbol no puedes hacer al menos manualmente no se en inputs x.y.z, tiene que ser x.y = {z}
     };
   },
   methods: {
-    // no se si esto esta bien
+    // no se si esto esta bien, no lo está da error
     onFileChange(e) {
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
       this.createImage(files[0]);
+    },
+
+    createPosition() {
+      //console.log(this.newPosition)
+      const videos = document.getElementById("video").files[0];
+      // Por lo que he encontrado se deberá codificar en Base64 para que se pueda enviar pero no se como hacerlo
+      const toBase64 = (file) =>
+        new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = (error) => reject(error);
+        });
+      let result = toBase64(videos);
+      // No furrula
+      this.newPosition.intro = { file: result };
+      // He borrado lo que tenias porque con esto nos vale ya, en principio las crea solo con el nombre va bien y todo bien si falla debería saltar el error
+      this.$apollo
+        .mutate({
+          mutation: CREATE_POS,
+          variables: {
+            position: this.newPosition,
+          },
+        })
+        .then(() => {
+          alert("Position created successfully");
+        })
+        .catch((error) => {
+          alert(error);
+        });
     },
     /*
     const onSubmitForm = (event) => {

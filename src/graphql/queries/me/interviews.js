@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const GET_ID = gql` //Returns every position in the account, with its id, name and if its archived to filter them
+export const GET_ID = gql`
   query GET_ID {
     positions {
       id
@@ -10,7 +10,7 @@ export const GET_ID = gql` //Returns every position in the account, with its id,
   }
 `;
 
-export const GET_INTER = gql` // Returns the url to the interviews giving a position ID
+export const GET_INTER = gql`
   query GET_INTER($position: String!) {
     interviews(position: $position) {
       url {
@@ -20,7 +20,7 @@ export const GET_INTER = gql` // Returns the url to the interviews giving a posi
   }
 `;
 
-export const INVITE_TO = gql` // Invite someone by its name and email and a valid position Id
+export const INVITE_TO = gql`
   mutation INVITE_TO($candidate: inputCandidate, $positionId: String) {
     Position(id: $positionId) {
       invite(candidate: $candidate) {
@@ -30,7 +30,7 @@ export const INVITE_TO = gql` // Invite someone by its name and email and a vali
   }
 `;
 
-export const GET_CANDIDATES = gql` // Returns the candidates' name and email of position given
+export const GET_CANDIDATES = gql`
   query GET_CANDIDATES($position: String!) {
     interviews(position: $position) {
       candidate {
@@ -40,7 +40,7 @@ export const GET_CANDIDATES = gql` // Returns the candidates' name and email of 
     }
   }
 `;
-export const ARCHIVE_POS = gql` // Archive or active a position depending of the flag's value, needed a valid position Id
+export const ARCHIVE_POS = gql`
   mutation ARCHIVE_POS($positionId: String, $archive: Boolean!) {
     Position(id: $positionId) {
       archive(archive: $archive) {
@@ -50,7 +50,7 @@ export const ARCHIVE_POS = gql` // Archive or active a position depending of the
   }
 `;
 
-export const DELETE_POS = gql` // Delete a position using it id
+export const DELETE_POS = gql`
   mutation DELETE_POS($positionId: String) {
     Position(id: $positionId) {
       delete
@@ -58,7 +58,7 @@ export const DELETE_POS = gql` // Delete a position using it id
   }
 `;
 
-export const CREATE_POS = gql` // Create a position depending of the attributes of the object
+export const CREATE_POS = gql`
   mutation CREATE_POS($position: PositionInputType) {
     Position {
       save(position: $position) {

@@ -2,6 +2,22 @@
   <v-app class="form-container technologiesStyle">
     <form action class="form" @submit.prevent="createPosition">
       <div class="col-sm-12">
+        <div class="col-sm-3" />
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>API Key</label>
+            <input
+              class="form-input aux"
+              type="text"
+              id="APIKey"
+              v-model="newPosition.name"
+              required
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12">
         <div class="col-sm-6">
           <div class="form-group">
             <label>Name</label>
@@ -17,7 +33,7 @@
           <div class="form-group">
             <label>Intro video</label>
             <input
-              class="form-input aux"
+              class="form-input aux no-border"
               type="file"
               accept="video/*"
               id="video"
@@ -25,6 +41,73 @@
             />
           </div>
         </div>
+      </div>
+
+      <div class="container">
+        <div class="col-sm-12">
+          <input
+            class="btn btn-primary"
+            id="add_question"
+            value="+"
+            type="submit"
+          />
+        </div>
+        <div class="clonar">
+          <div class="col-sm-12">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Question name</label>
+                <input
+                  class="form-input aux"
+                  type="text"
+                  id="name"
+                  v-model="newPosition.name"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Question video</label>
+                <input
+                  class="form-input aux no-border"
+                  type="file"
+                  accept="video/*"
+                  id="video"
+                  @change="onFileChange"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="col-sm-2" />
+            <div class="col-sm-10">
+              <div class="form-group">
+                <label>Question description</label>
+                <input
+                  class="form-input aux"
+                  type="text"
+                  id="description"
+                  v-model="newPosition.description"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="col-sm-4" />
+            <div class="col-sm-4">
+              <input
+                class="btn btn-primary puntero"
+                value="Remove"
+                type="submit"
+              />
+            </div>
+          </div>
+        </div>
+        <div id="contenedor"></div>
+      </div>
+
+      <div class="col-sm-12">
+        <div class="col-sm-3" />
         <div class="col-sm-6">
           <input
             class="btn btn-primary form-submit"
@@ -45,8 +128,31 @@ export default {
     return {
       //altura: null,
       //anchura: null,
+      questionNum: 0,
+      agregar: null,
+      contenido: null,
       newPosition: {}, // No hace falta crear los atributos se añaden dinamicamente haciendoles referencia en los inputs pero solo se puede hacer en primer nivel del arbol no puedes hacer al menos manualmente no se en inputs x.y.z, tiene que ser x.y = {z}
     };
+  },
+  mounted() {
+    this.questionNum = 0;
+    this.agregar = document.getElementById("add_question");
+    this.contenido = document.getElementById("contenedor");
+    this.agregar.addEventListener("click", (e) => {
+      e.preventDefault();
+      this.questionNum++;
+      let contenido = document.getElementById("contenedor");
+      let clonado = document.querySelector(".clonar");
+      let clon = clonado.cloneNode(true);
+      contenido.appendChild(clon).classList.remove("clonar");
+    });
+    this.contenido.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (e.target.classList.contains("puntero")) {
+        let contenedor = e.target.parentNode.parentNode;
+        contenedor.parentNode.removeChild(contenedor);
+      }
+    });
   },
   methods: {
     // no se si esto esta bien, no lo está da error
@@ -55,7 +161,14 @@ export default {
       if (!files.length) return;
       this.createImage(files[0]);
     },
+    /*addQuesion() {
+      this.questionNum++;
 
+      let contenido = document.getElementById('contenedor');
+      let clonado = document.querySelector('.clonar');
+      let clon = clonado.cloneNode(true);
+      contenido.appendChild(clon).classList.remove('clonar');
+    },*/
     createPosition() {
       //console.log(this.newPosition)
       const videos = document.getElementById("video").files[0];
@@ -161,3 +274,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.no-border {
+  border-bottom: 0px;
+}
+</style>

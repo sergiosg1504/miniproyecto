@@ -9,7 +9,7 @@
       <h4>Seminarios web</h4>
       <div class="aviso">
         <div>
-          <img class="imagen" src="../images/info.png" />
+          <!--<img class="imagen" src="../images/info.png" />-->
         </div>
         <div>
           ¡Puede celebrar un seminario web gratuito de 30 minutos hoy en

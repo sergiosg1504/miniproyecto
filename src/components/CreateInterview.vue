@@ -1,7 +1,7 @@
 <template>
   <v-app class="form-container technologiesStyle">
     <form action class="form" @submit.prevent="createPosition">
-      <div class="col-sm-12">
+      <!--<div class="col-sm-12">
         <div class="col-sm-3" />
         <div class="col-sm-6">
           <div class="form-group">
@@ -15,7 +15,7 @@
             />
           </div>
         </div>
-      </div>
+      </div>-->
 
       <div class="col-sm-12">
         <div class="col-sm-6">
@@ -45,7 +45,9 @@
 
       <div id="padre" class="container">
         <div class="col-sm-12">
-          <button class="btn btn-primary" @click="addQuestion()">+</button>
+          <button type="button" class="btn btn-primary" @click="addQuestion()">
+            +
+          </button>
         </div>
         <div class="clonar">
           <div class="col-sm-12">
@@ -56,46 +58,48 @@
                   class="form-input aux"
                   type="text"
                   id="name"
-                  v-model="newPosition.questions[0].questionName"
+                  v-model="newPosition.questions[0].title"
                 />
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
               <div class="form-group">
                 <label>Question video</label>
                 <input
                   class="form-input aux no-border"
                   type="file"
                   accept="video/*"
-                  id="video"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-12">
-            <div class="col-sm-2" />
-            <div class="col-sm-10">
-              <div class="form-group">
-                <label>Question description</label>
-                <input
-                  class="form-input aux"
-                  type="text"
-                  id="description"
-                  v-model="newPosition.questions[0].questionDescription"
+                  :id="'video_' + questionNum"
+                  @change="onFileChangeQuestions"
                 />
               </div>
             </div>
           </div>
           <div class="col-sm-12">
             <div class="col-sm-4" />
-            <div class="col-sm-4">
-              <input
-                class="btn btn-primary puntero"
-                value="Remove"
-                type="submit"
-              />
+            <div class="col-sm-8">
+              <div class="form-group">
+                <label>Question description</label>
+                <input
+                  class="form-input aux"
+                  type="text"
+                  id="description"
+                  v-model="newPosition.questions[0].description"
+                />
+              </div>
             </div>
           </div>
+          <!--<div class="col-sm-12">
+            <div class="col-sm-4" />
+            <div class="col-sm-4">
+              <button
+                type="button"
+                class="btn btn-primary puntero"
+                @click="remove()">
+                Remove
+              </button>
+            </div>
+          </div>-->
           <div id="hijo"></div>
         </div>
 
@@ -126,16 +130,20 @@ export default {
       //anchura: null,
       questionNum: 0,
       newPosition: {
-        APIKey: "",
         name: "",
         // varialbe para el video
         questions: [
           {
-            questionName: "",
-            questionDescription: "",
-            //questionVideo
+            title: "",
+            description: "",
+            media: {
+              file: "",
+            },
           },
         ],
+        intro: {
+          file: "",
+        },
       }, // No hace falta crear los atributos se añaden dinamicamente haciendoles referencia en los inputs pero solo se puede hacer en primer nivel del arbol no puedes hacer al menos manualmente no se en inputs x.y.z, tiene que ser x.y = {z}
     };
   },
@@ -162,11 +170,22 @@ export default {
     });*/
   },
   methods: {
-    // no se si esto esta bien, no lo está da error
+    // Esto se supone que funcionaría pero el video se tiene que convertir a Blob primero cosa que no se como hacerlo
     onFileChange(e) {
-      var files = e.target.files || e.dataTransfer.files;
-      if (!files.length) return;
-      this.createImage(files[0]);
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.newPosition.intro.file = e.target.result;
+      };
+      reader.readAsDataURL(e);
+    },
+    onFileChangeQuestions(e) {
+      const num = e.srcElement.id.substring(6, 7); // trataba de asignar dinamicamente l id para luego recuperar el numero de pregunta, pero al hacerlo asi al crear otra se me actualiza y no vale
+      console.log(num);
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.newPosition.questions[num].media.file = e.target.result;
+      };
+      reader.readAsBinaryString(e);
     },
     addQuestion() {
       this.questionNum++;
@@ -174,25 +193,15 @@ export default {
       newDiv.innerHTML =
         '<div class="col-sm-12"><div class="col-sm-6"><div class="form-group"><label>Question name</label><input class="form-input aux" type="text" id="name"  v-model="newPosition.questions[' +
         this.questionNum +
-        '].questionName"/></div></div><div class="col-sm-6"><div class="form-group"><label>Question video</label><input class="form-input aux no-border" type="file" accept="video/*" id="video"/></div></div></div><div class="col-sm-12"><div class="col-sm-2" /><div class="col-sm-10"><div class="form-group"><label>Question description</label><input class="form-input aux" type="text" id="description" v-model="newPosition.questions[' +
+        '].title"/></div></div><div class="col-sm-6"><div class="form-group"><label>Question video</label><input class="form-input aux no-border" type="file" accept="video/*" id=video_' +
         this.questionNum +
-        '].questionDescription"/></div></div></div><div class="col-sm-12"><div class="col-sm-4" /><div class="col-sm-4"><inputclass="btn btn-primary puntero" value="Remove" type="submit"/></div></div>';
+        ' /></div></div></div><div class="col-sm-12"><div class="col-sm-2" /><div class="col-sm-10"><div class="form-group"><label>Question description</label><input class="form-input aux" type="text" id="description" v-model="newPosition.questions[' +
+        this.questionNum +
+        '].description"/></div></div></div><div class="col-sm-12"><div class="col-sm-4" /><div class="col-sm-4"><button type="button" class="btn btn-primary puntero" @click="remove()"> Remove </button></div></div>';
       document.getElementById("hijo").appendChild(newDiv);
     },
     createPosition() {
-      //console.log(this.newPosition)
-      const videos = document.getElementById("video").files[0];
-      // Por lo que he encontrado se deberá codificar en Base64 para que se pueda enviar pero no se como hacerlo
-      const toBase64 = (file) =>
-        new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.readAsDataURL(file);
-          reader.onload = () => resolve(reader.result);
-          reader.onerror = (error) => reject(error);
-        });
-      let result = toBase64(videos);
-      // No furrula
-      this.newPosition.intro = { file: result };
+      console.log(this.newPosition);
       // He borrado lo que tenias porque con esto nos vale ya, en principio las crea solo con el nombre va bien y todo bien si falla debería saltar el error
       this.$apollo
         .mutate({

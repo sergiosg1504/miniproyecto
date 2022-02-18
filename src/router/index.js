@@ -12,13 +12,14 @@ import NavigationBar from "../components/NavigationBar.vue";
 
 import IncomingMeetings from "../components/IncomingMeetings.vue";
 import PreviousMeetings from "../components/PreviousMeetings.vue";
-
 import CreateMeeting from "../views/CreateMeeting.vue";
 import UpdateMeeting from "../views/UpdateMeeting.vue";
 
 import InterviewList from "../views/InterviewList.vue";
 import CreateInterview from "../views/CreateInterview.vue";
 import InvitationInterview from "../views/InvitationInterview.vue";
+import OpenInterviews from "../components/OpenInterviews.vue";
+import ClosedInterviews from "../components/ClosedInterviews.vue";
 
 import Calendario from "../views/Calendario.vue";
 
@@ -156,6 +157,18 @@ const routes = [
     path: "/createInterview",
     name: "CreateInterview",
     component: CreateInterview,
+    props: true,
+  },
+  {
+    path: "/openInterviews",
+    name: "OpenInterviews",
+    component: OpenInterviews,
+    props: true,
+  },
+  {
+    path: "/closedInterviews",
+    name: "ClosedInterviews",
+    component: ClosedInterviews,
     props: true,
   },
   {

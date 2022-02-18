@@ -1,6 +1,6 @@
 <template>
   <div v-bind:class="{ 'table-container': !home, 'col-sm-12': home }">
-    <h4>Incoming interviews</h4>
+    <h4>Closed interviews</h4>
     <div class="row">
       <div class="col-sm-3">
         <b-pagination
@@ -40,7 +40,21 @@
       <template #cell(name)="data">
         {{ data.item.name }}
       </template>
-      <template #cell(options)="">
+      <template #cell(options)="data">
+        <b-button
+          v-b-tooltip.hover
+          title="Show interview information"
+          v-if="!data.detailsShowing"
+          @click="data.toggleDetails"
+          ><font-awesome-icon icon="eye" />
+        </b-button>
+        <b-button
+          v-b-tooltip.hover
+          title="Hide interivew information"
+          v-else
+          @click="data.toggleDetails"
+          ><font-awesome-icon icon="eye-slash" />
+        </b-button>
         <!--<b-button
           v-b-tooltip.hover
           title="Show meeting information"
@@ -65,32 +79,25 @@
           ><font-awesome-icon icon="video" />
         </b-button>-->
       </template>
-      <!--<template #row-details="data">
+      <template #row-details="data">
         <div class="col-sm-12 card profile-card">
-          <p>
-            Name: {{ data.item.name }}<br />Description:
-            {{ data.item.descripcion }}<br />Number of participants:
-            {{ data.item.numParticipants }}<br />
-            <b-button
-              v-b-tooltip.hover
-              title="Delete element"
-              @click="click_delete(data.item)"
-              ><font-awesome-icon icon="trash" />
-            </b-button>
-          </p>
+          <div v-for="(c, i) in data.item.candidates" :key="i">
+            {{ c.candidate.name }}, {{ c.candidate.email }}
+          </div>
+          <p></p>
         </div>
-      </template>-->
+      </template>
     </b-table>
   </div>
 </template>
 
 <script>
-//import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { GET_ID } from "../graphql/queries/me/interviews";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { GET_ID, GET_INTER_INFO } from "../graphql/queries/me/interviews";
 export default {
-  name: "IncomingInterviews",
+  name: "ClosedInterviews",
   components: {
-    //FontAwesomeIcon,
+    FontAwesomeIcon,
   },
   data() {
     return {
@@ -105,6 +112,7 @@ export default {
       filter: null,
       // mis variables
       interviews: [],
+      interviewsInfo: [],
       rows: this.rows_total,
     };
   },
@@ -116,23 +124,21 @@ export default {
       return this.users.length;
     },
   },
-  async created() {
+  async mounted() {
     const aux = await this.$apollo.query({ query: GET_ID });
     let i;
     for (i = 0; i < aux.data.positions.length; i++) {
-      if (aux.data.positions[i].archived == null)
+      if (aux.data.positions[i].archived != null)
         this.interviews.push(aux.data.positions[i]);
     }
-    /*for (let i = 0; i < this.interviewList.length; i++) {
-      console.log(this.interviewList[i].name);
-    }*/
-    // separar la interviewList entre previousInterviewList e incomingInterviewList
-    // de momento mando todo a incoming para ver si va xd porque no se va a poder separar
-    /*this.incomingInterviewList = this.interviewList;
-    console.log("incoming interview de la lista vista");
-    for (let i = 0; i < this.incomingInterviewList.length; i++) {
-      console.log(this.incomingInterviewList[i].name);
-    }*/
+    for (i = 0; i < aux.data.positions.length; i++) {
+      if (aux.data.positions[i].archived != null) {
+        this.interviewsInfo[i] = await this.$apollo.query({
+          query: GET_INTER_INFO,
+          variables: { position: aux.data.positions[i].id },
+        });
+      }
+    }
   },
   methods: {},
 };

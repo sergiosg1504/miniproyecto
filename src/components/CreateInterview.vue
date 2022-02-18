@@ -43,65 +43,61 @@
         </div>
       </div>
 
-      <!--<div id="padre" class="container">
-        <div class="col-sm-12">
-          <button type="button" class="btn btn-primary" @click="addQuestion()">
-            +
-          </button>
+      <div class="col-sm-12">
+        <button type="button" class="btn btn-primary" @click="addQuestion()">
+          +
+        </button>
+      </div>
+
+      <div class="col-sm-12">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Question 1 name</label>
+            <input
+              class="form-input aux"
+              type="text"
+              v-model="newPosition.questions[0].title"
+            />
+          </div>
         </div>
-        <div class="clonar">
-          <div class="col-sm-12">
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label>Question name</label>
-                <input
-                  class="form-input aux"
-                  type="text"
-                  id="name"
-                  v-model="newPosition.questions[0].title"
-                />
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label>Question video</label>
-                <input
-                  class="form-input aux no-border"
-                  type="file"
-                  accept="video/*"
-                  :id="'video_' + questionNum"
-                  @change="onFileChangeQuestions"
-                />
-              </div>
-            </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Question 1 video</label>
+            <input
+              class="form-input aux no-border"
+              type="file"
+              accept="video/*"
+              @change="onFileChangeQuestions"
+            />
           </div>
-          <div class="col-sm-12">
-            <div class="col-sm-4" />
-            <div class="col-sm-8">
-              <div class="form-group">
-                <label>Question description</label>
-                <input
-                  class="form-input aux"
-                  type="text"
-                  id="description"
-                  v-model="newPosition.questions[0].description"
-                />
-              </div>
-            </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Question 1 description</label>
+            <input
+              class="form-input aux"
+              type="text"
+              v-model="newPosition.questions[0].description"
+            />
           </div>
-          <div class="col-sm-12">
-            <div class="col-sm-4" />
-            <div class="col-sm-4">
-              <button
-                type="button"
-                class="btn btn-primary puntero"
-                @click="remove()">
-                Remove
-              </button>
-            </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <button
+              type="button"
+              class="btn btn-primary puntero"
+              @click="remove()"
+            >
+              Remove question 1
+            </button>
           </div>
-          <div id="hijo"></div>
-        </div>-->
+        </div>
+      </div>
+
+      <div id="hijo"></div>
 
       <div class="col-sm-12">
         <div class="col-sm-3" />
@@ -113,7 +109,6 @@
           />
         </div>
       </div>
-      <!--</div>-->
     </form>
   </v-app>
 </template>
@@ -124,15 +119,11 @@ export default {
   components: {},
   data() {
     return {
-      padre: null,
-      hijo: null,
-      //altura: null,
-      //anchura: null,
       questionNum: 0,
       newPosition: {
         name: "",
         // varialbe para el video
-        /*questions: [
+        questions: [
           {
             title: "",
             description: "",
@@ -140,7 +131,7 @@ export default {
               file: "https://www.youtube.com/watch?v=OYGot5tm49A",
             },
           },
-        ],*/
+        ],
         /*intro: {
           file: "",
         },*/
@@ -149,8 +140,6 @@ export default {
   },
   created() {
     this.questionNum = 0;
-    this.padre = document.getElementById("padre");
-    this.hijo = document.getElementById("hijo");
     /*this.agregar = document.getElementById("add_question");
     this.contenido = document.getElementById("contenedor");
     this.agregar.addEventListener("click", (e) => {
@@ -193,18 +182,23 @@ export default {
       this.questionNum++;
       var newDiv = document.createElement("div");
       newDiv.innerHTML =
-        '<div class="col-sm-12"><div class="col-sm-6"><div class="form-group"><label>Question name</label><input class="form-input aux" type="text" id="name"  v-model="newPosition.questions[' +
+        '<div class="col-sm-12"> <div class="col-sm-6"><div class="form-group"><label>Question name ' +
+        (this.questionNum + 1) +
+        '</label><input class="form-input aux" type="text" v-model="newPosition.questions[' +
         this.questionNum +
-        '].title"/></div></div><div class="col-sm-6"><div class="form-group"><label>Question video</label><input class="form-input aux no-border" type="file" accept="video/*" id=video_' +
+        '].title"/></div></div><div class="col-sm-6"><div class="form-group"><label>Question video ' +
+        (this.questionNum + 1) +
+        '</label><input class="form-input aux no-border" type="file" accept="video/*" @change="onFileChangeQuestions"/></div></div></div><div class="col-sm-12"><div class="col-sm-6"><div class="form-group"><label>Question description ' +
+        (this.questionNum + 1) +
+        '</label><input class="form-input aux" type="text" v-model="newPosition.questions[' +
         this.questionNum +
-        ' /></div></div></div><div class="col-sm-12"><div class="col-sm-2" /><div class="col-sm-10"><div class="form-group"><label>Question description</label><input class="form-input aux" type="text" id="description" v-model="newPosition.questions[' +
-        this.questionNum +
-        '].description"/></div></div></div><div class="col-sm-12"><div class="col-sm-4" /><div class="col-sm-4"><button type="button" class="btn btn-primary puntero" @click="remove()"> Remove </button></div></div>';
+        '].description"/></div></div><div class="col-sm-6"><div class="form-group"><button type="button" class="btn btn-primary puntero" @click="remove()">Remove question ' +
+        (this.questionNum + 1) +
+        "</button></div></div></div>";
       document.getElementById("hijo").appendChild(newDiv);
     },
     createPosition() {
       console.log(this.newPosition);
-      // He borrado lo que tenias porque con esto nos vale ya, en principio las crea solo con el nombre va bien y todo bien si falla debería saltar el error
       this.$apollo
         .mutate({
           mutation: CREATE_POS,
@@ -219,75 +213,6 @@ export default {
           console.log(error);
         });
     },
-    /*
-    const onSubmitForm = (event) => {
-    event.preventDefault();
-
-    // In order to be able to send files (in this case videos) to the API
-    // we need to use multipart/form-data encoding format for the POST request
-    const formData = new FormData();
-
-    // We append the GraphQL query. In order to create a position, the mutation
-    // "Position => save" needs to be executed.
-    // Note: in order to discover which variables can be used in this mutation,
-    // use GraphQL introspection.
-    formData.append(
-      "query",
-      `
-      mutation createPositionMutation($position: PositionInputType) {
-        Position {
-          save(position: $position) {
-            id
-            name
-          }
-        } 
-      }
-    `
-    );
-
-    // We append each video file we want to upload. In this example we are uploading
-    // an intro video and one video question
-    formData.append("intro", event.target["intro-video-file"].files[0]);
-    formData.append(
-      "question-1-video-file",
-      event.target["question-1-video-file"].files[0]
-    );
-
-    // We append the GraphQL variables as a stringified JSON value.
-    // Note: in order to discover which variables can be used in this mutation,
-    // use GraphQL introspection.
-    // Each value of the "file" property should be equal to the file name appended above
-    formData.append(
-      "variables",
-      JSON.stringify({
-        position: {
-          name: event.target["position-name"].value,
-          intro: {
-            file: "intro"
-          },
-          questions: [
-            {
-              title: event.target["question-1-name"].value,
-              media: {
-                file: "question-1-video-file"
-              }
-            }
-          ]
-        }
-      })
-    );
-
-    const request = new XMLHttpRequest();
-
-    request.open("POST", HIREFLIX_API_URL);
-
-    // Do not forget to include the API key generated in Hireflix in a header
-    // with key: x-api-key
-    request.setRequestHeader("x-api-key", event.target["api-key"].value);
-    request.send(formData);
-
-    return false;
-  };*/
   },
 };
 </script>
@@ -295,5 +220,7 @@ export default {
 <style scoped>
 .no-border {
   border-bottom: 0px;
+}
+#padre {
 }
 </style>

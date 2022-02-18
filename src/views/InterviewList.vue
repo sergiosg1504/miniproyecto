@@ -23,34 +23,27 @@
       </div>
     </div>
     <div class="col-sm-6">
-      <incoming-interviews />
+      <open-interviews />
     </div>
-    <!--<div class="col-sm-6">
-      <previous-interviews :interviewList="previousInterviewList" />
-    </div>-->
+    <div class="col-sm-6">
+      <closed-interviews />
+    </div>
   </div>
 </template>
 
 <script>
-import IncomingInterviews from "@/components/IncomingInterviews.vue";
-//import PreviousInterviews from "../components/PreviousInterviews.vue";
+import OpenInterviews from "@/components/OpenInterviews.vue";
+import ClosedInterviews from "@/components/ClosedInterviews.vue";
 export default {
   name: "InterviewListView",
   components: {
-    IncomingInterviews,
-    //PreviousInterviews,
+    OpenInterviews,
+    ClosedInterviews,
   },
   props: {
     meetingList: {
       type: Array,
     },
-  },
-  data() {
-    return {
-      /*interviewList: [],
-      incomingInterviewList: [],
-      previousInterviewList: [],*/
-    };
   },
   methods: {
     goToCalendar() {

@@ -43,7 +43,7 @@
         </div>
       </div>
 
-      <div id="padre" class="container">
+      <!--<div id="padre" class="container">
         <div class="col-sm-12">
           <button type="button" class="btn btn-primary" @click="addQuestion()">
             +
@@ -89,7 +89,7 @@
               </div>
             </div>
           </div>
-          <!--<div class="col-sm-12">
+          <div class="col-sm-12">
             <div class="col-sm-4" />
             <div class="col-sm-4">
               <button
@@ -99,21 +99,21 @@
                 Remove
               </button>
             </div>
-          </div>-->
-          <div id="hijo"></div>
-        </div>
-
-        <div class="col-sm-12">
-          <div class="col-sm-3" />
-          <div class="col-sm-6">
-            <input
-              class="btn btn-primary form-submit"
-              type="submit"
-              value="Create"
-            />
           </div>
+          <div id="hijo"></div>
+        </div>-->
+
+      <div class="col-sm-12">
+        <div class="col-sm-3" />
+        <div class="col-sm-6">
+          <input
+            class="btn btn-primary form-submit"
+            type="submit"
+            value="Create"
+          />
         </div>
       </div>
+      <!--</div>-->
     </form>
   </v-app>
 </template>
@@ -132,18 +132,18 @@ export default {
       newPosition: {
         name: "",
         // varialbe para el video
-        questions: [
+        /*questions: [
           {
             title: "",
             description: "",
             media: {
-              file: "",
+              file: "https://www.youtube.com/watch?v=OYGot5tm49A",
             },
           },
-        ],
-        intro: {
+        ],*/
+        /*intro: {
           file: "",
-        },
+        },*/
       }, // No hace falta crear los atributos se añaden dinamicamente haciendoles referencia en los inputs pero solo se puede hacer en primer nivel del arbol no puedes hacer al menos manualmente no se en inputs x.y.z, tiene que ser x.y = {z}
     };
   },
@@ -172,11 +172,13 @@ export default {
   methods: {
     // Esto se supone que funcionaría pero el video se tiene que convertir a Blob primero cosa que no se como hacerlo
     onFileChange(e) {
-      const reader = new FileReader();
+      const formData = new FormData();
+      formData.append("intro", e, ".mp4");
+      /*const reader = new FileReader();
       reader.onload = (e) => {
         this.newPosition.intro.file = e.target.result;
       };
-      reader.readAsDataURL(e);
+      reader.readAsBinaryString(formData);*/
     },
     onFileChangeQuestions(e) {
       const num = e.srcElement.id.substring(6, 7); // trataba de asignar dinamicamente l id para luego recuperar el numero de pregunta, pero al hacerlo asi al crear otra se me actualiza y no vale
@@ -214,7 +216,7 @@ export default {
           alert("Position created successfully");
         })
         .catch((error) => {
-          alert(error);
+          console.log(error);
         });
     },
     /*

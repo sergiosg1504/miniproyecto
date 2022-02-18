@@ -10,11 +10,22 @@ export const GET_ID = gql`
   }
 `;
 
-export const GET_INTER = gql`
-  query GET_INTER($position: String!) {
+// Devuelve lo de la pantalla para ver las cosas pero se necesita el login para acceder, lo otro devuelve el titulo de la pregunta y la url de la respuesta
+export const GET_INTER_INFO = gql`
+  query GET_INTER_INFO($position: String!) {
     interviews(position: $position) {
+      candidate {
+        name
+        email
+      }
       url {
-        public
+        private
+      }
+      questions {
+        title
+        answer {
+          url
+        }
       }
     }
   }

@@ -61,6 +61,12 @@
           @click="click_closeInterview(data.item)"
           ><font-awesome-icon icon="ban"
         /></b-button>
+        <b-button
+          v-b-tooltip.hover
+          title="Delete interview"
+          @click="click_delete(data.item)"
+          ><font-awesome-icon icon="trash" />
+        </b-button>
         <!--<b-button v-b-tooltip.hover title="Edit" @click="click_edit(data.item)"
           ><font-awesome-icon icon="edit" />
         </b-button>
@@ -89,6 +95,7 @@ import {
   GET_ID,
   GET_INTER_INFO,
   ARCHIVE_POS,
+  DELETE_POS,
 } from "../graphql/queries/me/interviews";
 export default {
   name: "IncomingInterviews",
@@ -155,6 +162,22 @@ export default {
           console.log(error);
         });
       console.log(interview.id);
+    },
+    click_delete(interview) {
+      this.$apollo
+        .mutate({
+          mutation: DELETE_POS,
+          variables: {
+            positionId: interview.id,
+          },
+        })
+        .then(() => {
+          alert("Position deleted successfully");
+          console.log("nice");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };

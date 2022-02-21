@@ -55,6 +55,12 @@
           @click="data.toggleDetails"
           ><font-awesome-icon icon="eye-slash" />
         </b-button>
+        <b-button
+          v-b-tooltip.hover
+          title="Delete interview"
+          @click="click_delete(data.item)"
+          ><font-awesome-icon icon="trash" />
+        </b-button>
         <!--<b-button
           v-b-tooltip.hover
           title="Show meeting information"
@@ -93,7 +99,11 @@
 
 <script>
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { GET_ID, GET_INTER_INFO } from "../graphql/queries/me/interviews";
+import {
+  DELETE_POS,
+  GET_ID,
+  GET_INTER_INFO,
+} from "../graphql/queries/me/interviews";
 export default {
   name: "ClosedInterviews",
   components: {
@@ -140,6 +150,23 @@ export default {
       }
     }
   },
-  methods: {},
+  methods: {
+    click_delete(interview) {
+      this.$apollo
+        .mutate({
+          mutation: DELETE_POS,
+          variables: {
+            positionId: interview.id,
+          },
+        })
+        .then(() => {
+          alert("Position deleted successfully");
+          console.log("nice");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
 };
 </script>

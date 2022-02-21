@@ -55,42 +55,27 @@
           @click="data.toggleDetails"
           ><font-awesome-icon icon="eye-slash" />
         </b-button>
-        <b-button
-          v-b-tooltip.hover
-          title="Delete interview"
-          @click="click_delete(data.item)"
-          ><font-awesome-icon icon="trash" />
-        </b-button>
-        <!--<b-button
-          v-b-tooltip.hover
-          title="Show meeting information"
-          v-if="!data.detailsShowing"
-          @click="data.toggleDetails"
-          ><font-awesome-icon icon="eye" />
-        </b-button>
-        <b-button
-          v-b-tooltip.hover
-          title="Hide meeting information"
-          v-else
-          @click="data.toggleDetails"
-          ><font-awesome-icon icon="eye-slash" />
-        </b-button>
-        <b-button v-b-tooltip.hover title="Edit" @click="click_edit(data.item)"
+        <!--<b-button v-b-tooltip.hover title="Edit" @click="click_edit(data.item)"
           ><font-awesome-icon icon="edit" />
-        </b-button>
-        <b-button
-          v-b-tooltip.hover
-          title="Go to meeting room"
-          @click="click_goToRoom(data.item)"
-          ><font-awesome-icon icon="video" />
         </b-button>-->
       </template>
       <template #row-details="data">
         <div class="col-sm-12 card profile-card">
-          <div v-for="(c, i) in data.item.candidates" :key="i">
-            {{ c.candidate.name }}, {{ c.candidate.email }}
+          <p>Interview name: {{ data.item.name }}</p>
+          <p>Candidates invited:</p>
+          <div v-for="(candidates, i) in interviews" :key="i">
+            <div v-if="candidates.id === data.item.id">
+              <div v-for="(c, j) in interviewsInfo[i]" :key="j">
+                {{ c.candidate.name }}, {{ c.candidate.email }}
+              </div>
+            </div>
           </div>
-          <p></p>
+          <b-button
+            v-b-tooltip.hover
+            title="Delete interview"
+            @click="click_delete(data.item)"
+            ><font-awesome-icon icon="trash" />
+          </b-button>
         </div>
       </template>
     </b-table>
@@ -138,15 +123,13 @@ export default {
     const aux = await this.$apollo.query({ query: GET_ID });
     let i;
     for (i = 0; i < aux.data.positions.length; i++) {
-      if (aux.data.positions[i].archived != null)
-        this.interviews.push(aux.data.positions[i]);
-    }
-    for (i = 0; i < aux.data.positions.length; i++) {
       if (aux.data.positions[i].archived != null) {
-        this.interviewsInfo[i] = await this.$apollo.query({
+        this.interviews.push(aux.data.positions[i]);
+        const aux2 = await this.$apollo.query({
           query: GET_INTER_INFO,
           variables: { position: aux.data.positions[i].id },
         });
+        this.interviewsInfo.push(aux2.data.interviews);
       }
     }
   },

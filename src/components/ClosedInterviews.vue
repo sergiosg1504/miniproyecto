@@ -61,10 +61,12 @@
       </template>
       <template #row-details="data">
         <div class="col-sm-12 card profile-card">
-          <p>Interview name: {{ data.item.name }}</p>
-          <p>Candidates invited:</p>
-          <div v-for="(candidates, i) in interviews" :key="i">
-            <div v-if="candidates.id === data.item.id">
+          <p>Interview name:</p>
+          <p>{{ data.item.name }}</p>
+          <!-- no se si tiene sentido xq los invitados se van al cerrar la position -->
+          <div v-for="(inter, i) in interviews" :key="i">
+            <div v-if="inter.id === data.item.id">
+              <p>Candidates invited:</p>
               <div v-for="(c, j) in interviewsInfo[i]" :key="j">
                 {{ c.candidate.name }}, {{ c.candidate.email }}
               </div>

@@ -67,11 +67,20 @@
       </template>
       <template #row-details="data">
         <div class="col-sm-12 card profile-card">
-          <p>Interview name: {{ data.item.name }}</p>
-          <p>Candidates invited:</p>
+          <p>Interview name:</p>
+          <p>{{ data.item.name }}</p>
+          <!--<p>Questions list:</p>
           <div v-for="(candidates, i) in interviews" :key="i">
             <div v-if="candidates.id === data.item.id">
               <div v-for="(c, j) in interviewsInfo[i]" :key="j">
+                {{ c.questions.title }}
+              </div>
+            </div>
+          </div>-->
+          <p>Candidates invited:</p>
+          <div v-for="(candidates, a) in interviews" :key="a">
+            <div v-if="candidates.id === data.item.id">
+              <div v-for="(c, b) in interviewsInfo[a]" :key="b">
                 {{ c.candidate.name }}, {{ c.candidate.email }}
               </div>
             </div>
@@ -97,7 +106,7 @@ import {
   DELETE_POS,
 } from "../graphql/queries/me/interviews";
 export default {
-  name: "IncomingInterviews",
+  name: "OpenInterviews",
   components: {
     FontAwesomeIcon,
   },

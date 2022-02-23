@@ -69,14 +69,16 @@
         <div class="col-sm-12 card profile-card">
           <p>Interview name:</p>
           <p>{{ data.item.name }}</p>
-          <!--<p>Questions list:</p>
-          <div v-for="(candidates, i) in interviews" :key="i">
-            <div v-if="candidates.id === data.item.id">
-              <div v-for="(c, j) in interviewsInfo[i]" :key="j">
-                {{ c.questions.title }}
+          <p>Questions list:</p>
+          <div v-for="(interview, i) in interviews" :key="i">
+            <div v-if="interview.id === data.item.id">
+              <div v-for="(q, j) in interviewsInfo[i]" :key="j">
+                <div v-for="(question, k) in q.questions" :key="k">
+                  {{ question.title }}
+                </div>
               </div>
             </div>
-          </div>-->
+          </div>
           <p>Candidates invited:</p>
           <div v-for="(candidates, a) in interviews" :key="a">
             <div v-if="candidates.id === data.item.id">
@@ -148,6 +150,32 @@ export default {
         this.interviewsInfo.push(aux2.data.interviews);
       }
     }
+    //console.log(this.interviewsInfo);
+    //console.log(this.interviewsInfo[2].);
+    /*this.interviewsInfo[0].forEach(a => {
+      console.log('1  ' + a.candidate.name);
+    });
+    this.interviewsInfo[1].forEach(a => {
+      console.log('2  ' +a.candidate.name);
+    });
+    this.interviewsInfo[2].forEach(a => {
+      console.log('3  '+a.candidate.name);
+    });*/
+    /*this.interviewsInfo[0].forEach(a => {
+     a.forEach(b => {
+       console.log('1  for : ' + b.questions.title);
+     });
+      //console.log('1  '+a.questions.title);
+    });*/
+    this.interviewsInfo[2].forEach((a) => {
+      a.questions.forEach((b) => {
+        console.log(b.title);
+      });
+      //console.log('2  '+a.questions[0].title);
+    });
+    /*this.interviewsInfo[2].forEach(a => {
+      console.log('3  '+a.questions);
+    });*/
   },
   methods: {
     click_closeInterview(interview) {

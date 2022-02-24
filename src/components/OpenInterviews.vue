@@ -69,21 +69,22 @@
         <div class="col-sm-12 card profile-card">
           <p>Interview name:</p>
           <p>{{ data.item.name }}</p>
-          <p>Questions list:</p>
-          <div v-for="(interview, i) in interviews" :key="i">
-            <div v-if="interview.id === data.item.id">
-              <div v-for="(q, j) in interviewsInfo[i]" :key="j">
-                <div v-for="(question, k) in q.questions" :key="k">
-                  {{ question.title }}
-                </div>
-              </div>
-            </div>
-          </div>
-          <p>Candidates invited:</p>
           <div v-for="(candidates, a) in interviews" :key="a">
             <div v-if="candidates.id === data.item.id">
-              <div v-for="(c, b) in interviewsInfo[a]" :key="b">
-                {{ c.candidate.name }}, {{ c.candidate.email }}
+              <div v-for="(person, b) in interviewsInfo[a]" :key="b">
+                Candidate {{ person.candidate.name }},
+                {{ person.candidate.email }}
+                <div v-for="(question, c) in person.questions" :key="c">
+                  <p>QUESTION {{ c + 1 }}</p>
+                  <p>Title: {{ question.title }}</p>
+                  <p>Description: {{ question.description }}</p>
+                  <p v-if="question.answered === null">
+                    Status: not answered <font-awesome-icon icon="ban" />
+                  </p>
+                  <p v-else>
+                    Status: answered <font-awesome-icon icon="check-circle" />
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -150,32 +151,6 @@ export default {
         this.interviewsInfo.push(aux2.data.interviews);
       }
     }
-    //console.log(this.interviewsInfo);
-    //console.log(this.interviewsInfo[2].);
-    /*this.interviewsInfo[0].forEach(a => {
-      console.log('1  ' + a.candidate.name);
-    });
-    this.interviewsInfo[1].forEach(a => {
-      console.log('2  ' +a.candidate.name);
-    });
-    this.interviewsInfo[2].forEach(a => {
-      console.log('3  '+a.candidate.name);
-    });*/
-    /*this.interviewsInfo[0].forEach(a => {
-     a.forEach(b => {
-       console.log('1  for : ' + b.questions.title);
-     });
-      //console.log('1  '+a.questions.title);
-    });*/
-    this.interviewsInfo[2].forEach((a) => {
-      a.questions.forEach((b) => {
-        console.log(b.title);
-      });
-      //console.log('2  '+a.questions[0].title);
-    });
-    /*this.interviewsInfo[2].forEach(a => {
-      console.log('3  '+a.questions);
-    });*/
   },
   methods: {
     click_closeInterview(interview) {

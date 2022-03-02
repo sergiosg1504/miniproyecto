@@ -29,18 +29,6 @@
             />
           </div>
         </div>
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label>Intro video</label>
-            <input
-              class="form-input aux no-border"
-              type="file"
-              accept="video/*"
-              id="video"
-              @change="onFileChange"
-            />
-          </div>
-        </div>
       </div>
 
       <div class="col-sm-12">
@@ -48,7 +36,9 @@
           +
         </button>
       </div>
-
+      <div class="col-sm-12" v-for="i in questions" :key="i.title">
+        <p>{{ i }}</p>
+      </div>
       <div class="col-sm-12">
         <div class="col-sm-6">
           <div class="form-group">
@@ -62,20 +52,6 @@
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <label>Question 1 video</label>
-            <input
-              class="form-input aux no-border"
-              type="file"
-              accept="video/*"
-              @change="onFileChangeQuestions"
-            />
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-12">
-        <div class="col-sm-6">
-          <div class="form-group">
             <label>Question 1 description</label>
             <input
               class="form-input aux"
@@ -84,7 +60,10 @@
             />
           </div>
         </div>
-        <div class="col-sm-6">
+      </div>
+
+      <div class="col-sm-12">
+        <div class="col-sm-12">
           <div class="form-group">
             <button
               type="button"
@@ -127,9 +106,6 @@ export default {
           {
             title: "",
             description: "",
-            media: {
-              file: "https://www.youtube.com/watch?v=OYGot5tm49A",
-            },
           },
         ],
         /*intro: {
@@ -186,16 +162,16 @@ export default {
         (this.questionNum + 1) +
         '</label><input class="form-input aux" type="text" v-model="newPosition.questions[' +
         this.questionNum +
-        '].title"/></div></div><div class="col-sm-6"><div class="form-group"><label>Question video ' +
-        (this.questionNum + 1) +
-        '</label><input class="form-input aux no-border" type="file" accept="video/*" @change="onFileChangeQuestions"/></div></div></div><div class="col-sm-12"><div class="col-sm-6"><div class="form-group"><label>Question description ' +
+        '].title"/></div>' +
+        '</div><div class="col-sm-6"><div class="form-group"><label>Question description ' +
         (this.questionNum + 1) +
         '</label><input class="form-input aux" type="text" v-model="newPosition.questions[' +
         this.questionNum +
-        '].description"/></div></div><div class="col-sm-6"><div class="form-group"><button type="button" class="btn btn-primary puntero" @click="remove()">Remove question ' +
+        '].description"/></div><div class="col-sm-12"><div class="form-group"><button type="button" class="btn btn-primary puntero" @click="remove()">Remove question ' +
         (this.questionNum + 1) +
         "</button></div></div></div>";
       document.getElementById("hijo").appendChild(newDiv);
+      console.log(this.questionNum + 1);
     },
     createPosition() {
       console.log(this.newPosition);

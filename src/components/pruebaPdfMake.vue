@@ -1,10 +1,6 @@
 <template>
   <div class="main">
-    <input
-      type="button"
-      value="Save as PDF"
-      onclick="saveReportOfAllToPDF();"
-    />
+    <input type="button" value="Save as PDF" @click="saveReportOfAllToPDF()" />
 
     <h1>In accumsan velit in orci tempor</h1>
     <p>
@@ -424,11 +420,9 @@ export default {
           fit: [119, 54],
         });
         doc.content.push({
-          text: "General reports",
-          fontSize: 32,
-          bold: true,
-          alignment: "center",
-          margin: [0, 15, 0, 15],
+          text: "CVs Analysed Reports",
+          fontSize: 10,
+          margin: [0, 0, 0, 15],
         });
         doc.content.push({
           text: "Date: " + currentDate,
@@ -444,6 +438,70 @@ export default {
           text: "Downloaded by: " + userName,
           fontSize: 11,
           margin: [0, 0, 0, 15],
+        });
+
+        doc.content.push({
+          table: {
+            widths: [120, 400],
+            fillColor: "#62c4e4",
+            body: [
+              [
+                {
+                  border: [false, false, false, false],
+                  fillColor: "#62c4e4",
+                  text: "Date",
+                  alignment: "right",
+                },
+                [
+                  {
+                    table: {
+                      widths: [360],
+                      body: [
+                        [
+                          {
+                            border: [true, true, true, true],
+                            fillColor: "#ffffff",
+                            text: currentDate,
+                          },
+                        ],
+                      ],
+                    },
+                  },
+                ],
+                /*{
+                  border: [true, true, true, true],
+                  fillColor: "#ffffff",
+                  text: currentDate,
+                },*/
+              ],
+              [
+                {
+                  border: [false, false, false, false],
+                  fillColor: "#62c4e4",
+                  text: "Company",
+                  alignment: "right",
+                },
+                {
+                  border: [true, true, true, true],
+                  fillColor: "#ffffff",
+                  text: companyName,
+                },
+              ],
+              [
+                {
+                  border: [false, false, false, false],
+                  fillColor: "#62c4e4",
+                  text: "Requested by",
+                  alignment: "right",
+                },
+                {
+                  border: [true, true, true, true],
+                  fillColor: "#ffffff",
+                  text: userName,
+                },
+              ],
+            ],
+          },
         });
 
         /* GRAPH CONTENT */

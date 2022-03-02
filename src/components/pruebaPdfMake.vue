@@ -1,10 +1,6 @@
 <template>
   <div class="main">
-    <input
-      type="button"
-      value="Save as PDF"
-      onclick="saveReportOfAllToPDF();"
-    />
+    <input type="button" value="Save as PDF" @click="saveReportOfAllToPDF()" />
 
     <h1>In accumsan velit in orci tempor</h1>
     <p>
@@ -179,9 +175,9 @@ export default {
 
     // Create series
 
-    //createSeries("value", "Series #1");
-    //createSeries("value2", "Series #2");
-    //createSeries("value3", "Series #3");
+    this.createSeries("value", "Series #1");
+    this.createSeries("value2", "Series #2");
+    this.createSeries("value3", "Series #3");
 
     /**
      * Chart 2
@@ -403,13 +399,13 @@ export default {
       const companyName = "Progradum S.L.";
       const userName = "luisbm";
 
-      const graphContent = this.graphContent;
+      //const graphContent = this.graphContent;
       const documentTitle = "prueba.pdf";
 
       // Load async conversion of charts into svg and create pdf
       // Promise means array of graphs have to wait to be converted into images (svg format)
       // YOU CANT USE this. inside Promise.all
-      Promise.all(chartImagesTmp).then((res) => {
+      Promise.all(chartImagesTmp).then(() => {
         // Create document template
         var doc = {
           pageSize: "A4",
@@ -418,36 +414,31 @@ export default {
           content: [],
         };
 
+        // Cabecera
         /* TITLE OF REPORT */
         doc.content.unshift({
           image: progradumLogoBase64,
           fit: [119, 54],
         });
         doc.content.push({
-          text: "General reports",
-          fontSize: 32,
-          bold: true,
-          alignment: "center",
-          margin: [0, 15, 0, 15],
+          text: "Exam Reports",
+          fontSize: 12,
+          alignment: "left",
+          margin: [8, 0, 0, 15],
         });
         doc.content.push({
-          text: "Date: " + currentDate,
-          fontSize: 11,
-          margin: [0, 0, 0, 15],
-        });
-        doc.content.push({
-          text: "Company: " + companyName,
-          fontSize: 11,
-          margin: [0, 0, 0, 15],
-        });
-        doc.content.push({
-          text: "Downloaded by: " + userName,
-          fontSize: 11,
-          margin: [0, 0, 0, 15],
+          style: "table",
+          table: {
+            body: [
+              ["Date", currentDate],
+              ["Company", companyName],
+              ["UserName", userName],
+            ],
+          },
         });
 
         /* GRAPH CONTENT */
-        graphContent.forEach((content, index) => {
+        /*graphContent.forEach((content, index) => {
           if (res[index] != null) {
             // Title
             doc.content.push({
@@ -467,7 +458,7 @@ export default {
               width: 530,
             });
           }
-        });
+        });*/
 
         // Download
         pdfMake.createPdf(doc).download(documentTitle);

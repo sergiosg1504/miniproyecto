@@ -22,6 +22,7 @@ import OpenInterviews from "../components/OpenInterviews.vue";
 import ClosedInterviews from "../components/ClosedInterviews.vue";
 
 import Calendario from "../views/Calendario.vue";
+import ReportsDownloader from "../components/pruebaPdfMake.vue";
 
 import MeetingList from "../views/MeetingList.vue";
 import MeetSeminariosWeb from "../views/MeetSeminariosWeb.vue";
@@ -218,6 +219,11 @@ const routes = [
     name: "WaitingRoom",
     component: WaitingRoom,
     props: true,
+  },
+  {
+    path: "/pdf",
+    name: "pruebaPdfMake",
+    component: ReportsDownloader,
   },
 ];
 

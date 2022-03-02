@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@amcharts/amcharts4": "^4.10.24",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
@@ -26,6 +27,7 @@
     "graphql-tag": "^2.12.6",
     "js-cookie": "^3.0.1",
     "nodemailer": "^6.7.0",
+    "pdfmake": "^0.2.4",
     "vue-add-to-calendar": "^1.0.7",
     "vue-apollo": "^3.1.0",
     "vue-cal": "^3.10.1",

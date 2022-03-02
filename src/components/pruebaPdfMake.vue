@@ -427,12 +427,46 @@ export default {
           margin: [8, 0, 0, 15],
         });
         doc.content.push({
-          style: "table",
           table: {
             body: [
-              ["Date", currentDate],
-              ["Company", companyName],
-              ["UserName", userName],
+              {
+                table: {
+                  widths: ["30%", "*", "1%"],
+                  body: [
+                    [
+                      {
+                        text: "Date",
+                        fontSize: 10,
+                        alignment: "right",
+                        fillColor: "#62c4e4",
+                      },
+                      { text: currentDate, fontSize: 10, alignment: "left" },
+                      { text: " ", fillColor: "#62c4e4" },
+                    ],
+                    [
+                      {
+                        text: "Company",
+                        fontSize: 10,
+                        alignment: "right",
+                        fillColor: "#62c4e4",
+                      },
+                      { text: companyName, fontSize: 10, alignment: "left" },
+                      { text: " ", fillColor: "#62c4e4" },
+                    ],
+                    [
+                      {
+                        text: "User Name",
+                        fontSize: 10,
+                        alignment: "right",
+                        fillColor: "#62c4e4",
+                      },
+                      { text: userName, fontSize: 10, alignment: "left" },
+                      { text: " ", fillColor: "#62c4e4" },
+                    ],
+                  ],
+                },
+                layout: "noBorders",
+              },
             ],
           },
         });

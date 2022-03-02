@@ -23,9 +23,8 @@ export const GET_INTER_INFO = gql`
       }
       questions {
         title
-        answer {
-          url
-        }
+        description
+        answered
       }
     }
   }

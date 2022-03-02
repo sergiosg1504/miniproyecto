@@ -63,12 +63,23 @@
         <div class="col-sm-12 card profile-card">
           <p>Interview name:</p>
           <p>{{ data.item.name }}</p>
-          <!-- no se si tiene sentido xq los invitados se van al cerrar la position -->
-          <div v-for="(inter, i) in interviews" :key="i">
-            <div v-if="inter.id === data.item.id">
-              <p>Candidates invited:</p>
-              <div v-for="(c, j) in interviewsInfo[i]" :key="j">
-                {{ c.candidate.name }}, {{ c.candidate.email }}
+          <!-- no tiene mucho sentido xq los invitados se van al cerrar la position -->
+          <div v-for="(candidates, a) in interviews" :key="a">
+            <div v-if="candidates.id === data.item.id">
+              <div v-for="(person, b) in interviewsInfo[a]" :key="b">
+                Candidate {{ person.candidate.name }},
+                {{ person.candidate.email }}
+                <div v-for="(question, c) in person.questions" :key="c">
+                  <p>QUESTION {{ c + 1 }}</p>
+                  <p>Title: {{ question.title }}</p>
+                  <p>Description: {{ question.description }}</p>
+                  <p v-if="question.answered === null">
+                    Status: not answered <font-awesome-icon icon="ban" />
+                  </p>
+                  <p v-else>
+                    Status: answered <font-awesome-icon icon="check-circle" />
+                  </p>
+                </div>
               </div>
             </div>
           </div>

@@ -382,6 +382,7 @@ export default {
       bullet.circle.strokeWidth = 3;
       bullet.circle.radius = 7;
     },
+
     saveReportOfAllToPDF() {
       this.isDownloadLoading = true; // Set spinner active
 
@@ -414,32 +415,6 @@ export default {
           content: [],
         };
 
-        /* TITLE OF REPORT */
-        doc.content.unshift({
-          image: progradumLogoBase64,
-          fit: [119, 54],
-        });
-        doc.content.push({
-          text: "CVs Analysed Reports",
-          fontSize: 10,
-          margin: [0, 0, 0, 15],
-        });
-        doc.content.push({
-          text: "Date: " + currentDate,
-          fontSize: 11,
-          margin: [0, 0, 0, 15],
-        });
-        doc.content.push({
-          text: "Company: " + companyName,
-          fontSize: 11,
-          margin: [0, 0, 0, 15],
-        });
-        doc.content.push({
-          text: "Downloaded by: " + userName,
-          fontSize: 11,
-          margin: [0, 0, 0, 15],
-        });
-
         doc.content.push(
           {
             canvas: [
@@ -470,148 +445,278 @@ export default {
                 ["Sample value 1", "Sample value 2", "Sample value 3"],
                 ["Sample value 1", "Sample value 2", "Sample value 3"],
               ],
+              layout: "headerLineOnly",
+              absolutePosition: { x: 45, y: 50 },
+            },
+          }
+        );
+
+        /* TITLE OF REPORT */
+        doc.content.unshift({
+          image: progradumLogoBase64,
+          fit: [119, 54],
+        });
+        doc.content.push({
+          text: "CVs Analysed Reports",
+          fontSize: 10,
+          margin: [0, 0, 0, 15],
+        });
+        doc.content.push({
+          text: "Date: " + currentDate,
+          fontSize: 11,
+          margin: [0, 0, 0, 15],
+        });
+        doc.content.push({
+          text: "Company: " + companyName,
+          fontSize: 11,
+          margin: [0, 0, 0, 15],
+        });
+        doc.content.push({
+          text: "Downloaded by: " + userName,
+          fontSize: 11,
+          margin: [0, 0, 0, 15],
+        });
+
+        /*doc.content.push(
+          {
+            canvas: [
+              {
+                type: "rect",
+                x: 0,
+                y: 0,
+                w: 285,
+                h: 130,
+                r: 5,
+                lineColor: "pink",
+              },
+            ],
+          },
+          {
+            style: "tableExample",
+            table: {
+              headerRows: 1,
+              body: [
+                [
+                  { text: "Header 1", style: "tableHeader" },
+                  { text: "Header 2", style: "tableHeader" },
+                  { text: "Header 3", style: "tableHeader" },
+                ],
+                ["Sample value 1", "Sample value 2", "Sample value 3"],
+                ["Sample value 1", "Sample value 2", "Sample value 3"],
+                ["Sample value 1", "Sample value 2", "Sample value 3"],
+                ["Sample value 1", "Sample value 2", "Sample value 3"],
+                ["Sample value 1", "Sample value 2", "Sample value 3"],
+              ],
             },
             layout: "headerLineOnly",
             absolutePosition: { x: 45, y: 50 },
           }
-        );
+        );*/
 
-        doc.content.push({
-          table: {
-            heights: [4, "auto", "auto", "auto", 4],
-            widths: [4, 130, 382, 4],
-            fillColor: "#62c4e4",
-            body: [
-              [
-                {
-                  border: [false, false, false, false],
-                  fillColor: "#62c4e4",
-                  text: " ",
-                  fontSize: 0.1,
-                },
-                {
-                  border: [false, false, false, false],
-                  fillColor: "#62c4e4",
-                  text: " ",
-                  fontSize: 0.1,
-                },
-                {
-                  border: [false, false, false, false],
-                  fillColor: "#62c4e4",
-                  text: " ",
-                  fontSize: 0.1,
-                },
-                {
-                  border: [false, false, false, false],
-                  fillColor: "#62c4e4",
-                  text: " ",
-                  fontSize: 0.1,
-                },
-              ],
-              [
-                {
-                  border: [false, false, false, false],
-                  fillColor: "#62c4e4",
-                  text: " ",
-                  fontSize: 0.1,
-                },
-                {
-                  border: [false, false, false, false],
-                  fillColor: "#62c4e4",
-                  text: "Date",
-                  alignment: "right",
-                },
-                {
-                  border: [true, true, true, true],
-                  fillColor: "#ffffff",
-                  text: currentDate,
-                },
-                {
-                  border: [false, false, false, false],
-                  fillColor: "#62c4e4",
-                  text: " ",
-                  fontSize: 0.1,
-                },
-              ],
-              [
-                {
-                  border: [false, false, false, false],
-                  fillColor: "#62c4e4",
-                  text: " ",
-                  fontSize: 0.1,
-                },
-                {
-                  border: [false, false, false, false],
-                  fillColor: "#62c4e4",
-                  text: "Company",
-                  alignment: "right",
-                },
-                {
-                  border: [true, true, true, true],
-                  fillColor: "#ffffff",
-                  text: companyName,
-                },
-                {
-                  border: [false, false, false, false],
-                  fillColor: "#62c4e4",
-                  text: " ",
-                  fontSize: 0.1,
-                },
-              ],
-              [
-                {
-                  border: [false, false, false, false],
-                  fillColor: "#62c4e4",
-                  text: " ",
-                  fontSize: 0.1,
-                },
-                {
-                  border: [false, false, false, false],
-                  fillColor: "#62c4e4",
-                  text: "Requested by",
-                  alignment: "right",
-                },
-                {
-                  border: [true, true, true, true],
-                  fillColor: "#ffffff",
-                  text: userName,
-                },
-                {
-                  border: [false, false, false, false],
-                  fillColor: "#62c4e4",
-                  text: " ",
-                  fontSize: 0.1,
-                },
-              ],
-              [
-                {
-                  border: [false, false, false, false],
-                  fillColor: "#62c4e4",
-                  text: " ",
-                  fontSize: 0.1,
-                },
-                {
-                  border: [false, false, false, false],
-                  fillColor: "#62c4e4",
-                  text: " ",
-                  fontSize: 0.1,
-                },
-                {
-                  border: [false, false, false, false],
-                  fillColor: "#62c4e4",
-                  text: " ",
-                  fontSize: 0.1,
-                },
-                {
-                  border: [false, false, false, false],
-                  fillColor: "#62c4e4",
-                  text: " ",
-                  fontSize: 0.1,
-                },
-              ],
+        doc.content.push(
+          {
+            canvas: [
+              {
+                type: "rect",
+                x: 0,
+                y: 0,
+                w: 550,
+                h: 4 + 20 + 1 + 20 + 1 + 20 + 4,
+                r: 10,
+                lineColor: "pink",
+              },
             ],
           },
-        });
+          {
+            table: {
+              heights: [4, "auto", 1, "auto", 1, "auto", 4],
+              widths: [4, 130, 355, 4],
+              fillColor: "#62c4e4",
+              body: [
+                [
+                  {
+                    border: [false, false, false, false],
+                    fillColor: "#62c4e4",
+                    text: " ",
+                    fontSize: 0.1,
+                  },
+                  {
+                    border: [false, false, false, false],
+                    fillColor: "#62c4e4",
+                    text: " ",
+                    fontSize: 0.1,
+                  },
+                  {
+                    border: [false, false, false, false],
+                    fillColor: "#62c4e4",
+                    text: " ",
+                    fontSize: 0.1,
+                  },
+                  {
+                    border: [false, false, false, false],
+                    fillColor: "#62c4e4",
+                    text: " ",
+                    fontSize: 0.1,
+                  },
+                ],
+                [
+                  {
+                    border: [false, false, false, false],
+                    fillColor: "#62c4e4",
+                    text: " ",
+                    fontSize: 0.1,
+                  },
+                  {
+                    border: [false, false, false, false],
+                    fillColor: "#62c4e4",
+                    text: "Date",
+                    alignment: "right",
+                  },
+                  {
+                    border: [true, true, true, true],
+                    fillColor: "#ffffff",
+                    text: currentDate,
+                  },
+                  {
+                    border: [false, false, false, false],
+                    fillColor: "#62c4e4",
+                    text: " ",
+                    fontSize: 0.1,
+                  },
+                ],
+                [
+                  {
+                    border: [false, false, false, false],
+                    fillColor: "#62c4e4",
+                    text: " ",
+                    fontSize: 0.01,
+                  },
+                  {
+                    border: [false, false, false, false],
+                    fillColor: "#62c4e4",
+                    text: " ",
+                    fontSize: 0.01,
+                  },
+                  {
+                    border: [false, false, false, false],
+                    fillColor: "#62c4e4",
+                    text: " ",
+                    fontSize: 0.01,
+                  },
+                  {
+                    border: [false, false, false, false],
+                    fillColor: "#62c4e4",
+                    text: " ",
+                    fontSize: 0.01,
+                  },
+                ],
+                [
+                  {
+                    border: [false, false, false, false],
+                    fillColor: "#62c4e4",
+                    text: " ",
+                    fontSize: 0.1,
+                  },
+                  {
+                    border: [false, false, false, false],
+                    fillColor: "#62c4e4",
+                    text: "Company",
+                    alignment: "right",
+                  },
+                  {
+                    border: [true, true, true, true],
+                    fillColor: "#ffffff",
+                    text: companyName,
+                  },
+                  {
+                    border: [false, false, false, false],
+                    fillColor: "#62c4e4",
+                    text: " ",
+                    fontSize: 0.1,
+                  },
+                ],
+                [
+                  {
+                    border: [false, false, false, false],
+                    fillColor: "#62c4e4",
+                    text: " ",
+                    fontSize: 0.01,
+                  },
+                  {
+                    border: [false, false, false, false],
+                    fillColor: "#62c4e4",
+                    text: " ",
+                    fontSize: 0.01,
+                  },
+                  {
+                    border: [false, false, false, false],
+                    fillColor: "#62c4e4",
+                    text: " ",
+                    fontSize: 0.01,
+                  },
+                  {
+                    border: [false, false, false, false],
+                    fillColor: "#62c4e4",
+                    text: " ",
+                    fontSize: 0.01,
+                  },
+                ],
+                [
+                  {
+                    border: [false, false, false, false],
+                    fillColor: "#62c4e4",
+                    text: " ",
+                    fontSize: 0.1,
+                  },
+                  {
+                    border: [false, false, false, false],
+                    fillColor: "#62c4e4",
+                    text: "Requested by",
+                    alignment: "right",
+                  },
+                  {
+                    border: [true, true, true, true],
+                    fillColor: "#ffffff",
+                    text: userName,
+                  },
+                  {
+                    border: [false, false, false, false],
+                    fillColor: "#62c4e4",
+                    text: " ",
+                    fontSize: 0.1,
+                  },
+                ],
+
+                [
+                  {
+                    border: [false, false, false, false],
+                    fillColor: "#62c4e4",
+                    text: " ",
+                    fontSize: 0.1,
+                  },
+                  {
+                    border: [false, false, false, false],
+                    fillColor: "#62c4e4",
+                    text: " ",
+                    fontSize: 0.1,
+                  },
+                  {
+                    border: [false, false, false, false],
+                    fillColor: "#62c4e4",
+                    text: " ",
+                    fontSize: 0.1,
+                  },
+                  {
+                    border: [false, false, false, false],
+                    fillColor: "#62c4e4",
+                    text: " ",
+                    fontSize: 0.1,
+                  },
+                ],
+              ],
+            },
+          }
+        );
 
         /* GRAPH CONTENT */
         graphContent.forEach((content, index) => {
@@ -628,7 +733,7 @@ export default {
             // res contains the result of promise an array with the graphs in image format
             // res[0] => image of chart1
             // res[1] => image of chart2
-            // ...
+            // ..
             doc.content.push({
               image: res[index],
               width: 530,

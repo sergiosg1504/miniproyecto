@@ -440,41 +440,106 @@ export default {
           margin: [0, 0, 0, 15],
         });
 
+        doc.content.push(
+          {
+            canvas: [
+              {
+                type: "rect",
+                x: 0,
+                y: 0,
+                w: 285,
+                h: 130,
+                r: 5,
+                lineColor: "black",
+              },
+            ],
+          },
+          {
+            style: "tableExample",
+            table: {
+              headerRows: 1,
+              body: [
+                [
+                  { text: "Header 1", style: "tableHeader" },
+                  { text: "Header 2", style: "tableHeader" },
+                  { text: "Header 3", style: "tableHeader" },
+                ],
+                ["Sample value 1", "Sample value 2", "Sample value 3"],
+                ["Sample value 1", "Sample value 2", "Sample value 3"],
+                ["Sample value 1", "Sample value 2", "Sample value 3"],
+                ["Sample value 1", "Sample value 2", "Sample value 3"],
+                ["Sample value 1", "Sample value 2", "Sample value 3"],
+              ],
+            },
+            layout: "headerLineOnly",
+            absolutePosition: { x: 45, y: 50 },
+          }
+        );
+
         doc.content.push({
           table: {
-            widths: [120, 400],
+            heights: [4, "auto", "auto", "auto", 4],
+            widths: [4, 130, 382, 4],
             fillColor: "#62c4e4",
             body: [
               [
                 {
                   border: [false, false, false, false],
                   fillColor: "#62c4e4",
+                  text: " ",
+                  fontSize: 0.1,
+                },
+                {
+                  border: [false, false, false, false],
+                  fillColor: "#62c4e4",
+                  text: " ",
+                  fontSize: 0.1,
+                },
+                {
+                  border: [false, false, false, false],
+                  fillColor: "#62c4e4",
+                  text: " ",
+                  fontSize: 0.1,
+                },
+                {
+                  border: [false, false, false, false],
+                  fillColor: "#62c4e4",
+                  text: " ",
+                  fontSize: 0.1,
+                },
+              ],
+              [
+                {
+                  border: [false, false, false, false],
+                  fillColor: "#62c4e4",
+                  text: " ",
+                  fontSize: 0.1,
+                },
+                {
+                  border: [false, false, false, false],
+                  fillColor: "#62c4e4",
                   text: "Date",
                   alignment: "right",
                 },
-                [
-                  {
-                    table: {
-                      widths: [360],
-                      body: [
-                        [
-                          {
-                            border: [true, true, true, true],
-                            fillColor: "#ffffff",
-                            text: currentDate,
-                          },
-                        ],
-                      ],
-                    },
-                  },
-                ],
-                /*{
+                {
                   border: [true, true, true, true],
                   fillColor: "#ffffff",
                   text: currentDate,
-                },*/
+                },
+                {
+                  border: [false, false, false, false],
+                  fillColor: "#62c4e4",
+                  text: " ",
+                  fontSize: 0.1,
+                },
               ],
               [
+                {
+                  border: [false, false, false, false],
+                  fillColor: "#62c4e4",
+                  text: " ",
+                  fontSize: 0.1,
+                },
                 {
                   border: [false, false, false, false],
                   fillColor: "#62c4e4",
@@ -486,8 +551,20 @@ export default {
                   fillColor: "#ffffff",
                   text: companyName,
                 },
+                {
+                  border: [false, false, false, false],
+                  fillColor: "#62c4e4",
+                  text: " ",
+                  fontSize: 0.1,
+                },
               ],
               [
+                {
+                  border: [false, false, false, false],
+                  fillColor: "#62c4e4",
+                  text: " ",
+                  fontSize: 0.1,
+                },
                 {
                   border: [false, false, false, false],
                   fillColor: "#62c4e4",
@@ -498,6 +575,38 @@ export default {
                   border: [true, true, true, true],
                   fillColor: "#ffffff",
                   text: userName,
+                },
+                {
+                  border: [false, false, false, false],
+                  fillColor: "#62c4e4",
+                  text: " ",
+                  fontSize: 0.1,
+                },
+              ],
+              [
+                {
+                  border: [false, false, false, false],
+                  fillColor: "#62c4e4",
+                  text: " ",
+                  fontSize: 0.1,
+                },
+                {
+                  border: [false, false, false, false],
+                  fillColor: "#62c4e4",
+                  text: " ",
+                  fontSize: 0.1,
+                },
+                {
+                  border: [false, false, false, false],
+                  fillColor: "#62c4e4",
+                  text: " ",
+                  fontSize: 0.1,
+                },
+                {
+                  border: [false, false, false, false],
+                  fillColor: "#62c4e4",
+                  text: " ",
+                  fontSize: 0.1,
                 },
               ],
             ],

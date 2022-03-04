@@ -400,8 +400,10 @@ export default {
       const companyName = "Progradum S.L.";
       const userName = "luisbm";
 
-      const graphContent = this.graphContent;
+      //const graphContent = this.graphContent;
       const documentTitle = "prueba.pdf";
+
+      const X_MARGIN = 42;
 
       // Load async conversion of charts into svg and create pdf
       // Promise means array of graphs have to wait to be converted into images (svg format)
@@ -455,73 +457,24 @@ export default {
         doc.content.unshift({
           image: progradumLogoBase64,
           fit: [119, 54],
-        });
-        /*doc.content.push({
-          text: "CVs Analysed Reports",
-          fontSize: 10,
-          margin: [0, 0, 0, 15],
-        });
-        doc.content.push({
-          text: "Date: " + currentDate,
-          fontSize: 11,
-          margin: [0, 0, 0, 15],
-        });
-        doc.content.push({
-          text: "Company: " + companyName,
-          fontSize: 11,
-          margin: [0, 0, 0, 15],
-        });
-        doc.content.push({
-          text: "Downloaded by: " + userName,
-          fontSize: 11,
-          margin: [0, 0, 0, 15],
+          absolutePosition: { x: X_MARGIN - 8, y: 47 },
         });
 
-        /*doc.content.push(
-          {
-            canvas: [
-              {
-                type: "rect",
-                x: 0,
-                y: 0,
-                w: 285,
-                h: 130,
-                r: 5,
-                lineColor: "pink",
-              },
-            ],
-          },
-          {
-            style: "tableExample",
-            table: {
-              headerRows: 1,
-              body: [
-                [
-                  { text: "Header 1", style: "tableHeader" },
-                  { text: "Header 2", style: "tableHeader" },
-                  { text: "Header 3", style: "tableHeader" },
-                ],
-                ["Sample value 1", "Sample value 2", "Sample value 3"],
-                ["Sample value 1", "Sample value 2", "Sample value 3"],
-                ["Sample value 1", "Sample value 2", "Sample value 3"],
-                ["Sample value 1", "Sample value 2", "Sample value 3"],
-                ["Sample value 1", "Sample value 2", "Sample value 3"],
-              ],
-            },
-            layout: "headerLineOnly",
-            absolutePosition: { x: 45, y: 50 },
-          }
-        );*/
+        doc.content.push({
+          text: "CVs Analysed Reports",
+          fontSize: 12,
+          absolutePosition: { x: X_MARGIN, y: 77 },
+        });
 
         doc.content.push(
           {
-            absolutePosition: { x: 25, y: 57 },
+            absolutePosition: { x: X_MARGIN, y: 116 },
             canvas: [
               {
                 type: "rect",
                 x: 0,
                 y: 0,
-                w: 540,
+                w: 512, //540
                 h: 95,
                 r: 10,
                 color: "#62c4e4",
@@ -529,6 +482,7 @@ export default {
             ],
           },
           {
+            absolutePosition: { x: X_MARGIN, y: 116 },
             table: {
               heights: [0, "auto", 0, "auto", 0, "auto", 0],
               widths: [0, 130, 355, 4],
@@ -750,25 +704,25 @@ export default {
         );
 
         doc.content.push({
-          absolutePosition: { x: 187, y: 71 },
+          absolutePosition: { x: X_MARGIN + 158, y: 129 },
           text: currentDate,
           fontSize: 10,
         });
 
         doc.content.push({
-          absolutePosition: { x: 187, y: 97 },
+          absolutePosition: { x: X_MARGIN + 158, y: 155 },
           text: companyName,
           fontSize: 10,
         });
 
         doc.content.push({
-          absolutePosition: { x: 187, y: 123 },
+          absolutePosition: { x: X_MARGIN + 158, y: 181 },
           text: userName,
           fontSize: 10,
         });
 
         /* GRAPH CONTENT */
-        graphContent.forEach((content, index) => {
+        /*graphContent.forEach((content, index) => {
           if (res[index] != null) {
             // Title
             doc.content.push({
@@ -788,7 +742,8 @@ export default {
               width: 530,
             });
           }
-        });
+        });*/
+        if (res == null) console.log("borrar esto");
 
         // Download
         pdfMake.createPdf(doc).download(documentTitle);

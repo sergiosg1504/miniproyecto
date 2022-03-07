@@ -423,6 +423,7 @@ export default {
           image: progradumLogoBase64,
           fit: [119, 54],
           absolutePosition: { x: X_MARGIN - 8, y: 47 },
+          height: 10,
         });
         // Company header
         doc.content.push({
@@ -433,15 +434,15 @@ export default {
         // Company header
         doc.content.push(
           {
-            absolutePosition: { x: X_MARGIN, y: 116 },
+            absolutePosition: { x: X_MARGIN, y: 114 },
             canvas: [
               {
                 type: "rect",
                 x: 0,
                 y: 0,
                 w: 512, //540
-                h: 95,
-                r: 10,
+                h: 70,
+                r: 5,
                 color: "#62c4e4",
               },
             ],
@@ -449,47 +450,46 @@ export default {
           {
             absolutePosition: { x: X_MARGIN, y: 116 },
             table: {
-              heights: [0, "auto", 0, "auto", 0, "auto", 0],
+              //heights: [0.01, 11, 0.01, 11, 0.01, 11, 0.01],
               widths: [0, 130, 355, 4],
               body: [
                 //fila 1
                 [
                   {
+                    //border: [true,true,true,true],
                     border: [false, false, false, false],
-
                     text: " ",
-                    fontSize: 0.1,
-                  },
-                  {
-                    border: [false, false, false, false],
-
-                    text: " ",
-                    fontSize: 0.1,
-                  },
-                  {
-                    border: [false, false, false, false],
-
-                    text: " ",
-                    fontSize: 0.1,
+                    fontSize: 0.01,
                   },
                   {
                     border: [false, false, false, false],
                     text: " ",
-                    fontSize: 0.1,
+                    fontSize: 0.01,
+                  },
+                  {
+                    border: [false, false, false, false],
+                    text: " ",
+                    fontSize: 0.01,
+                  },
+                  {
+                    border: [false, false, false, false],
+                    text: " ",
+                    fontSize: 0.01,
                   },
                 ],
                 // fila 2
                 [
                   {
+                    //border: [true,true,true,true],
                     border: [false, false, false, false],
                     text: " ",
-                    fontSize: 0.1,
+                    fontSize: 0.01,
                   },
                   {
                     border: [false, false, false, false],
                     text: "Date",
                     alignment: "right",
-                    margin: [0, 3, 0, 0],
+                    fontSize: 9,
                   },
                   {
                     border: [false, false, false, false],
@@ -499,24 +499,23 @@ export default {
                         x: -3,
                         y: 0,
                         w: 350,
-                        h: 17,
-                        r: 5,
+                        h: 11,
+                        r: 3,
                         color: "#ffffff",
                       },
                     ],
                   },
                   {
                     border: [false, false, false, false],
-
                     text: " ",
-                    fontSize: 0.1,
+                    fontSize: 0.01,
                   },
                 ],
                 // fila 3
                 [
                   {
+                    //border: [true,true,true,true],
                     border: [false, false, false, false],
-
                     text: " ",
                     fontSize: 0.01,
                   },
@@ -528,13 +527,11 @@ export default {
                   },
                   {
                     border: [false, false, false, false],
-
                     text: " ",
                     fontSize: 0.01,
                   },
                   {
                     border: [false, false, false, false],
-
                     text: " ",
                     fontSize: 0.01,
                   },
@@ -542,16 +539,16 @@ export default {
                 // fila 4
                 [
                   {
+                    //border: [true,true,true,true],
                     border: [false, false, false, false],
-
                     text: " ",
-                    fontSize: 0.1,
+                    fontSize: 0.01,
                   },
                   {
                     border: [false, false, false, false],
-
                     text: "Company",
                     alignment: "right",
+                    fontSize: 9,
                   },
                   {
                     border: [false, false, false, false],
@@ -561,42 +558,38 @@ export default {
                         x: -3,
                         y: 0,
                         w: 350,
-                        h: 17,
-                        r: 5,
+                        h: 11,
+                        r: 3,
                         color: "#ffffff",
                       },
                     ],
                   },
                   {
                     border: [false, false, false, false],
-
                     text: " ",
-                    fontSize: 0.1,
+                    fontSize: 0.01,
                   },
                 ],
                 // fila 5
                 [
                   {
+                    //border: [true,true,true,true],
                     border: [false, false, false, false],
-
                     text: " ",
                     fontSize: 0.01,
                   },
                   {
                     border: [false, false, false, false],
-
                     text: " ",
                     fontSize: 0.01,
                   },
                   {
                     border: [false, false, false, false],
-
                     text: " ",
                     fontSize: 0.01,
                   },
                   {
                     border: [false, false, false, false],
-
                     text: " ",
                     fontSize: 0.01,
                   },
@@ -604,16 +597,16 @@ export default {
                 // fila 6
                 [
                   {
+                    //border: [true,true,true,true],
                     border: [false, false, false, false],
-
                     text: " ",
-                    fontSize: 0.1,
+                    fontSize: 0.01,
                   },
                   {
                     border: [false, false, false, false],
-
                     text: "Requested by",
                     alignment: "right",
+                    fontSize: 9,
                   },
                   {
                     border: [false, false, false, false],
@@ -623,44 +616,40 @@ export default {
                         x: -3,
                         y: 0,
                         w: 350,
-                        h: 17,
-                        r: 5,
+                        h: 11,
+                        r: 3,
                         color: "#ffffff",
                       },
                     ],
                   },
                   {
                     border: [false, false, false, false],
-
                     text: " ",
-                    fontSize: 0.1,
+                    fontSize: 0.01,
                   },
                 ],
                 // fila 7
                 [
                   {
+                    //border: [true,true,true,true],
                     border: [false, false, false, false],
-
                     text: " ",
-                    fontSize: 0.1,
+                    fontSize: 0.01,
                   },
                   {
                     border: [false, false, false, false],
-
                     text: " ",
-                    fontSize: 0.1,
+                    fontSize: 0.01,
                   },
                   {
                     border: [false, false, false, false],
-
                     text: " ",
-                    fontSize: 0.1,
+                    fontSize: 0.01,
                   },
                   {
                     border: [false, false, false, false],
-
                     text: " ",
-                    fontSize: 0.1,
+                    fontSize: 0.01,
                   },
                 ],
               ],
@@ -669,21 +658,21 @@ export default {
         );
         // Date
         doc.content.push({
-          absolutePosition: { x: X_MARGIN + 158, y: 129 },
+          absolutePosition: { x: X_MARGIN + 158, y: 124 },
           text: currentDate,
-          fontSize: 10,
+          fontSize: 9,
         });
         // Company name
         doc.content.push({
-          absolutePosition: { x: X_MARGIN + 158, y: 155 },
+          absolutePosition: { x: X_MARGIN + 158, y: 145 },
           text: companyName,
-          fontSize: 10,
+          fontSize: 9,
         });
         // User name
         doc.content.push({
-          absolutePosition: { x: X_MARGIN + 158, y: 181 },
+          absolutePosition: { x: X_MARGIN + 158, y: 167 },
           text: userName,
-          fontSize: 10,
+          fontSize: 9,
         });
 
         /* GRAPH CONTENT */

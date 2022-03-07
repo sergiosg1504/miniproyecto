@@ -175,9 +175,9 @@ export default {
 
     // Create series
 
-    //createSeries("value", "Series #1");
-    //createSeries("value2", "Series #2");
-    //createSeries("value3", "Series #3");
+    this.createSeries("value", "Series #1");
+    this.createSeries("value2", "Series #2");
+    this.createSeries("value3", "Series #3");
 
     /**
      * Chart 2
@@ -400,10 +400,11 @@ export default {
       const companyName = "Progradum S.L.";
       const userName = "luisbm";
 
-      //const graphContent = this.graphContent;
+      const graphContent = this.graphContent;
       const documentTitle = "prueba.pdf";
 
       const X_MARGIN = 42;
+      const GRAPH_HEIGHT = 200;
 
       // Load async conversion of charts into svg and create pdf
       // Promise means array of graphs have to wait to be converted into images (svg format)
@@ -417,55 +418,19 @@ export default {
           content: [],
         };
 
-        /*doc.content.push(
-          {
-            canvas: [
-              {
-                type: "rect",
-                x: 0,
-                y: 0,
-                w: 285,
-                h: 130,
-                r: 5,
-                lineColor: "black",
-              },
-            ],
-          },
-          {
-            style: "tableExample",
-            table: {
-              headerRows: 1,
-              body: [
-                [
-                  { text: "Header 1", style: "tableHeader" },
-                  { text: "Header 2", style: "tableHeader" },
-                  { text: "Header 3", style: "tableHeader" },
-                ],
-                ["Sample value 1", "Sample value 2", "Sample value 3"],
-                ["Sample value 1", "Sample value 2", "Sample value 3"],
-                ["Sample value 1", "Sample value 2", "Sample value 3"],
-                ["Sample value 1", "Sample value 2", "Sample value 3"],
-                ["Sample value 1", "Sample value 2", "Sample value 3"],
-              ],
-              layout: "headerLineOnly",
-              absolutePosition: { x: 45, y: 50 },
-            },
-          }
-        );*/
-
         //TITLE OF REPORT
         doc.content.unshift({
           image: progradumLogoBase64,
           fit: [119, 54],
           absolutePosition: { x: X_MARGIN - 8, y: 47 },
         });
-
+        // Company header
         doc.content.push({
           text: "CVs Analysed Reports",
           fontSize: 12,
           absolutePosition: { x: X_MARGIN, y: 77 },
         });
-
+        // Company header
         doc.content.push(
           {
             absolutePosition: { x: X_MARGIN, y: 116 },
@@ -702,19 +667,19 @@ export default {
             },
           }
         );
-
+        // Date
         doc.content.push({
           absolutePosition: { x: X_MARGIN + 158, y: 129 },
           text: currentDate,
           fontSize: 10,
         });
-
+        // Company name
         doc.content.push({
           absolutePosition: { x: X_MARGIN + 158, y: 155 },
           text: companyName,
           fontSize: 10,
         });
-
+        // User name
         doc.content.push({
           absolutePosition: { x: X_MARGIN + 158, y: 181 },
           text: userName,
@@ -722,27 +687,91 @@ export default {
         });
 
         /* GRAPH CONTENT */
-        /*graphContent.forEach((content, index) => {
+
+        graphContent.forEach((content, index) => {
+          if (res[index] != null) {
+            if (index === 3) {
+              // Title
+              doc.content.push({
+                absolutePosition: {
+                  x: X_MARGIN,
+                  y: 220 + GRAPH_HEIGHT * index,
+                },
+                text: content.title,
+                fontSize: 12,
+                bold: true,
+                margin: [0, 20, 0, 15],
+              });
+              // Image of graph
+              // res contains the result of promise an array with the graphs in image format
+              // res[0] => image of chart1
+              // res[1] => image of chart2
+              // ..
+              doc.content.push({
+                absolutePosition: {
+                  x: X_MARGIN,
+                  y: 240 + GRAPH_HEIGHT * index,
+                },
+                image: res[index],
+                height: 180,
+                width: 512, //540
+                pageBreak: "after",
+              });
+            } else {
+              // Title
+              doc.content.push({
+                absolutePosition: {
+                  x: X_MARGIN,
+                  y: 220 + GRAPH_HEIGHT * index,
+                },
+                text: content.title,
+                fontSize: 12,
+                bold: true,
+                margin: [0, 20, 0, 15],
+              });
+              // Image of graph
+              // res contains the result of promise an array with the graphs in image format
+              // res[0] => image of chart1
+              // res[1] => image of chart2
+              // ..
+              doc.content.push({
+                absolutePosition: {
+                  x: X_MARGIN,
+                  y: 240 + GRAPH_HEIGHT * index,
+                },
+                image: res[index],
+                height: 180,
+                width: 512, //540
+              });
+            }
+          }
+        });
+
+        // para mas graficos
+        graphContent.forEach((content, index) => {
           if (res[index] != null) {
             // Title
             doc.content.push({
+              absolutePosition: { x: X_MARGIN, y: 220 + GRAPH_HEIGHT * index },
               text: content.title,
-              fontSize: 20,
+              fontSize: 12,
               bold: true,
               margin: [0, 20, 0, 15],
             });
-
             // Image of graph
             // res contains the result of promise an array with the graphs in image format
             // res[0] => image of chart1
             // res[1] => image of chart2
             // ..
             doc.content.push({
+              absolutePosition: { x: X_MARGIN, y: 240 + GRAPH_HEIGHT * index },
               image: res[index],
-              width: 530,
+              height: 180,
+              width: 512, //540
             });
           }
-        });*/
+        });
+
         if (res == null) console.log("borrar esto");
 
         // Download
@@ -751,6 +780,7 @@ export default {
         this.isDownloadLoading = false; // Set spinner active
       });
     },
+
     formatDate(date) {
       var dateHourSplitSpace = date.split(" ");
 

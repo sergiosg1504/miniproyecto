@@ -36,10 +36,12 @@
           +
         </button>
       </div>
-      <div class="col-sm-12" v-for="i in questions" :key="i.title">
-        <p>{{ i }}</p>
-      </div>
-      <div class="col-sm-12">
+
+      <div
+        class="col-sm-12"
+        v-for="item in newPosition.questions"
+        v-bind:key="item.id"
+      >
         <div class="col-sm-6">
           <div class="form-group">
             <label>Question 1 name</label>
@@ -104,6 +106,7 @@ export default {
         // varialbe para el video
         questions: [
           {
+            id: 0,
             title: "",
             description: "",
           },
@@ -116,6 +119,8 @@ export default {
   },
   created() {
     this.questionNum = 0;
+    let pos = this.newPosition;
+    console.log(pos);
     /*this.agregar = document.getElementById("add_question");
     this.contenido = document.getElementById("contenedor");
     this.agregar.addEventListener("click", (e) => {
@@ -156,22 +161,13 @@ export default {
     },
     addQuestion() {
       this.questionNum++;
-      var newDiv = document.createElement("div");
-      newDiv.innerHTML =
-        '<div class="col-sm-12"> <div class="col-sm-6"><div class="form-group"><label>Question name ' +
-        (this.questionNum + 1) +
-        '</label><input class="form-input aux" type="text" v-model="newPosition.questions[' +
-        this.questionNum +
-        '].title"/></div>' +
-        '</div><div class="col-sm-6"><div class="form-group"><label>Question description ' +
-        (this.questionNum + 1) +
-        '</label><input class="form-input aux" type="text" v-model="newPosition.questions[' +
-        this.questionNum +
-        '].description"/></div><div class="col-sm-12"><div class="form-group"><button type="button" class="btn btn-primary puntero" @click="remove()">Remove question ' +
-        (this.questionNum + 1) +
-        "</button></div></div></div>";
-      document.getElementById("hijo").appendChild(newDiv);
-      console.log(this.questionNum + 1);
+      let question = {
+        id: this.questionNum,
+        title: "",
+        description: "",
+      };
+      this.newPosition.questions.push(question);
+      console.log(this.newPosition.questions);
     },
     createPosition() {
       console.log(this.newPosition);
@@ -188,6 +184,12 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+    },
+  },
+  computed: {
+    qtn: () => {
+      let pos = this.newPosition;
+      return pos.questions;
     },
   },
 };

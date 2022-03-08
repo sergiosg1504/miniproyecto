@@ -405,13 +405,14 @@ export default {
       const documentTitle = "prueba.pdf";
 
       const X_MARGIN = 42;
-      const GRAPH_HEIGHT = 200;
+      const GRAPH_HEIGHT = 190;
+      const date = new Date();
 
-      pdfMake.fonts = {
+      /*pdfMake.fonts = {
         Myriad_Pro_Regular: {
           normail: "/public/fonts/MyriadPro-Regular.woff",
         },
-      };
+      };*/
 
       // Load async conversion of charts into svg and create pdf
       // Promise means array of graphs have to wait to be converted into images (svg format)
@@ -423,18 +424,38 @@ export default {
           pageOrientation: "portrait",
           pageMargins: [30, 30, 30, 30],
           content: [],
-          defaultStyles: {
-            font: "progradum",
+          footer: function (currentPage, pageCount) {
+            return {
+              columns: [
+                {
+                  text:
+                    "Exams Reports  |  " +
+                    date.toLocaleString() +
+                    " · Progradum · Examiner",
+                  margin: [X_MARGIN, 0, 0, 0],
+                  color: "grey",
+                  fontSize: 10,
+                },
+                {
+                  text: currentPage.toString() + "/" + pageCount,
+                  alignment: "right",
+                  color: "grey",
+                  margin: [0, 0, 30, 0],
+                  fontSize: 10,
+                },
+              ],
+            };
           },
         };
 
         //TITLE OF REPORT
-        doc.content.unshift({
-          image: progradumLogoBase64,
-          fit: [119, 54],
-          absolutePosition: { x: X_MARGIN - 8, y: 47 },
-          height: 10,
-        });
+        doc.content.push({}),
+          doc.content.unshift({
+            image: progradumLogoBase64,
+            fit: [119, 54],
+            absolutePosition: { x: X_MARGIN - 8, y: 47 },
+            height: 10,
+          });
         // Company header
         doc.content.push({
           text: "Exam Reports",
@@ -735,7 +756,6 @@ export default {
           absolutePosition: { x: X_MARGIN + 158, y: 145 },
           text: companyName,
           fontSize: 9,
-          font: "Myriad_Pro_Regular",
         });
         // User name
         doc.content.push({
@@ -769,7 +789,6 @@ export default {
 
         graphContent.forEach((content, index) => {
           if (res[index] != null) {
-            console.log(res);
             if (index % 3 === 0 && index !== 0) {
               doc.content.push({
                 absolutePosition: { x: X_MARGIN + 158, y: 20 },
@@ -818,7 +837,7 @@ export default {
                   {
                     type: "ellipse",
                     x: -125,
-                    y: 37 + GRAPH_HEIGHT * index,
+                    y: 45 + GRAPH_HEIGHT * index,
                     r1: 1,
                     r2: 1,
                     color: "red",
@@ -829,7 +848,7 @@ export default {
               doc.content.push({
                 absolutePosition: {
                   x: X_MARGIN + 50,
-                  y: 230 + GRAPH_HEIGHT * index,
+                  y: 238 + GRAPH_HEIGHT * index,
                 },
                 text: content.title,
                 fontSize: 12,
@@ -928,6 +947,16 @@ export default {
         hourSplit[2]
       );
     },
+    /*formatoFecha(fecha, formato = 'dd/mm/yy') {
+    const map = {
+        dd: fecha.getDate(),
+        mm: fecha.getMonth() + 1,
+        yy: fecha.getFullYear().toString().slice(-2),
+        yyyy: fecha.getFullYear()
+    }
+
+    return formato.replace(/dd|mm|yy|yyy/gi, matched => map[matched])
+}*/
   },
 };
 </script>

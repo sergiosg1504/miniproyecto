@@ -427,7 +427,7 @@ export default {
         });
         // Company header
         doc.content.push({
-          text: "CVs Analysed Reports",
+          text: "Exam Reports",
           fontSize: 12,
           absolutePosition: { x: X_MARGIN, y: 77 },
         });
@@ -675,48 +675,90 @@ export default {
           fontSize: 9,
         });
 
+        /* Adding the line separator */
+        doc.content.push({
+          absolutePosition: { x: X_MARGIN + 158, y: 200 },
+          canvas: [
+            {
+              type: "line",
+              x1: -157,
+              y1: 20,
+              x2: 355,
+              y2: 20,
+              lineWidth: 1,
+              lineColor: "black",
+            },
+          ],
+        });
         /* GRAPH CONTENT */
 
         graphContent.forEach((content, index) => {
           if (res[index] != null) {
-            if (index === 3) {
+            console.log(res);
+            if (index % 3 === 0 && index !== 0) {
+              doc.content.push({
+                absolutePosition: { x: X_MARGIN + 158, y: 20 },
+                canvas: [
+                  {
+                    type: "ellipse",
+                    x: -125,
+                    y: 0,
+                    r1: 1,
+                    r2: 1,
+                    color: "red",
+                  },
+                ],
+                pageBreak: "before",
+              });
               // Title
               doc.content.push({
                 absolutePosition: {
-                  x: X_MARGIN,
-                  y: 220 + GRAPH_HEIGHT * index,
+                  x: X_MARGIN + 50,
+                  y: 0,
                 },
                 text: content.title,
                 fontSize: 12,
                 bold: true,
-                margin: [0, 20, 0, 15],
               });
               // Image of graph
               // res contains the result of promise an array with the graphs in image format
               // res[0] => image of chart1
               // res[1] => image of chart2
               // ..
-              doc.content.push({
+              /*doc.content.push({
                 absolutePosition: {
                   x: X_MARGIN,
-                  y: 240 + GRAPH_HEIGHT * index,
+                  y: 260 + GRAPH_HEIGHT *index,
                 },
                 image: res[index],
                 height: 180,
-                width: 512, //540
-                pageBreak: "after",
-              });
+                width: 200, //540
+                pageBreak: "before",
+              });*/
             } else {
+              // Title Dot
+              doc.content.push({
+                absolutePosition: { x: X_MARGIN + 158, y: 200 },
+                canvas: [
+                  {
+                    type: "ellipse",
+                    x: -125,
+                    y: 37 + GRAPH_HEIGHT * index,
+                    r1: 1,
+                    r2: 1,
+                    color: "red",
+                  },
+                ],
+              });
               // Title
               doc.content.push({
                 absolutePosition: {
-                  x: X_MARGIN,
-                  y: 220 + GRAPH_HEIGHT * index,
+                  x: X_MARGIN + 50,
+                  y: 230 + GRAPH_HEIGHT * index,
                 },
                 text: content.title,
                 fontSize: 12,
                 bold: true,
-                margin: [0, 20, 0, 15],
               });
               // Image of graph
               // res contains the result of promise an array with the graphs in image format
@@ -725,17 +767,32 @@ export default {
               // ..
               doc.content.push({
                 absolutePosition: {
-                  x: X_MARGIN,
-                  y: 240 + GRAPH_HEIGHT * index,
+                  x: X_MARGIN + 100,
+                  y: 250 + GRAPH_HEIGHT * index,
                 },
                 image: res[index],
-                height: 180,
-                width: 512, //540
+                height: 160,
+                width: 350, //540
+              });
+              // Separator
+              doc.content.push({
+                absolutePosition: { x: X_MARGIN + 158, y: 200 },
+                canvas: [
+                  {
+                    type: "line",
+                    x1: -157,
+                    y1: 220 + GRAPH_HEIGHT * index,
+                    x2: 355,
+                    y2: 220 + GRAPH_HEIGHT * index,
+                    lineWidth: 1,
+                    lineColor: "black",
+                  },
+                ],
               });
             }
           }
         });
-
+        /*
         // para mas graficos
         graphContent.forEach((content, index) => {
           if (res[index] != null) {
@@ -759,7 +816,7 @@ export default {
               width: 512, //540
             });
           }
-        });
+        });*/
 
         if (res == null) console.log("borrar esto");
 

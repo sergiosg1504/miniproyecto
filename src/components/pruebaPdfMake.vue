@@ -396,6 +396,8 @@ export default {
 
       const progradumLogoBase64 =
         "data:image/png;base64,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";
+      //const progradumLetter =
+      //"data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDIwMDEwOTA0Ly9FTiIKICJodHRwOi8vd3d3LnczLm9yZy9UUi8yMDAxL1JFQy1TVkctMjAwMTA5MDQvRFREL3N2ZzEwLmR0ZCI+CjxzdmcgdmVyc2lvbj0iMS4wIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiB3aWR0aD0iMjA3LjAwMDAwMHB0IiBoZWlnaHQ9IjIwNy4wMDAwMDBwdCIgdmlld0JveD0iMCAwIDIwNy4wMDAwMDAgMjA3LjAwMDAwMCIKIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIG1lZXQiPgoKPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMC4wMDAwMDAsMjA3LjAwMDAwMCkgc2NhbGUoMC4xMDAwMDAsLTAuMTAwMDAwKSIKZmlsbD0iIzAwMDAwMCIgc3Ryb2tlPSJub25lIj4KPC9nPgo8L3N2Zz4K"
       const currentDate = "08/02/2022";
       const companyName = "Progradum S.L.";
       const userName = "luisbm";
@@ -406,7 +408,7 @@ export default {
 
       const X_MARGIN = 42;
       const GRAPH_HEIGHT = 190;
-      const date = new Date();
+      const date = this.styler(new Date().toLocaleString());
 
       /*pdfMake.fonts = {
         Myriad_Pro_Regular: {
@@ -424,17 +426,22 @@ export default {
           pageOrientation: "portrait",
           pageMargins: [30, 30, 30, 30],
           content: [],
+          header: {
+            image: progradumLogoBase64,
+            fit: [150, 70],
+            margin: [X_MARGIN - 10, 50, 0, 0],
+          },
           footer: function (currentPage, pageCount) {
             return {
               columns: [
                 {
-                  text:
-                    "Exams Reports  |  " +
-                    date.toLocaleString() +
-                    " · Progradum · Examiner",
+                  text: "Exams Reports  |  " + date + " · Progradum · Examiner",
                   margin: [X_MARGIN, 0, 0, 0],
                   color: "grey",
                   fontSize: 10,
+                },
+                {
+                  // Aqui iria la otra foto
                 },
                 {
                   text: currentPage.toString() + "/" + pageCount,
@@ -449,20 +456,11 @@ export default {
         };
 
         //TITLE OF REPORT
-        doc.content.push({}),
-          doc.content.unshift({
-            image: progradumLogoBase64,
-            fit: [119, 54],
-            absolutePosition: { x: X_MARGIN - 8, y: 47 },
-            height: 10,
-          });
-        // Company header
         doc.content.push({
           text: "Exam Reports",
           fontSize: 12,
-          absolutePosition: { x: X_MARGIN, y: 77 },
+          absolutePosition: { x: X_MARGIN, y: 83 },
         });
-        // Company header
         doc.content.push(
           {
             absolutePosition: { x: X_MARGIN, y: 114 },
@@ -785,50 +783,53 @@ export default {
             },
           ],
         });
+
         /* GRAPH CONTENT */
 
         graphContent.forEach((content, index) => {
           if (res[index] != null) {
             if (index % 3 === 0 && index !== 0) {
               doc.content.push({
-                absolutePosition: { x: X_MARGIN + 158, y: 20 },
+                canvas: [
+                  {
+                    type: "line",
+                    x1: -157,
+                    y1: 20,
+                    x2: 355,
+                    y2: 20,
+                    lineWidth: 0.7,
+                    lineColor: "black",
+                  },
+                ],
+                margin: [X_MARGIN + 128, 75, 0, 0],
+                pageBreak: "before",
+              });
+              doc.content.push({
                 canvas: [
                   {
                     type: "ellipse",
-                    x: -125,
+                    x: 0,
                     y: 0,
                     r1: 1,
                     r2: 1,
                     color: "red",
                   },
                 ],
-                pageBreak: "before",
+                margin: [X_MARGIN + 5, 20, 0, 0],
               });
               // Title
               doc.content.push({
-                absolutePosition: {
-                  x: X_MARGIN + 50,
-                  y: 0,
-                },
+                margin: [X_MARGIN + 25, -8, 0, 0],
                 text: content.title,
                 fontSize: 12,
                 bold: true,
               });
-              // Image of graph
-              // res contains the result of promise an array with the graphs in image format
-              // res[0] => image of chart1
-              // res[1] => image of chart2
-              // ..
-              /*doc.content.push({
-                absolutePosition: {
-                  x: X_MARGIN,
-                  y: 260 + GRAPH_HEIGHT *index,
-                },
+              doc.content.push({
                 image: res[index],
-                height: 180,
-                width: 200, //540
-                pageBreak: "before",
-              });*/
+                height: 160,
+                width: 350, //540
+                margin: [X_MARGIN + 70, 10, 0, 0],
+              });
             } else {
               // Title Dot
               doc.content.push({
@@ -854,11 +855,6 @@ export default {
                 fontSize: 12,
                 bold: true,
               });
-              // Image of graph
-              // res contains the result of promise an array with the graphs in image format
-              // res[0] => image of chart1
-              // res[1] => image of chart2
-              // ..
               doc.content.push({
                 absolutePosition: {
                   x: X_MARGIN + 100,
@@ -947,16 +943,10 @@ export default {
         hourSplit[2]
       );
     },
-    /*formatoFecha(fecha, formato = 'dd/mm/yy') {
-    const map = {
-        dd: fecha.getDate(),
-        mm: fecha.getMonth() + 1,
-        yy: fecha.getFullYear().toString().slice(-2),
-        yyyy: fecha.getFullYear()
-    }
-
-    return formato.replace(/dd|mm|yy|yyy/gi, matched => map[matched])
-}*/
+    styler(fecha) {
+      var aux = fecha.split(",");
+      return aux[0];
+    },
   },
 };
 </script>

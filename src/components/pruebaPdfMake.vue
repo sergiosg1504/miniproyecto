@@ -399,12 +399,19 @@ export default {
       const currentDate = "08/02/2022";
       const companyName = "Progradum S.L.";
       const userName = "luisbm";
+      const areaName = "Progradum Tech.";
 
       const graphContent = this.graphContent;
       const documentTitle = "prueba.pdf";
 
       const X_MARGIN = 42;
       const GRAPH_HEIGHT = 200;
+
+      pdfMake.fonts = {
+        Myriad_Pro_Regular: {
+          normail: "/public/fonts/MyriadPro-Regular.woff",
+        },
+      };
 
       // Load async conversion of charts into svg and create pdf
       // Promise means array of graphs have to wait to be converted into images (svg format)
@@ -416,6 +423,9 @@ export default {
           pageOrientation: "portrait",
           pageMargins: [30, 30, 30, 30],
           content: [],
+          defaultStyles: {
+            font: "progradum",
+          },
         };
 
         //TITLE OF REPORT
@@ -441,7 +451,7 @@ export default {
                 x: 0,
                 y: 0,
                 w: 512, //540
-                h: 70,
+                h: 92,
                 r: 5,
                 color: "#62c4e4",
               },
@@ -652,6 +662,64 @@ export default {
                     fontSize: 0.01,
                   },
                 ],
+                // fila 8
+                [
+                  {
+                    //border: [true,true,true,true],
+                    border: [false, false, false, false],
+                    text: " ",
+                    fontSize: 0.01,
+                  },
+                  {
+                    border: [false, false, false, false],
+                    text: "Area",
+                    alignment: "right",
+                    fontSize: 9,
+                  },
+                  {
+                    border: [false, false, false, false],
+                    canvas: [
+                      {
+                        type: "rect",
+                        x: -3,
+                        y: 0,
+                        w: 350,
+                        h: 11,
+                        r: 3,
+                        color: "#ffffff",
+                      },
+                    ],
+                  },
+                  {
+                    border: [false, false, false, false],
+                    text: " ",
+                    fontSize: 0.01,
+                  },
+                ],
+                // fila 9
+                [
+                  {
+                    //border: [true,true,true,true],
+                    border: [false, false, false, false],
+                    text: " ",
+                    fontSize: 0.01,
+                  },
+                  {
+                    border: [false, false, false, false],
+                    text: " ",
+                    fontSize: 0.01,
+                  },
+                  {
+                    border: [false, false, false, false],
+                    text: " ",
+                    fontSize: 0.01,
+                  },
+                  {
+                    border: [false, false, false, false],
+                    text: " ",
+                    fontSize: 0.01,
+                  },
+                ],
               ],
             },
           }
@@ -667,11 +735,18 @@ export default {
           absolutePosition: { x: X_MARGIN + 158, y: 145 },
           text: companyName,
           fontSize: 9,
+          font: "Myriad_Pro_Regular",
         });
         // User name
         doc.content.push({
           absolutePosition: { x: X_MARGIN + 158, y: 167 },
           text: userName,
+          fontSize: 9,
+        });
+        // Area name
+        doc.content.push({
+          absolutePosition: { x: X_MARGIN + 158, y: 188 },
+          text: areaName,
           fontSize: 9,
         });
 
@@ -685,7 +760,7 @@ export default {
               y1: 20,
               x2: 355,
               y2: 20,
-              lineWidth: 1,
+              lineWidth: 0.7,
               lineColor: "black",
             },
           ],
@@ -784,7 +859,7 @@ export default {
                     y1: 220 + GRAPH_HEIGHT * index,
                     x2: 355,
                     y2: 220 + GRAPH_HEIGHT * index,
-                    lineWidth: 1,
+                    lineWidth: 0.7,
                     lineColor: "black",
                   },
                 ],

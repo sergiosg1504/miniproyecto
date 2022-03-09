@@ -7,18 +7,18 @@ import { HttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import VueApollo from "vue-apollo";
 
-let key;
-
 export default {
-  getKey(k) {
-    console.log(k);
-    this.key = k;
+  setKey(key) {
+    let head = { "x-api-key": key };
+    httpLink.headers = head;
+    apolloProvider.defaultClient.link = httpLink;
+    //console.log(apolloProvider.defaultClient.link)
   },
 };
 
-let httpLink = new HttpLink({
+const httpLink = new HttpLink({
   uri: "https://api.hireflix.com/me",
-  headers: { "x-api-key": key },
+  headers: { "x-api-key": "f380c52f-e7fe-4e5d-b04e-f84d544b9584" },
 });
 
 // Error Handling

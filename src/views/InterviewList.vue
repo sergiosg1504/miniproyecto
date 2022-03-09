@@ -15,7 +15,7 @@
           <input
             class="form-input aux"
             type="text"
-            v-model="key"
+            v-model="akey"
             placeholder="Introduce your API-key"
           />
           <br />
@@ -37,10 +37,10 @@
       </div>
     </div>
     <div class="col-sm-6">
-      <open-interviews />
+      <open-interviews ref="open" />
     </div>
     <div class="col-sm-6">
-      <closed-interviews />
+      <closed-interviews ref="closed" />
     </div>
   </div>
 </template>
@@ -57,7 +57,7 @@ export default {
     ClosedInterviews,
   },
   data: () => ({
-    key: "f380c52f-e7fe-4e5d-b04e-f84d544b9584",
+    akey: "",
   }),
   props: {
     meetingList: {
@@ -72,7 +72,7 @@ export default {
       });
     },
     saveKey() {
-      apollo.getKey(this.key);
+      apollo.setKey(this.akey);
     },
   },
 };

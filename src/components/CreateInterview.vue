@@ -44,21 +44,21 @@
       >
         <div class="col-sm-6">
           <div class="form-group">
-            <label>Question 1 name</label>
+            <label>Question {{ item.id + 1 }} name</label>
             <input
               class="form-input aux"
               type="text"
-              v-model="newPosition.questions[0].title"
+              v-model="newPosition.questions[item.id].title"
             />
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <label>Question 1 description</label>
+            <label>Question {{ item.id + 1 }} description</label>
             <input
               class="form-input aux"
               type="text"
-              v-model="newPosition.questions[0].description"
+              v-model="newPosition.questions[item.id].description"
             />
           </div>
         </div>

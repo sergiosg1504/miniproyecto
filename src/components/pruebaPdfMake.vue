@@ -1,85 +1,6 @@
 <template>
   <div class="main">
     <input type="button" value="Save as PDF" @click="saveReportOfAllToPDF()" />
-
-    <h1>In accumsan velit in orci tempor</h1>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sem quam,
-      sodales ac volutpat sed, vestibulum id quam. Sed quis arcu non elit
-      fringilla mattis. Sed auctor mi sed efficitur vehicula. Sed bibendum odio
-      urna, quis lobortis dui luctus ac. Duis eu lacus sodales arcu tincidunt
-      ultrices viverra a risus. Vivamus justo massa, malesuada quis pellentesque
-      ut, placerat in massa. Nunc bibendum diam justo, in consequat ipsum
-      fringilla ac. Praesent porta nibh ac arcu viverra, at scelerisque neque
-      venenatis. Donec aliquam lorem non ultrices ultrices. Aliquam efficitur
-      eros quis tortor condimentum, id pellentesque metus iaculis. Aenean at
-      consequat neque, a posuere lectus. In eu libero magna. Pellentesque
-      molestie tellus nec nisi molestie, eu dignissim lacus tristique. Sed
-      tellus nulla, suscipit a velit non, mattis dictum metus. Curabitur mi mi,
-      convallis nec libero quis, venenatis vestibulum ante.
-    </p>
-    <h2>Aliquam lacinia justo</h2>
-    <div id="chartdiv" class="chart"></div>
-
-    <h2>Phasellus suscipit in diam a interdum</h2>
-    <table>
-      <tr>
-        <th>USA</th>
-        <th>Japan</th>
-        <th>France</th>
-        <th>Mexico</th>
-      </tr>
-      <tr>
-        <td>2500</td>
-        <td>1900</td>
-        <td>2200</td>
-        <td>1200</td>
-      </tr>
-      <tr>
-        <td>800</td>
-        <td>1200</td>
-        <td>990</td>
-        <td>708</td>
-      </tr>
-      <tr>
-        <td>2100</td>
-        <td>2150</td>
-        <td>900</td>
-        <td>1260</td>
-      </tr>
-    </table>
-
-    <h2>Duis sed efficitur mauris</h2>
-    <div>
-      <div class="col">
-        <div id="chartdiv2" class="chart"></div>
-      </div>
-      <div class="col">
-        <div id="chartdiv3" class="chart"></div>
-      </div>
-    </div>
-
-    <br />
-    <h2>Aliquam semper lacinia</h2>
-    <div id="chartdiv4" class="chart"></div>
-    <p>
-      Maecenas congue leo vel tortor faucibus, non semper odio viverra. In ac
-      libero rutrum libero elementum blandit vel in orci. Donec sit amet nisl ac
-      eros mollis molestie. Curabitur ut urna vitae turpis bibendum malesuada
-      sit amet imperdiet orci. Etiam pulvinar quam at lorem pellentesque congue.
-      Integer sed odio enim. Maecenas eu nulla justo. Sed quis enim in est
-      sodales facilisis non sed erat. Aenean vel ornare urna. Praesent viverra
-      volutpat ex a aliquet.
-    </p>
-
-    <p>
-      Fusce sed quam pharetra, ornare ligula id, maximus risus. Integer
-      dignissim risus in placerat mattis. Fusce malesuada dui ut lectus
-      ultricies, et sollicitudin nisl placerat. In dignissim elit in pretium
-      lobortis. Fusce ornare enim at metus laoreet, ut convallis elit lacinia.
-      Maecenas pharetra aliquet mi. Nulla orci nunc, egestas id nisi ut,
-      volutpat sollicitudin mi.
-    </p>
   </div>
 </template>
 
@@ -368,6 +289,7 @@ export default {
     series.labels.template.disabled = true;
     series.ticks.template.disabled = true;
   },
+
   methods: {
     createSeries(field, name) {
       var series = this.chart.series.push(new am4charts.LineSeries());
@@ -396,8 +318,9 @@ export default {
 
       const progradumLogoBase64 =
         "data:image/png;base64,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";
-      //const progradumLetter =
-      //"data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDIwMDEwOTA0Ly9FTiIKICJodHRwOi8vd3d3LnczLm9yZy9UUi8yMDAxL1JFQy1TVkctMjAwMTA5MDQvRFREL3N2ZzEwLmR0ZCI+CjxzdmcgdmVyc2lvbj0iMS4wIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiB3aWR0aD0iMjA3LjAwMDAwMHB0IiBoZWlnaHQ9IjIwNy4wMDAwMDBwdCIgdmlld0JveD0iMCAwIDIwNy4wMDAwMDAgMjA3LjAwMDAwMCIKIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIG1lZXQiPgoKPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMC4wMDAwMDAsMjA3LjAwMDAwMCkgc2NhbGUoMC4xMDAwMDAsLTAuMTAwMDAwKSIKZmlsbD0iIzAwMDAwMCIgc3Ryb2tlPSJub25lIj4KPC9nPgo8L3N2Zz4K"
+      const progradumLetter =
+        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM8AAADPCAYAAABSgYVfAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAthJREFUeNrs3cFNAkEUgGEw3vHGlQ7cDqADKQErkBK0ArECoYO1AqECsQOu3NYK1rdhjQcPOruoEL4vmeBBDXn4Z4dBQrcsyw6Q7swIQDwgHhAPiAcQD4gHxAPiAfEA4gHxgHhAPCAeQDwgHhAPiAcQD4gHxAPiAfEA4gHxgHhAPCAeQDwgHhAPiAcQD4gHxAPiAfEA4gHxgHhAPCAeQDwgHhAPiAcQD7RwbgRpxqvtLG6yI7irRaxJPuwXHjXxHIoqnOGR3NdNxD6KgNYeNts20vRivURAE6MQD8081ttNxEMDNxFQHuvCKMRDuqtYywhoYBTiId1lrHUElBmFeEjnIEE8tOQgQTy04CBBPLRQHSRMjUE8IB4QD4gH+OC/qv9JPux3m/5sfTK27Oxe8MSVh4TwqvfojGI9mYZ4aBBQrHF8uTAN8dDM3AjEA+IB8QDiAfGAeEA8IB5APCAeEA+IBxAPiAfEA+IB8QDiAfGAeEA8IB5APCAeEA+IBxAPiAfEA+IB8QDiAfGAeGhqvNoO4mZmEv/Dp2EfbzhZZ/eJ2D3TEA+fYYy++ZYqnHuTEg9fPRuB5zwgHkA8IB72am0E4iHNW6zrfNjPjSKN0zbhjCIcVx1XHhK8xhoIRzykWdRXnMIobNv4uYeIZmoM4iFNdTAwNwbx4GDAcx5+/WAgE454SLOqrzgbo7BtOxV3e/gdRUTjjXLiOS3xR39rCrZtIB5APCAeEA+IB8QDiAfEA+IB8YB4APGAeEA8IB5APCAeEA+IB8QDiAfEA+IB8YB4APGAeEA8IB5APCAeEA+IB8QDiAfEAwfBp2Gnm8daGgPdsixNAWzbQDwgHhAPIB4QD4gHxAPiAcQD4gHxgHhAPIB4QDwgHhAPIB4QD4gHxAPiAcQD4gHxgHhAPIB4QDwgHhAPIB4QD4gHxAPiAcQD4gHxgHhAPIB4QDwgHhAPIB4QD/yxdwEGAMqeZTX9gaNEAAAAAElFTkSuQmCC";
+      //"data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDIwMDEwOTA0Ly9FTiIKICJodHRwOi8vd3d3LnczLm9yZy9UUi8yMDAxL1JFQy1TVkctMjAwMTA5MDQvRFREL3N2ZzEwLmR0ZCI+CjxzdmcgdmVyc2lvbj0iMS4wIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiB3aWR0aD0iMjA3LjAwMDAwMHB0IiBoZWlnaHQ9IjIwNy4wMDAwMDBwdCIgdmlld0JveD0iMCAwIDIwNy4wMDAwMDAgMjA3LjAwMDAwMCIKIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIG1lZXQiPgoKPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMC4wMDAwMDAsMjA3LjAwMDAwMCkgc2NhbGUoMC4xMDAwMDAsLTAuMTAwMDAwKSIKZmlsbD0iIzAwMDAwMCIgc3Ryb2tlPSJub25lIj4KPC9nPgo8L3N2Zz4K";
       const currentDate = "08/02/2022";
       const companyName = "Progradum S.L.";
       const userName = "luisbm";
@@ -406,10 +329,12 @@ export default {
       const graphContent = this.graphContent;
       const documentTitle = "prueba.pdf";
 
+      const graphName = "aaaaaaaaaaaaaaaaaaaaaaaaaa";
+
       const X_MARGIN = 42;
       const GRAPH_HEIGHT = 190;
       const date = this.styler(new Date().toLocaleString());
-
+      console.log(date);
       /*pdfMake.fonts = {
         Myriad_Pro_Regular: {
           normail: "/public/fonts/MyriadPro-Regular.woff",
@@ -429,25 +354,28 @@ export default {
           header: {
             image: progradumLogoBase64,
             fit: [150, 70],
-            margin: [X_MARGIN - 10, 50, 0, 0],
+            margin: [X_MARGIN - 10, 40, 0, 0],
           },
           footer: function (currentPage, pageCount) {
             return {
               columns: [
                 {
                   text: "Exams Reports  |  " + date + " · Progradum · Examiner",
-                  margin: [X_MARGIN, 0, 0, 0],
+                  margin: [X_MARGIN, -10, 0, 0],
                   color: "grey",
                   fontSize: 10,
                 },
                 {
-                  // Aqui iria la otra foto
+                  image: progradumLetter,
+                  alignment: "right",
+                  fit: [18, 18],
+                  margin: [0, -3, -70, 0],
                 },
                 {
                   text: currentPage.toString() + "/" + pageCount,
                   alignment: "right",
                   color: "grey",
-                  margin: [0, 0, 30, 0],
+                  margin: [0, 0, 38, 0],
                   fontSize: 10,
                 },
               ],
@@ -784,96 +712,92 @@ export default {
           ],
         });
 
-        /* GRAPH CONTENT */
-
-        graphContent.forEach((content, index) => {
-          if (res[index] != null) {
-            if (index % 3 === 0 && index !== 0) {
+        let index = 0; // contador del indice total
+        let count = 0; // contador del indice por pagina
+        // Primera pagina
+        while (index < 3) {
+          if (res[index] !== null) {
+            // Title Dot
+            doc.content.push({
+              absolutePosition: { x: X_MARGIN + 158, y: 200 },
+              canvas: [
+                {
+                  type: "ellipse",
+                  x: -125,
+                  y: 45 + GRAPH_HEIGHT * count,
+                  r1: 1,
+                  r2: 1,
+                  color: "red",
+                },
+              ],
+            });
+            // Title
+            doc.content.push({
+              absolutePosition: {
+                x: X_MARGIN + 50,
+                y: 238 + GRAPH_HEIGHT * count,
+              },
+              text: graphContent[index].title,
+              fontSize: 9,
+              bold: true,
+            });
+            // Question
+            doc.content.push({
+              absolutePosition: {
+                x: X_MARGIN + 50,
+                y: 252.1 + GRAPH_HEIGHT * count,
+              },
+              text: "soy la pregunta",
+              fontSize: 9,
+              italics: true,
+            });
+            // Graph
+            doc.content.push({
+              absolutePosition: {
+                x: X_MARGIN + 100,
+                y: 270 + GRAPH_HEIGHT * count,
+              },
+              image: res[index],
+              height: 115,
+              width: 350, //540
+            });
+            // Graph name
+            let xPos = 595 / 2 - graphName.length / 2 - 30;
+            doc.content.push({
+              absolutePosition: {
+                x: xPos,
+                y: 390 + GRAPH_HEIGHT * count,
+              },
+              text: graphName,
+              fontSize: 7,
+            });
+            // Separator
+            if (count === 2) {
               doc.content.push({
+                absolutePosition: { x: X_MARGIN + 158, y: 200 },
                 canvas: [
                   {
                     type: "line",
                     x1: -157,
-                    y1: 20,
+                    y1: 210 + GRAPH_HEIGHT * count,
                     x2: 355,
-                    y2: 20,
+                    y2: 210 + GRAPH_HEIGHT * count,
                     lineWidth: 0.7,
                     lineColor: "black",
                   },
                 ],
-                margin: [X_MARGIN + 128, 75, 0, 0],
-                pageBreak: "before",
-              });
-              doc.content.push({
-                canvas: [
-                  {
-                    type: "ellipse",
-                    x: 0,
-                    y: 0,
-                    r1: 1,
-                    r2: 1,
-                    color: "red",
-                  },
-                ],
-                margin: [X_MARGIN + 5, 20, 0, 0],
-              });
-              // Title
-              doc.content.push({
-                margin: [X_MARGIN + 25, -8, 0, 0],
-                text: content.title,
-                fontSize: 12,
-                bold: true,
-              });
-              doc.content.push({
-                image: res[index],
-                height: 160,
-                width: 350, //540
-                margin: [X_MARGIN + 70, 10, 0, 0],
+                pageBreak: "after",
               });
             } else {
-              // Title Dot
-              doc.content.push({
-                absolutePosition: { x: X_MARGIN + 158, y: 200 },
-                canvas: [
-                  {
-                    type: "ellipse",
-                    x: -125,
-                    y: 45 + GRAPH_HEIGHT * index,
-                    r1: 1,
-                    r2: 1,
-                    color: "red",
-                  },
-                ],
-              });
-              // Title
-              doc.content.push({
-                absolutePosition: {
-                  x: X_MARGIN + 50,
-                  y: 238 + GRAPH_HEIGHT * index,
-                },
-                text: content.title,
-                fontSize: 12,
-                bold: true,
-              });
-              doc.content.push({
-                absolutePosition: {
-                  x: X_MARGIN + 100,
-                  y: 250 + GRAPH_HEIGHT * index,
-                },
-                image: res[index],
-                height: 160,
-                width: 350, //540
-              });
-              // Separator
               doc.content.push({
                 absolutePosition: { x: X_MARGIN + 158, y: 200 },
                 canvas: [
                   {
                     type: "line",
                     x1: -157,
-                    y1: 220 + GRAPH_HEIGHT * index,
+                    y1: 210 + GRAPH_HEIGHT * count,
                     x2: 355,
-                    y2: 220 + GRAPH_HEIGHT * index,
+                    y2: 210 + GRAPH_HEIGHT * count,
                     lineWidth: 0.7,
                     lineColor: "black",
                   },
@@ -881,32 +805,137 @@ export default {
               });
             }
           }
-        });
-        /*
-        // para mas graficos
-        graphContent.forEach((content, index) => {
-          if (res[index] != null) {
+          count++;
+          index++;
+        }
+        let reps = 0;
+        // Demas paginas
+        count = 0;
+        while (count < 4) {
+          if (index < graphContent.length) {
+            if (count === 0) {
+              // logo 52.2
+              // separador  108.4
+              doc.content.push({
+                absolutePosition: { x: X_MARGIN + 158, y: 0 },
+                canvas: [
+                  {
+                    type: "line",
+                    x1: -157,
+                    y1: 108.4,
+                    x2: 355,
+                    y2: 108.4,
+                    lineWidth: 0.7,
+                    lineColor: "black",
+                  },
+                ],
+              });
+            }
+            // Rula los cuatro graficos con sus separadores
+            let base_Height = 104.4 + 164.5 * count;
+            // Title Dot  108.4+32
+            doc.content.push({
+              absolutePosition: { x: X_MARGIN + 158, y: base_Height + 26.3 },
+              canvas: [
+                {
+                  type: "ellipse",
+                  x: -125,
+                  y: 6,
+                  r1: 1,
+                  r2: 1,
+                  color: "red",
+                },
+              ],
+            });
             // Title
             doc.content.push({
-              absolutePosition: { x: X_MARGIN, y: 220 + GRAPH_HEIGHT * index },
-              text: content.title,
-              fontSize: 12,
+              absolutePosition: {
+                x: X_MARGIN + 50,
+                y: base_Height + 26.3,
+              },
+              text: graphContent[index].title,
+              fontSize: 9,
               bold: true,
-              margin: [0, 20, 0, 15],
             });
-            // Image of graph
-            // res contains the result of promise an array with the graphs in image format
-            // res[0] => image of chart1
-            // res[1] => image of chart2
-            // ..
+            // Question
             doc.content.push({
-              absolutePosition: { x: X_MARGIN, y: 240 + GRAPH_HEIGHT * index },
-              image: res[index],
-              height: 180,
-              width: 512, //540
+              absolutePosition: {
+                x: X_MARGIN + 50,
+                y: base_Height + 40.4,
+              },
+              text: "soy la pregunta",
+              fontSize: 9,
+              italics: true,
             });
+            // Graph
+            doc.content.push({
+              absolutePosition: {
+                x: X_MARGIN + 100,
+                y: base_Height + 58.5,
+              },
+              image: res[index],
+              height: 90,
+              width: 350,
+            });
+            // Graph name
+            let xPos = 595 / 2 - graphName.length / 2 - 30;
+            doc.content.push({
+              absolutePosition: {
+                x: xPos,
+                y: base_Height + 153.5,
+              },
+              text: graphName,
+              fontSize: 7,
+            });
+            // Separator
+            if (count === 3) {
+              doc.content.push({
+                absolutePosition: {
+                  x: X_MARGIN + 158,
+                  y: 110.4 + 164.5 * (count + 1),
+                },
+                canvas: [
+                  {
+                    type: "line",
+                    x1: -157,
+                    y1: 6,
+                    x2: 355,
+                    y2: 6,
+                    lineWidth: 0.7,
+                    lineColor: "black",
+                  },
+                ],
+                pageBreak: "after",
+              });
+              count = 0;
+              index++;
+            } else {
+              doc.content.push({
+                absolutePosition: {
+                  x: X_MARGIN + 158,
+                  y: 110.4 + 164.5 * (count + 1),
+                },
+                canvas: [
+                  {
+                    type: "line",
+                    x1: -157,
+                    y1: 6,
+                    x2: 355,
+                    y2: 6,
+                    lineWidth: 0.7,
+                    lineColor: "black",
+                  },
+                ],
+              });
+              count++;
+              index++;
+            }
+          } else {
+            index = 0;
+            reps++;
+            if (reps === 3) break;
           }
-        });*/
+        }
 
         if (res == null) console.log("borrar esto");
 
@@ -950,60 +979,3 @@ export default {
   },
 };
 </script>
-
-<style type="text/css">
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-}
-
-input {
-  font-size: 17px;
-  padding: 10px 20px;
-  float: right;
-  margin: 15px 0 0 15px;
-}
-
-.chart {
-  width: 100%;
-  height: 250px;
-  border: 1px solid #eee;
-}
-
-#chartdiv4 {
-  float: left;
-  margin: 0 20px 20px 0;
-  width: 30%;
-}
-
-.main {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-h2 {
-  margin-top: 2em;
-  clear: both;
-}
-
-br {
-  clear: both;
-}
-
-table {
-  width: 100%;
-  border: 1px solid #eee;
-  border-collapse: collapse;
-}
-
-table td,
-table th {
-  border: 1px solid #eee;
-  padding: 5px;
-}
-
-.col {
-  width: 50%;
-  float: left;
-}
-</style>

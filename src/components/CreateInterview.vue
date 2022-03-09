@@ -36,47 +36,51 @@
           +
         </button>
       </div>
-
-      <div
-        class="col-sm-12"
-        v-for="item in newPosition.questions"
-        v-bind:key="item.id"
+      <b-pagination
+        v-model="newPosition.questions"
+        :total-rows="1"
+        :per-page="1"
       >
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label>Question {{ item.id + 1 }} name</label>
-            <input
-              class="form-input aux"
-              type="text"
-              v-model="newPosition.questions[item.id].title"
-            />
+        <div
+          class="col-sm-12"
+          v-for="item in newPosition.questions"
+          v-bind:key="item.id"
+        >
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Question {{ item.id + 1 }} name</label>
+              <input
+                class="form-input aux"
+                type="text"
+                v-model="newPosition.questions[item.id].title"
+              />
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Question {{ item.id + 1 }} description</label>
+              <input
+                class="form-input aux"
+                type="text"
+                v-model="newPosition.questions[item.id].description"
+              />
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <button
+                  type="button"
+                  class="btn btn-primary puntero"
+                  @click="remove()"
+                >
+                  Remove question {{ item.id + 1 }}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label>Question {{ item.id + 1 }} description</label>
-            <input
-              class="form-input aux"
-              type="text"
-              v-model="newPosition.questions[item.id].description"
-            />
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-12">
-        <div class="col-sm-12">
-          <div class="form-group">
-            <button
-              type="button"
-              class="btn btn-primary puntero"
-              @click="remove()"
-            >
-              Remove question 1
-            </button>
-          </div>
-        </div>
-      </div>
+      </b-pagination>
 
       <div id="hijo"></div>
 

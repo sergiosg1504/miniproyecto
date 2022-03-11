@@ -397,7 +397,7 @@ export default {
                 type: "rect",
                 x: 0,
                 y: 0,
-                w: 512, //540
+                w: 512,
                 h: 92,
                 r: 5,
                 color: "#62c4e4",
@@ -407,13 +407,11 @@ export default {
           {
             absolutePosition: { x: X_MARGIN, y: 116 },
             table: {
-              //heights: [0.01, 11, 0.01, 11, 0.01, 11, 0.01],
               widths: [0, 130, 355, 4],
               body: [
                 //fila 1
                 [
                   {
-                    //border: [true,true,true,true],
                     border: [false, false, false, false],
                     text: " ",
                     fontSize: 0.01,
@@ -437,7 +435,6 @@ export default {
                 // fila 2
                 [
                   {
-                    //border: [true,true,true,true],
                     border: [false, false, false, false],
                     text: " ",
                     fontSize: 0.01,
@@ -471,7 +468,6 @@ export default {
                 // fila 3
                 [
                   {
-                    //border: [true,true,true,true],
                     border: [false, false, false, false],
                     text: " ",
                     fontSize: 0.01,
@@ -496,7 +492,6 @@ export default {
                 // fila 4
                 [
                   {
-                    //border: [true,true,true,true],
                     border: [false, false, false, false],
                     text: " ",
                     fontSize: 0.01,
@@ -530,7 +525,6 @@ export default {
                 // fila 5
                 [
                   {
-                    //border: [true,true,true,true],
                     border: [false, false, false, false],
                     text: " ",
                     fontSize: 0.01,
@@ -554,7 +548,6 @@ export default {
                 // fila 6
                 [
                   {
-                    //border: [true,true,true,true],
                     border: [false, false, false, false],
                     text: " ",
                     fontSize: 0.01,
@@ -588,7 +581,6 @@ export default {
                 // fila 7
                 [
                   {
-                    //border: [true,true,true,true],
                     border: [false, false, false, false],
                     text: " ",
                     fontSize: 0.01,
@@ -612,7 +604,6 @@ export default {
                 // fila 8
                 [
                   {
-                    //border: [true,true,true,true],
                     border: [false, false, false, false],
                     text: " ",
                     fontSize: 0.01,
@@ -646,7 +637,6 @@ export default {
                 // fila 9
                 [
                   {
-                    //border: [true,true,true,true],
                     border: [false, false, false, false],
                     text: " ",
                     fontSize: 0.01,
@@ -745,7 +735,7 @@ export default {
             doc.content.push({
               absolutePosition: {
                 x: X_MARGIN + 50,
-                y: 252.1 + GRAPH_HEIGHT * count,
+                y: 252 + GRAPH_HEIGHT * count,
               },
               text: "soy la pregunta",
               fontSize: 9,
@@ -832,7 +822,7 @@ export default {
               });
             }
             // Rula los cuatro graficos con sus separadores
-            let base_Height = 104.4 + 164.5 * count;
+            let base_Height = 269.9 * count;
             // Title Dot  108.4+32
             doc.content.push({
               absolutePosition: { x: X_MARGIN + 158, y: base_Height + 26.3 },
@@ -892,7 +882,7 @@ export default {
               doc.content.push({
                 absolutePosition: {
                   x: X_MARGIN + 158,
-                  y: 110.4 + 164.5 * (count + 1),
+                  y: 274.9 * (count + 1),
                 },
                 canvas: [
                   {
@@ -913,7 +903,7 @@ export default {
               doc.content.push({
                 absolutePosition: {
                   x: X_MARGIN + 158,
-                  y: 110.4 + 164.5 * (count + 1),
+                  y: 274.9 * (count + 1),
                 },
                 canvas: [
                   {

@@ -355,6 +355,14 @@ export default {
             name: "Apache Spark Developer Certification",
             is_requiered: 1,
           },
+          {
+            name: "Apache Spark Developer Certification",
+            is_requiered: 1,
+          },
+          {
+            name: "Apache Spark Developer Certification",
+            is_requiered: 1,
+          },
         ],
       };
 
@@ -814,6 +822,20 @@ export default {
           margin: [72, -10, 0, 0],
           bold: true,
         });
+
+        for (let i = 0; i < certifications.value.length; i++) {
+          doc.content.push({
+            absolutePosition: {
+              x: this.setter_X(i, certifications.value),
+              y: this.setter_Y(certifications.value[i].name, i),
+            },
+            text: certifications.value[i].name,
+            fontSize: 8,
+            //margin: [this.setter_X(item.name,index), this.setter_Y(item,index),0, 0],
+            italics: true,
+          });
+        }
+        /*
         certifications.value.forEach((item, index) => {
           doc.content.push({
             absolutePosition: {
@@ -825,7 +847,7 @@ export default {
             //margin: [this.setter_X(item.name,index), this.setter_Y(item,index),0, 0],
             italics: true,
           });
-        });
+        });*/
 
         /* Bucle para introducir las certificaciones --> Hacerlo con canvas e introducir el nombre */
 
@@ -1093,16 +1115,66 @@ export default {
       var aux = fecha.split(",");
       return aux[0];
     },
-    setter_X(text, index, separator = 4) {
-      //console.log(text.length)
+    setter_X(index, array) {
+      // Separador entre elementos = 6, correspondecia: 29 longitud son 98 puntos en el pdf aprox
       if (index === 0) return 165;
-      else if (index < 3) return 165 + text.length * separator;
+      else if (index < 3) return 165 + this.op(index, index - 1, array);
       else if (index === 3) return 165;
+      else if (index < 6) return 165 + this.op(index, index - 1, array);
     },
     setter_Y(text, index) {
       if (index >= 3 && index < 6) return 275;
       else if (index >= 6 && index < 9) return 285;
       else return 265;
+    },
+    op(now_index, bef_index, array) {
+      if (now_index % 2 === 0) {
+        console.log("Len now index: " + array[now_index].name.length);
+        console.log("Len bef index: " + array[bef_index - 1].name.length);
+        var len_i =
+          (98 * array[now_index - 1].name.length) /
+          array[bef_index - 1].name.length;
+        console.log("Index - 1: " + len_i);
+        var len_ii =
+          (98 * array[now_index - 1].name.length) /
+            array[bef_index - 1].name.length +
+          (98 * array[now_index].name.length) /
+            array[bef_index - 1].name.length;
+        console.log("Index - 2: " + len_ii);
+        //return ((98*array[now_index].name.length)/array[bef_index].name.length) + ((98*array[now_index].name.length)/array[bef_index].name.length);
+        return len_i * 2 - 3;
+      } else {
+        len_i =
+          (98 * array[now_index].name.length) / array[bef_index].name.length;
+        console.log("En la otra parte: " + len_i);
+        return len_i;
+      }
+      /*
+        if (now_index < 3)
+        {
+          if (now_index === 1)
+            return ((98*array[now_index].name.length)/array[bef_index].name.length)
+          else
+            return ((98*array[now_index].name.length)/array[bef_index].name.length) + ((98*array[now_index].name.length)/array[bef_index-1].name.length)
+        }
+        else if (now_index <6)
+        {
+            if (now_index === 5)
+              return ((98*array[now_index].name.length)/array[bef_index].name.length)
+            else
+              return ((98*array[now_index].name.length)/array[bef_index].name.length) + ((98*array[now_index].name.length)/array[bef_index-1].name.length)
+        }
+        else if ( now_index < 9)
+        {
+            if (now_index === 7)
+              return ((98*array[now_index].name.length)/array[bef_index].name.length)
+            else
+              return ((98*array[now_index].name.length)/array[bef_index].name.length) + ((98*array[now_index].name.length)/array[bef_index-1].name.length)
+        }
+        else 
+        {
+          return 165;
+        }*/
     },
   },
 };

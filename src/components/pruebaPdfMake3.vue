@@ -836,7 +836,7 @@ export default {
                   type: "rect",
                   x: 0,
                   y: 0,
-                  w: (98 * certifications.value[i + j].name.length) / 29,
+                  w: 3.7 * certifications.value[i + j].name.length,
                   h: 11,
                   r: 2,
                   lineColor: "#9BE6FF",

@@ -19,10 +19,10 @@ export default {
     return {
       isDownloadLoading: false,
       graphContent: [
-        { title: "Chart1" },
-        { title: "Chart2" },
-        { title: "Chart3" },
-        { title: "Chart4" },
+        { title: "User CVs analysed by company" },
+        { title: "User CVs analysed per admins" },
+        { title: "User CVs analysed by date" },
+        { title: "User CVs analysed by level" },
       ],
       chart: null,
       chart1: null,
@@ -326,7 +326,7 @@ export default {
       const userName = "luisbm";
       const areaName = "Progradum Tech.";
 
-      //const graphContent = this.graphContent;
+      const graphContent = this.graphContent;
       const documentTitle = "prueba.pdf";
 
       //const graphName = "aaaaaaaaaaaaaaaaaaaaaaaaaa";
@@ -697,7 +697,7 @@ export default {
               type: "line",
               x1: 0,
               y1: 20,
-              x2: 565 - X_MARGIN,
+              x2: 555 - X_MARGIN,
               y2: 20,
               lineWidth: 0.7,
               lineColor: "black",
@@ -712,7 +712,7 @@ export default {
               type: "line",
               x1: 0,
               y1: 20,
-              x2: 565 - X_MARGIN,
+              x2: 555 - X_MARGIN,
               y2: 20,
               lineWidth: 0.7,
               lineColor: "black",
@@ -727,7 +727,7 @@ export default {
               type: "line",
               x1: 0,
               y1: 20,
-              x2: 565 - X_MARGIN,
+              x2: 555 - X_MARGIN,
               y2: 20,
               lineWidth: 0.7,
               lineColor: "black",
@@ -748,6 +748,211 @@ export default {
               lineColor: "black",
             },
           ],
+        });
+
+        // Upper left
+        // Title Dot
+        doc.content.push({
+          absolutePosition: { x: X_MARGIN + 25, y: 286 },
+          canvas: [
+            {
+              type: "ellipse",
+              x: 0,
+              y: 0,
+              r1: 1,
+              r2: 1,
+              color: "red",
+            },
+          ],
+        });
+        // Title
+        doc.content.push({
+          absolutePosition: {
+            x: X_MARGIN + 40,
+            y: 280,
+          },
+          text: graphContent[0].title,
+          fontSize: 11,
+          bold: true,
+        });
+        // Graph
+        doc.content.push({
+          absolutePosition: {
+            x: X_MARGIN + 50,
+            y: 315,
+          },
+          image: res[0],
+          height: 140,
+          width: 170, //540
+        });
+        // User
+        doc.content.push({
+          absolutePosition: {
+            x: X_MARGIN + 555 / 8 + 40,
+            y: 475,
+          },
+          text: "User",
+          fontSize: 9,
+          bold: true,
+        });
+        // CVs Analysed
+        doc.content.push({
+          absolutePosition: {
+            x: X_MARGIN + 30,
+            y: 280 + 100,
+          },
+          text: "10",
+          fontSize: 9,
+          bold: true,
+        });
+
+        // Upper right
+        // Title Dot
+        doc.content.push({
+          absolutePosition: { x: X_MARGIN + 555 / 2 + 25, y: 286 },
+          canvas: [
+            {
+              type: "ellipse",
+              x: 0,
+              y: 0,
+              r1: 1,
+              r2: 1,
+              color: "red",
+            },
+          ],
+        });
+        // Title
+        doc.content.push({
+          absolutePosition: {
+            x: X_MARGIN + 555 / 2 + 40,
+            y: 280,
+          },
+          text: graphContent[1].title,
+          fontSize: 11,
+          bold: true,
+        });
+        console.log(graphContent[1].title);
+        // Graph
+        doc.content.push({
+          absolutePosition: {
+            x: X_MARGIN + 555 / 2 + 50,
+            y: 315,
+          },
+          image: res[1],
+          height: 140,
+          width: 170, //540
+        });
+        // User
+        doc.content.push({
+          absolutePosition: {
+            x: X_MARGIN + 555 / 2 + 555 / 8 + 40,
+            y: 475,
+          },
+          text: "User",
+          fontSize: 9,
+          bold: true,
+        });
+        // CVs Analysed
+        doc.content.push({
+          absolutePosition: {
+            x: X_MARGIN + 555 / 2 + 30,
+            y: 280 + 100,
+          },
+          text: "10",
+          fontSize: 9,
+          bold: true,
+        });
+
+        // Bottom left
+        // Title Dot
+        doc.content.push({
+          absolutePosition: { x: X_MARGIN + 25, y: 525.5 },
+          canvas: [
+            {
+              type: "ellipse",
+              x: 0,
+              y: 0,
+              r1: 1,
+              r2: 1,
+              color: "red",
+            },
+          ],
+        });
+        // Title
+        doc.content.push({
+          absolutePosition: {
+            x: X_MARGIN + 40,
+            y: 520.5,
+          },
+          text: graphContent[2].title,
+          fontSize: 11,
+          bold: true,
+        });
+        // Graph
+        doc.content.push({
+          absolutePosition: {
+            x: X_MARGIN + 50,
+            y: 315 + 240.5,
+          },
+          image: res[2],
+          height: 140,
+          width: 170, //540
+        });
+        // User
+        doc.content.push({
+          absolutePosition: {
+            x: X_MARGIN + 555 / 8 + 40,
+            y: 475 + 240.5,
+          },
+          text: "User",
+          fontSize: 9,
+          bold: true,
+        });
+        // CVs Analysed
+        doc.content.push({
+          absolutePosition: {
+            x: X_MARGIN + 30,
+            y: 280 + 100 + 240.5,
+          },
+          text: "10",
+          fontSize: 9,
+          bold: true,
+        });
+
+        // Bottom right
+        // Title Dot
+        doc.content.push({
+          absolutePosition: { x: X_MARGIN + 555 / 2 + 25, y: 526.5 },
+          canvas: [
+            {
+              type: "ellipse",
+              x: 0,
+              y: 0,
+              r1: 1,
+              r2: 1,
+              color: "red",
+            },
+          ],
+        });
+        // Title
+        doc.content.push({
+          absolutePosition: {
+            x: X_MARGIN + 555 / 2 + 40,
+            y: 280 + 240.5,
+          },
+          text: graphContent[3].title,
+          fontSize: 11,
+          bold: true,
+        });
+        // Graph
+        doc.content.push({
+          absolutePosition: {
+            x: X_MARGIN + 555 / 2 + 50,
+            y: 315 + 240.5,
+          },
+          image: res[3],
+          height: 140,
+          width: 170, //540
         });
 
         if (res == null) console.log("borrar esto");

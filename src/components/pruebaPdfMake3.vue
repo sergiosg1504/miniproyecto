@@ -352,15 +352,15 @@ export default {
             is_requiered: 1,
           },
           {
-            name: "Apache Spark Developer Certification",
+            name: "Apache Spark Developer",
             is_requiered: 1,
           },
           {
-            name: "Apache Spark Developer Certification",
+            name: "Apache Spark",
             is_requiered: 1,
           },
           {
-            name: "Apache Spark Developer Certification",
+            name: "Project Management Professional Certification",
             is_requiered: 1,
           },
         ],
@@ -823,17 +823,37 @@ export default {
           bold: true,
         });
 
-        for (let i = 0; i < certifications.value.length; i++) {
-          doc.content.push({
-            absolutePosition: {
-              x: this.setter_X(i, certifications.value),
-              y: this.setter_Y(certifications.value[i].name, i),
-            },
-            text: certifications.value[i].name,
-            fontSize: 8,
-            //margin: [this.setter_X(item.name,index), this.setter_Y(item,index),0, 0],
-            italics: true,
-          });
+        for (let i = 0; i < certifications.value.length; i = i + 3) {
+          var j = 0;
+          while (j < 3) {
+            doc.content.push({
+              absolutePosition: {
+                x: this.setter_X(i, j, certifications.value),
+                y: this.setter_Y(i),
+              },
+              canvas: [
+                {
+                  type: "rect",
+                  x: 0,
+                  y: 0,
+                  w: (98 * certifications.value[i + j].name.length) / 29,
+                  h: 11,
+                  r: 2,
+                  lineColor: "#9BE6FF",
+                },
+              ],
+            });
+            doc.content.push({
+              absolutePosition: {
+                x: this.setter_X(i, j, certifications.value),
+                y: this.setter_Y(i),
+              },
+              text: certifications.value[i + j].name,
+              fontSize: 8,
+              italics: true,
+            });
+            j++;
+          }
         }
         /*
         certifications.value.forEach((item, index) => {
@@ -1115,41 +1135,40 @@ export default {
       var aux = fecha.split(",");
       return aux[0];
     },
-    setter_X(index, array) {
-      // Separador entre elementos = 6, correspondecia: 29 longitud son 98 puntos en el pdf aprox
-      if (index === 0) return 165;
-      else if (index < 3) return 165 + this.op(index, index - 1, array);
-      else if (index === 3) return 165;
-      else if (index < 6) return 165 + this.op(index, index - 1, array);
+    setter_X(row_index, pos_index, array) {
+      var pos1, pos2;
+      if ((row_index + pos_index) % 3 == 0) return 165;
+      if (row_index % 2 === 0) {
+        // Rows with starting index even
+        if (pos_index % 2 === 0) {
+          pos1 = (98 * array[row_index + pos_index - 1].name.length) / 29;
+          pos2 = (98 * array[row_index + pos_index - 2].name.length) / 29;
+          return 165 + pos1 + 5 + pos2 + 5;
+        } else {
+          pos1 = (98 * array[row_index + pos_index - 1].name.length) / 29;
+          return 165 + pos1 + 5;
+        }
+      } // Rows with starting index odd
+      else {
+        if (pos_index % 2 === 0) {
+          pos1 = (98 * array[row_index + pos_index - 1].name.length) / 29;
+          console.log(array[row_index + pos_index].name);
+          return 165 + pos1 + 50;
+        } else {
+          console.log(array[row_index + pos_index].name);
+          pos1 = (98 * array[row_index + pos_index - 1].name.length) / 29;
+          pos2 = (98 * array[row_index + pos_index - 2].name.length) / 29;
+          return 165 + pos1 + 10 + pos2 + 20;
+        }
+      }
     },
-    setter_Y(text, index) {
-      if (index >= 3 && index < 6) return 275;
-      else if (index >= 6 && index < 9) return 285;
+    setter_Y(index) {
+      if (index >= 3 && index < 6) return 285;
+      else if (index >= 6 && index < 9) return 305;
       else return 265;
     },
-    op(now_index, bef_index, array) {
-      if (now_index % 2 === 0) {
-        console.log("Len now index: " + array[now_index].name.length);
-        console.log("Len bef index: " + array[bef_index - 1].name.length);
-        var len_i =
-          (98 * array[now_index - 1].name.length) /
-          array[bef_index - 1].name.length;
-        console.log("Index - 1: " + len_i);
-        var len_ii =
-          (98 * array[now_index - 1].name.length) /
-            array[bef_index - 1].name.length +
-          (98 * array[now_index].name.length) /
-            array[bef_index - 1].name.length;
-        console.log("Index - 2: " + len_ii);
-        //return ((98*array[now_index].name.length)/array[bef_index].name.length) + ((98*array[now_index].name.length)/array[bef_index].name.length);
-        return len_i * 2 - 3;
-      } else {
-        len_i =
-          (98 * array[now_index].name.length) / array[bef_index].name.length;
-        console.log("En la otra parte: " + len_i);
-        return len_i;
-      }
-      /*
+
+    /*
         if (now_index < 3)
         {
           if (now_index === 1)
@@ -1175,7 +1194,6 @@ export default {
         {
           return 165;
         }*/
-    },
   },
 };
 </script>

@@ -1152,16 +1152,15 @@ export default {
       else {
         if (pos_index % 2 === 0) {
           pos1 = (98 * array[row_index + pos_index - 1].name.length) / 29;
-          console.log(array[row_index + pos_index].name);
           return 165 + pos1 + 50;
         } else {
-          console.log(array[row_index + pos_index].name);
           pos1 = (98 * array[row_index + pos_index - 1].name.length) / 29;
           pos2 = (98 * array[row_index + pos_index - 2].name.length) / 29;
           return 165 + pos1 + 10 + pos2 + 20;
         }
       }
     },
+
     setter_Y(index) {
       if (index >= 3 && index < 6) return 285;
       else if (index >= 6 && index < 9) return 305;

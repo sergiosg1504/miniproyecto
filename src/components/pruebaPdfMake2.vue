@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <p>Este es el de los gráficos, el tuyo Sergio</p>
+    <p>Este es el de los gráficos, el de todos</p>
     <input type="button" value="Save as PDF" @click="saveReportOfAllToPDF()" />
   </div>
 </template>

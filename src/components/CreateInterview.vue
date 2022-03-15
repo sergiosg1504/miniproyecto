@@ -32,6 +32,85 @@
       </div>
 
       <div class="col-sm-12">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Title</label>
+            <input
+              class="form-input aux"
+              type="text"
+              id="name"
+              v-model="newPosition.questions[0].title"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Description</label>
+            <input
+              class="form-input aux"
+              type="text"
+              id="name"
+              v-model="newPosition.questions[0].description"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Title</label>
+            <input
+              class="form-input aux"
+              type="text"
+              id="name"
+              v-model="newPosition.questions[1].title"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Description</label>
+            <input
+              class="form-input aux"
+              type="text"
+              id="name"
+              v-model="newPosition.questions[1].description"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Title</label>
+            <input
+              class="form-input aux"
+              type="text"
+              id="name"
+              v-model="newPosition.questions[2].title"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Description</label>
+            <input
+              class="form-input aux"
+              type="text"
+              id="name"
+              v-model="newPosition.questions[2].description"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="col-sm-12">
         <button type="button" class="btn btn-primary" @click="addQuestion()">
           +
         </button>
@@ -82,7 +161,7 @@
         </div>
       </b-pagination>
 
-      <div id="hijo"></div>
+      <div id="hijo"></div>-->
 
       <div class="col-sm-12">
         <div class="col-sm-3" />
@@ -110,14 +189,18 @@ export default {
         // varialbe para el video
         questions: [
           {
-            id: 0,
+            title: "",
+            description: "",
+          },
+          {
+            title: "",
+            description: "",
+          },
+          {
             title: "",
             description: "",
           },
         ],
-        /*intro: {
-          file: "",
-        },*/
       }, // No hace falta crear los atributos se añaden dinamicamente haciendoles referencia en los inputs pero solo se puede hacer en primer nivel del arbol no puedes hacer al menos manualmente no se en inputs x.y.z, tiene que ser x.y = {z}
     };
   },
@@ -148,11 +231,6 @@ export default {
     onFileChange(e) {
       const formData = new FormData();
       formData.append("intro", e, ".mp4");
-      /*const reader = new FileReader();
-      reader.onload = (e) => {
-        this.newPosition.intro.file = e.target.result;
-      };
-      reader.readAsBinaryString(formData);*/
     },
     onFileChangeQuestions(e) {
       const num = e.srcElement.id.substring(6, 7); // trataba de asignar dinamicamente l id para luego recuperar el numero de pregunta, pero al hacerlo asi al crear otra se me actualiza y no vale

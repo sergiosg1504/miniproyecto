@@ -330,7 +330,7 @@ export default {
       //const areaName = "Progradum Tech.";
 
       //const graphContent = this.graphContent;
-      const documentTitle = "prueba.pdf";
+      //const documentTitle = "prueba.pdf";
 
       const profile = "JAVA";
       const category = "Middle";
@@ -344,7 +344,7 @@ export default {
             is_requiered: 1,
           },
           {
-            name: "Oracle Certified Especialist  ",
+            name: "Oracle Certified Especialist",
             is_requiered: 1,
           },
           {
@@ -361,6 +361,40 @@ export default {
           },
           {
             name: "Project Management Professional Certification",
+            is_requiered: 1,
+          },
+        ],
+      };
+
+      const education = {
+        title: "Education",
+        value: [
+          {
+            name: "Grado en Ingenería informática",
+            is_requiered: 1,
+          },
+          {
+            name: "Licenciado en Ingenieria Informatica",
+            is_requiered: 1,
+          },
+          {
+            name: "FP Grado Superior",
+            is_requiered: 1,
+          },
+          {
+            name: "Master en Ingeniería Informatica",
+            is_requiered: 1,
+          },
+          {
+            name: "FP Grado Medio",
+            is_requiered: 1,
+          },
+          {
+            name: "FP Grado Superior",
+            is_requiered: 1,
+          },
+          {
+            name: "Ingeniero",
             is_requiered: 1,
           },
         ],
@@ -836,7 +870,7 @@ export default {
                   type: "rect",
                   x: 0,
                   y: 0,
-                  w: 3.5 * certifications.value[i + j].name.length,
+                  w: this.calcWidht(certifications.value[i + j].name.length),
                   h: 11,
                   r: 2,
                   lineColor: "#9BE6FF",
@@ -851,8 +885,69 @@ export default {
               text: certifications.value[i + j].name,
               fontSize: 8,
               italics: true,
+              noWrap: true,
             });
             j++;
+          }
+        }
+
+        doc.content.push({
+          canvas: [
+            {
+              type: "rect",
+              x: 31,
+              y: 25,
+              w: 95,
+              h: 12,
+              r: 2,
+              color: "#62c4e4",
+            },
+          ],
+        });
+
+        doc.content.push({
+          text: education.title,
+          fontSize: 8,
+          margin: [85, -10, 0, 0],
+          bold: true,
+        });
+
+        for (var i = 0; i < education.value.length; i = i + 3) {
+          j = 0;
+          try {
+            while (j < 3) {
+              console.log(education.value[i + j].name.length);
+              doc.content.push({
+                absolutePosition: {
+                  x: this.setter_X(i, j, education.value),
+                  y: this.setter_Y(i, 0),
+                },
+                canvas: [
+                  {
+                    type: "rect",
+                    x: 0,
+                    y: 0,
+                    w: this.calcWidht(education.value[i + j].name.length),
+                    h: 11,
+                    r: 2,
+                    lineColor: "#9BE6FF",
+                  },
+                ],
+              });
+              doc.content.push({
+                absolutePosition: {
+                  x: this.setter_X(i, j, education.value),
+                  y: this.setter_Y(i, 1),
+                },
+                text: education.value[i + j].name,
+                fontSize: 8,
+                italics: true,
+                noWrap: true,
+              });
+              j++;
+            }
+          } catch (err) {
+            break;
           }
         }
         /*
@@ -1081,7 +1176,7 @@ export default {
                     y1: 6,
                     x2: 355,
                     y2: 6,
-                    lineWidth: 0.7,
+                    lineWidth: 0.7, 
                     lineColor: "black",
                   },
                 ],
@@ -1099,7 +1194,8 @@ export default {
         if (res == null) console.log("borrar esto");
 
         // Download
-        pdfMake.createPdf(doc).download(documentTitle);
+        //pdfMake.createPdf(doc).download(documentTitle);
+        pdfMake.createPdf(doc).open(); // Esto es para que no se descargue solo se abra
 
         this.isDownloadLoading = false; // Set spinner active
       });
@@ -1161,10 +1257,27 @@ export default {
       }
     },
 
-    setter_Y(index) {
-      if (index >= 3 && index < 6) return 285;
-      else if (index >= 6 && index < 9) return 305;
-      else return 265;
+    setter_Y(index, type) {
+      if (type === 0) {
+        if (index < 3) return 265;
+        else if (index < 6) return 280;
+        else if (index < 9) return 300;
+        else return 320;
+      } else if (type === 1) {
+        if (index < 3) return 302;
+        else if (index < 6) return 315;
+        else if (index < 9) return 335;
+        else return 345;
+      }
+    },
+    calcWidht(length) {
+      if (length <= 20) return length * 4.1;
+      if (length <= 25) return length * 4;
+      if (length <= 30) return 3.4 * length;
+      if (length <= 35) return 3 * length;
+      if (length <= 40) return 2.5 * length;
+      if (length <= 45) return 3.6 * length;
+      else return 9 * length;
     },
 
     /*

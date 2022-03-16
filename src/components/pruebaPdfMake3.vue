@@ -1,7 +1,8 @@
 <template>
   <div class="main">
     <p>
-      Este es el de los reportes de los usuarios, el mio, este tocalo Sergio
+      Este es el de los reportes de los usuarios, el mio, este no lo toques
+      Sergio
     </p>
     <input type="button" value="Save as PDF" @click="saveReportOfAllToPDF()" />
   </div>
@@ -343,7 +344,7 @@ export default {
             is_requiered: 1,
           },
           {
-            name: "Oracle Certified Especialist  ",
+            name: "Oracle Certified Especialist",
             is_requiered: 1,
           },
           {
@@ -351,21 +352,21 @@ export default {
             is_requiered: 1,
           },
           {
-            name: "Apache Spark Developer Certification",
+            name: "Apache Spark Developer",
             is_requiered: 1,
           },
           {
-            name: "Apache Spark Developer Certification",
+            name: "Apache Spark",
             is_requiered: 1,
           },
           {
-            name: "Apache Spark Developer Certification",
+            name: "Project Management Professional Certification",
             is_requiered: 1,
           },
         ],
       };
 
-      /*const education = {
+      const education = {
         title: "Education",
         value: [
           {
@@ -375,7 +376,7 @@ export default {
           {
             name: "Licenciado en Ingenieria Informatica",
             is_requiered: 1,
-          }, 
+          },
           {
             name: "FP Grado Superior",
             is_requiered: 1,
@@ -397,7 +398,7 @@ export default {
             is_requiered: 1,
           },
         ],
-      };*/
+      };
 
       //const graphName = "aaaaaaaaaaaaaaaaaaaaaaaaaa";
 
@@ -856,14 +857,13 @@ export default {
           bold: true,
         });
 
-        for (var i = 0; i < certifications.value.length; i = i + 3) {
+        for (let i = 0; i < certifications.value.length; i = i + 3) {
           var j = 0;
           try {
             while (j < 3) {
-              console.log(certifications.value[i + j].name.length);
               doc.content.push({
-                absolutePosition: {
-                  x: this.setter_X(i, j, certifications.value),
+                relativePosition: {
+                  x: this.setter_X(i, j, certifications.value, 0),
                   y: this.setter_Y(i, 0),
                 },
                 canvas: [
@@ -879,9 +879,9 @@ export default {
                 ],
               });
               doc.content.push({
-                absolutePosition: {
-                  x: this.setter_X(i, j, certifications.value),
-                  y: this.setter_Y(i, 1),
+                relativePosition: {
+                  x: this.setter_X(i, j, certifications.value, 0),
+                  y: this.setter_Y(i, 0),
                 },
                 text: certifications.value[i + j].name,
                 fontSize: 8,
@@ -895,16 +895,36 @@ export default {
           }
         }
 
-        /* Bucle para introducir las certificaciones --> Hacerlo con canvas e introducir el nombre */
-        /* for (i = 0; i < education.value.length; i = i + 3) {
+        doc.content.push({
+          canvas: [
+            {
+              type: "rect",
+              x: 31,
+              y: 25,
+              w: 95,
+              h: 12,
+              r: 2,
+              color: "#62c4e4",
+            },
+          ],
+        });
+
+        doc.content.push({
+          text: education.title,
+          fontSize: 8,
+          margin: [85, -10, 0, 0],
+          bold: true,
+        });
+
+        for (var i = 0; i < education.value.length; i = i + 3) {
           j = 0;
           try {
             while (j < 3) {
               console.log(education.value[i + j].name.length);
               doc.content.push({
                 absolutePosition: {
-                  x: this.setter_X(i, j, education.value),
-                  y: this.setter_Y(i, 0),
+                  x: this.setter_X(i, j, education.value, 1),
+                  y: this.setter_Y(i, 1),
                 },
                 canvas: [
                   {
@@ -920,7 +940,7 @@ export default {
               });
               doc.content.push({
                 absolutePosition: {
-                  x: this.setter_X(i, j, education.value),
+                  x: this.setter_X(i, j, education.value, 1),
                   y: this.setter_Y(i, 1),
                 },
                 text: education.value[i + j].name,
@@ -933,7 +953,7 @@ export default {
           } catch (err) {
             break;
           }
-        }*/
+        }
 
         // Top line
         doc.content.push({
@@ -965,40 +985,36 @@ export default {
             },
           ],
         });
-        // Y line
-        if (graphContent.length > 1) {
-          doc.content.push({
-            absolutePosition: { x: (565 + 30) / 2, y: 395 },
-            canvas: [
-              {
-                type: "line",
-                x1: 0,
-                y1: 0,
-                x2: 0,
-                y2: 356,
-                lineWidth: 0.7,
-                lineColor: "black",
-              },
-            ],
-          });
-        } else {
-          doc.content.push({
-            absolutePosition: { x: (565 + 30) / 2, y: 395 },
-            canvas: [
-              {
-                type: "line",
-                x1: 0,
-                y1: 0,
-                x2: 0,
-                y2: 178,
-                lineWidth: 0.7,
-                lineColor: "black",
-              },
-            ],
-          });
-        }
+        doc.content.push({
+          absolutePosition: { x: (565 + 30) / 2, y: 395 },
+          canvas: [
+            {
+              type: "line",
+              x1: 0,
+              y1: 0,
+              x2: 0,
+              y2: 178,
+              lineWidth: 0.7,
+              lineColor: "black",
+            },
+          ],
+        });
+        doc.content.push({
+          absolutePosition: { x: (565 + 30) / 2, y: 395 },
+          canvas: [
+            {
+              type: "line",
+              x1: 0,
+              y1: 0,
+              x2: 0,
+              y2: 356,
+              lineWidth: 0.7,
+              lineColor: "black",
+            },
+          ],
+        });
         let index = 0;
-        // Upper left
+
         if (index < graphContent.length) {
           // Title Dot
           doc.content.push({
@@ -1056,7 +1072,6 @@ export default {
           });
           index++;
         }
-        // Upper right
         if (index < graphContent.length) {
           // Title Dot
           doc.content.push({
@@ -1115,7 +1130,6 @@ export default {
           });
           index++;
         }
-        // Bottom left
         if (index < graphContent.length) {
           // Title Dot
           doc.content.push({
@@ -1173,7 +1187,6 @@ export default {
           });
           index++;
         }
-        // Bottom right
         if (index < graphContent.length) {
           // Title Dot
           doc.content.push({
@@ -1609,7 +1622,8 @@ export default {
         if (res == null) console.log("borrar esto");
 
         // Download
-        pdfMake.createPdf(doc).open();
+        //pdfMake.createPdf(doc).download(documentTitle);
+        pdfMake.createPdf(doc).open(); // Esto es para que no se descargue solo se abra
 
         this.isDownloadLoading = false; // Set spinner active
       });
@@ -1645,25 +1659,58 @@ export default {
       var aux = fecha.split(",");
       return aux[0];
     },
+    setter_X(row_index, pos_index, array, type) {
+      var pos1, pos2, delay;
+      if (type === 0) delay = 135;
+      else if (type === 1) delay = 165;
+      if ((row_index + pos_index) % 3 == 0) return delay;
+      if (row_index % 2 === 0) {
+        // Rows with starting index even
+        if (pos_index % 2 === 0) {
+          pos1 = (98 * array[row_index + pos_index - 1].name.length) / 29;
+          pos2 = (98 * array[row_index + pos_index - 2].name.length) / 29;
+
+          return delay + pos1 + 5 + pos2 + 15;
+        } else {
+          pos1 = (98 * array[row_index + pos_index - 1].name.length) / 29;
+
+          return delay + pos1 + 10;
+        }
+      } // Rows with starting index odd
+      else {
+        if (pos_index % 2 === 0) {
+          pos1 = (140 * array[row_index + pos_index - 1].name.length) / 29;
+
+          return delay + pos1 + 50;
+        } else {
+          pos1 = (98 * array[row_index + pos_index - 1].name.length) / 29;
+          pos2 = (98 * array[row_index + pos_index - 2].name.length) / 29;
+
+          return delay + pos1 + 10 + pos2 + 40;
+        }
+      }
+    },
+
     setter_Y(index, type) {
       if (type === 0) {
-        if (index < 3) return 265;
-        else if (index < 6) return 280;
-        else if (index < 9) return 300;
-        else return 320;
+        if (index < 3) return -10;
+        else if (index < 6) return 5;
+        else if (index < 9) return 20;
+        else return 35;
       } else if (type === 1) {
         if (index < 3) return 302;
-        else if (index < 6) return 315;
-        else if (index < 9) return 335;
-        else return 345;
+        else if (index < 6) return 317;
+        else if (index < 9) return 333;
+        else return 348;
       }
     },
     calcWidht(length) {
+      console.log(length);
       if (length <= 20) return length * 4.1;
       if (length <= 25) return length * 4;
-      if (length <= 30) return 3.4 * length;
-      if (length <= 35) return 3 * length;
-      if (length <= 40) return 2.5 * length;
+      if (length <= 30) return 3.6 * length;
+      if (length <= 35) return 3.5 * length;
+      if (length <= 40) return 3.5 * length;
       if (length <= 45) return 3.6 * length;
       else return 9 * length;
     },

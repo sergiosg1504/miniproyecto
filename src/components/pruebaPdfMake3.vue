@@ -400,6 +400,55 @@ export default {
         ],
       };
 
+      const tech = {
+        title: "Technology Skills",
+        items: [
+          {
+            name: "Programming Skill",
+            value: [
+              { name: "Java", is_requiered: 0 },
+              { name: "JavaScript", is_requiered: 0 },
+              { name: "C", is_requiered: 1 },
+            ],
+          },
+          {
+            name: "Tools",
+            value: [
+              { name: "MySQL", is_requiered: 0 },
+              { name: "Eclips", is_requiered: 0 },
+              { name: "NeatBeans", is_requiered: 1 },
+            ],
+          },
+          {
+            name: "Frameworks",
+            value: [
+              { name: "Spring", is_requiered: 0 },
+              { name: "Spring Security", is_requiered: 0 },
+              { name: "Tiles", is_requiered: 1 },
+              { name: "JPA", is_requiered: 1 },
+              { name: "J2EE", is_requiered: 1 },
+              { name: "JSP", is_requiered: 1 },
+            ],
+          },
+          {
+            name: "Others",
+            value: [
+              { name: "Github", is_requiered: 0 },
+              { name: "API", is_requiered: 0 },
+              { name: "Java EE", is_requiered: 1 },
+              { name: "Programación orientada a objetos", is_requiered: 1 },
+              { name: "Oracle", is_requiered: 1 },
+              { name: "MVC", is_requiered: 1 },
+            ],
+          },
+        ],
+      };
+
+      /*const skills = {
+        title: "Non-Technology skills",
+        value:[]
+      }*/
+
       //const graphName = "aaaaaaaaaaaaaaaaaaaaaaaaaa";
 
       const X_MARGIN = 42;
@@ -954,6 +1003,27 @@ export default {
             break;
           }
         }
+
+        doc.content.push({
+          canvas: [
+            {
+              type: "rect",
+              x: 31,
+              y: 40,
+              w: 95,
+              h: 12,
+              r: 2,
+              color: "#62c4e4",
+            },
+          ],
+        });
+
+        doc.content.push({
+          text: tech.title,
+          fontSize: 8,
+          margin: [60, -10, 0, 0],
+          bold: true,
+        });
 
         // Top line
         doc.content.push({

@@ -859,35 +859,39 @@ export default {
 
         for (let i = 0; i < certifications.value.length; i = i + 3) {
           var j = 0;
-          while (j < 3) {
-            doc.content.push({
-              relativePosition: {
-                x: this.setter_X(i, j, certifications.value),
-                y: this.setter_Y(i),
-              },
-              canvas: [
-                {
-                  type: "rect",
-                  x: 0,
-                  y: 0,
-                  w: this.calcWidht(certifications.value[i + j].name.length),
-                  h: 11,
-                  r: 2,
-                  lineColor: "#9BE6FF",
+          try {
+            while (j < 3) {
+              doc.content.push({
+                relativePosition: {
+                  x: this.setter_X(i, j, certifications.value, 0),
+                  y: this.setter_Y(i, 0),
                 },
-              ],
-            });
-            doc.content.push({
-              relativePosition: {
-                x: this.setter_X(i, j, certifications.value),
-                y: this.setter_Y(i),
-              },
-              text: certifications.value[i + j].name,
-              fontSize: 8,
-              italics: true,
-              noWrap: true,
-            });
-            j++;
+                canvas: [
+                  {
+                    type: "rect",
+                    x: 0,
+                    y: 0,
+                    w: this.calcWidht(certifications.value[i + j].name.length),
+                    h: 11,
+                    r: 2,
+                    lineColor: "#9BE6FF",
+                  },
+                ],
+              });
+              doc.content.push({
+                relativePosition: {
+                  x: this.setter_X(i, j, certifications.value, 0),
+                  y: this.setter_Y(i, 0),
+                },
+                text: certifications.value[i + j].name,
+                fontSize: 8,
+                italics: true,
+                noWrap: true,
+              });
+              j++;
+            }
+          } catch (err) {
+            break;
           }
         }
 
@@ -919,8 +923,8 @@ export default {
               console.log(education.value[i + j].name.length);
               doc.content.push({
                 absolutePosition: {
-                  x: this.setter_X(i, j, education.value),
-                  y: this.setter_Y(i, 0),
+                  x: this.setter_X(i, j, education.value, 1),
+                  y: this.setter_Y(i, 1),
                 },
                 canvas: [
                   {
@@ -936,7 +940,7 @@ export default {
               });
               doc.content.push({
                 absolutePosition: {
-                  x: this.setter_X(i, j, education.value),
+                  x: this.setter_X(i, j, education.value, 1),
                   y: this.setter_Y(i, 1),
                 },
                 text: education.value[i + j].name,
@@ -950,246 +954,6 @@ export default {
             break;
           }
         }
-        /*
-        certifications.value.forEach((item, index) => {
-          doc.content.push({
-            absolutePosition: {
-              x: this.setter_X(item.name, index),
-              y: this.setter_Y(item, index),
-            },
-            text: item.name,
-            fontSize: 8,
-            //margin: [this.setter_X(item.name,index), this.setter_Y(item,index),0, 0],
-            italics: true,
-          });
-        });*/
-
-        /* Bucle para introducir las certificaciones --> Hacerlo con canvas e introducir el nombre */
-
-        //let index = 0; // contador del indice total
-        //let count = 0; // contador del indice por pagina
-        // Primera pagina
-        /*while (index < 3) {
-          if (res[index] !== null) {
-            // Title Dot
-            doc.content.push({
-              absolutePosition: { x: X_MARGIN + 158, y: 200 },
-              canvas: [
-                {
-                  type: "ellipse",
-                  x: -125,
-                  y: 45 + GRAPH_HEIGHT * count,
-                  r1: 1,
-                  r2: 1,
-                  color: "red",
-                },
-              ],
-            });
-            // Title
-            doc.content.push({
-              absolutePosition: {
-                x: X_MARGIN + 50,
-                y: 238 + GRAPH_HEIGHT * count,
-              },
-              text: graphContent[index].title,
-              fontSize: 9,
-              bold: true,
-            });
-            // Question
-            doc.content.push({
-              absolutePosition: {
-                x: X_MARGIN + 50,
-                y: 252.1 + GRAPH_HEIGHT * count,
-              },
-              text: "soy la pregunta",
-              fontSize: 9,
-              italics: true,
-            });
-            // Graph
-            doc.content.push({
-              absolutePosition: {
-                x: X_MARGIN + 100,
-                y: 270 + GRAPH_HEIGHT * count,
-              },
-              image: res[index],
-              height: 115,
-              width: 350, //540
-            });
-            // Graph name
-            let xPos = 595 / 2 - graphName.length / 2 - 30;
-            doc.content.push({
-              absolutePosition: {
-                x: xPos,
-                y: 390 + GRAPH_HEIGHT * count,
-              },
-              text: graphName,
-              fontSize: 7,
-            });
-            // Separator
-            if (count === 2) {
-              doc.content.push({
-                absolutePosition: { x: X_MARGIN + 158, y: 200 },
-                canvas: [
-                  {
-                    type: "line",
-                    x1: -157,
-                    y1: 210 + GRAPH_HEIGHT * count,
-                    x2: 355,
-                    y2: 210 + GRAPH_HEIGHT * count,
-                    lineWidth: 0.7,
-                    lineColor: "black",
-                  },
-                ],
-                pageBreak: "after",
-              });
-            } else {
-              doc.content.push({
-                absolutePosition: { x: X_MARGIN + 158, y: 200 },
-                canvas: [
-                  {
-                    type: "line",
-                    x1: -157,
-                    y1: 210 + GRAPH_HEIGHT * count,
-                    x2: 355,
-                    y2: 210 + GRAPH_HEIGHT * count,
-                    lineWidth: 0.7,
-                    lineColor: "black",
-                  },
-                ],
-              });
-            }
-          }
-          count++;
-          index++;
-        }
-        let reps = 0;
-        // Demas paginas
-        count = 0;
-        while (count < 4) {
-          if (index < graphContent.length) {
-            if (count === 0) {
-              // logo 52.2
-              // separador  108.4
-              doc.content.push({
-                absolutePosition: { x: X_MARGIN + 158, y: 0 },
-                canvas: [
-                  {
-                    type: "line",
-                    x1: -157,
-                    y1: 108.4,
-                    x2: 355,
-                    y2: 108.4,
-                    lineWidth: 0.7,
-                    lineColor: "black",
-                  },
-                ],
-              });
-            }
-            // Rula los cuatro graficos con sus separadores
-            let base_Height = 104.4 + 164.5 * count;
-            // Title Dot  108.4+32
-            doc.content.push({
-              absolutePosition: { x: X_MARGIN + 158, y: base_Height + 26.3 },
-              canvas: [
-                {
-                  type: "ellipse",
-                  x: -125,
-                  y: 6,
-                  r1: 1,
-                  r2: 1,
-                  color: "red",
-                },
-              ],
-            });
-            // Title
-            doc.content.push({
-              absolutePosition: {
-                x: X_MARGIN + 50,
-                y: base_Height + 26.3,
-              },
-              text: graphContent[index].title,
-              fontSize: 9,
-              bold: true,
-            });
-            // Question
-            doc.content.push({
-              absolutePosition: {
-                x: X_MARGIN + 50,
-                y: base_Height + 40.4,
-              },
-              text: "soy la pregunta",
-              fontSize: 9,
-              italics: true,
-            });
-            // Graph
-            doc.content.push({
-              absolutePosition: {
-                x: X_MARGIN + 100,
-                y: base_Height + 58.5,
-              },
-              image: res[index],
-              height: 90,
-              width: 350,
-            });
-            // Graph name
-            let xPos = 595 / 2 - graphName.length / 2 - 30;
-            doc.content.push({
-              absolutePosition: {
-                x: xPos,
-                y: base_Height + 153.5,
-              },
-              text: graphName,
-              fontSize: 7,
-            });
-            // Separator
-            if (count === 3) {
-              doc.content.push({
-                absolutePosition: {
-                  x: X_MARGIN + 158,
-                  y: 110.4 + 164.5 * (count + 1),
-                },
-                canvas: [
-                  {
-                    type: "line",
-                    x1: -157,
-                    y1: 6,
-                    x2: 355,
-                    y2: 6,
-                    lineWidth: 0.7,
-                    lineColor: "black",
-                  },
-                ],
-                pageBreak: "after",
-              });
-              count = 0;
-              index++;
-            } else {
-              doc.content.push({
-                absolutePosition: {
-                  x: X_MARGIN + 158,
-                  y: 110.4 + 164.5 * (count + 1),
-                },
-                canvas: [
-                  {
-                    type: "line",
-                    x1: -157,
-                    y1: 6,
-                    x2: 355,
-                    y2: 6,
-                    lineWidth: 0.7, 
-                    lineColor: "black",
-                  },
-                ],
-              });
-              count++;
-              index++;
-            }
-          } else {
-            index = 0;
-            reps++;
-            if (reps === 3) break;
-          }
-        }*/
 
         if (res == null) console.log("borrar esto");
 
@@ -1231,81 +995,61 @@ export default {
       var aux = fecha.split(",");
       return aux[0];
     },
-    setter_X(row_index, pos_index, array) {
-      var pos1, pos2;
-      if ((row_index + pos_index) % 3 == 0) return 165;
+    setter_X(row_index, pos_index, array, type) {
+      var pos1, pos2, delay;
+      if (type === 0) delay = 135;
+      else if (type === 1) delay = 165;
+      if ((row_index + pos_index) % 3 == 0) return delay;
       if (row_index % 2 === 0) {
         // Rows with starting index even
         if (pos_index % 2 === 0) {
           pos1 = (98 * array[row_index + pos_index - 1].name.length) / 29;
           pos2 = (98 * array[row_index + pos_index - 2].name.length) / 29;
-          return 165 + pos1 + 5 + pos2 + 5;
+
+          return delay + pos1 + 5 + pos2 + 15;
         } else {
           pos1 = (98 * array[row_index + pos_index - 1].name.length) / 29;
-          return 165 + pos1 + 5;
+
+          return delay + pos1 + 10;
         }
       } // Rows with starting index odd
       else {
         if (pos_index % 2 === 0) {
-          pos1 = (98 * array[row_index + pos_index - 1].name.length) / 29;
-          return 165 + pos1 + 50;
+          pos1 = (140 * array[row_index + pos_index - 1].name.length) / 29;
+
+          return delay + pos1 + 50;
         } else {
           pos1 = (98 * array[row_index + pos_index - 1].name.length) / 29;
           pos2 = (98 * array[row_index + pos_index - 2].name.length) / 29;
-          return 165 + pos1 + 10 + pos2 + 20;
+
+          return delay + pos1 + 10 + pos2 + 40;
         }
       }
     },
 
     setter_Y(index, type) {
       if (type === 0) {
-        if (index < 3) return 265;
-        else if (index < 6) return 280;
-        else if (index < 9) return 300;
-        else return 320;
+        if (index < 3) return -10;
+        else if (index < 6) return 5;
+        else if (index < 9) return 20;
+        else return 35;
       } else if (type === 1) {
         if (index < 3) return 302;
-        else if (index < 6) return 315;
-        else if (index < 9) return 335;
-        else return 345;
+        else if (index < 6) return 317;
+        else if (index < 9) return 333;
+        else return 348;
       }
     },
     calcWidht(length) {
+      console.log(length);
       if (length <= 20) return length * 4.1;
       if (length <= 25) return length * 4;
-      if (length <= 30) return 3.4 * length;
-      if (length <= 35) return 3 * length;
-      if (length <= 40) return 2.5 * length;
+      if (length <= 30) return 3.6 * length;
+      if (length <= 35) return 3.5 * length;
+      if (length <= 40) return 3.5 * length;
       if (length <= 45) return 3.6 * length;
       else return 9 * length;
     },
-
-    /*
-        if (now_index < 3)
-        {
-          if (now_index === 1)
-            return ((98*array[now_index].name.length)/array[bef_index].name.length)
-          else
-            return ((98*array[now_index].name.length)/array[bef_index].name.length) + ((98*array[now_index].name.length)/array[bef_index-1].name.length)
-        }
-        else if (now_index <6)
-        {
-            if (now_index === 5)
-              return ((98*array[now_index].name.length)/array[bef_index].name.length)
-            else
-              return ((98*array[now_index].name.length)/array[bef_index].name.length) + ((98*array[now_index].name.length)/array[bef_index-1].name.length)
-        }
-        else if ( now_index < 9)
-        {
-            if (now_index === 7)
-              return ((98*array[now_index].name.length)/array[bef_index].name.length)
-            else
-              return ((98*array[now_index].name.length)/array[bef_index].name.length) + ((98*array[now_index].name.length)/array[bef_index-1].name.length)
-        }
-        else 
-        {
-          return 165;
-        }*/
   },
 };
 </script>

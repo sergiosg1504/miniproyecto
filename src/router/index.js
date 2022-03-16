@@ -22,7 +22,10 @@ import OpenInterviews from "../components/OpenInterviews.vue";
 import ClosedInterviews from "../components/ClosedInterviews.vue";
 
 import Calendario from "../views/Calendario.vue";
-import ReportsDownloader from "../components/pruebaPdfMake.vue";
+import PdfExam from "../components/PdfExam.vue";
+import PdfExam2 from "../components/PdfExam2.vue";
+/*import ReportsDownloader from "../components/pruebaPdfMake.vue";*/
+import ReportsDownloader3 from "../components/pruebaPdfMake3.vue";
 
 import MeetingList from "../views/MeetingList.vue";
 import MeetSeminariosWeb from "../views/MeetSeminariosWeb.vue";
@@ -221,9 +224,19 @@ const routes = [
     props: true,
   },
   {
-    path: "/pdf",
-    name: "pruebaPdfMake",
-    component: ReportsDownloader,
+    path: "/PdfExam",
+    name: "PdfExam",
+    component: PdfExam,
+  },
+  {
+    path: "/PdfExam2",
+    name: "PdfExam2",
+    component: PdfExam2,
+  },
+  {
+    path: "/pdf3",
+    name: "pruebaPdfMake3",
+    component: ReportsDownloader3,
   },
 ];
 

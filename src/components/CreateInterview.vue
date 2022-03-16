@@ -29,75 +29,139 @@
             />
           </div>
         </div>
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label>Intro video</label>
-            <input
-              class="form-input aux no-border"
-              type="file"
-              accept="video/*"
-              id="video"
-              @change="onFileChange"
-            />
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-12">
-        <button type="button" class="btn btn-primary" @click="addQuestion()">
-          +
-        </button>
       </div>
 
       <div class="col-sm-12">
         <div class="col-sm-6">
           <div class="form-group">
-            <label>Question 1 name</label>
+            <label>Title</label>
             <input
               class="form-input aux"
               type="text"
+              id="name"
               v-model="newPosition.questions[0].title"
             />
           </div>
         </div>
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label>Question 1 video</label>
-            <input
-              class="form-input aux no-border"
-              type="file"
-              accept="video/*"
-              @change="onFileChangeQuestions"
-            />
-          </div>
-        </div>
       </div>
-
       <div class="col-sm-12">
         <div class="col-sm-6">
           <div class="form-group">
-            <label>Question 1 description</label>
+            <label>Description</label>
             <input
               class="form-input aux"
               type="text"
+              id="name"
               v-model="newPosition.questions[0].description"
             />
           </div>
         </div>
+      </div>
+      <div class="col-sm-12">
         <div class="col-sm-6">
           <div class="form-group">
-            <button
-              type="button"
-              class="btn btn-primary puntero"
-              @click="remove()"
-            >
-              Remove question 1
-            </button>
+            <label>Title</label>
+            <input
+              class="form-input aux"
+              type="text"
+              id="name"
+              v-model="newPosition.questions[1].title"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Description</label>
+            <input
+              class="form-input aux"
+              type="text"
+              id="name"
+              v-model="newPosition.questions[1].description"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Title</label>
+            <input
+              class="form-input aux"
+              type="text"
+              id="name"
+              v-model="newPosition.questions[2].title"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Description</label>
+            <input
+              class="form-input aux"
+              type="text"
+              id="name"
+              v-model="newPosition.questions[2].description"
+            />
           </div>
         </div>
       </div>
 
-      <div id="hijo"></div>
+      <!-- <div class="col-sm-12">
+        <button type="button" class="btn btn-primary" @click="addQuestion()">
+          +
+        </button>
+      </div>
+      <b-pagination
+        v-model="newPosition.questions"
+        :total-rows="1"
+        :per-page="1"
+      >
+        <div
+          class="col-sm-12"
+          v-for="item in newPosition.questions"
+          v-bind:key="item.id"
+        >
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Question {{ item.id + 1 }} name</label>
+              <input
+                class="form-input aux"
+                type="text"
+                v-model="newPosition.questions[item.id].title"
+              />
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Question {{ item.id + 1 }} description</label>
+              <input
+                class="form-input aux"
+                type="text"
+                v-model="newPosition.questions[item.id].description"
+              />
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <button
+                  type="button"
+                  class="btn btn-primary puntero"
+                  @click="remove()"
+                >
+                  Remove question {{ item.id + 1 }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </b-pagination>
+
+      <div id="hijo"></div>-->
 
       <div class="col-sm-12">
         <div class="col-sm-3" />
@@ -127,19 +191,23 @@ export default {
           {
             title: "",
             description: "",
-            media: {
-              file: "https://www.youtube.com/watch?v=OYGot5tm49A",
-            },
+          },
+          {
+            title: "",
+            description: "",
+          },
+          {
+            title: "",
+            description: "",
           },
         ],
-        /*intro: {
-          file: "",
-        },*/
       }, // No hace falta crear los atributos se añaden dinamicamente haciendoles referencia en los inputs pero solo se puede hacer en primer nivel del arbol no puedes hacer al menos manualmente no se en inputs x.y.z, tiene que ser x.y = {z}
     };
   },
   created() {
     this.questionNum = 0;
+    let pos = this.newPosition;
+    console.log(pos);
     /*this.agregar = document.getElementById("add_question");
     this.contenido = document.getElementById("contenedor");
     this.agregar.addEventListener("click", (e) => {
@@ -163,11 +231,6 @@ export default {
     onFileChange(e) {
       const formData = new FormData();
       formData.append("intro", e, ".mp4");
-      /*const reader = new FileReader();
-      reader.onload = (e) => {
-        this.newPosition.intro.file = e.target.result;
-      };
-      reader.readAsBinaryString(formData);*/
     },
     onFileChangeQuestions(e) {
       const num = e.srcElement.id.substring(6, 7); // trataba de asignar dinamicamente l id para luego recuperar el numero de pregunta, pero al hacerlo asi al crear otra se me actualiza y no vale
@@ -180,22 +243,13 @@ export default {
     },
     addQuestion() {
       this.questionNum++;
-      var newDiv = document.createElement("div");
-      newDiv.innerHTML =
-        '<div class="col-sm-12"> <div class="col-sm-6"><div class="form-group"><label>Question name ' +
-        (this.questionNum + 1) +
-        '</label><input class="form-input aux" type="text" v-model="newPosition.questions[' +
-        this.questionNum +
-        '].title"/></div></div><div class="col-sm-6"><div class="form-group"><label>Question video ' +
-        (this.questionNum + 1) +
-        '</label><input class="form-input aux no-border" type="file" accept="video/*" @change="onFileChangeQuestions"/></div></div></div><div class="col-sm-12"><div class="col-sm-6"><div class="form-group"><label>Question description ' +
-        (this.questionNum + 1) +
-        '</label><input class="form-input aux" type="text" v-model="newPosition.questions[' +
-        this.questionNum +
-        '].description"/></div></div><div class="col-sm-6"><div class="form-group"><button type="button" class="btn btn-primary puntero" @click="remove()">Remove question ' +
-        (this.questionNum + 1) +
-        "</button></div></div></div>";
-      document.getElementById("hijo").appendChild(newDiv);
+      let question = {
+        id: this.questionNum,
+        title: "",
+        description: "",
+      };
+      this.newPosition.questions.push(question);
+      console.log(this.newPosition.questions);
     },
     createPosition() {
       console.log(this.newPosition);
@@ -212,6 +266,12 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+    },
+  },
+  computed: {
+    qtn: () => {
+      let pos = this.newPosition;
+      return pos.questions;
     },
   },
 };

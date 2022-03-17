@@ -329,7 +329,7 @@ export default {
       const userName = "luisbm";
       //const areaName = "Progradum Tech.";
 
-      const graphContent = this.graphContent;
+      //const graphContent = this.graphContent;
       //const documentTitle = "prueba.pdf";
 
       const profile = "JAVA";
@@ -338,6 +338,7 @@ export default {
       const year_max = "4";
       const certifications = {
         title: "Certifications",
+        //value:[]
         value: [
           {
             name: "Oracle Certified Professional",
@@ -368,6 +369,7 @@ export default {
 
       const education = {
         title: "Education",
+        //value:[]
         value: [
           {
             name: "Grado en Ingenería informática",
@@ -444,10 +446,17 @@ export default {
         ],
       };
 
-      /*const skills = {
+      const skills = {
         title: "Non-Technology skills",
-        value:[]
-      }*/
+        value: [
+          { name: "Empathy", is_requiered: 0 },
+          { name: "Solidarity", is_requiered: 0 },
+          { name: "Adaptability", is_requiered: 1 },
+          { name: "Creativity", is_requiered: 1 },
+          { name: "Customer", is_requiered: 1 },
+          { name: "Teamwork", is_requiered: 1 },
+        ],
+      };
 
       //const graphName = "aaaaaaaaaaaaaaaaaaaaaaaaaa";
 
@@ -906,42 +915,75 @@ export default {
           bold: true,
         });
 
-        for (let i = 0; i < certifications.value.length; i = i + 3) {
-          var j = 0;
-          try {
-            while (j < 3) {
-              doc.content.push({
-                relativePosition: {
-                  x: this.setter_X(i, j, certifications.value, 0),
-                  y: this.setter_Y(i, 0),
-                },
-                canvas: [
-                  {
-                    type: "rect",
-                    x: 0,
-                    y: 0,
-                    w: this.calcWidht(certifications.value[i + j].name.length),
-                    h: 11,
-                    r: 2,
-                    lineColor: "#9BE6FF",
+        if (certifications.value.length !== 0) {
+          for (let i = 0; i < certifications.value.length; i = i + 3) {
+            var j = 0;
+            try {
+              while (j < 3) {
+                doc.content.push({
+                  relativePosition: {
+                    x: this.setter_X(i, j, certifications.value, 0),
+                    y: this.setter_Y(i, 0),
                   },
-                ],
-              });
-              doc.content.push({
-                relativePosition: {
-                  x: this.setter_X(i, j, certifications.value, 0),
-                  y: this.setter_Y(i, 0),
-                },
-                text: certifications.value[i + j].name,
-                fontSize: 8,
-                italics: true,
-                noWrap: true,
-              });
-              j++;
+                  canvas: [
+                    {
+                      type: "rect",
+                      x: 0,
+                      y: 0,
+                      w: this.calcWidht(
+                        certifications.value[i + j].name.length
+                      ),
+                      h: 11,
+                      r: 2,
+                      lineColor: "#9BE6FF",
+                    },
+                  ],
+                });
+                doc.content.push({
+                  relativePosition: {
+                    x: this.setter_X(i, j, certifications.value, 0),
+                    y: this.setter_Y(i, 0),
+                  },
+                  text: certifications.value[i + j].name,
+                  fontSize: 8,
+                  italics: true,
+                  noWrap: true,
+                });
+                j++;
+              }
+            } catch (err) {
+              break;
             }
-          } catch (err) {
-            break;
           }
+        } else {
+          doc.content.push({
+            relativePosition: {
+              x: 135,
+              y: -10,
+            },
+            canvas: [
+              {
+                type: "rect",
+                x: 0,
+                y: 0,
+                w: "No certifications".length * 3.5,
+                h: 11,
+                r: 2,
+                lineColor: "#C9C9C8",
+              },
+            ],
+          });
+          doc.content.push({
+            relativePosition: {
+              x: 137,
+              y: -10,
+            },
+            text: "No certifications",
+            fontSize: 8,
+            italics: true,
+            noWrap: true,
+            color: "#C9C9C8",
+          });
         }
 
         doc.content.push({
@@ -964,44 +1006,73 @@ export default {
           margin: [85, -10, 0, 0],
           bold: true,
         });
-
-        for (var i = 0; i < education.value.length; i = i + 3) {
-          j = 0;
-          try {
-            while (j < 3) {
-              console.log(education.value[i + j].name.length);
-              doc.content.push({
-                absolutePosition: {
-                  x: this.setter_X(i, j, education.value, 1),
-                  y: this.setter_Y(i, 1),
-                },
-                canvas: [
-                  {
-                    type: "rect",
-                    x: 0,
-                    y: 0,
-                    w: this.calcWidht(education.value[i + j].name.length),
-                    h: 11,
-                    r: 2,
-                    lineColor: "#9BE6FF",
+        if (education.value.length !== 0) {
+          for (var i = 0; i < education.value.length; i = i + 3) {
+            j = 0;
+            try {
+              while (j < 3) {
+                console.log(education.value[i + j].name.length);
+                doc.content.push({
+                  absolutePosition: {
+                    x: this.setter_X(i, j, education.value, 1),
+                    y: this.setter_Y(i, 1),
                   },
-                ],
-              });
-              doc.content.push({
-                absolutePosition: {
-                  x: this.setter_X(i, j, education.value, 1),
-                  y: this.setter_Y(i, 1),
-                },
-                text: education.value[i + j].name,
-                fontSize: 8,
-                italics: true,
-                noWrap: true,
-              });
-              j++;
+                  canvas: [
+                    {
+                      type: "rect",
+                      x: 0,
+                      y: 0,
+                      w: this.calcWidht(education.value[i + j].name.length),
+                      h: 11,
+                      r: 2,
+                      lineColor: "#9BE6FF",
+                    },
+                  ],
+                });
+                doc.content.push({
+                  absolutePosition: {
+                    x: this.setter_X(i, j, education.value, 1),
+                    y: this.setter_Y(i, 1),
+                  },
+                  text: education.value[i + j].name,
+                  fontSize: 8,
+                  italics: true,
+                  noWrap: true,
+                });
+                j++;
+              }
+            } catch (err) {
+              break;
             }
-          } catch (err) {
-            break;
           }
+        } else {
+          doc.content.push({
+            relativePosition: {
+              x: 135,
+              y: -10,
+            },
+            canvas: [
+              {
+                type: "rect",
+                x: 0,
+                y: 0,
+                w: "No certifications".length * 4,
+                h: 11,
+                r: 2,
+                lineColor: "#C9C9C8",
+              },
+            ],
+          });
+          doc.content.push({
+            relativePosition: {
+              x: 137,
+              y: -10,
+            },
+            text: "No education titles",
+            fontSize: 8,
+            italics: true,
+            color: "#C9C9C8",
+          });
         }
 
         doc.content.push({
@@ -1025,8 +1096,87 @@ export default {
           bold: true,
         });
 
-        // Top line
+        tech.items.forEach((item, index) => {
+          console.log(index);
+          doc.content.push({
+            canvas: [
+              {
+                type: "rect",
+                x: 55,
+                y: 4,
+                w: 70,
+                h: 12,
+                r: 2,
+                color: "#62c4e4",
+              },
+            ],
+          });
+
+          doc.content.push({
+            text: item.name,
+            fontSize: 7,
+            margin: [60, -10, 0, 0],
+            bold: true,
+            color: "#ffffff",
+          });
+          // Iria lo de mostrar lo otro
+        });
+
         doc.content.push({
+          canvas: [
+            {
+              type: "rect",
+              x: 31,
+              y: 20,
+              w: 95,
+              h: 12,
+              r: 2,
+              color: "#62c4e4",
+            },
+          ],
+        });
+
+        doc.content.push({
+          text: skills.title,
+          fontSize: 8,
+          margin: [40, -10, 0, 0],
+          bold: true,
+        });
+
+        if (skills.value.length !== 0) {
+          console.log("jaj");
+        } else {
+          doc.content.push({
+            relativePosition: {
+              x: 135,
+              y: -10,
+            },
+            canvas: [
+              {
+                type: "rect",
+                x: 0,
+                y: 0,
+                w: "No Non-Technology skills defined".length * 4,
+                h: 11,
+                r: 2,
+                lineColor: "#C9C9C8",
+              },
+            ],
+          });
+          doc.content.push({
+            relativePosition: {
+              x: 140,
+              y: -10,
+            },
+            text: "No Non-Technology skills defined",
+            fontSize: 8,
+            italics: true,
+            color: "#C9C9C8",
+          });
+        }
+
+        // Top line
+        /*doc.content.push({
           absolutePosition: { x: X_MARGIN, y: 375 },
           canvas: [
             {
@@ -1687,7 +1837,7 @@ export default {
           } else {
             break;
           }
-        }
+        }*/
 
         if (res == null) console.log("borrar esto");
 

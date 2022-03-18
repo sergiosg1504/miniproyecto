@@ -407,45 +407,45 @@ export default {
         items: [
           {
             name: "Programming Skill",
-            value: [],
-            /*value: [
+            //value: [],
+            value: [
               { name: "Java", is_requiered: 0 },
               { name: "JavaScript", is_requiered: 0 },
               { name: "C", is_requiered: 1 },
-            ],*/
+            ],
           },
           {
             name: "Tools",
-            value: [],
-            /*value: [
+            //value: [],
+            value: [
               { name: "MySQL", is_requiered: 0 },
               { name: "Eclips", is_requiered: 0 },
               { name: "NeatBeans", is_requiered: 1 },
-            ],*/
+            ],
           },
           {
             name: "Frameworks",
-            value: [],
-            /*value: [
+            //value: [],
+            value: [
               { name: "Spring", is_requiered: 0 },
               { name: "Spring Security", is_requiered: 0 },
               { name: "Tiles", is_requiered: 1 },
               { name: "JPA", is_requiered: 1 },
               { name: "J2EE", is_requiered: 1 },
               { name: "JSP", is_requiered: 1 },
-            ],*/
+            ],
           },
           {
             name: "Others",
-            value: [],
-            /*value: [
+            //value: [],
+            value: [
               { name: "Github", is_requiered: 0 },
               { name: "API", is_requiered: 0 },
               { name: "Java EE", is_requiered: 1 },
               { name: "Programación orientada a objetos", is_requiered: 1 },
               { name: "Oracle", is_requiered: 1 },
               { name: "MVC", is_requiered: 1 },
-            ],*/
+            ],
           },
         ],
       };
@@ -1124,7 +1124,44 @@ export default {
             color: "#ffffff",
           });
           if (item.value.length !== 0) {
-            console.log(index);
+            for (i = 0; i < item.value.length; i = i + 3) {
+              j = 0;
+              try {
+                while (j < 3) {
+                  console.log(item.value[i + j].name.length);
+                  doc.content.push({
+                    absolutePosition: {
+                      x: this.setter_X(i, j, item.value, 1),
+                      y: this.setter_Y(i, 2),
+                    },
+                    canvas: [
+                      {
+                        type: "rect",
+                        x: 0,
+                        y: 0,
+                        w: this.calcWidht(item.value[i + j].name.length),
+                        h: 11,
+                        r: 2,
+                        lineColor: "#9BE6FF",
+                      },
+                    ],
+                  });
+                  doc.content.push({
+                    absolutePosition: {
+                      x: this.setter_X(i, j, item.value, 1),
+                      y: this.setter_Y(i, 2),
+                    },
+                    text: item.value[i + j].name,
+                    fontSize: 8,
+                    italics: true,
+                    noWrap: true,
+                  });
+                  j++;
+                }
+              } catch (err) {
+                break;
+              }
+            }
           } else {
             doc.content.push({
               relativePosition: {
@@ -1993,6 +2030,11 @@ export default {
         else if (index < 6) return 317;
         else if (index < 9) return 333;
         else return 348;
+      } else if (type === 2) {
+        if (index < 3) return 350;
+        else if (index < 6) return 360;
+        else if (index < 9) return 370;
+        else return 380;
       } else if (type === 4) {
         if (index < 3) return 440;
         else if (index < 6) return 455;

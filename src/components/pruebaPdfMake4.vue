@@ -361,10 +361,14 @@ export default {
             name: "Project Management Professional Certification",
             is_requiered: 1,
           },
+          {
+            name: "Project Management Professional Certification",
+            is_requiered: 1,
+          },
         ],
       };
 
-      /*const education = {
+      const education = {
         title: "Education",
         //value:[]
         value: [
@@ -457,7 +461,7 @@ export default {
           { name: "Customer", is_requiered: 1 },
           { name: "Teamwork", is_requiered: 1 },
         ],
-      };*/
+      };
 
       //const graphName = "aaaaaaaaaaaaaaaaaaaaaaaaaa";
 
@@ -916,8 +920,9 @@ export default {
           bold: true,
         });
 
-        let separator;
+        //let separator;
         if (certifications.value.length !== 0) {
+          /*
           for (var i = 0; i < certifications.value.length; i++) {
             if (i === 0) separator = 0;
             else separator = certifications.value[i - 1].name.length;
@@ -927,7 +932,13 @@ export default {
               fontSize: 8,
               italics: true,
             });
-          }
+          }*/
+          doc.content.push({
+            margin: [140, -7, 0, 0],
+            table: {
+              body: this.custom_table(certifications.value),
+            },
+          });
         } else {
           doc.content.push({
             margin: [140, -10, 0, 0],
@@ -955,6 +966,222 @@ export default {
           });
         }
 
+        doc.content.push({
+          canvas: [
+            {
+              type: "rect",
+              x: 31,
+              y: 5,
+              w: 95,
+              h: 12,
+              r: 2,
+              color: "#62c4e4",
+            },
+          ],
+        });
+
+        doc.content.push({
+          text: education.title,
+          fontSize: 8,
+          margin: [72, -10, 0, 0],
+          bold: true,
+        });
+
+        //let separator;
+        if (education.value.length !== 0) {
+          /*
+          for (var i = 0; i < certifications.value.length; i++) {
+            if (i === 0) separator = 0;
+            else separator = certifications.value[i - 1].name.length;
+            console.log(separator);
+            doc.content.push({
+              text: certifications.value[i].name,
+              fontSize: 8,
+              italics: true,
+            });
+          }*/
+          doc.content.push({
+            margin: [140, -7, 0, 0],
+            table: {
+              body: this.custom_table(education.value),
+            },
+          });
+        } else {
+          doc.content.push({
+            margin: [140, -10, 0, 0],
+            canvas: [
+              {
+                type: "rect",
+                x: 0,
+                y: 0,
+                w: this.calcWidht(
+                  ("No " + education.title + " registered").length
+                ),
+                h: 11,
+                r: 2,
+                lineColor: "#C9C9C8",
+              },
+            ],
+          });
+          doc.content.push({
+            margin: [142, -10, 0, 0],
+            text: "No " + education.title + " registered",
+            fontSize: 8,
+            italics: true,
+            noWrap: true,
+            color: "#C9C9C8",
+          });
+        }
+
+        doc.content.push({
+          canvas: [
+            {
+              type: "rect",
+              x: 31,
+              y: 0,
+              w: 95,
+              h: 12,
+              r: 2,
+              color: "#62c4e4",
+            },
+          ],
+        });
+
+        doc.content.push({
+          text: tech.title,
+          fontSize: 8,
+          margin: [60, -10, 0, 0],
+          bold: true,
+        });
+
+        //let separator;
+        tech.items.forEach((item, index) => {
+          console.log(index);
+          doc.content.push({
+            canvas: [
+              {
+                type: "rect",
+                x: 55,
+                y: 4,
+                w: 70,
+                h: 12,
+                r: 2,
+                color: "#62c4e4",
+              },
+            ],
+          });
+
+          doc.content.push({
+            text: item.name,
+            fontSize: 7,
+            margin: [60, -10, 0, 0],
+            bold: true,
+            color: "#ffffff",
+          });
+          if (item.value.length !== 0) {
+            doc.content.push({
+              margin: [140, -7, 0, 0],
+              table: {
+                body: this.custom_table2(item.value),
+              },
+            });
+          } else {
+            doc.content.push({
+              relativePosition: {
+                x: 135,
+                y: -10,
+              },
+              canvas: [
+                {
+                  type: "rect",
+                  x: 0,
+                  y: 0,
+                  w: this.calcWidht(("No " + item.name + " defined").length),
+                  h: 11,
+                  r: 2,
+                  lineColor: "#C9C9C8",
+                },
+              ],
+            });
+            doc.content.push({
+              relativePosition: {
+                x: 140,
+                y: -10,
+              },
+              text: "No " + item.name + " defined",
+              fontSize: 8,
+              italics: true,
+              color: "#C9C9C8",
+            });
+          }
+        });
+
+        doc.content.push({
+          canvas: [
+            {
+              type: "rect",
+              x: 31,
+              y: 5,
+              w: 95,
+              h: 12,
+              r: 2,
+              color: "#62c4e4",
+            },
+          ],
+        });
+
+        doc.content.push({
+          text: skills.title,
+          fontSize: 8,
+          margin: [40, -10, 0, 0],
+          bold: true,
+        });
+
+        //let separator;
+        if (skills.value.length !== 0) {
+          /*
+          for (var i = 0; i < certifications.value.length; i++) {
+            if (i === 0) separator = 0;
+            else separator = certifications.value[i - 1].name.length;
+            console.log(separator);
+            doc.content.push({
+              text: certifications.value[i].name,
+              fontSize: 8,
+              italics: true,
+            });
+          }*/
+          doc.content.push({
+            margin: [140, -7, 0, 0],
+            table: {
+              body: this.custom_table2(skills.value),
+            },
+          });
+        } else {
+          doc.content.push({
+            margin: [140, -10, 0, 0],
+            canvas: [
+              {
+                type: "rect",
+                x: 0,
+                y: 0,
+                w: this.calcWidht(
+                  ("No " + skills.title + " registered").length
+                ),
+                h: 11,
+                r: 2,
+                lineColor: "#C9C9C8",
+              },
+            ],
+          });
+          doc.content.push({
+            margin: [142, -10, 0, 0],
+            text: "No " + skills.title + " registered",
+            fontSize: 8,
+            italics: true,
+            noWrap: true,
+            color: "#C9C9C8",
+          });
+        }
         /*doc.content.push({
           canvas: [
             {
@@ -2016,6 +2243,95 @@ export default {
       if (length <= 40) return 3.5 * length;
       if (length <= 45) return 3.6 * length;
       else return 9 * length;
+    },
+    custom_table(items) {
+      var obj = [];
+      var aux = {};
+      const empty_obj = { text: " ", border: [false, false, false, false] };
+      var row;
+      var j;
+      const length = items.length;
+
+      for (var i = 0; i < length; i = i + 3) {
+        row = new Array();
+        j = 0;
+        try {
+          while (j < 3) {
+            aux.border = [false, false, false, false];
+            aux.text = items[i + j].name;
+            aux.fontSize = 8;
+            aux.margin = [0, -5, 0, 0];
+            //console.log(aux);
+            row.push(aux);
+            aux = new Object();
+            j++;
+          }
+          obj.push(row);
+        } catch (err) {
+          if (j === 0) {
+            row.push(empty_obj);
+            row.push(empty_obj);
+            row.push(empty_obj);
+          } else if (j === 1) {
+            row.push(empty_obj);
+            row.push(empty_obj);
+          } else if (j === 2) {
+            row.push(empty_obj);
+            row.push(empty_obj);
+          }
+          obj.push(row);
+        }
+      }
+      return obj;
+    },
+
+    custom_table2(items) {
+      var obj = [];
+      var aux = {};
+      const empty_obj = { text: " ", border: [false, false, false, false] };
+      var row;
+      var j;
+      const length = items.length;
+
+      for (var i = 0; i < length; i = i + 5) {
+        row = new Array();
+        j = 0;
+        try {
+          while (j < 5) {
+            aux.border = [false, false, false, false];
+            aux.text = items[i + j].name;
+            aux.fontSize = 8;
+            aux.margin = [0, -5, 0, 0];
+            //console.log(aux);
+            row.push(aux);
+            aux = new Object();
+            j++;
+          }
+          obj.push(row);
+        } catch (err) {
+          if (j === 0) {
+            row.push(empty_obj);
+            row.push(empty_obj);
+            row.push(empty_obj);
+            row.push(empty_obj);
+          } else if (j === 1) {
+            row.push(empty_obj);
+            row.push(empty_obj);
+            row.push(empty_obj);
+            row.push(empty_obj);
+          } else if (j === 2) {
+            row.push(empty_obj);
+            row.push(empty_obj);
+            row.push(empty_obj);
+          } else if (j === 3) {
+            row.push(empty_obj);
+            row.push(empty_obj);
+          }
+          obj.push(row);
+        }
+      }
+      console.table(obj);
+      return obj;
     },
   },
 };

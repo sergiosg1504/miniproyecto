@@ -2,6 +2,17 @@
   <v-app class="form-container technologiesStyle">
     <form action class="form" @submit="invite">
       <div class="col-sm-12">
+        <div>
+          <label>Import candidates from CSV</label>
+
+          <vue-csv-import
+            v-model="csv"
+            :autoMatchFields="true"
+            :autoMatchIgnoreCase="true"
+            :map-fields="['name', 'email', 'phone']"
+          >
+          </vue-csv-import>
+        </div>
         <div class="form-group">
           <label>Active positions in the account</label>
           <div class="content-select">
@@ -10,10 +21,6 @@
                 {{ item.name }}
               </option>
             </select>
-          </div>
-          <label>Import candidates from CSV</label>
-          <div class="content-select">
-            <button class="btn btn-primary form-submit">a</button>
           </div>
           <div v-if="selected">
             <div v-if="checkLength">
@@ -89,6 +96,7 @@
 </template>
 
 <script>
+import { VueCsvImport } from "vue-csv-import";
 import {
   GET_ID,
   INVITE_TO,
@@ -96,8 +104,12 @@ import {
 } from "../graphql/queries/me/interviews";
 export default {
   name: "InvitationInterview",
+  components: {
+    VueCsvImport,
+  },
   data() {
     return {
+      csv: null,
       interviews: [],
       IDS: [],
       flag: false,

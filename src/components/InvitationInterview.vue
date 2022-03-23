@@ -6,19 +6,23 @@
           <label>Active positions in the account</label>
           <div class="content-select">
             <select v-model="selected" @change="customChange">
-              <option v-for="(item, i) in IDS" :key="i" v-bind:value="item" >
+              <option v-for="(item, i) in IDS" :key="i" v-bind:value="item">
                 {{ item.name }}
               </option>
             </select>
           </div>
+          <label>Import candidates from CSV</label>
+          <div class="content-select">
+            <button class="btn btn-primary form-submit">a</button>
+          </div>
           <div v-if="selected">
             <div v-if="checkLength">
-              <p>Candidates invited:  </p>
-              <div v-for="(c,i) in inter" :key="i"> {{c.candidate.name}}, {{c.candidate.email}} </div>
+              <p>Candidates invited:</p>
+              <div v-for="(c, i) in inter" :key="i">
+                {{ c.candidate.name }}, {{ c.candidate.email }}
+              </div>
             </div>
-            <div v-else>
-                No candidates
-            </div>
+            <div v-else>No candidates</div>
           </div>
         </div>
       </div>
@@ -85,7 +89,11 @@
 </template>
 
 <script>
-import { GET_ID, INVITE_TO, GET_CANDIDATES } from "../graphql/queries/me/interviews";
+import {
+  GET_ID,
+  INVITE_TO,
+  GET_CANDIDATES,
+} from "../graphql/queries/me/interviews";
 export default {
   name: "InvitationInterview",
   data() {
@@ -97,7 +105,7 @@ export default {
       inv_email: null,
       inv_phone: null,
       selected: null,
-      inter:null,
+      inter: null,
     };
   },
   methods: {
@@ -144,19 +152,20 @@ export default {
     click_Cancell() {
       this.$router.push({ name: "MeetingList" });
     },
-     async customChange(){
-      const aux =  await this.$apollo.query({query: GET_CANDIDATES, variables: {position: this.selected.id}})
+    async customChange() {
+      const aux = await this.$apollo.query({
+        query: GET_CANDIDATES,
+        variables: { position: this.selected.id },
+      });
 
-      this.inter = aux.data.interviews
-    }
+      this.inter = aux.data.interviews;
+    },
   },
-  computed:{
-    checkLength(){
-      if ( this.inter.length === 0 || this.inter === null)
-        return false
-      else  
-        return true
-    }
+  computed: {
+    checkLength() {
+      if (this.inter.length === 0 || this.inter === null) return false;
+      else return true;
+    },
   },
   async mounted() {
     const aux = await this.$apollo.query({ query: GET_ID });

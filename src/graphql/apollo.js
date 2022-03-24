@@ -9,7 +9,7 @@ import VueApollo from "vue-apollo";
 
 const httpLink = new HttpLink({
   uri: "https://api.hireflix.com/me",
-  headers: { "x-api-key": "66074bb9-b49e-4c98-aaaa-b560e604809b" },
+  headers: { "x-api-key": "58b327ff-2d3d-40df-9826-138e916af950" },
 });
 
 // Error Handling

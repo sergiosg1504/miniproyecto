@@ -2,24 +2,6 @@
   <v-app class="form-container technologiesStyle">
     <form action class="form" @submit="invite">
       <div class="col-sm-12">
-        <div>
-          <label>Import candidates from CSV</label>
-
-          <vue-csv-import
-            v-model="csv"
-            :autoMatchFields="true"
-            :autoMatchIgnoreCase="true"
-            :map-fields="['name', 'email', 'phone']"
-          >
-          </vue-csv-import>
-          <p v-if="csv != null">
-            Se han cargado {{ csv.length }} elementos. <br />
-            El primer elemento es: {{ csv[0] }}
-          </p>
-          <button class="btn btn-primary" @click="sendToImported()">
-            Enviar correo a los bobos importados
-          </button>
-        </div>
         <div class="form-group">
           <label>Active positions in the account</label>
           <div class="content-select">
@@ -41,6 +23,27 @@
         </div>
       </div>
       <div class="col-sm-12">
+        <button class="btn btn-primary" @click="change()">
+          <label v-if="!csvFlag">Subir csv</label>
+          <label v-else>A mano</label>
+        </button>
+      </div>
+      <div class="col-sm-12" v-if="csvFlag">
+        <label>Import candidates from CSV</label>
+        <vue-csv-import v-model="csv" :map-fields="['name', 'email', 'phone']">
+          <vue-csv-toggle-headers></vue-csv-toggle-headers>
+          <vue-csv-errors></vue-csv-errors>
+          <vue-csv-input></vue-csv-input>
+          <vue-csv-map :auto-match="true"></vue-csv-map>
+        </vue-csv-import>
+        <div v-if="csv != null">
+          <p>Candidates loaded from the file:</p>
+          <!--<div v-for="(c, i) in csv" :key="i">
+                {{ c.name }}, {{ c.email }}
+              </div>-->
+        </div>
+      </div>
+      <div class="col-sm-12" v-else>
         <div class="col-sm-4">
           <div class="form-group">
             <label>Name</label>
@@ -77,7 +80,6 @@
           </div>
         </div>
       </div>
-
       <div class="form-group col-lg-4 align-item-center">
         <div class="col-sm-12">
           <div class="col-sm-6">
@@ -116,6 +118,7 @@ export default {
   },
   data() {
     return {
+      csvFlag: false,
       csv: null,
       interviews: [],
       IDS: [],
@@ -128,47 +131,25 @@ export default {
     };
   },
   methods: {
-    invite() {
-      this.$apollo
-        .mutate({
-          mutation: INVITE_TO,
-          variables: {
-            positionId: this.selected.id,
-            candidate: {
-              name: this.inv_name,
-              email: this.inv_email,
-              phone: this.inv_phone,
-            },
-          },
-        })
-        .then(() => {
-          alert("Invitation success");
-        })
-        .catch((error) => {
-          alert(this.customError(error));
-        });
-    },
-    sendToImported() {
-      if (this.csv === null) {
-        console.log("ERROR");
+    change() {
+      if (this.csvFlag) {
+        this.csvFlag = false;
+        console.log(this.csv);
+      } else {
+        this.csvFlag = true;
       }
-      let longitud = this.csv.length;
-      let i = 0;
-      let j = 0;
-      while (i < longitud) {
-        if (j === 20) {
-          setTimeout("", 5000);
-          j = 0;
-        }
+    },
+    invite() {
+      if (!this.csvFlag) {
         this.$apollo
           .mutate({
             mutation: INVITE_TO,
             variables: {
               positionId: this.selected.id,
               candidate: {
-                name: this.csv[i].name,
-                email: this.csv[i].email,
-                phone: this.csv[i].phone,
+                name: this.inv_name,
+                email: this.inv_email,
+                phone: this.inv_phone,
               },
             },
           })
@@ -178,11 +159,38 @@ export default {
           .catch((error) => {
             alert(this.customError(error));
           });
-        i++;
-        j++;
+      } else {
+        let longitud = this.csv.length;
+        let i = 0;
+        let j = 0;
+        while (i < longitud) {
+          if (j === 20) {
+            setTimeout("", 5000);
+            j = 0;
+          }
+          this.$apollo
+            .mutate({
+              mutation: INVITE_TO,
+              variables: {
+                positionId: this.selected.id,
+                candidate: {
+                  name: this.csv[i].name,
+                  email: this.csv[i].email,
+                  phone: this.csv[i].phone,
+                },
+              },
+            })
+            .then(() => {
+              alert("Invitation success");
+            })
+            .catch((error) => {
+              alert(this.customError(error));
+            });
+          i++;
+          j++;
+        }
       }
     },
-
     customError(error) {
       const code = error.graphQLErrors[0].code;
       let propmt_err;
@@ -216,7 +224,8 @@ export default {
   },
   computed: {
     checkLength() {
-      if (this.inter.length === 0 || this.inter === null) return false;
+      if (this.inter === null) return false;
+      if (this.inter.length === 0) return false;
       else return true;
     },
   },

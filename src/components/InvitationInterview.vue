@@ -12,6 +12,13 @@
             :map-fields="['name', 'email', 'phone']"
           >
           </vue-csv-import>
+          <p v-if="csv != null">
+            Se han cargado {{ csv.length }} elementos. <br />
+            El primer elemento es: {{ csv[0] }}
+          </p>
+          <button class="btn btn-primary" @click="sendToImported()">
+            Enviar correo a los bobos importados
+          </button>
         </div>
         <div class="form-group">
           <label>Active positions in the account</label>
@@ -140,6 +147,40 @@ export default {
         .catch((error) => {
           alert(this.customError(error));
         });
+    },
+    sendToImported() {
+      if (this.csv === null) {
+        console.log("ERROR");
+      }
+      let longitud = this.csv.length;
+      let i = 0;
+      let j = 0;
+      while (i < longitud) {
+        if (j === 20) {
+          setTimeout("", 5000);
+          j = 0;
+        }
+        this.$apollo
+          .mutate({
+            mutation: INVITE_TO,
+            variables: {
+              positionId: this.selected.id,
+              candidate: {
+                name: this.csv[i].name,
+                email: this.csv[i].email,
+                phone: this.csv[i].phone,
+              },
+            },
+          })
+          .then(() => {
+            alert("Invitation success");
+          })
+          .catch((error) => {
+            alert(this.customError(error));
+          });
+        i++;
+        j++;
+      }
     },
 
     customError(error) {

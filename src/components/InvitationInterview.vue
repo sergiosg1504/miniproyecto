@@ -24,8 +24,8 @@
       </div>
       <div class="col-sm-12">
         <button class="btn btn-primary" @click="change()">
-          <label v-if="!csvFlag">Subir csv</label>
-          <label v-else>A mano</label>
+          <label class="btn-label" v-if="!csvFlag">Subir csv</label>
+          <label class="btn-label" v-else>A mano</label>
         </button>
       </div>
       <div class="col-sm-12" v-if="csvFlag">
@@ -164,8 +164,8 @@ export default {
         let i = 0;
         let j = 0;
         while (i < longitud) {
-          if (j === 20) {
-            setTimeout("", 5000);
+          if (j === 10) {
+            setTimeout("", 10000);
             j = 0;
           }
           this.$apollo
@@ -266,5 +266,8 @@ export default {
 }
 .content-select select:hover {
   background: lightgrey;
+}
+.btn-label {
+  color: white;
 }
 </style>

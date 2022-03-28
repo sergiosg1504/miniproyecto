@@ -30,11 +30,12 @@
       </div>
       <div class="col-sm-12" v-if="csvFlag">
         <label>Import candidates from CSV</label>
-        <vue-csv-import v-model="csv" :map-fields="['name', 'email', 'phone']">
-          <vue-csv-toggle-headers></vue-csv-toggle-headers>
-          <vue-csv-errors></vue-csv-errors>
-          <vue-csv-input></vue-csv-input>
-          <vue-csv-map :auto-match="true"></vue-csv-map>
+        <vue-csv-import
+          v-model="csv"
+          :map-fields="['name', 'email', 'phone']"
+          :autoMatchFields="true"
+          :autoMatchIgnoreCase="true"
+        >
         </vue-csv-import>
         <div v-if="csv != null">
           <p>Candidates loaded from the file:</p>

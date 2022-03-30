@@ -331,154 +331,17 @@ export default {
       //const graphContent = this.graphContent;
       //const documentTitle = "prueba.pdf";
 
-      const profile = "JAVA";
-      const category = "Middle";
-      const year_min = "2";
-      const year_max = "4";
-      const certifications = {
-        title: "Certifications",
-        //value:[]
-        value: [
-          {
-            name: "Oracle Certified Professional",
-            is_requiered: 1,
-          },
-          {
-            name: "Oracle Certified Especialist",
-            is_requiered: 1,
-          },
-          {
-            name: "Project Management Professional Certification",
-            is_requiered: 1,
-          },
-          {
-            name: "Apache Spark Developer",
-            is_requiered: 1,
-          },
-          {
-            name: "Apache Spark",
-            is_requiered: 1,
-          },
-          {
-            name: "Project Management Professional Certification",
-            is_requiered: 1,
-          },
-          {
-            name: "Project Management Professional Certification",
-            is_requiered: 1,
-          },
-        ],
-      };
-
-      const education = {
-        title: "Education",
-        //value:[]
-        value: [
-          {
-            name: "Grado en Ingenería informática",
-            is_requiered: 1,
-          },
-          {
-            name: "Licenciado en Ingenieria Informatica",
-            is_requiered: 1,
-          },
-          {
-            name: "FP Grado Superior",
-            is_requiered: 1,
-          },
-          {
-            name: "Master en Ingeniería Informatica",
-            is_requiered: 1,
-          },
-          {
-            name: "FP Grado Medio",
-            is_requiered: 1,
-          },
-          {
-            name: "FP Grado Superior",
-            is_requiered: 1,
-          },
-          {
-            name: "Ingeniero",
-            is_requiered: 1,
-          },
-        ],
-      };
-
-      const tech = {
-        title: "Technology Skills",
-        items: [
-          {
-            name: "Programming Skill",
-            //value: [],
-            value: [
-              { name: "Java", is_requiered: 0 },
-              { name: "JavaScript", is_requiered: 0 },
-              { name: "C", is_requiered: 1 },
-            ],
-          },
-          {
-            name: "Tools",
-            //value: [],
-            value: [
-              { name: "MySQL", is_requiered: 0 },
-              { name: "Eclips", is_requiered: 0 },
-              { name: "NeatBeans", is_requiered: 1 },
-            ],
-          },
-          {
-            name: "Frameworks",
-            //value: [],
-            value: [
-              { name: "Spring", is_requiered: 0 },
-              { name: "Spring Security", is_requiered: 0 },
-              { name: "Tiles", is_requiered: 1 },
-              { name: "JPA", is_requiered: 1 },
-              { name: "J2EE", is_requiered: 1 },
-              { name: "JSP", is_requiered: 1 },
-            ],
-          },
-          {
-            name: "Others",
-            //value: [],
-            value: [
-              { name: "Github", is_requiered: 0 },
-              { name: "API", is_requiered: 0 },
-              { name: "Java EE", is_requiered: 1 },
-              { name: "Programación orientada a objetos", is_requiered: 1 },
-              { name: "Oracle", is_requiered: 1 },
-              { name: "MVC", is_requiered: 1 },
-            ],
-          },
-        ],
-      };
-
-      const skills = {
-        title: "Non-Technology skills",
-        value: [
-          { name: "Empathy", is_requiered: 0 },
-          { name: "Solidarity", is_requiered: 0 },
-          { name: "Adaptability", is_requiered: 1 },
-          { name: "Creativity", is_requiered: 1 },
-          { name: "Customer", is_requiered: 1 },
-          { name: "Teamwork", is_requiered: 1 },
-        ],
-      };
-
       //const graphName = "aaaaaaaaaaaaaaaaaaaaaaaaaa";
 
       const X_MARGIN = 42;
       //const GRAPH_HEIGHT = 190;
-      const date = this.styler(new Date().toLocaleString());
+      //const date = this.styler(new Date().toLocaleString());
       /*pdfMake.fonts = {
         Myriad_Pro_Regular: {
           normail: "/public/fonts/MyriadPro-Regular.woff",
         },
       };*/
 
-      // Load async conversion of charts into svg and create pdf
-      // Promise means array of graphs have to wait to be converted into images (svg format)
-      // YOU CANT USE this. inside Promise.all
       Promise.all(chartImagesTmp).then((res) => {
         // Create document template
         var doc = {
@@ -494,12 +357,6 @@ export default {
           footer: function (currentPage, pageCount) {
             return {
               columns: [
-                {
-                  text: "CVs Analysed Reports  |  " + date + " · Progradum ",
-                  margin: [X_MARGIN, -10, 0, 0],
-                  color: "grey",
-                  fontSize: 10,
-                },
                 {
                   image: progradumLetter,
                   alignment: "right",
@@ -895,1064 +752,263 @@ export default {
           fontSize: 9,
         });
 
-        // Area name
+        // Title dot
         doc.content.push({
-          absolutePosition: { x: X_MARGIN + 20, y: 190 },
+          absolutePosition: { x: X_MARGIN + 20, y: 265 },
           canvas: [
             {
               type: "ellipse",
               x: 0,
-              y: 55,
+              y: 0,
               r1: 1,
               r2: 1,
               color: "red",
             },
           ],
         });
-
+        // Title assesment rules
         doc.content.push({
-          text: "Profile defined by each technology with its attributes",
-          fontSize: 11,
-          margin: [50, 210, 0, 0],
-          bold: true,
-        });
-
-        doc.content.push({
-          table: {
-            widths: [73, 80, 40, 70, 120, 10, 20, 5],
-            body: [
-              [
-                {
-                  border: [false, false, false, false],
-                  text: "Profile",
-                  fontSize: 10,
-                  alignment: "right",
-                },
-                {
-                  border: [false, false, false, false],
-                  canvas: [
-                    {
-                      type: "rect",
-                      x: -3,
-                      y: 0,
-                      w: 75,
-                      h: 11,
-                      r: 2,
-                      color: "#F3F2F2",
-                    },
-                  ],
-                },
-                {
-                  border: [false, false, false, false],
-                  text: "Category",
-                  fontSize: 10,
-                  alignment: "left",
-                },
-                {
-                  border: [false, false, false, false],
-                  alignment: "left",
-                  canvas: [
-                    {
-                      type: "rect",
-                      x: -3,
-                      y: 0,
-                      w: 70,
-                      h: 11,
-                      r: 2,
-                      color: "#F3F2F2",
-                    },
-                  ],
-                },
-                {
-                  border: [false, false, false, false],
-                  text: "Years of experience / min: ",
-                  fontSize: 10,
-                },
-                {
-                  border: [false, false, false, false],
-                  alignment: "left",
-                  canvas: [
-                    {
-                      type: "rect",
-                      x: -3,
-                      y: 0,
-                      w: 15,
-                      h: 11,
-                      r: 2,
-                      color: "#F3F2F2",
-                    },
-                  ],
-                },
-                {
-                  border: [false, false, false, false],
-                  text: "max: ",
-                  fontSize: 10,
-                  alignment: "left",
-                },
-                {
-                  border: [false, false, false, false],
-                  alignment: "left",
-                  canvas: [
-                    {
-                      type: "rect",
-                      x: -3,
-                      y: 0,
-                      w: 15,
-                      h: 11,
-                      r: 2,
-                      color: "#F3F2F2",
-                    },
-                  ],
-                },
-              ],
-            ],
+          absolutePosition: {
+            x: X_MARGIN + 40,
+            y: 260,
           },
-        });
-
-        doc.content.push({
-          text: profile,
+          text: "ASSESMENT RULES",
           fontSize: 9,
-          margin: [93, -25, 0, 0],
-        });
-        doc.content.push({
-          text: category,
-          fontSize: 9,
-          margin: [230, -11, 0, 0],
-        });
-        doc.content.push({
-          text: year_min,
-          fontSize: 9,
-          margin: [436, -11, 0, 0],
-        });
-        doc.content.push({
-          text: year_max,
-          fontSize: 9,
-          margin: [482, -10, 0, 0],
-        });
-
-        doc.content.push({
-          canvas: [
-            {
-              type: "rect",
-              x: 31,
-              y: 15,
-              w: 95,
-              h: 12,
-              r: 2,
-              color: "#62c4e4",
-            },
-          ],
-        });
-
-        doc.content.push({
-          text: certifications.title,
-          fontSize: 8,
-          margin: [72, -10, 0, 0],
           bold: true,
         });
-
-        //let separator;
-        if (certifications.value.length !== 0) {
-          /*
-          for (var i = 0; i < certifications.value.length; i++) {
-            if (i === 0) separator = 0;
-            else separator = certifications.value[i - 1].name.length;
-            console.log(separator);
-            doc.content.push({
-              text: certifications.value[i].name,
-              fontSize: 8,
-              italics: true,
-            });
-          }*/
-          doc.content.push({
-            margin: [140, -7, 0, 0],
-            table: {
-              body: this.custom_table(certifications.value),
-            },
-          });
-        } else {
-          doc.content.push({
-            margin: [140, -10, 0, 0],
-            canvas: [
-              {
-                type: "rect",
-                x: 0,
-                y: 0,
-                w: this.calcWidht(
-                  ("No " + certifications.title + " registered").length
-                ),
-                h: 11,
-                r: 2,
-                lineColor: "#C9C9C8",
-              },
-            ],
-          });
-          doc.content.push({
-            margin: [142, -10, 0, 0],
-            text: "No " + certifications.title + " registered",
-            fontSize: 8,
-            italics: true,
-            noWrap: true,
-            color: "#C9C9C8",
-          });
-        }
-
+        // Separator
         doc.content.push({
-          canvas: [
-            {
-              type: "rect",
-              x: 31,
-              y: 5,
-              w: 95,
-              h: 12,
-              r: 2,
-              color: "#62c4e4",
-            },
-          ],
-        });
-
-        doc.content.push({
-          text: education.title,
-          fontSize: 8,
-          margin: [72, -10, 0, 0],
-          bold: true,
-        });
-
-        if (education.value.length !== 0) {
-          doc.content.push({
-            margin: [140, -7, 0, 0],
-            table: {
-              body: this.custom_table(education.value),
-            },
-          });
-        } else {
-          doc.content.push({
-            margin: [140, -10, 0, 0],
-            canvas: [
-              {
-                type: "rect",
-                x: 0,
-                y: 0,
-                w: this.calcWidht(
-                  ("No " + education.title + " registered").length
-                ),
-                h: 11,
-                r: 2,
-                lineColor: "#C9C9C8",
-              },
-            ],
-          });
-          doc.content.push({
-            margin: [142, -10, 0, 0],
-            text: "No " + education.title + " registered",
-            fontSize: 8,
-            italics: true,
-            noWrap: true,
-            color: "#C9C9C8",
-          });
-        }
-
-        doc.content.push({
-          canvas: [
-            {
-              type: "rect",
-              x: 31,
-              y: 0,
-              w: 95,
-              h: 12,
-              r: 2,
-              color: "#62c4e4",
-            },
-          ],
-        });
-
-        doc.content.push({
-          text: tech.title,
-          fontSize: 8,
-          margin: [60, -10, 0, 0],
-          bold: true,
-        });
-
-        tech.items.forEach((item) => {
-          doc.content.push({
-            margin: [0, 0, 0, -10],
-            canvas: [
-              {
-                type: "rect",
-                x: 55,
-                y: 5,
-                w: 70,
-                h: 12,
-                r: 2,
-                color: "#62c4e4",
-              },
-            ],
-          });
-          doc.content.push({
-            text: item.name,
-            fontSize: 7,
-            margin: [60, 0, 0, 0],
-            bold: true,
-            color: "#ffffff",
-          });
-          if (item.value.length !== 0) {
-            doc.content.push({
-              margin: [140, -7, 0, 0],
-              table: {
-                body: this.custom_table2(item.value),
-              },
-            });
-          } else {
-            doc.content.push({
-              relativePosition: {
-                x: 135,
-                y: -10,
-              },
-              canvas: [
-                {
-                  type: "rect",
-                  x: 0,
-                  y: 5,
-                  w: this.calcWidht(("No " + item.name + " defined").length),
-                  h: 11,
-                  r: 2,
-                  lineColor: "#C9C9C8",
-                },
-              ],
-            });
-            doc.content.push({
-              relativePosition: {
-                x: 140,
-                y: -10,
-              },
-              text: "No " + item.name + " defined",
-              fontSize: 8,
-              italics: true,
-              color: "#C9C9C8",
-            });
-          }
-        });
-
-        doc.content.push({
-          canvas: [
-            {
-              type: "rect",
-              x: 31,
-              y: 0,
-              w: 95,
-              h: 12,
-              r: 2,
-              color: "#62c4e4",
-            },
-          ],
-        });
-        doc.content.push({
-          text: skills.title,
-          fontSize: 8,
-          margin: [40, -10, 0, 0],
-          bold: true,
-        });
-
-        if (skills.value.length !== 0) {
-          doc.content.push({
-            margin: [140, -7, 0, 0],
-            table: {
-              body: this.custom_table2(skills.value),
-            },
-          });
-        } else {
-          doc.content.push({
-            margin: [140, -10, 0, 0],
-            canvas: [
-              {
-                type: "rect",
-                x: 0,
-                y: 0,
-                w: this.calcWidht(
-                  ("No " + skills.title + " registered").length
-                ),
-                h: 11,
-                r: 2,
-                lineColor: "#C9C9C8",
-              },
-            ],
-          });
-          doc.content.push({
-            margin: [142, -10, 0, 0],
-            text: "No " + skills.title + " registered",
-            fontSize: 8,
-            italics: true,
-            noWrap: true,
-            color: "#C9C9C8",
-          });
-        }
-
-        // Top line
-        /*doc.content.push({
-          absolutePosition: { x: X_MARGIN, y: 375 },
-          canvas: [
-            {
-              type: "line",
-              x1: 0,
-              y1: 20,
-              x2: 555 - X_MARGIN,
-              y2: 20,
-              lineWidth: 0.7,
-              lineColor: "black",
-            },
-          ],
-        });
-        // Middle line
-        doc.content.push({
-          absolutePosition: { x: X_MARGIN, y: 553 },
-          canvas: [
-            {
-              type: "line",
-              x1: 0,
-              y1: 20,
-              x2: 555 - X_MARGIN,
-              y2: 20,
-              lineWidth: 0.7,
-              lineColor: "black",
-            },
-          ],
-        });
-        doc.content.push({
-          absolutePosition: { x: (565 + 30) / 2, y: 395 },
+          absolutePosition: { x: X_MARGIN + 40, y: 325 },
           canvas: [
             {
               type: "line",
               x1: 0,
               y1: 0,
-              x2: 0,
-              y2: 178,
+              x2: 216.5,
+              y2: 0,
               lineWidth: 0.7,
               lineColor: "black",
             },
           ],
+        });
+        // HR
+        doc.content.push({
+          absolutePosition: {
+            x: 82 + 4 + 2 + 8,
+            y: 275,
+          },
+          text: "HR",
+          fontSize: 9,
         });
         doc.content.push({
-          absolutePosition: { x: (565 + 30) / 2, y: 395 },
+          absolutePosition: {
+            x: 82 + 4 + 3,
+            y: 280 + 10 + 3,
+          },
+          text: "7,02",
+          fontSize: 14,
+          bold: true,
+        });
+        doc.content.push({
+          absolutePosition: {
+            x: 82 + 4,
+            y: 280 + 5 + 10 + 15,
+          },
+          text: "Out of 10",
+          fontSize: 8,
+        });
+        // Area mangager
+        doc.content.push({
+          absolutePosition: {
+            x: 138 + 4 + 2 + 8,
+            y: 273,
+          },
+          text: "Area",
+          fontSize: 9,
+        });
+        doc.content.push({
+          absolutePosition: {
+            x: 138 + 4,
+            y: 280,
+          },
+          text: "manager",
+          fontSize: 9,
+        });
+        doc.content.push({
+          absolutePosition: {
+            x: 138 + 4 + 3,
+            y: 280 + 10 + 3,
+          },
+          text: "7,98",
+          fontSize: 14,
+          bold: true,
+        });
+        doc.content.push({
+          absolutePosition: {
+            x: 138 + 4,
+            y: 280 + 5 + 10 + 15,
+          },
+          text: "Out of 10",
+          fontSize: 8,
+        });
+        // Pair
+        doc.content.push({
+          absolutePosition: {
+            x: 194 + 4 + 3 + 7,
+            y: 275,
+          },
+          text: "Pair",
+          fontSize: 9,
+        });
+        doc.content.push({
+          absolutePosition: {
+            x: 194 + 4 + 3,
+            y: 280 + 10 + 3,
+          },
+          text: "8,97",
+          fontSize: 14,
+          bold: true,
+        });
+        doc.content.push({
+          absolutePosition: {
+            x: 194 + 4,
+            y: 280 + 5 + 10 + 15,
+          },
+          text: "Out of 10",
+          fontSize: 8,
+        });
+        // Collaborator
+        doc.content.push({
+          absolutePosition: {
+            x: 250 - 5,
+            y: 275,
+          },
+          text: "Collaborator",
+          fontSize: 9,
+        });
+        doc.content.push({
+          absolutePosition: {
+            x: 250 + 4 + 3,
+            y: 280 + 10 + 3,
+          },
+          text: "8,63",
+          fontSize: 14,
+          bold: true,
+        });
+        doc.content.push({
+          absolutePosition: {
+            x: 250 + 4,
+            y: 280 + 5 + 10 + 15,
+          },
+          text: "Out of 10",
+          fontSize: 8,
+        });
+
+        // Weighted average
+        doc.content.push({
+          absolutePosition: {
+            x: 138 - 10,
+            y: 273 + 45 + 22.5,
+          },
+          text: "Area",
+          fontSize: 9,
+        });
+        doc.content.push({
+          absolutePosition: {
+            x: 138 - 20,
+            y: 285 + 45 + 22.5,
+          },
+          text: "manager",
+          fontSize: 9,
+        });
+        doc.content.push({
+          absolutePosition: {
+            x: 194 + 4 + 3,
+            y: 280 + 45 + 22.5 - 13,
+          },
+          text: "7,88",
+          fontSize: 18,
+          bold: true,
+        });
+        doc.content.push({
+          absolutePosition: {
+            x: 194 + 4 + 3,
+            y: 280 + 45 + 22.5 + 10,
+          },
+          text: "Out of 10",
+          fontSize: 8,
+        });
+
+        // Title dot
+        doc.content.push({
+          absolutePosition: { x: X_MARGIN + 264.5 + 20, y: 265 },
           canvas: [
             {
-              type: "line",
-              x1: 0,
-              y1: 0,
-              x2: 0,
-              y2: 356,
-              lineWidth: 0.7,
-              lineColor: "black",
+              type: "ellipse",
+              x: 0,
+              y: 0,
+              r1: 1,
+              r2: 1,
+              color: "red",
             },
           ],
         });
-        let index = 0;
+        // Title spider diagram
+        doc.content.push({
+          absolutePosition: {
+            x: X_MARGIN + 264.5 + 40,
+            y: 260,
+          },
+          text: "SPIDER DIAGRAM",
+          fontSize: 9,
+          bold: true,
+        });
+        // Graph
+        doc.content.push({
+          absolutePosition: {
+            x: X_MARGIN + 264.5 + 30,
+            y: 280,
+          },
+          image: res[0],
+          height: 100,
+          width: 180, //540
+        });
 
-        if (index < graphContent.length) {
-          // Title Dot
-          doc.content.push({
-            absolutePosition: { x: X_MARGIN + 25, y: 413 },
-            canvas: [
-              {
-                type: "ellipse",
-                x: 0,
-                y: 0,
-                r1: 1,
-                r2: 1,
-                color: "red",
-              },
-            ],
-          });
-          // Title
-          doc.content.push({
-            absolutePosition: {
-              x: X_MARGIN + 40,
-              y: 405,
+        // Title dot
+        doc.content.push({
+          absolutePosition: { x: X_MARGIN + 20, y: 395 },
+          canvas: [
+            {
+              type: "ellipse",
+              x: 0,
+              y: 0,
+              r1: 1,
+              r2: 1,
+              color: "red",
             },
-            text: graphContent[index].title,
-            fontSize: 11,
-            bold: true,
-          });
-          // Graph
-          doc.content.push({
-            absolutePosition: {
-              x: X_MARGIN + 50,
-              y: 420,
-            },
-            image: res[index],
-            height: 120,
-            width: 170, //540
-          });
-          // User
-          doc.content.push({
-            absolutePosition: {
-              x: X_MARGIN + 555 / 8 + 40,
-              y: 553,
-            },
-            text: "User",
-            fontSize: 9,
-            bold: true,
-          });
-          // CVs Analysed
-          doc.content.push({
-            absolutePosition: {
-              x: X_MARGIN + 30,
-              y: 474,
-            },
-            text: "10",
-            fontSize: 9,
-            bold: true,
-          });
-          index++;
-        }
-        if (index < graphContent.length) {
-          // Title Dot
-          doc.content.push({
-            absolutePosition: { x: X_MARGIN + 555 / 2 + 25, y: 413 },
-            canvas: [
-              {
-                type: "ellipse",
-                x: 0,
-                y: 0,
-                r1: 1,
-                r2: 1,
-                color: "red",
-              },
-            ],
-          });
-          // Title
-          doc.content.push({
-            absolutePosition: {
-              x: X_MARGIN + 555 / 2 + 40,
-              y: 405,
-            },
-            text: graphContent[index].title,
-            fontSize: 11,
-            bold: true,
-          });
-          console.log(graphContent[1].title);
-          // Graph
-          doc.content.push({
-            absolutePosition: {
-              x: X_MARGIN + 555 / 2 + 50,
-              y: 420,
-            },
-            image: res[index],
-            height: 120,
-            width: 170,
-          });
-          // User
-          doc.content.push({
-            absolutePosition: {
-              x: X_MARGIN + 555 / 2 + 555 / 8 + 40,
-              y: 553,
-            },
-            text: "User",
-            fontSize: 9,
-            bold: true,
-          });
-          // CVs Analysed
-          doc.content.push({
-            absolutePosition: {
-              x: X_MARGIN + 555 / 2 + 30,
-              y: 474,
-            },
-            text: "10",
-            fontSize: 9,
-            bold: true,
-          });
-          index++;
-        }
-        if (index < graphContent.length) {
-          // Title Dot
-          doc.content.push({
-            absolutePosition: { x: X_MARGIN + 25, y: 591 },
-            canvas: [
-              {
-                type: "ellipse",
-                x: 0,
-                y: 0,
-                r1: 1,
-                r2: 1,
-                color: "red",
-              },
-            ],
-          });
-          // Title
-          doc.content.push({
-            absolutePosition: {
-              x: X_MARGIN + 40,
-              y: 583,
-            },
-            text: graphContent[index].title,
-            fontSize: 11,
-            bold: true,
-          });
-          // Graph
-          doc.content.push({
-            absolutePosition: {
-              x: X_MARGIN + 50,
-              y: 598,
-            },
-            image: res[index],
-            height: 120,
-            width: 170,
-          });
-          // User
-          doc.content.push({
-            absolutePosition: {
-              x: X_MARGIN + 555 / 8 + 40,
-              y: 731,
-            },
-            text: "User",
-            fontSize: 9,
-            bold: true,
-          });
-          // CVs Analysed
-          doc.content.push({
-            absolutePosition: {
-              x: X_MARGIN + 30,
-              y: 652,
-            },
-            text: "10",
-            fontSize: 9,
-            bold: true,
-          });
-          index++;
-        }
-        if (index < graphContent.length) {
-          // Title Dot
-          doc.content.push({
-            absolutePosition: { x: X_MARGIN + 555 / 2 + 25, y: 591 },
-            canvas: [
-              {
-                type: "ellipse",
-                x: 0,
-                y: 0,
-                r1: 1,
-                r2: 1,
-                color: "red",
-              },
-            ],
-          });
-          // Title
-          doc.content.push({
-            absolutePosition: {
-              x: X_MARGIN + 555 / 2 + 40,
-              y: 583,
-            },
-            text: graphContent[index].title,
-            fontSize: 11,
-            bold: true,
-          });
-          // Graph
-          doc.content.push({
-            absolutePosition: {
-              x: X_MARGIN + 555 / 2 + 50,
-              y: 598,
-            },
-            image: res[index],
-            height: 120,
-            width: 170,
-          });
-          // User
-          doc.content.push({
-            absolutePosition: {
-              x: X_MARGIN + 555 / 2 + 555 / 8 + 40,
-              y: 731,
-            },
-            text: "User",
-            fontSize: 9,
-            bold: true,
-          });
-          // CVs Analysed
-          doc.content.push({
-            absolutePosition: {
-              x: X_MARGIN + 555 / 2 + 30,
-              y: 652,
-            },
-            text: "10",
-            fontSize: 9,
-            bold: true,
-          });
-        }
-        // Bottom line
-        if (graphContent.length > 1) {
-          if (graphContent.length > 3) {
-            doc.content.push({
-              absolutePosition: { x: X_MARGIN, y: 731 },
-              canvas: [
-                {
-                  type: "line",
-                  x1: 0,
-                  y1: 20,
-                  x2: 555 - X_MARGIN,
-                  y2: 20,
-                  lineWidth: 0.7,
-                  lineColor: "black",
-                },
-              ],
-              pageBreak: "after",
-            });
-          } else {
-            doc.content.push({
-              absolutePosition: { x: X_MARGIN, y: 731 },
-              canvas: [
-                {
-                  type: "line",
-                  x1: 0,
-                  y1: 20,
-                  x2: 555 - X_MARGIN,
-                  y2: 20,
-                  lineWidth: 0.7,
-                  lineColor: "black",
-                },
-              ],
-            });
-          }
-          index++;
-        }
-
-        while (index < graphContent.length) {
-          // Top line
-          doc.content.push({
-            absolutePosition: { x: X_MARGIN, y: 150 },
-            canvas: [
-              {
-                type: "line",
-                x1: 0,
-                y1: 20,
-                x2: 555 - X_MARGIN,
-                y2: 20,
-                lineWidth: 0.7,
-                lineColor: "black",
-              },
-            ],
-          });
-          console.log(index);
-          // Middle line
-          doc.content.push({
-            absolutePosition: { x: X_MARGIN, y: 390.5 },
-            canvas: [
-              {
-                type: "line",
-                x1: 0,
-                y1: 20,
-                x2: 555 - X_MARGIN,
-                y2: 20,
-                lineWidth: 0.7,
-                lineColor: "black",
-              },
-            ],
-          });
-          if (index + 2 < graphContent.length) {
-            // Bottom line
-            doc.content.push({
-              absolutePosition: { x: X_MARGIN, y: 631 },
-              canvas: [
-                {
-                  type: "line",
-                  x1: 0,
-                  y1: 20,
-                  x2: 555 - X_MARGIN,
-                  y2: 20,
-                  lineWidth: 0.7,
-                  lineColor: "black",
-                },
-              ],
-            });
-            // Y line
-            doc.content.push({
-              absolutePosition: { x: (565 + 30) / 2, y: 170 },
-              canvas: [
-                {
-                  type: "line",
-                  x1: 0,
-                  y1: 0,
-                  x2: 0,
-                  y2: 481,
-                  lineWidth: 0.7,
-                  lineColor: "black",
-                },
-              ],
-            });
-          } else {
-            // Y line
-            doc.content.push({
-              absolutePosition: { x: (565 + 30) / 2, y: 170 },
-              canvas: [
-                {
-                  type: "line",
-                  x1: 0,
-                  y1: 0,
-                  x2: 0,
-                  y2: 240,
-                  lineWidth: 0.7,
-                  lineColor: "black",
-                },
-              ],
-            });
-          }
-          // Upper left
-          if (index < graphContent.length) {
-            // Title Dot
-            doc.content.push({
-              absolutePosition: { x: X_MARGIN + 25, y: 186 },
-              canvas: [
-                {
-                  type: "ellipse",
-                  x: 0,
-                  y: 0,
-                  r1: 1,
-                  r2: 1,
-                  color: "red",
-                },
-              ],
-            });
-            // Title
-            doc.content.push({
-              absolutePosition: {
-                x: X_MARGIN + 40,
-                y: 180,
-              },
-              text: graphContent[index].title,
-              fontSize: 11,
-              bold: true,
-            });
-            // Graph
-            doc.content.push({
-              absolutePosition: {
-                x: X_MARGIN + 50,
-                y: 215,
-              },
-              image: res[index],
-              height: 140,
-              width: 170, //540
-            });
-            // User
-            doc.content.push({
-              absolutePosition: {
-                x: X_MARGIN + 555 / 8 + 40,
-                y: 375,
-              },
-              text: "User",
-              fontSize: 9,
-              bold: true,
-            });
-            // CVs Analysed
-            doc.content.push({
-              absolutePosition: {
-                x: X_MARGIN + 30,
-                y: 280,
-              },
-              text: "10",
-              fontSize: 9,
-              bold: true,
-            });
-            index++;
-          } else {
-            break;
-          }
-
-          // Upper right
-          if (index < graphContent.length) {
-            // Title Dot
-            doc.content.push({
-              absolutePosition: { x: X_MARGIN + 555 / 2 + 25, y: 186 },
-              canvas: [
-                {
-                  type: "ellipse",
-                  x: 0,
-                  y: 0,
-                  r1: 1,
-                  r2: 1,
-                  color: "red",
-                },
-              ],
-            });
-            // Title
-            doc.content.push({
-              absolutePosition: {
-                x: X_MARGIN + 555 / 2 + 40,
-                y: 280 - 100,
-              },
-              text: graphContent[index].title,
-              fontSize: 11,
-              bold: true,
-            });
-            console.log(graphContent[1].title);
-            // Graph
-            doc.content.push({
-              absolutePosition: {
-                x: X_MARGIN + 555 / 2 + 50,
-                y: 315 - 100,
-              },
-              image: res[index],
-              height: 140,
-              width: 170,
-            });
-            // User
-            doc.content.push({
-              absolutePosition: {
-                x: X_MARGIN + 555 / 2 + 555 / 8 + 40,
-                y: 475 - 100,
-              },
-              text: "User",
-              fontSize: 9,
-              bold: true,
-            });
-            // CVs Analysed
-            doc.content.push({
-              absolutePosition: {
-                x: X_MARGIN + 555 / 2 + 30,
-                y: 280 + 100 - 100,
-              },
-              text: "10",
-              fontSize: 9,
-              bold: true,
-            });
-            index++;
-          } else {
-            break;
-          }
-
-          // Bottom left
-          if (index < graphContent.length) {
-            // Title Dot
-            doc.content.push({
-              absolutePosition: { x: X_MARGIN + 25, y: 525.5 - 150 },
-              canvas: [
-                {
-                  type: "ellipse",
-                  x: 0,
-                  y: 0,
-                  r1: 1,
-                  r2: 1,
-                  color: "red",
-                },
-              ],
-            });
-            // Title
-            doc.content.push({
-              absolutePosition: {
-                x: X_MARGIN + 40,
-                y: 520.5 - 100,
-              },
-              text: graphContent[index].title,
-              fontSize: 11,
-              bold: true,
-            });
-            // Graph
-            doc.content.push({
-              absolutePosition: {
-                x: X_MARGIN + 50,
-                y: 315 + 240.5 - 100,
-              },
-              image: res[index],
-              height: 140,
-              width: 170,
-            });
-            // User
-            doc.content.push({
-              absolutePosition: {
-                x: X_MARGIN + 555 / 8 + 40,
-                y: 475 + 240.5 - 100,
-              },
-              text: "User",
-              fontSize: 9,
-              bold: true,
-            });
-            // CVs Analysed
-            doc.content.push({
-              absolutePosition: {
-                x: X_MARGIN + 30,
-                y: 280 + 100 + 240.5 - 100,
-              },
-              text: "10",
-              fontSize: 9,
-              bold: true,
-            });
-            index++;
-          } else {
-            break;
-          }
-
-          // Bottom right
-          if (index < graphContent.length) {
-            // Title Dot
-            doc.content.push({
-              absolutePosition: { x: X_MARGIN + 555 / 2 + 25, y: 526.5 - 100 },
-              canvas: [
-                {
-                  type: "ellipse",
-                  x: 0,
-                  y: 0,
-                  r1: 1,
-                  r2: 1,
-                  color: "red",
-                },
-              ],
-            });
-            // Title
-            doc.content.push({
-              absolutePosition: {
-                x: X_MARGIN + 555 / 2 + 40,
-                y: 280 + 240.5 - 100,
-              },
-              text: graphContent[index].title,
-              fontSize: 11,
-              bold: true,
-            });
-            // User
-            doc.content.push({
-              absolutePosition: {
-                x: X_MARGIN + 555 / 2 + 555 / 8 + 40,
-                y: 475 + 240.5 - 100,
-              },
-              text: "User",
-              fontSize: 9,
-              bold: true,
-            });
-            // CVs Analysed
-            doc.content.push({
-              absolutePosition: {
-                x: X_MARGIN + 555 / 2 + 30,
-                y: 280 + 100 + 240.5 - 100,
-              },
-              text: "10",
-              fontSize: 9,
-              bold: true,
-            });
-            // Graph
-            if (index + 1 < graphContent.length) {
-              doc.content.push({
-                absolutePosition: {
-                  x: X_MARGIN + 555 / 2 + 50,
-                  y: 315 + 240.5 - 100,
-                },
-                image: res[index],
-                height: 140,
-                width: 170,
-                pageBreak: "after",
-              });
-            } else {
-              doc.content.push({
-                absolutePosition: {
-                  x: X_MARGIN + 555 / 2 + 50,
-                  y: 315 + 240.5 - 100,
-                },
-                image: res[index],
-                height: 140,
-                width: 170,
-              });
-            }
-            index++;
-          } else {
-            break;
-          }
-        }*/
+          ],
+        });
+        // Title conclusions
+        doc.content.push({
+          absolutePosition: {
+            x: X_MARGIN + 40,
+            y: 390,
+          },
+          text: "CONCLUSIONS",
+          fontSize: 9,
+          bold: true,
+        });
+        // Text
+        doc.content.push({
+          absolutePosition: {
+            x: X_MARGIN + 40,
+            y: 410,
+          },
+          text: "Lorem ipsum dolor sit amet consectetur adipiscing elit pharetra, accumsan ultrices egestas facilisi urna aptent suspendisse a, morbi tincidunt consequat parturient nam duis tempus. Aliquam primis nunc placerat vehicula interdum commodo sem, nascetur leo fringilla pellentesque pulvinar nisl habitant ligula, rutrum urna tincidunt sodales aptent platea. Cubilia commodo eu interdum at ac morbi sollicitudin dictumst lectus, tristique auctor tempor quam metus pharetra ligula gravida.",
+          fontSize: 8,
+        });
 
         if (res == null) console.log("borrar esto");
-
         // Download
         //pdfMake.createPdf(doc).download(documentTitle);
         pdfMake.createPdf(doc).open(); // Esto es para que no se descargue solo se abra
@@ -1990,157 +1046,6 @@ export default {
     styler(fecha) {
       var aux = fecha.split(",");
       return aux[0];
-    },
-    setter_X(row_index, pos_index, array, type) {
-      var pos1, pos2, delay;
-      if (type === 0) delay = 135;
-      else if (type === 1) delay = 165;
-      if ((row_index + pos_index) % 3 == 0) return delay;
-      if (row_index % 2 === 0) {
-        // Rows with starting index even
-        if (pos_index % 2 === 0) {
-          pos1 = (98 * array[row_index + pos_index - 1].name.length) / 29;
-          pos2 = (98 * array[row_index + pos_index - 2].name.length) / 29;
-
-          return delay + pos1 + 5 + pos2 + 15;
-        } else {
-          pos1 = (98 * array[row_index + pos_index - 1].name.length) / 29;
-
-          return delay + pos1 + 10;
-        }
-      } // Rows with starting index odd
-      else {
-        if (pos_index % 2 === 0) {
-          pos1 = (140 * array[row_index + pos_index - 1].name.length) / 29;
-
-          return delay + pos1 + 50;
-        } else {
-          pos1 = (98 * array[row_index + pos_index - 1].name.length) / 29;
-          pos2 = (98 * array[row_index + pos_index - 2].name.length) / 29;
-
-          return delay + pos1 + 10 + pos2 + 40;
-        }
-      }
-    },
-
-    setter_Y(index, type) {
-      if (type === 0) {
-        if (index < 3) return -10;
-        else if (index < 6) return 5;
-        else if (index < 9) return 20;
-        else return 35;
-      } else if (type === 1) {
-        if (index < 3) return 302;
-        else if (index < 6) return 317;
-        else if (index < 9) return 333;
-        else return 348;
-      } else if (type === 2) {
-        if (index < 3) return 350;
-        else if (index < 6) return 360;
-        else if (index < 9) return 370;
-        else return 380;
-      } else if (type === 4) {
-        if (index < 3) return 440;
-        else if (index < 6) return 455;
-        else if (index < 9) return 470;
-        else return 485;
-      }
-    },
-    calcWidht(length) {
-      if (length < 10) return 4.5 * length;
-      if (length <= 20) return 4.1 * length;
-      if (length <= 25) return 4 * length;
-      if (length <= 30) return 3.6 * length;
-      if (length <= 35) return 3.5 * length;
-      if (length <= 40) return 3.5 * length;
-      if (length <= 45) return 3.6 * length;
-      else return 9 * length;
-    },
-    custom_table(items) {
-      var obj = [];
-      var aux = {};
-      const empty_obj = { text: " ", border: [false, false, false, false] };
-      var row;
-      var j;
-      const length = items.length;
-
-      for (var i = 0; i < length; i = i + 3) {
-        row = new Array();
-        j = 0;
-        try {
-          while (j < 3) {
-            aux.border = [false, false, false, false];
-            aux.text = items[i + j].name;
-            aux.fontSize = 8;
-            aux.margin = [0, -5, 0, 0];
-            row.push(aux);
-            aux = new Object();
-            j++;
-          }
-          obj.push(row);
-        } catch (err) {
-          if (j === 0) {
-            row.push(empty_obj);
-            row.push(empty_obj);
-            row.push(empty_obj);
-          } else if (j === 1) {
-            row.push(empty_obj);
-            row.push(empty_obj);
-          } else if (j === 2) {
-            row.push(empty_obj);
-            row.push(empty_obj);
-          }
-          obj.push(row);
-        }
-      }
-      return obj;
-    },
-
-    custom_table2(items) {
-      var obj = [];
-      var aux = {};
-      const empty_obj = { text: " ", border: [false, false, false, false] };
-      var row;
-      var j;
-      const length = items.length;
-
-      for (var i = 0; i < length; i = i + 5) {
-        row = new Array();
-        j = 0;
-        try {
-          while (j < 5) {
-            aux.border = [false, false, false, false];
-            aux.text = items[i + j].name;
-            aux.fontSize = 8;
-            aux.margin = [0, -5, 0, 0];
-            row.push(aux);
-            aux = new Object();
-            j++;
-          }
-          obj.push(row);
-        } catch (err) {
-          if (j === 0) {
-            row.push(empty_obj);
-            row.push(empty_obj);
-            row.push(empty_obj);
-            row.push(empty_obj);
-          } else if (j === 1) {
-            row.push(empty_obj);
-            row.push(empty_obj);
-            row.push(empty_obj);
-            row.push(empty_obj);
-          } else if (j === 2) {
-            row.push(empty_obj);
-            row.push(empty_obj);
-            row.push(empty_obj);
-          } else if (j === 3) {
-            row.push(empty_obj);
-            row.push(empty_obj);
-          }
-          obj.push(row);
-        }
-      }
-      return obj;
     },
   },
 };

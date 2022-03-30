@@ -28,6 +28,7 @@ import PdfExam2 from "../components/PdfExam2.vue";
 import ReportsDownloader2 from "../components/pruebaPdfMake2.vue";
 import ReportsDownloader3 from "../components/pruebaPdfMake3.vue";
 import ReportsDownloader4 from "../components/pruebaPdfMake4.vue";
+import ReportsDownloader5 from "../components/pruebaPdfMake5.vue";
 
 import MeetingList from "../views/MeetingList.vue";
 import MeetSeminariosWeb from "../views/MeetSeminariosWeb.vue";
@@ -249,6 +250,11 @@ const routes = [
     path: "/tester",
     name: "pruebaPdfMake4",
     component: ReportsDownloader4,
+  },
+  {
+    path: "/pdf5",
+    name: "pruebaPdfMake5",
+    component: ReportsDownloader5,
   },
 ];
 

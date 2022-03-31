@@ -999,14 +999,30 @@ export default {
           bold: true,
         });
         // Text
-        doc.content.push({
-          absolutePosition: {
-            x: X_MARGIN + 40,
-            y: 410,
+        doc.content.push(
+          {
+            absolutePosition: { x: X_MARGIN + 38, y: 405 },
+            canvas: [
+              {
+                type: "rect",
+                x: 0,
+                y: 0,
+                w: 480,
+                h: 50,
+                r: 0,
+                color: "#bfbfbf",
+              },
+            ],
           },
-          text: "Lorem ipsum dolor sit amet consectetur adipiscing elit pharetra, accumsan ultrices egestas facilisi urna aptent suspendisse a, morbi tincidunt consequat parturient nam duis tempus. Aliquam primis nunc placerat vehicula interdum commodo sem, nascetur leo fringilla pellentesque pulvinar nisl habitant ligula, rutrum urna tincidunt sodales aptent platea. Cubilia commodo eu interdum at ac morbi sollicitudin dictumst lectus, tristique auctor tempor quam metus pharetra ligula gravida.",
-          fontSize: 8,
-        });
+          {
+            absolutePosition: {
+              x: X_MARGIN + 40,
+              y: 410,
+            },
+            text: "Lorem ipsum dolor sit amet consectetur adipiscing elit pharetra, accumsan ultrices egestas facilisi urna aptent suspendisse a, morbi tincidunt consequat parturient nam duis tempus. Aliquam primis nunc placerat vehicula interdum commodo sem, nascetur leo fringilla pellentesque pulvinar nisl habitant ligula, rutrum urna tincidunt sodales aptent platea. Cubilia commodo eu interdum at ac morbi sollicitudin dictumst lectus, tristique auctor tempor quam metus pharetra ligula gravida.",
+            fontSize: 8,
+          }
+        );
 
         if (res == null) console.log("borrar esto");
         // Download

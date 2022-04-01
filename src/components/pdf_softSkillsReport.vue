@@ -110,17 +110,29 @@ export default {
 </script>
 
 <style scoped>
+* {
+  margin-left: 40px;
+}
+
 .header-progradum-logo {
 }
 .pdf-title {
 }
 .header-table {
+  background: #62c4e4;
+  width: 500px;
+  border-radius: 10px;
 }
 .header-table-tr {
 }
 .header-table-td-left {
+  text-align: right;
+  padding: 4px 10px;
 }
 .header-table-td-right {
+  text-align: left;
+  background: #ffffff;
+  padding: 4px 10px;
 }
 .title {
 }

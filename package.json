@@ -35,6 +35,7 @@
     "vue-cal": "^3.10.1",
     "vue-csv-import": "^3.3.5",
     "vue-google-calendar": "^0.3.4",
+    "vue-html2pdf": "^1.8.0",
     "vue-navigation-bar": "^4.1.0",
     "vue-numeric-input": "^2.0.0",
     "vue-router": "^3.2.0",

@@ -1005,12 +1005,12 @@ export default {
             canvas: [
               {
                 type: "rect",
-                x: 0,
+                x: -5,
                 y: 0,
                 w: 480,
                 h: 50,
-                r: 0,
-                color: "#bfbfbf",
+                r: 1,
+                color: "#ecece8",
               },
             ],
           },

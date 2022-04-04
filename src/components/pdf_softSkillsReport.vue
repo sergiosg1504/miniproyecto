@@ -76,7 +76,6 @@
             sollicitudin dictumst lectus, tristique auctor tempor quam metus
             pharetra ligula gravida.
           </p>
-          <p class="title">ASSESSMENT RESULTS</p>
           <p class="title">QUANTITATIVE ASSESSMENT PER EVALUATOR</p>
           <table class="quantitative-table">
             <thead>
@@ -102,6 +101,43 @@
                   <td>{{ competence.pair }}</td>
                   <td>{{ competence.collaborator }}</td>
                 </tr>
+                <hr />
+              </div>
+            </tbody>
+          </table>
+          <p class="title">QUALITATIVE ASSESSMENT PER EVALUATOR</p>
+          <table class="quantitative-table">
+            <tbody>
+              <hr />
+              <div v-for="(group, i) in competences2" :key="i">
+                <div v-for="(competence, j) in group" :key="j">
+                  <tr>
+                    <td v-if="j === 0">Group {{ i }}</td>
+                    <td v-else></td>
+                    <td>Competence {{ competence.competence }}</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>HR</td>
+                    <td>{{ competence.hr }}</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>Area manager</td>
+                    <td>{{ competence.area_manager }}</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>Pair</td>
+                    <td>{{ competence.pair }}</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>Collaborator</td>
+                    <td>{{ competence.collaborator }}</td>
+                  </tr>
+                </div>
                 <hr />
               </div>
             </tbody>
@@ -265,6 +301,77 @@ export default {
             area_manager: "Level n",
             pair: "Level n",
             collaborator: "Level n",
+          },
+        ],
+      },
+      competences2: {
+        1: [
+          {
+            competence: "A",
+            hr: "Text describing the level for the assessed competence",
+            area_manager:
+              "Text describing the level for the assessed competence",
+            pair: "Text describing the level for the assessed competence",
+            collaborator:
+              "Text describing the level for the assessed competence",
+          },
+          {
+            competence: "D",
+            hr: "Text describing the level for the assessed competence",
+            area_manager:
+              "Text describing the level for the assessed competence",
+            pair: "Text describing the level for the assessed competence",
+            collaborator:
+              "Text describing the level for the assessed competence",
+          },
+          {
+            competence: "F",
+            hr: "Text describing the level for the assessed competence",
+            area_manager:
+              "Text describing the level for the assessed competence",
+            pair: "Text describing the level for the assessed competence",
+            collaborator:
+              "Text describing the level for the assessed competence",
+          },
+        ],
+        2: [
+          {
+            competence: "B",
+            hr: "Text describing the level for the assessed competence",
+            area_manager:
+              "Text describing the level for the assessed competence",
+            pair: "Text describing the level for the assessed competence",
+            collaborator:
+              "Text describing the level for the assessed competence",
+          },
+          {
+            competence: "C",
+            hr: "Text describing the level for the assessed competence",
+            area_manager:
+              "Text describing the level for the assessed competence",
+            pair: "Text describing the level for the assessed competence",
+            collaborator:
+              "Text describing the level for the assessed competence",
+          },
+          {
+            competence: "D",
+            hr: "Text describing the level for the assessed competence",
+            area_manager:
+              "Text describing the level for the assessed competence",
+            pair: "Text describing the level for the assessed competence",
+            collaborator:
+              "Text describing the level for the assessed competence",
+          },
+        ],
+        3: [
+          {
+            competence: "C",
+            hr: "Text describing the level for the assessed competence",
+            area_manager:
+              "Text describing the level for the assessed competence",
+            pair: "Text describing the level for the assessed competence",
+            collaborator:
+              "Text describing the level for the assessed competence",
           },
         ],
       },

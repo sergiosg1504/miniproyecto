@@ -2,6 +2,72 @@
   <div>
     <button @click="generateReport()">hola</button>
     <div>
+      <p class="title">QUALITATIVE ASSESSMENT PER EVALUATOR</p>
+      <table class="qualitative-table" align="center">
+        <div id="line" :key="group"><hr /></div>
+        <template v-for="group in competences2">
+          <template v-for="competence in group">
+            <tr :key="competence">
+              <td v-if="j === 0">Group</td>
+              <td v-else></td>
+              <td>Competence {{ competence.competence }}</td>
+              <td></td>
+            </tr>
+            <tr :key="competence">
+              <td></td>
+              <td>HR</td>
+              <td>{{ competence.hr }}</td>
+            </tr>
+            <tr :key="competence">
+              <td></td>
+              <td>Area manager</td>
+              <td>{{ competence.area_manager }}</td>
+            </tr>
+            <tr :key="competence">
+              <td></td>
+              <td>Pair</td>
+              <td>{{ competence.pair }}</td>
+            </tr>
+            <tr :key="competence">
+              <td></td>
+              <td>Collaborator</td>
+              <td>{{ competence.collaborator }}</td>
+            </tr>
+          </template>
+          <div id="line" :key="group"><hr /></div>
+        </template>
+      </table>
+
+      <p class="title">QUANTITATIVE ASSESSMENT PER EVALUATOR</p>
+      <table class="quantitative-table" align="center">
+        <tr>
+          <td>Group of competences</td>
+          <td>Competences</td>
+          <td>Required profiles</td>
+          <td>HR</td>
+          <td>Area Manager</td>
+          <td>Pair</td>
+          <td>Collaborator</td>
+        </tr>
+        <div id="line" :key="group"><hr /></div>
+        <template v-for="group in competences">
+          <tr v-for="(competence, j) in group" :key="j">
+            <td v-if="j === 0">Group competences</td>
+            <td v-else-if="j === 1">Included</td>
+            <td v-else-if="j === 2">Not included</td>
+            <td v-else></td>
+            <td>Competence {{ competence.competence }}</td>
+            <td>{{ competence.required_profile }}</td>
+            <td>{{ competence.hr }}</td>
+            <td>{{ competence.area_manager }}</td>
+            <td>{{ competence.pair }}</td>
+            <td>{{ competence.collaborator }}</td>
+          </tr>
+          <div id="line" :key="group"><hr /></div>
+        </template>
+      </table>
+    </div>
+    <div>
       <VueHtml2pdf
         :show-layout="false"
         :float-layout="true"
@@ -77,70 +143,62 @@
             pharetra ligula gravida.
           </p>
           <p class="title">QUANTITATIVE ASSESSMENT PER EVALUATOR</p>
-          <table class="quantitative-table">
-            <thead>
-              <tr>
-                <th>Group of competences</th>
-                <th>Competences</th>
-                <th>Required profiles</th>
-                <th>HR</th>
-                <th>Area Manager</th>
-                <th>Pair</th>
-                <th>Collaborator</th>
+          <table class="quantitative-table" align="center">
+            <tr>
+              <td>Group of competences</td>
+              <td>Competences</td>
+              <td>Required profiles</td>
+              <td>HR</td>
+              <td>Area Manager</td>
+              <td>Pair</td>
+              <td>Collaborator</td>
+            </tr>
+            <template v-for="group in competences">
+              <tr v-for="(competence, j) in group" :key="j">
+                <td>Group competences</td>
+                <td>Competence {{ competence.competence }}</td>
+                <td>{{ competence.required_profile }}</td>
+                <td>{{ competence.hr }}</td>
+                <td>{{ competence.area_manager }}</td>
+                <td>{{ competence.pair }}</td>
+                <td>{{ competence.collaborator }}</td>
               </tr>
-            </thead>
-            <tbody>
-              <hr />
-              <div v-for="(group, i) in competences" :key="i">
-                <tr v-for="(competence, j) in group" :key="j">
-                  <td>Group {{ i }} competences</td>
-                  <td>Competence {{ competence.competence }}</td>
-                  <td>{{ competence.required_profile }}</td>
-                  <td>{{ competence.hr }}</td>
-                  <td>{{ competence.area_manager }}</td>
-                  <td>{{ competence.pair }}</td>
-                  <td>{{ competence.collaborator }}</td>
-                </tr>
-                <hr />
-              </div>
-            </tbody>
+            </template>
           </table>
           <p class="title">QUALITATIVE ASSESSMENT PER EVALUATOR</p>
-          <table class="quantitative-table">
-            <tbody>
-              <hr />
-              <div v-for="(group, i) in competences2" :key="i">
-                <div v-for="(competence, j) in group" :key="j">
-                  <tr>
-                    <td v-if="j === 0">Group {{ i }}</td>
-                    <td v-else></td>
-                    <td>Competence {{ competence.competence }}</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td>HR</td>
-                    <td>{{ competence.hr }}</td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td>Area manager</td>
-                    <td>{{ competence.area_manager }}</td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td>Pair</td>
-                    <td>{{ competence.pair }}</td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td>Collaborator</td>
-                    <td>{{ competence.collaborator }}</td>
-                  </tr>
-                </div>
-                <hr />
-              </div>
-            </tbody>
+          <table class="qualitative-table" align="center">
+            <div id="line" :key="group"><hr /></div>
+            <template v-for="group in competences2">
+              <template v-for="competence in group">
+                <tr :key="competence">
+                  <td v-if="j === 0">Group</td>
+                  <td v-else></td>
+                  <td>Competence {{ competence.competence }}</td>
+                  <td></td>
+                </tr>
+                <tr :key="competence">
+                  <td></td>
+                  <td>HR</td>
+                  <td>{{ competence.hr }}</td>
+                </tr>
+                <tr :key="competence">
+                  <td></td>
+                  <td>Area manager</td>
+                  <td>{{ competence.area_manager }}</td>
+                </tr>
+                <tr :key="competence">
+                  <td></td>
+                  <td>Pair</td>
+                  <td>{{ competence.pair }}</td>
+                </tr>
+                <tr :key="competence">
+                  <td></td>
+                  <td>Collaborator</td>
+                  <td>{{ competence.collaborator }}</td>
+                </tr>
+              </template>
+              <div id="line" :key="group"><hr /></div>
+            </template>
           </table>
 
           <!-- acaba -->
@@ -389,15 +447,17 @@ export default {
         .get("pdf")
         .then((pdf) => {
           const totalPages = pdf.internal.getNumberOfPages();
-          console.log(totalPages);
+          console.log(`num pags:    ` + totalPages);
+          console.log(`width:  ` + pdf.internal.pageSize.getWidth());
+          console.log(`height:  ` + pdf.internal.pageSize.getHeight());
           for (let i = 1; i <= totalPages; i++) {
             pdf.setPage(i);
-            pdf.setFontSize(40);
-            pdf.setTextColor(300);
+            pdf.setFontSize(20);
+            pdf.setTextColor(150);
             pdf.text(
               "Page " + i + " of " + totalPages,
-              pdf.internal.pageSize.getWidth() * 0.88,
-              pdf.internal.pageSize.getHeight() - 0.3
+              pdf.internal.pageSize.getWidth() / 2,
+              pdf.internal.pageSize.getHeight() - 2
             );
           }
         })
@@ -443,6 +503,51 @@ export default {
 }
 .conclusions-content {
 }
+
+table.quantitative-table {
+  table-layout: fixed;
+  width: 90px;
+} /*Setting the table width is important!*/
+table.quantitative-table td {
+  overflow: hidden;
+} /*Hide text outside the cell.*/
+table.quantitative-table td:nth-of-type(1) {
+  width: 180px;
+} /*Setting the width of column 1.*/
+table.quantitative-table td:nth-of-type(2) {
+  width: 100px;
+} /*Setting the width of column 2.*/
+table.quantitative-table td:nth-of-type(3) {
+  width: 70px;
+} /*Setting the width of column 3.*/
+table.quantitative-table td:nth-of-type(4) {
+  width: 70px;
+} /*Setting the width of column 1.*/
+table.quantitative-table td:nth-of-type(5) {
+  width: 70px;
+} /*Setting the width of column 1.*/
+table.quantitative-table td:nth-of-type(6) {
+  width: 70px;
+} /*Setting the width of column 1.*/
+table.quantitative-table td:nth-of-type(7) {
+  width: 90px;
+} /*Setting the width of column 1.*/
+
 .quantitative-table {
+}
+
+hr {
+  border: 0;
+  clear: both;
+  display: block;
+  width: 96%;
+  background-color: #ffff00;
+  height: 1px;
+}
+
+#line {
+  float: left;
+  width: 731px;
+  height: 40px;
 }
 </style>

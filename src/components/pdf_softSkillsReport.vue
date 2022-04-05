@@ -417,20 +417,26 @@ export default {
 .pdf-title {
 }
 .header-table {
+  position: relative;
+  left: 15%;
   background: #62c4e4;
+  border-collapse: "separate";
   width: 500px;
   border-radius: 10px;
+  border: 8px solid #62c4e4;
 }
 .header-table-tr {
 }
 .header-table-td-left {
   text-align: right;
-  padding: 4px 10px;
+  padding: 0 10px;
 }
 .header-table-td-right {
   text-align: left;
   background: #ffffff;
-  padding: 4px 10px;
+  padding: 0 10px;
+  border-radius: 8px;
+  margin-right: 10%;
 }
 .title {
 }

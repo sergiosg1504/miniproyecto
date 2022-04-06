@@ -2,72 +2,6 @@
   <div>
     <button @click="generateReport()">hola</button>
     <div>
-      <p class="title">QUALITATIVE ASSESSMENT PER EVALUATOR</p>
-      <table class="qualitative-table" align="center">
-        <div id="line" :key="group"><hr /></div>
-        <template v-for="group in competences2">
-          <template v-for="competence in group">
-            <tr :key="competence">
-              <td v-if="j === 0">Group</td>
-              <td v-else></td>
-              <td>Competence {{ competence.competence }}</td>
-              <td></td>
-            </tr>
-            <tr :key="competence">
-              <td></td>
-              <td>HR</td>
-              <td>{{ competence.hr }}</td>
-            </tr>
-            <tr :key="competence">
-              <td></td>
-              <td>Area manager</td>
-              <td>{{ competence.area_manager }}</td>
-            </tr>
-            <tr :key="competence">
-              <td></td>
-              <td>Pair</td>
-              <td>{{ competence.pair }}</td>
-            </tr>
-            <tr :key="competence">
-              <td></td>
-              <td>Collaborator</td>
-              <td>{{ competence.collaborator }}</td>
-            </tr>
-          </template>
-          <div id="line" :key="group"><hr /></div>
-        </template>
-      </table>
-
-      <p class="title">QUANTITATIVE ASSESSMENT PER EVALUATOR</p>
-      <table class="quantitative-table" align="center">
-        <tr>
-          <td>Group of competences</td>
-          <td>Competences</td>
-          <td>Required profiles</td>
-          <td>HR</td>
-          <td>Area Manager</td>
-          <td>Pair</td>
-          <td>Collaborator</td>
-        </tr>
-        <div id="line" :key="group"><hr /></div>
-        <template v-for="group in competences">
-          <tr v-for="(competence, j) in group" :key="j">
-            <td v-if="j === 0">Group competences</td>
-            <td v-else-if="j === 1">Included</td>
-            <td v-else-if="j === 2">Not included</td>
-            <td v-else></td>
-            <td>Competence {{ competence.competence }}</td>
-            <td>{{ competence.required_profile }}</td>
-            <td>{{ competence.hr }}</td>
-            <td>{{ competence.area_manager }}</td>
-            <td>{{ competence.pair }}</td>
-            <td>{{ competence.collaborator }}</td>
-          </tr>
-          <div id="line" :key="group"><hr /></div>
-        </template>
-      </table>
-    </div>
-    <div>
       <VueHtml2pdf
         :show-layout="false"
         :float-layout="true"
@@ -81,7 +15,6 @@
         pdf-orientation="portrait"
         pdf-content-width="80%"
         ref="html2Pdf"
-        margin="[20,30,20,30]"
         @beforeDownload="beforeDownload($event)"
       >
         <section slot="pdf-content">
@@ -143,64 +76,128 @@
             pharetra ligula gravida.
           </p>
           <p class="title">QUANTITATIVE ASSESSMENT PER EVALUATOR</p>
-          <table class="quantitative-table" align="center">
-            <tr>
-              <td>Group of competences</td>
-              <td>Competences</td>
-              <td>Required profiles</td>
-              <td>HR</td>
-              <td>Area Manager</td>
-              <td>Pair</td>
-              <td>Collaborator</td>
+          <table class="quantitative-table">
+            <tr class="quantitative-table-tr">
+              <td class="table-title">Group of competences</td>
+              <td class="table-title">Competences</td>
+              <td class="table-title">Required profiles</td>
+              <td class="table-title">HR</td>
+              <td class="table-title">Area Manager</td>
+              <td class="table-title">Pair</td>
+              <td class="table-title">Collaborator</td>
             </tr>
             <template v-for="group in competences">
-              <tr v-for="(competence, j) in group" :key="j">
-                <td>Group competences</td>
-                <td>Competence {{ competence.competence }}</td>
-                <td>{{ competence.required_profile }}</td>
-                <td>{{ competence.hr }}</td>
-                <td>{{ competence.area_manager }}</td>
-                <td>{{ competence.pair }}</td>
-                <td>{{ competence.collaborator }}</td>
+              <tr
+                class="quantitative-table-tr"
+                v-for="(competence, j) in group"
+                :key="j"
+              >
+                <td class="quantitative-table-td" v-if="j === 0">
+                  <p class="quantitative-table-td-p-blue">Group competences</p>
+                </td>
+                <td class="quantitative-table-td" v-else-if="j === 1">
+                  <p class="quantitative-table-td-p-gray">Included</p>
+                </td>
+                <td class="quantitative-table-td" v-else-if="j === 2">
+                  <p class="quantitative-table-td-p-gray">Not included</p>
+                </td>
+                <td class="quantitative-table-td" v-else></td>
+                <td class="quantitative-table-td">
+                  <p class="quantitative-table-td-p-light-blue">
+                    Competence {{ competence.competence }}
+                  </p>
+                </td>
+                <td class="quantitative-table-td">
+                  <p class="quantitative-table-td-p-dark-blue">
+                    {{ competence.required_profile }}
+                  </p>
+                </td>
+                <td class="quantitative-table-td">
+                  <p class="quantitative-table-td-p-black">
+                    {{ competence.hr }}
+                  </p>
+                </td>
+                <td class="quantitative-table-td">
+                  <p class="quantitative-table-td-p-black">
+                    {{ competence.area_manager }}
+                  </p>
+                </td>
+                <td class="quantitative-table-td">
+                  <p class="quantitative-table-td-p-black">
+                    {{ competence.pair }}
+                  </p>
+                </td>
+                <td class="quantitative-table-td">
+                  <p class="quantitative-table-td-p-black">
+                    {{ competence.collaborator }}
+                  </p>
+                </td>
               </tr>
             </template>
           </table>
           <p class="title">QUALITATIVE ASSESSMENT PER EVALUATOR</p>
-          <table class="qualitative-table" align="center">
+          <table class="qualitative-table">
             <div id="line" :key="group"><hr /></div>
             <template v-for="group in competences2">
               <template v-for="competence in group">
-                <tr :key="competence">
-                  <td v-if="j === 0">Group</td>
-                  <td v-else></td>
-                  <td>Competence {{ competence.competence }}</td>
-                  <td></td>
+                <tr class="qualitative-table-tr" :key="competence">
+                  <td class="qualitative-table-td" v-if="j === 0">Group</td>
+                  <td class="qualitative-table-td" v-else></td>
+                  <td class="qualitative-table-td">
+                    <p class="quantitative-table-td-p-light-blue">
+                      Competence {{ competence.competence }}
+                    </p>
+                  </td>
+                  <td class="qualitative-table-td"></td>
                 </tr>
-                <tr :key="competence">
-                  <td></td>
-                  <td>HR</td>
-                  <td>{{ competence.hr }}</td>
+                <tr class="qualitative-table-tr" :key="competence">
+                  <td class="qualitative-table-td"></td>
+                  <td class="qualitative-table-td">
+                    <p class="qualitative-table-td-p-dark-blue">HR</p>
+                  </td>
+                  <td class="qualitative-table-td">
+                    <p class="qualitative-table-td-p-text">
+                      {{ competence.hr }}
+                    </p>
+                  </td>
                 </tr>
-                <tr :key="competence">
-                  <td></td>
-                  <td>Area manager</td>
-                  <td>{{ competence.area_manager }}</td>
+                <tr class="qualitative-table-tr" :key="competence">
+                  <td class="qualitative-table-td"></td>
+                  <td class="qualitative-table-td">
+                    <p class="qualitative-table-td-p-dark-blue">Area manager</p>
+                  </td>
+                  <td class="qualitative-table-td">
+                    <p class="qualitative-table-td-p-text">
+                      {{ competence.area_manager }}
+                    </p>
+                  </td>
                 </tr>
-                <tr :key="competence">
-                  <td></td>
-                  <td>Pair</td>
-                  <td>{{ competence.pair }}</td>
+                <tr class="qualitative-table-tr" :key="competence">
+                  <td class="qualitative-table-td"></td>
+                  <td class="qualitative-table-td">
+                    <p class="qualitative-table-td-p-dark-blue">Pair</p>
+                  </td>
+                  <td class="qualitative-table-td">
+                    <p class="qualitative-table-td-p-text">
+                      {{ competence.pair }}
+                    </p>
+                  </td>
                 </tr>
-                <tr :key="competence">
-                  <td></td>
-                  <td>Collaborator</td>
-                  <td>{{ competence.collaborator }}</td>
+                <tr class="qualitative-table-tr" :key="competence">
+                  <td class="qualitative-table-td"></td>
+                  <td class="qualitative-table-td">
+                    <p class="qualitative-table-td-p-dark-blue">Collaborator</p>
+                  </td>
+                  <td class="qualitative-table-td">
+                    <p class="qualitative-table-td-p-text">
+                      {{ competence.collaborator }}
+                    </p>
+                  </td>
                 </tr>
               </template>
               <div id="line" :key="group"><hr /></div>
             </template>
           </table>
-
           <!-- acaba -->
         </section>
       </VueHtml2pdf>
@@ -452,12 +449,12 @@ export default {
           console.log(`height:  ` + pdf.internal.pageSize.getHeight());
           for (let i = 1; i <= totalPages; i++) {
             pdf.setPage(i);
-            pdf.setFontSize(20);
+            pdf.setFontSize(40);
             pdf.setTextColor(150);
             pdf.text(
-              "Page " + i + " of " + totalPages,
-              pdf.internal.pageSize.getWidth() / 2,
-              pdf.internal.pageSize.getHeight() - 2
+              i + "/" + totalPages,
+              pdf.internal.pageSize.getWidth() * 0.8,
+              pdf.internal.pageSize.getHeight() - 0.5
             );
           }
         })
@@ -475,6 +472,7 @@ export default {
 .header-progradum-logo {
 }
 .pdf-title {
+  font-weight: bold;
 }
 .header-table {
   position: relative;
@@ -499,6 +497,7 @@ export default {
   margin-right: 10%;
 }
 .title {
+  font-weight: bold;
 }
 .containter-assessment-spider {
   display: flex;
@@ -538,22 +537,93 @@ table.quantitative-table td:nth-of-type(6) {
 table.quantitative-table td:nth-of-type(7) {
   width: 90px;
 } /*Setting the width of column 1.*/
+.table-title {
+  font-weight: bold;
+  font-size: 12px;
+  text-align: center;
+}
 
 .quantitative-table {
 }
-
-hr {
-  border: 0;
-  clear: both;
-  display: block;
-  width: 96%;
-  background-color: #ffff00;
-  height: 1px;
+.quantitative-table-tr {
+  height: 25px;
 }
-
-#line {
-  float: left;
-  width: 731px;
-  height: 40px;
+.quantitative-table-td {
+  font-size: 12px;
+  text-align: center;
+}
+.quantitative-table-td-p-gray {
+  color: #b4b5b4;
+  display: inline-block;
+  border-radius: 4px;
+  padding-right: 4px;
+  padding-left: 4px;
+}
+.quantitative-table-td-p-blue {
+  background-color: #45bbd8;
+  color: white;
+  display: inline-block;
+  border-radius: 4px;
+  padding-right: 4px;
+  padding-left: 4px;
+}
+.quantitative-table-td-p-light-blue {
+  background-color: #91d1d5;
+  color: white;
+  display: inline-block;
+  border-radius: 4px;
+  padding-right: 4px;
+  padding-left: 4px;
+}
+.quantitative-table-td-p-dark-blue {
+  background-color: #206c87;
+  color: white;
+  display: inline-block;
+  border-radius: 4px;
+  padding-right: 4px;
+  padding-left: 4px;
+}
+.quantitative-table-td-p-black {
+  background-color: #0f1e2b;
+  color: white;
+  display: inline-block;
+  border-radius: 4px;
+  padding-right: 4px;
+  padding-left: 4px;
+}
+.qualitative-table {
+}
+.qualitative-table-tr {
+  height: 25px;
+}
+.qualitative-table-td {
+  font-size: 12px;
+  text-align: left;
+  margin-right: 8px;
+}
+.qualitative-table-td-p-text {
+  border: #206c87 1px solid;
+  display: inline-block;
+  border-radius: 4px;
+  padding-right: 4px;
+  padding-left: 4px;
+}
+.qualitative-table-td-p-light-blue {
+  background-color: #91d1d5;
+  color: white;
+  display: inline-block;
+  border-radius: 4px;
+  padding-right: 4px;
+  padding-left: 4px;
+  width: 100%;
+}
+.qualitative-table-td-p-dark-blue {
+  background-color: #206c87;
+  color: white;
+  display: inline-block;
+  border-radius: 4px;
+  padding-right: 4px;
+  padding-left: 4px;
+  width: 100%;
 }
 </style>

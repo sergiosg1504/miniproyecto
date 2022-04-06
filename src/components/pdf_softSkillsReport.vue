@@ -4,17 +4,15 @@
     <div>
       <VueHtml2pdf
         :show-layout="false"
-        :float-layout="true"
-        :enable-download="true"
+        :float-layout="false"
+        :enable-download="false"
         :preview-modal="true"
         :paginate-elements-by-height="1400"
-        filename="softSkillsReport"
         :pdf-quality="2"
         :manual-pagination="false"
-        pdf-format="a4"
-        pdf-orientation="portrait"
-        pdf-content-width="80%"
         ref="html2Pdf"
+        filename="softSkillsReport"
+        html-to-pdf-options="htmlToPdfOptions"
         @beforeDownload="beforeDownload($event)"
       >
         <section slot="pdf-content">
@@ -137,12 +135,13 @@
           </table>
           <p class="title">QUALITATIVE ASSESSMENT PER EVALUATOR</p>
           <table class="qualitative-table">
-            <div id="line" :key="group"><hr /></div>
             <template v-for="group in competences2">
               <template v-for="competence in group">
                 <tr class="qualitative-table-tr" :key="competence">
                   <td class="qualitative-table-td" v-if="j === 0">Group</td>
-                  <td class="qualitative-table-td" v-else></td>
+                  <td class="qualitative-table-td" v-else>
+                    <p class="quantitative-table-td-p-blue">Group</p>
+                  </td>
                   <td class="qualitative-table-td">
                     <p class="quantitative-table-td-p-light-blue">
                       Competence {{ competence.competence }}
@@ -195,7 +194,6 @@
                   </td>
                 </tr>
               </template>
-              <div id="line" :key="group"><hr /></div>
             </template>
           </table>
           <!-- acaba -->
@@ -217,6 +215,23 @@ export default {
   },
   data() {
     return {
+      htmlToPdfOptions: {
+        margin: [40, 20, 60, 20],
+        enableLinks: false,
+        html2canvas: {
+          scale: 1,
+          useCORS: true,
+        },
+        image: {
+          type: "jpeg",
+          quality: 0.98,
+        },
+        jsPDF: {
+          unit: "in",
+          format: "a4",
+          orientation: "portrait",
+        },
+      },
       progradumLogoBase64:
         "data:image/png;base64,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",
       progradumLetter:
@@ -426,7 +441,7 @@ export default {
               "Text describing the level for the assessed competence",
             pair: "Text describing the level for the assessed competence",
             collaborator:
-              "Text describing the level for the assessed competence",
+              "Text describing the level for the assessed competence sdkfafkjdsfkldsafñkadsfkadsfñlsdfkldsfkladsflñdsafkldsafkladslñfkadsklfadskfladsjklfadsñflk",
           },
         ],
       },
@@ -444,17 +459,14 @@ export default {
         .get("pdf")
         .then((pdf) => {
           const totalPages = pdf.internal.getNumberOfPages();
-          console.log(`num pags:    ` + totalPages);
-          console.log(`width:  ` + pdf.internal.pageSize.getWidth());
-          console.log(`height:  ` + pdf.internal.pageSize.getHeight());
           for (let i = 1; i <= totalPages; i++) {
             pdf.setPage(i);
-            pdf.setFontSize(40);
+            pdf.setFontSize(12);
             pdf.setTextColor(150);
             pdf.text(
               i + "/" + totalPages,
-              pdf.internal.pageSize.getWidth() * 0.8,
-              pdf.internal.pageSize.getHeight() - 0.5
+              pdf.internal.pageSize.getWidth() * 0.9,
+              pdf.internal.pageSize.getHeight() - 10
             );
           }
         })
@@ -511,7 +523,6 @@ export default {
 
 table.quantitative-table {
   table-layout: fixed;
-  width: 90px;
 } /*Setting the table width is important!*/
 table.quantitative-table td {
   overflow: hidden;
@@ -527,16 +538,16 @@ table.quantitative-table td:nth-of-type(3) {
 } /*Setting the width of column 3.*/
 table.quantitative-table td:nth-of-type(4) {
   width: 70px;
-} /*Setting the width of column 1.*/
+} /*Setting the width of column 4.*/
 table.quantitative-table td:nth-of-type(5) {
   width: 70px;
-} /*Setting the width of column 1.*/
+} /*Setting the width of column 5.*/
 table.quantitative-table td:nth-of-type(6) {
   width: 70px;
-} /*Setting the width of column 1.*/
+} /*Setting the width of column 6.*/
 table.quantitative-table td:nth-of-type(7) {
   width: 90px;
-} /*Setting the width of column 1.*/
+} /*Setting the width of column 7.*/
 .table-title {
   font-weight: bold;
   font-size: 12px;
@@ -591,6 +602,22 @@ table.quantitative-table td:nth-of-type(7) {
   padding-right: 4px;
   padding-left: 4px;
 }
+
+table.qualitative-table {
+  table-layout: fixed;
+} /*Setting the table width is important!*/
+.qualitative-table-td {
+  overflow: hidden;
+} /*Hide text outside the cell.*/
+.qualitative-table-td:nth-of-type(1) {
+  width: 40px;
+} /*Setting the width of column 1.*/
+.qualitative-table-td:nth-of-type(2) {
+  width: 200px;
+} /*Setting the width of column 2.*/
+.qualitative-table-td:nth-of-type(3) {
+  width: 700px;
+} /*Setting the width of column 3.*/
 .qualitative-table {
 }
 .qualitative-table-tr {

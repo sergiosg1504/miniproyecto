@@ -62,28 +62,44 @@
 
           <div class="containter-assessment-spider">
             <div class="div-assessment-results">
-              <p class="title">ASSESSMENT RESULTS</p>
+              <div class="div-title">
+                <li class="orange-dot"></li>
+                <p class="title">ASSESSMENT RESULTS</p>
+              </div>
             </div>
             <div class="div-spider-diagram">
-              <p class="title">SPIDER DIAGRAM</p>
+              <div class="div-title">
+                <li class="orange-dot"></li>
+                <p class="title">SPIDER DIAGRAM</p>
+              </div>
               <img
                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM8AAADPCAYAAABSgYVfAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAthJREFUeNrs3cFNAkEUgGEw3vHGlQ7cDqADKQErkBK0ArECoYO1AqECsQOu3NYK1rdhjQcPOruoEL4vmeBBDXn4Z4dBQrcsyw6Q7swIQDwgHhAPiAcQD4gHxAPiAfEA4gHxgHhAPCAeQDwgHhAPiAcQD4gHxAPiAfEA4gHxgHhAPCAeQDwgHhAPiAcQD4gHxAPiAfEA4gHxgHhAPCAeQDwgHhAPiAcQD7RwbgRpxqvtLG6yI7irRaxJPuwXHjXxHIoqnOGR3NdNxD6KgNYeNts20vRivURAE6MQD8081ttNxEMDNxFQHuvCKMRDuqtYywhoYBTiId1lrHUElBmFeEjnIEE8tOQgQTy04CBBPLRQHSRMjUE8IB4QD4gH+OC/qv9JPux3m/5sfTK27Oxe8MSVh4TwqvfojGI9mYZ4aBBQrHF8uTAN8dDM3AjEA+IB8QDiAfGAeEA8IB5APCAeEA+IBxAPiAfEA+IB8QDiAfGAeEA8IB5APCAeEA+IBxAPiAfEA+IB8QDiAfGAeGhqvNoO4mZmEv/Dp2EfbzhZZ/eJ2D3TEA+fYYy++ZYqnHuTEg9fPRuB5zwgHkA8IB72am0E4iHNW6zrfNjPjSKN0zbhjCIcVx1XHhK8xhoIRzykWdRXnMIobNv4uYeIZmoM4iFNdTAwNwbx4GDAcx5+/WAgE454SLOqrzgbo7BtOxV3e/gdRUTjjXLiOS3xR39rCrZtIB5APCAeEA+IB8QDiAfEA+IB8YB4APGAeEA8IB5APCAeEA+IB8QDiAfEA+IB8YB4APGAeEA8IB5APCAeEA+IB8QDiAfEAwfBp2Gnm8daGgPdsixNAWzbQDwgHhAPIB4QD4gHxAPiAcQD4gHxgHhAPIB4QDwgHhAPIB4QD4gHxAPiAcQD4gHxgHhAPIB4QDwgHhAPIB4QD4gHxAPiAcQD4gHxgHhAPIB4QDwgHhAPIB4QD/yxdwEGAMqeZTX9gaNEAAAAAElFTkSuQmCC"
                 height="100"
               />
             </div>
           </div>
-          <p class="title">CONCLUSIONS</p>
-          <p class="conclusions-content">
-            Lorem ipsum dolor sit amet consectetur adipiscing elit pharetra,
-            accumsan ultrices egestas facilisi urna aptent suspendisse a, morbi
-            tincidunt consequat parturient nam duis tempus. Aliquam primis nunc
-            placerat vehicula interdum commodo sem, nascetur leo fringilla
-            pellentesque pulvinar nisl habitant ligula, rutrum urna tincidunt
-            sodales aptent platea. Cubilia commodo eu interdum at ac morbi
-            sollicitudin dictumst lectus, tristique auctor tempor quam metus
-            pharetra ligula gravida.
-          </p>
-          <p class="title">QUANTITATIVE ASSESSMENT PER EVALUATOR</p>
+          <div class="container-conclusions">
+            <div class="div-title">
+              <li class="orange-dot"></li>
+              <p class="title">CONCLUSIONS</p>
+            </div>
+            <p class="conclusions-content">
+              Lorem ipsum dolor sit amet consectetur adipiscing elit pharetra,
+              accumsan ultrices egestas facilisi urna aptent suspendisse a,
+              morbi tincidunt consequat parturient nam duis tempus. Aliquam
+              primis nunc placerat vehicula interdum commodo sem, nascetur leo
+              fringilla pellentesque pulvinar nisl habitant ligula, rutrum urna
+              tincidunt sodales aptent platea. Cubilia commodo eu interdum at ac
+              morbi sollicitudin dictumst lectus, tristique auctor tempor quam
+              metus pharetra ligula gravida.
+            </p>
+          </div>
+          <div class="container-quantitative">
+            <div class="div-title">
+              <li class="orange-dot"></li>
+              <p class="title">QUANTITATIVE ASSESSMENT PER EVALUATOR</p>
+            </div>
+          </div>
           <table class="quantitative-table">
             <tr class="quantitative-table-tr">
               <td class="table-title">Group of competences</td>
@@ -104,10 +120,14 @@
                   <p class="quantitative-table-td-p-blue">Group competences</p>
                 </td>
                 <td class="quantitative-table-td" v-else-if="j === 1">
-                  <p class="quantitative-table-td-p-gray">Included</p>
+                  <div class="quantitative-table-td-div">
+                    <p class="quantitative-table-td-p-gray">Included</p>
+                  </div>
                 </td>
                 <td class="quantitative-table-td" v-else-if="j === 2">
-                  <p class="quantitative-table-td-p-gray">Not included</p>
+                  <div class="quantitative-table-td-div">
+                    <p class="quantitative-table-td-p-gray">Not included</p>
+                  </div>
                 </td>
                 <td class="quantitative-table-td" v-else></td>
                 <td class="quantitative-table-td">
@@ -143,20 +163,28 @@
               </tr>
             </template>
           </table>
-          <p class="title">QUALITATIVE ASSESSMENT PER EVALUATOR</p>
+          <div class="container-qualitative">
+            <div class="div-title">
+              <li class="orange-dot"></li>
+              <p class="title">QUALITATIVE ASSESSMENT PER EVALUATOR</p>
+            </div>
+          </div>
           <table class="qualitative-table">
             <template v-for="group in competences2">
               <template v-for="competence in group">
                 <tr class="qualitative-table-tr" :key="competence">
-                  <td class="qualitative-table-td" v-if="j === 0">Group</td>
+                  <td class="qualitative-table-td" v-if="j === 0">
+                    <p class="qualitative-table-td-p-blue">Group</p>
+                  </td>
                   <td class="qualitative-table-td" v-else>
-                    <p class="quantitative-table-td-p-blue">Group</p>
+                    <p class="qualitative-table-td-p-blue">Group</p>
                   </td>
                   <td class="qualitative-table-td">
-                    <p class="quantitative-table-td-p-light-blue">
+                    <p class="qualitative-table-td-p-light-blue">
                       Competence {{ competence.competence }}
                     </p>
                   </td>
+                  <td class="qualitative-table-td"></td>
                   <td class="qualitative-table-td"></td>
                 </tr>
                 <tr class="qualitative-table-tr" :key="competence">
@@ -169,6 +197,7 @@
                       {{ competence.hr }}
                     </p>
                   </td>
+                  <td class="qualitative-table-td"></td>
                 </tr>
                 <tr class="qualitative-table-tr" :key="competence">
                   <td class="qualitative-table-td"></td>
@@ -180,6 +209,7 @@
                       {{ competence.area_manager }}
                     </p>
                   </td>
+                  <td class="qualitative-table-td"></td>
                 </tr>
                 <tr class="qualitative-table-tr" :key="competence">
                   <td class="qualitative-table-td"></td>
@@ -191,6 +221,7 @@
                       {{ competence.pair }}
                     </p>
                   </td>
+                  <td class="qualitative-table-td"></td>
                 </tr>
                 <tr class="qualitative-table-tr" :key="competence">
                   <td class="qualitative-table-td"></td>
@@ -202,6 +233,7 @@
                       {{ competence.collaborator }}
                     </p>
                   </td>
+                  <td class="qualitative-table-td"></td>
                 </tr>
               </template>
             </template>
@@ -527,23 +559,44 @@ export default {
   width: 100%;
 }
 
+.div-title {
+  display: flex;
+  margin: 0px;
+}
+.orange-dot {
+  margin-left: 20px;
+  color: orange;
+}
 .title {
+  margin: 0px;
   font-weight: bold;
 }
 .containter-assessment-spider {
   display: flex;
+  margin-top: 20px;
+  margin-bottom: 15px;
 }
 .div-assessment-results {
+  width: 300px;
+  margin: 0px;
 }
 .div-spider-diagram {
+  width: 300px;
+  margin: 0px;
+}
+.container-conclusions {
 }
 .conclusions-content {
-  display: inline-block;
+  margin-top: 10px;
+  font-size: 12px;
   text-overflow: ellipsis;
-  margin-right: 40px;
+  width: 550px;
   background-color: #edeeed;
+  border-radius: 4px;
 }
 
+.container-quantitative {
+}
 table.quantitative-table {
   table-layout: fixed;
 } /*Setting the table width is important!*/
@@ -578,6 +631,7 @@ table.quantitative-table td:nth-of-type(7) {
 }
 
 .quantitative-table {
+  margin-bottom: 10px;
 }
 .quantitative-table-tr {
   height: 25px;
@@ -586,24 +640,33 @@ table.quantitative-table td:nth-of-type(7) {
   font-size: 12px;
   text-align: center;
 }
+
+.quantitative-table-td-div {
+  text-align: left;
+  width: 80%;
+  margin-left: 20px;
+}
 .quantitative-table-td-p-gray {
   color: #b4b5b4;
   display: inline-block;
   border-radius: 4px;
   padding-right: 4px;
   padding-left: 4px;
+  border: 1px #b4b5b4 solid;
+  width: 100%;
 }
 .quantitative-table-td-p-blue {
   background-color: #45bbd8;
-  color: white;
+  color: black;
   display: inline-block;
   border-radius: 4px;
   padding-right: 4px;
   padding-left: 4px;
+  width: 80%;
 }
 .quantitative-table-td-p-light-blue {
   background-color: #91d1d5;
-  color: white;
+  color: black;
   display: inline-block;
   border-radius: 4px;
   padding-right: 4px;
@@ -626,50 +689,65 @@ table.quantitative-table td:nth-of-type(7) {
   padding-left: 4px;
 }
 
-table.qualitative-table {
-  table-layout: fixed;
-} /*Setting the table width is important!*/
-.qualitative-table-td {
-  overflow: hidden;
-} /*Hide text outside the cell.*/
-.qualitative-table-td:nth-of-type(1) {
-  width: 40px;
-} /*Setting the width of column 1.*/
-.qualitative-table-td:nth-of-type(2) {
-  width: 200px;
-} /*Setting the width of column 2.*/
-.qualitative-table-td:nth-of-type(3) {
-  width: 700px;
-} /*Setting the width of column 3.*/
+.container-qualitative {
+  margin-bottom: 10px;
+}
 .qualitative-table {
+  margin-left: 70px;
+  margin-right: 65px;
+
+  width: 100%;
+  table-layout: fixed;
 }
 .qualitative-table-tr {
   height: 25px;
 }
 .qualitative-table-td {
+  overflow: auto;
   font-size: 12px;
   text-align: left;
-  margin-right: 8px;
 }
-.qualitative-table-td-p-text {
-  border: #206c87 1px solid;
+table.qualitative-table td:nth-child(1) {
+  width: 10%;
+}
+table.qualitative-table td:nth-child(2) {
+  width: 15%;
+}
+table.qualitative-table td:nth-child(3) {
+  width: 53%;
+}
+table.qualitative-table td:nth-child(4) {
+  width: 22%;
+}
+.qualitative-table-td-p-blue {
+  background-color: #45bbd8;
+  color: black;
   display: inline-block;
   border-radius: 4px;
   padding-right: 4px;
   padding-left: 4px;
+  width: 60px;
 }
 .qualitative-table-td-p-light-blue {
   background-color: #91d1d5;
-  color: white;
+  color: black;
   display: inline-block;
   border-radius: 4px;
   padding-right: 4px;
   padding-left: 4px;
-  width: 100%;
+  width: 100px;
 }
 .qualitative-table-td-p-dark-blue {
   background-color: #206c87;
   color: white;
+  display: inline-block;
+  border-radius: 4px;
+  padding-right: 4px;
+  padding-left: 4px;
+  width: 100px;
+}
+.qualitative-table-td-p-text {
+  border: #206c87 1px solid;
   display: inline-block;
   border-radius: 4px;
   padding-right: 4px;

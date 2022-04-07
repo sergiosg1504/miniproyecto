@@ -541,7 +541,7 @@ export default {
   display: inline-block;
   text-overflow: ellipsis;
   margin-right: 40px;
-  background-color: #bfbfbf;
+  background-color: #edeeed;
 }
 
 table.quantitative-table {

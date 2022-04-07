@@ -26,26 +26,36 @@
           <table class="header-table">
             <tr class="header-table-tr">
               <td class="header-table-td-left">Date</td>
-              <td class="header-table-td-right">08 / 02 / 2022</td>
+              <td class="header-table-td-right">
+                <p class="header-table-td-right-p">08 / 02 / 2022</p>
+              </td>
             </tr>
             <tr class="header-table-tr">
               <td class="header-table-td-left">Company</td>
-              <td class="header-table-td-right">Progradum</td>
+              <td class="header-table-td-right">
+                <p class="header-table-td-right-p">Progradum</p>
+              </td>
             </tr>
             <tr class="header-table-tr">
               <td class="header-table-td-left">Requested by</td>
-              <td class="header-table-td-right">Administrator</td>
+              <td class="header-table-td-right">
+                <p class="header-table-td-right-p">Administrator</p>
+              </td>
             </tr>
             <tr class="header-table-tr">
               <td class="header-table-td-left">Asessed by</td>
               <td class="header-table-td-right">
-                HR / Area manager / Pair / Collaborator
+                <p class="header-table-td-right-p">
+                  HR / Area manager / Pair / Collaborator
+                </p>
               </td>
             </tr>
             <tr class="header-table-tr">
               <td class="header-table-td-left">Evaluator / Area</td>
               <td class="header-table-td-right">
-                María Sánchez / Sales Department
+                <p class="header-table-td-right-p">
+                  María Sánchez / Sales Department
+                </p>
               </td>
             </tr>
           </table>
@@ -488,26 +498,35 @@ export default {
 }
 .header-table {
   position: relative;
-  left: 15%;
   background: #62c4e4;
   border-collapse: "separate";
-  width: 500px;
-  border-radius: 10px;
-  border: 8px solid #62c4e4;
+  border-spacing: 0 15px;
+  width: 600px;
+  border-radius: 8px;
 }
 .header-table-tr {
+  height: 25px;
 }
 .header-table-td-left {
   text-align: right;
-  padding: 0 10px;
 }
 .header-table-td-right {
+  display: inline-block;
   text-align: left;
-  background: #ffffff;
-  padding: 0 10px;
-  border-radius: 8px;
-  margin-right: 10%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 80%;
 }
+.header-table-td-right-p {
+  background-color: #ffffff;
+  color: #000000;
+  display: inline-block;
+  border-radius: 4px;
+  padding-right: 4px;
+  padding-left: 4px;
+  width: 100%;
+}
+
 .title {
   font-weight: bold;
 }
@@ -519,6 +538,10 @@ export default {
 .div-spider-diagram {
 }
 .conclusions-content {
+  display: inline-block;
+  text-overflow: ellipsis;
+  margin-right: 40px;
+  background-color: #bfbfbf;
 }
 
 table.quantitative-table {

@@ -60,7 +60,7 @@
             </tr>
           </table>
 
-          <div class="containter-assessment-spider">
+          <div class="containter-assessment-spider-title">
             <div class="div-assessment-results">
               <div class="div-title">
                 <li class="orange-dot"></li>
@@ -68,7 +68,7 @@
               </div>
             </div>
             <div class="div-spider-diagram">
-              <div class="div-title">
+              <div class="div-title div-title-spider-diagram">
                 <li class="orange-dot"></li>
                 <p class="title">SPIDER DIAGRAM</p>
               </div>
@@ -76,7 +76,7 @@
           </div>
           <div class="container-assessment-spider">
             <!--img class="img-stat" src="../assets/stats.png" height="180" /-->
-            <table class="container-assessment-spider">
+            <table>
               <tr>
                 <td>
                   <div class="assessment">
@@ -94,19 +94,21 @@
                         <td class="result">{{ averageCollaborator }}</td>
                       </tr>
                       <tr>
-                        <td>Out of 10</td>
-                        <td>Out of 10</td>
-                        <td>Out of 10</td>
-                        <td>Out of 10</td>
+                        <td class="result-title">Out of 10</td>
+                        <td class="result-title">Out of 10</td>
+                        <td class="result-title">Out of 10</td>
+                        <td class="result-title">Out of 10</td>
                       </tr>
                     </table>
                     <hr />
-                    <table>
+                    <table class="table-average">
                       <tr>
-                        <td>Weighted average</td>
+                        <td class="result-title result-title-average">
+                          Weighted average
+                        </td>
                         <td class="average">
-                          <p class="result">{{ average }}</p>
-                          <p>Out of 10</p>
+                          <p class="result-average">{{ average }}</p>
+                          <p class="result-title">Out of 10</p>
                         </td>
                       </tr>
                     </table>
@@ -698,6 +700,9 @@ hr {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+.div-title-spider-diagram {
+  margin-left: 0px;
+}
 .orange-dot {
   margin-left: 20px;
   color: orange;
@@ -708,16 +713,21 @@ hr {
   margin: 0px;
   font-weight: bold;
 }
-.containter-assessment-spider {
+.containter-assessment-spider-title {
   margin-left: 0px;
   display: flex;
   margin-top: 10px;
-  margin-bottom: 15px;
+  height: 50px;
+}
+.container-assessment-spider {
+  margin-top: 5px;
   margin-left: 0px;
+  display: flex;
+  width: 800px;
 }
 .div-assessment-results {
   margin-left: 0px;
-  width: 50%;
+  width: 46%;
   margin: 0px;
 }
 .div-spider-diagram {
@@ -736,16 +746,33 @@ hr {
   width: 25%;
 }
 .result-title {
+  font-size: 14px;
   text-align: center;
 }
 .average {
   background-color: #edeeed;
   border-radius: 8px;
-  padding: 0px 4px;
+  padding: 4px;
+  border-left: 20px;
+  width: 90px;
+}
+.result-average {
+  font-weight: bold;
+  text-align: center;
+  font-size: 180%;
+  margin-right: 5px;
+}
+.result-title-average {
+  width: 20px;
+  font-weight: bold;
+  padding-right: 20px;
+}
+.table-average {
+  margin-left: 40px;
 }
 .img-stat {
   margin-left: 0px;
-  width: 75%;
+  width: 60%;
 }
 .container-conclusions {
   margin-left: 0px;
@@ -923,14 +950,14 @@ table.qualitative-table td:nth-child(4) {
   width: 100%;
 }
 hr {
-  border: 1px solid black;
+  border: 0.5px solid black;
   margin-left: 0px;
   margin-top: 5px;
   margin-bottom: 5px;
   width: 100%;
 }
 .special-hr {
-  border: 1px solid black;
+  border: 0.5px solid black;
   margin-left: 40px;
   margin-top: 5px;
   margin-bottom: 5px;

@@ -114,7 +114,9 @@
                     </table>
                   </div>
                 </td>
-                <td><img class="img-stat" src="../assets/spider.png" /></td>
+                <td class="spider-td">
+                  <img class="img-stat" src="../assets/spider.png" />
+                </td>
               </tr>
             </table>
           </div>
@@ -724,6 +726,9 @@ hr {
   margin-left: 0px;
   display: flex;
   width: 800px;
+}
+.spider-td {
+  padding-left: 70px;
 }
 .div-assessment-results {
   margin-left: 0px;

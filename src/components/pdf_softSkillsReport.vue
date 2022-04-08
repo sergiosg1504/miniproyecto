@@ -75,8 +75,46 @@
             </div>
           </div>
           <div class="container-assessment-spider">
-            <img class="img-stat" src="../assets/stats.png" height="180" />
-            <img class="img-stat" src="../assets/spider.png" height="180" />
+            <!--img class="img-stat" src="../assets/stats.png" height="180" /-->
+            <table>
+              <tr>
+                <td>
+                  <div class="assessment">
+                    <table>
+                      <tr>
+                        <td class="result-title">HR</td>
+                        <td class="result-title">Area manager</td>
+                        <td class="result-title">Pair</td>
+                        <td class="result-title">Collaborator</td>
+                      </tr>
+                      <tr>
+                        <td class="result">{{ averageHR }}</td>
+                        <td class="result">{{ averageAreaManager }}</td>
+                        <td class="result">{{ averagePair }}</td>
+                        <td class="result">{{ averageCollaborator }}</td>
+                      </tr>
+                      <tr>
+                        <td>Out of 10</td>
+                        <td>Out of 10</td>
+                        <td>Out of 10</td>
+                        <td>Out of 10</td>
+                      </tr>
+                    </table>
+                    <hr />
+                    <table>
+                      <tr>
+                        <td>weighted average</td>
+                        <td class="average">
+                          <p class="result">{{ average }}</p>
+                          <p>Out of 10</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </td>
+                <td><img class="img-stat" src="../assets/spider.png" /></td>
+              </tr>
+            </table>
           </div>
           <div class="container-conclusions">
             <div class="div-title">
@@ -262,6 +300,11 @@ export default {
       requested: "Administrator",
       assesed: "HR / Area manager / Pair / Collaborator",
       evaluator: "María Sánchez / Sales Department",
+      averageHR: 7.02,
+      averageAreaManager: 7.98,
+      averagePair: 8.97,
+      average: 7.88,
+      averageCollaborator: 8.63,
       htmlToPdfOptions: {
         margin: [40, 20, 60, 20],
         enableLinks: false,
@@ -527,6 +570,9 @@ export default {
 * {
   margin-left: 40px;
 }
+hr {
+  width: 90%;
+}
 
 .header-progradum-logo {
 }
@@ -580,17 +626,42 @@ export default {
   font-weight: bold;
 }
 .containter-assessment-spider {
+  margin-left: 0px;
   display: flex;
   margin-top: 20px;
   margin-bottom: 15px;
 }
 .div-assessment-results {
-  width: 300px;
+  margin-left: 0px;
+  width: 50%;
   margin: 0px;
 }
 .div-spider-diagram {
-  width: 300px;
+  margin-left: 0px;
+  width: 50%;
   margin: 0px;
+}
+.assessment {
+  margin-left: 0px;
+}
+.result {
+  font-weight: bold;
+  text-align: center;
+  font-size: 140%;
+  margin-right: 5px;
+  width: 25%;
+}
+.result-title {
+  text-align: center;
+}
+.average {
+  background-color: #edeeed;
+  border-radius: 8px;
+  padding: 0px 4px;
+}
+.img-stat {
+  margin-left: 0px;
+  width: 75%;
 }
 .container-conclusions {
 }

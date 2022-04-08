@@ -110,6 +110,29 @@
               <td class="table-title">Pair</td>
               <td class="table-title">Collaborator</td>
             </tr>
+            <tr>
+              <td>
+                <hr />
+              </td>
+              <td>
+                <hr />
+              </td>
+              <td>
+                <hr />
+              </td>
+              <td>
+                <hr />
+              </td>
+              <td>
+                <hr />
+              </td>
+              <td>
+                <hr />
+              </td>
+              <td>
+                <hr />
+              </td>
+            </tr>
             <template v-for="group in competences">
               <tr
                 class="quantitative-table-tr"
@@ -117,7 +140,9 @@
                 :key="j"
               >
                 <td class="quantitative-table-td" v-if="j === 0">
-                  <p class="quantitative-table-td-p-blue">Group competences</p>
+                  <p class="quantitative-table-td-p-blue">
+                    Group {{ competence.group }} competences
+                  </p>
                 </td>
                 <td class="quantitative-table-td" v-else-if="j === 1">
                   <div class="quantitative-table-td-div">
@@ -161,6 +186,29 @@
                   </p>
                 </td>
               </tr>
+              <tr :key="group">
+                <td>
+                  <hr />
+                </td>
+                <td>
+                  <hr />
+                </td>
+                <td>
+                  <hr />
+                </td>
+                <td>
+                  <hr />
+                </td>
+                <td>
+                  <hr />
+                </td>
+                <td>
+                  <hr />
+                </td>
+                <td>
+                  <hr />
+                </td>
+              </tr>
             </template>
           </table>
           <div class="container-qualitative">
@@ -169,15 +217,21 @@
               <p class="title">QUALITATIVE ASSESSMENT PER EVALUATOR</p>
             </div>
           </div>
+          <hr class="special-hr" />
           <table class="qualitative-table">
             <template v-for="group in competences2">
               <template v-for="competence in group">
                 <tr class="qualitative-table-tr" :key="competence">
-                  <td class="qualitative-table-td" v-if="j === 0">
-                    <p class="qualitative-table-td-p-blue">Group</p>
+                  <td
+                    class="qualitative-table-td"
+                    v-if="firstInGroup(competence)"
+                  >
+                    <p class="qualitative-table-td-p-blue">
+                      Group {{ competence.group }}
+                    </p>
                   </td>
                   <td class="qualitative-table-td" v-else>
-                    <p class="qualitative-table-td-p-blue">Group</p>
+                    <p class="qualitative-table-td-p-blue"></p>
                   </td>
                   <td class="qualitative-table-td">
                     <p class="qualitative-table-td-p-light-blue">
@@ -236,6 +290,17 @@
                   <td class="qualitative-table-td"></td>
                 </tr>
               </template>
+              <tr :key="group">
+                <td>
+                  <hr />
+                </td>
+                <td>
+                  <hr />
+                </td>
+                <td>
+                  <hr />
+                </td>
+              </tr>
             </template>
           </table>
           <!-- acaba -->
@@ -286,6 +351,7 @@ export default {
       competences: {
         1: [
           {
+            group: "I",
             competence: "A",
             required_profile: "Level n",
             hr: "Level n",
@@ -320,6 +386,7 @@ export default {
         ],
         2: [
           {
+            group: "II",
             competence: "A",
             required_profile: "Level n",
             hr: "Level n",
@@ -354,6 +421,7 @@ export default {
         ],
         3: [
           {
+            group: "III",
             competence: "A",
             required_profile: "Level n",
             hr: "Level n",
@@ -388,6 +456,7 @@ export default {
         ],
         4: [
           {
+            group: "n",
             competence: "A",
             required_profile: "Level n",
             hr: "Level n",
@@ -424,6 +493,7 @@ export default {
       competences2: {
         1: [
           {
+            group: "I",
             competence: "A",
             hr: "Text describing the level for the assessed competence",
             area_manager:
@@ -453,6 +523,7 @@ export default {
         ],
         2: [
           {
+            group: "II",
             competence: "B",
             hr: "Text describing the level for the assessed competence",
             area_manager:
@@ -482,6 +553,7 @@ export default {
         ],
         3: [
           {
+            group: "III",
             competence: "C",
             hr: "Text describing the level for the assessed competence",
             area_manager:
@@ -495,6 +567,10 @@ export default {
     };
   },
   methods: {
+    firstInGroup(competence) {
+      if (competence.group !== undefined) return 1;
+      else return 0;
+    },
     generateReport() {
       this.$refs.html2Pdf.generatePdf();
     },
@@ -527,8 +603,9 @@ export default {
 * {
   margin-left: 40px;
 }
-
 .header-progradum-logo {
+  margin-top: 80px;
+  margin-left: 24px;
 }
 .pdf-title {
   font-weight: bold;
@@ -542,7 +619,12 @@ export default {
   border-radius: 8px;
 }
 .header-table-tr {
-  height: 25px;
+}
+.header-table-tr:nth-of-type(5) td {
+  padding-bottom: 12px;
+}
+.header-table-tr:nth-of-type(1) td {
+  padding-top: 12px;
 }
 .header-table-td-left {
   text-align: right;
@@ -550,8 +632,8 @@ export default {
 .header-table-td-right {
   display: inline-block;
   text-align: left;
-  padding-top: 7px;
-  padding-bottom: 7px;
+  padding-top: 4px;
+  padding-bottom: 4px;
   width: 80%;
 }
 .header-table-td-right-p {
@@ -581,8 +663,9 @@ export default {
 }
 .containter-assessment-spider {
   display: flex;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-bottom: 15px;
+  margin-left: 0px;
 }
 .div-assessment-results {
   width: 300px;
@@ -593,17 +676,21 @@ export default {
   margin: 0px;
 }
 .container-conclusions {
+  margin-left: 0px;
+  text-align: left;
 }
 .conclusions-content {
   margin-top: 10px;
   font-size: 12px;
   text-overflow: ellipsis;
-  width: 550px;
+  width: 600px;
   background-color: #edeeed;
   border-radius: 4px;
+  padding-left: 4px;
 }
 
 .container-quantitative {
+  margin-left: 0px;
 }
 table.quantitative-table {
   table-layout: fixed;
@@ -612,34 +699,34 @@ table.quantitative-table td {
   overflow: hidden;
 } /*Hide text outside the cell.*/
 table.quantitative-table td:nth-of-type(1) {
-  width: 180px;
+  width: 160px;
 } /*Setting the width of column 1.*/
 table.quantitative-table td:nth-of-type(2) {
   width: 100px;
 } /*Setting the width of column 2.*/
 table.quantitative-table td:nth-of-type(3) {
-  width: 70px;
+  width: 65px;
 } /*Setting the width of column 3.*/
 table.quantitative-table td:nth-of-type(4) {
-  width: 70px;
+  width: 65px;
 } /*Setting the width of column 4.*/
 table.quantitative-table td:nth-of-type(5) {
-  width: 70px;
+  width: 65px;
 } /*Setting the width of column 5.*/
 table.quantitative-table td:nth-of-type(6) {
-  width: 70px;
+  width: 65px;
 } /*Setting the width of column 6.*/
 table.quantitative-table td:nth-of-type(7) {
-  width: 90px;
+  width: 80px;
 } /*Setting the width of column 7.*/
 .table-title {
   font-weight: bold;
-  font-size: 12px;
+  font-size: 13px;
   text-align: center;
 }
 
 .quantitative-table {
-  margin-bottom: 10px;
+  margin-bottom: 40px;
 }
 .quantitative-table-tr {
   height: 25px;
@@ -664,6 +751,7 @@ table.quantitative-table td:nth-of-type(7) {
   width: 100%;
 }
 .quantitative-table-td-p-blue {
+  font-weight: bold;
   background-color: #45bbd8;
   color: black;
   display: inline-block;
@@ -699,6 +787,7 @@ table.quantitative-table td:nth-of-type(7) {
 
 .container-qualitative {
   margin-bottom: 10px;
+  margin-left: 0px;
 }
 .qualitative-table {
   margin-left: 70px;
@@ -721,10 +810,10 @@ table.qualitative-table td:nth-child(2) {
   width: 15%;
 }
 table.qualitative-table td:nth-child(3) {
-  width: 53%;
+  width: 50%;
 }
 table.qualitative-table td:nth-child(4) {
-  width: 22%;
+  width: 25%;
 }
 .qualitative-table-td-p-blue {
   background-color: #45bbd8;
@@ -760,5 +849,19 @@ table.qualitative-table td:nth-child(4) {
   padding-right: 4px;
   padding-left: 4px;
   width: 100%;
+}
+hr {
+  border: 1px solid black;
+  margin-left: 0px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 100%;
+}
+.special-hr {
+  border: 1px solid black;
+  margin-left: 40px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 600px;
 }
 </style>

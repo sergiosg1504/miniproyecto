@@ -76,11 +76,11 @@
           </div>
           <div class="container-assessment-spider">
             <!--img class="img-stat" src="../assets/stats.png" height="180" /-->
-            <table>
+            <table class="container-assessment-spider">
               <tr>
                 <td>
                   <div class="assessment">
-                    <table>
+                    <table class="assessment">
                       <tr>
                         <td class="result-title">HR</td>
                         <td class="result-title">Area manager</td>
@@ -103,7 +103,7 @@
                     <hr />
                     <table>
                       <tr>
-                        <td>weighted average</td>
+                        <td>Weighted average</td>
                         <td class="average">
                           <p class="result">{{ average }}</p>
                           <p>Out of 10</p>

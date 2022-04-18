@@ -30,6 +30,7 @@ import ReportsDownloader3 from "../components/pruebaPdfMake3.vue";
 import ReportsDownloader4 from "../components/pruebaPdfMake4.vue";
 import ReportsDownloader5 from "../components/pruebaPdfMake5.vue";
 import SoftSkillsReport from "../components/pdf_softSkillsReport.vue";
+import ProfessionalProfileSearch from "../components/pdf_professionalProfileSearch.vue";
 
 import MeetingList from "../views/MeetingList.vue";
 import MeetSeminariosWeb from "../views/MeetSeminariosWeb.vue";
@@ -261,6 +262,11 @@ const routes = [
     path: "/pdf_softSkillsReport",
     name: "softSkillsReport",
     component: SoftSkillsReport,
+  },
+  {
+    path: "/pdf_professionalProfileSearch",
+    name: "professionalProfileSearch",
+    component: ProfessionalProfileSearch,
   },
 ];
 

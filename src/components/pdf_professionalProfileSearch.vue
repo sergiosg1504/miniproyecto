@@ -214,217 +214,43 @@
               </table>
             </div>
           </div>
-          <div class="container-quantitative">
+
+          <div class="container-results">
             <div class="div-title">
               <li class="orange-dot"></li>
-              <p class="title">QUANTITATIVE ASSESSMENT PER EVALUATOR</p>
+              <p class="title">
+                RESULTS FOUND&nbsp;&nbsp;&nbsp;{{
+                  results.length
+                }}&nbsp;&nbsp;&nbsp;Best scores on top
+              </p>
             </div>
           </div>
-          <table class="quantitative-table">
-            <tr class="quantitative-table-tr">
-              <td class="table-title">Group of competences</td>
-              <td class="table-title">Competences</td>
-              <td class="table-title">Required profiles</td>
-              <td class="table-title">HR</td>
-              <td class="table-title">Area Manager</td>
-              <td class="table-title">Pair</td>
-              <td class="table-title">Collaborator</td>
-            </tr>
-            <tr>
-              <td>
-                <hr />
-              </td>
-              <td>
-                <hr />
-              </td>
-              <td>
-                <hr />
-              </td>
-              <td>
-                <hr />
-              </td>
-              <td>
-                <hr />
-              </td>
-              <td>
-                <hr />
-              </td>
-              <td>
-                <hr />
-              </td>
-            </tr>
-            <template v-for="group in competences">
-              <tr
-                class="quantitative-table-tr"
-                v-for="(competence, j) in group"
-                :key="j"
-              >
-                <td class="quantitative-table-td" v-if="j === 0">
-                  <p class="quantitative-table-td-p-blue">
-                    Group {{ competence.group }} competences
-                  </p>
-                </td>
-                <td class="quantitative-table-td" v-else-if="j === 1">
-                  <div class="quantitative-table-td-div">
-                    <p class="quantitative-table-td-p-gray">Included</p>
+          <div class="div-results" v-for="(result, i) in results" :key="i">
+            <div class="div-result">
+              <img class="result-image" src="progradumLogoBase64" />
+              <div class="div-result-data">
+                <div class="div-result-data-name-email">
+                  <div class="div-result-data-name">
+                    <p>{{ result.name }}</p>
                   </div>
-                </td>
-                <td class="quantitative-table-td" v-else-if="j === 2">
-                  <div class="quantitative-table-td-div">
-                    <p class="quantitative-table-td-p-gray">Not included</p>
+                  <div class="div-result-data-email">
+                    <span>{{ result.email }}</span>
                   </div>
-                </td>
-                <td class="quantitative-table-td" v-else></td>
-                <td class="quantitative-table-td">
-                  <p class="quantitative-table-td-p-light-blue">
-                    Competence {{ competence.competence }}
-                  </p>
-                </td>
-                <td class="quantitative-table-td">
-                  <p class="quantitative-table-td-p-dark-blue">
-                    {{ competence.required_profile }}
-                  </p>
-                </td>
-                <td class="quantitative-table-td">
-                  <p class="quantitative-table-td-p-black">
-                    {{ competence.hr }}
-                  </p>
-                </td>
-                <td class="quantitative-table-td">
-                  <p class="quantitative-table-td-p-black">
-                    {{ competence.area_manager }}
-                  </p>
-                </td>
-                <td class="quantitative-table-td">
-                  <p class="quantitative-table-td-p-black">
-                    {{ competence.pair }}
-                  </p>
-                </td>
-                <td class="quantitative-table-td">
-                  <p class="quantitative-table-td-p-black">
-                    {{ competence.collaborator }}
-                  </p>
-                </td>
-              </tr>
-              <tr :key="group">
-                <td>
-                  <hr />
-                </td>
-                <td>
-                  <hr />
-                </td>
-                <td>
-                  <hr />
-                </td>
-                <td>
-                  <hr />
-                </td>
-                <td>
-                  <hr />
-                </td>
-                <td>
-                  <hr />
-                </td>
-                <td>
-                  <hr />
-                </td>
-              </tr>
-            </template>
-          </table>
-          <div class="container-qualitative">
-            <div class="div-title">
-              <li class="orange-dot"></li>
-              <p class="title">QUALITATIVE ASSESSMENT PER EVALUATOR</p>
+                </div>
+                <div class="div-result-data-topSkill">
+                  <span>Top skill:</span>
+                </div>
+                <div class="div-result-data-otherSkills">
+                  <span>Other important skills:</span>
+                </div>
+                <div class="div-result-data-topSoftSkill">
+                  <span>Top soft skill:</span>
+                </div>
+              </div>
             </div>
           </div>
-          <hr class="special-hr" />
-          <table class="qualitative-table">
-            <template v-for="group in competences2">
-              <template v-for="competence in group">
-                <tr class="qualitative-table-tr" :key="competence">
-                  <td
-                    class="qualitative-table-td"
-                    v-if="firstInGroup(competence)"
-                  >
-                    <p class="qualitative-table-td-p-blue">
-                      Group {{ competence.group }}
-                    </p>
-                  </td>
-                  <td class="qualitative-table-td" v-else>
-                    <p class="qualitative-table-td-p-blue"></p>
-                  </td>
-                  <td class="qualitative-table-td">
-                    <p class="qualitative-table-td-p-light-blue">
-                      Competence {{ competence.competence }}
-                    </p>
-                  </td>
-                  <td class="qualitative-table-td"></td>
-                  <td class="qualitative-table-td"></td>
-                </tr>
-                <tr class="qualitative-table-tr" :key="competence">
-                  <td class="qualitative-table-td"></td>
-                  <td class="qualitative-table-td">
-                    <p class="qualitative-table-td-p-dark-blue">HR</p>
-                  </td>
-                  <td class="qualitative-table-td">
-                    <p class="qualitative-table-td-p-text">
-                      {{ competence.hr }}
-                    </p>
-                  </td>
-                  <td class="qualitative-table-td"></td>
-                </tr>
-                <tr class="qualitative-table-tr" :key="competence">
-                  <td class="qualitative-table-td"></td>
-                  <td class="qualitative-table-td">
-                    <p class="qualitative-table-td-p-dark-blue">Area manager</p>
-                  </td>
-                  <td class="qualitative-table-td">
-                    <p class="qualitative-table-td-p-text">
-                      {{ competence.area_manager }}
-                    </p>
-                  </td>
-                  <td class="qualitative-table-td"></td>
-                </tr>
-                <tr class="qualitative-table-tr" :key="competence">
-                  <td class="qualitative-table-td"></td>
-                  <td class="qualitative-table-td">
-                    <p class="qualitative-table-td-p-dark-blue">Pair</p>
-                  </td>
-                  <td class="qualitative-table-td">
-                    <p class="qualitative-table-td-p-text">
-                      {{ competence.pair }}
-                    </p>
-                  </td>
-                  <td class="qualitative-table-td"></td>
-                </tr>
-                <tr class="qualitative-table-tr" :key="competence">
-                  <td class="qualitative-table-td"></td>
-                  <td class="qualitative-table-td">
-                    <p class="qualitative-table-td-p-dark-blue">Collaborator</p>
-                  </td>
-                  <td class="qualitative-table-td">
-                    <p class="qualitative-table-td-p-text">
-                      {{ competence.collaborator }}
-                    </p>
-                  </td>
-                  <td class="qualitative-table-td"></td>
-                </tr>
-              </template>
-              <tr :key="group">
-                <td>
-                  <hr />
-                </td>
-                <td>
-                  <hr />
-                </td>
-                <td>
-                  <hr />
-                </td>
-              </tr>
-            </template>
-          </table>
           <!-- acaba -->
-          <div style="margin-bottom: 15px">
+          <!--<div style="margin-bottom: 15px">
             <div class="row">
               <div data-v-de19924e="" class="col-md-1">
                 <img
@@ -438,7 +264,6 @@
               </div>
               <div class="col-md-6">
                 <div class="col-sm-12">
-                  <!----><!---->
                   <div class="progress full-progress-bar">
                     <div
                       role="progressbar"
@@ -479,7 +304,6 @@
                       57.14 %
                     </div>
                   </div>
-                  <!---->
                 </div>
               </div>
               <div class="col-md-1 profile-center-analysis">
@@ -534,7 +358,7 @@
                 </button>
               </div>
             </div>
-          </div>
+          </div>-->
         </section>
       </VueHtml2pdf>
     </div>
@@ -787,179 +611,65 @@ table.filters-table td:nth-child(4) {
   width: 28%;
 }
 
-.container-quantitative {
+.container-results {
   margin-left: 0px;
 }
-table.quantitative-table {
-  table-layout: fixed;
-} /*Setting the table width is important!*/
-table.quantitative-table td {
-  overflow: hidden;
-} /*Hide text outside the cell.*/
-table.quantitative-table td:nth-of-type(1) {
-  width: 160px;
-} /*Setting the width of column 1.*/
-table.quantitative-table td:nth-of-type(2) {
-  width: 100px;
-} /*Setting the width of column 2.*/
-table.quantitative-table td:nth-of-type(3) {
-  width: 65px;
-} /*Setting the width of column 3.*/
-table.quantitative-table td:nth-of-type(4) {
-  width: 65px;
-} /*Setting the width of column 4.*/
-table.quantitative-table td:nth-of-type(5) {
-  width: 65px;
-} /*Setting the width of column 5.*/
-table.quantitative-table td:nth-of-type(6) {
-  width: 65px;
-} /*Setting the width of column 6.*/
-table.quantitative-table td:nth-of-type(7) {
-  width: 80px;
-} /*Setting the width of column 7.*/
-.table-title {
-  font-weight: bold;
-  font-size: 13px;
+.div-results {
+  margin-left: 0px;
   text-align: center;
 }
-
-.quantitative-table {
-  margin-bottom: 40px;
+.div-result {
+  height: 100px;
+  width: 60%;
+  border: #c8d2c5 4px solid;
+  border-radius: 8px;
+  margin: 0px auto;
+  display: flex;
+  align-items: center;
 }
-.quantitative-table-tr {
-  height: 25px;
+.result-image {
+  display: inline;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 50px;
+  margin-right: 50px;
+  object-fit: cover;
+  object-position: right;
 }
-.quantitative-table-td {
-  font-size: 12px;
-  text-align: center;
-}
-
-.quantitative-table-td-div {
-  text-align: left;
-  width: 80%;
-  margin-left: 20px;
-}
-.quantitative-table-td-p-gray {
-  color: #b4b5b4;
-  display: inline-block;
-  border-radius: 4px;
-  padding-right: 4px;
-  padding-left: 4px;
-  border: 1px #b4b5b4 solid;
-  width: 100%;
-}
-.quantitative-table-td-p-blue {
-  font-weight: bold;
-  background-color: #45bbd8;
-  color: black;
-  display: inline-block;
-  border-radius: 4px;
-  padding-right: 4px;
-  padding-left: 4px;
-  width: 80%;
-}
-.quantitative-table-td-p-light-blue {
-  background-color: #91d1d5;
-  color: black;
-  display: inline-block;
-  border-radius: 4px;
-  padding-right: 4px;
-  padding-left: 4px;
-}
-.quantitative-table-td-p-dark-blue {
-  background-color: #206c87;
-  color: white;
-  display: inline-block;
-  border-radius: 4px;
-  padding-right: 4px;
-  padding-left: 4px;
-}
-.quantitative-table-td-p-black {
-  background-color: #0f1e2b;
-  color: white;
-  display: inline-block;
-  border-radius: 4px;
-  padding-right: 4px;
-  padding-left: 4px;
-}
-
-.container-qualitative {
-  margin-bottom: 10px;
+.div-result-data {
+  display: flex;
+  flex-direction: column;
   margin-left: 0px;
 }
-.qualitative-table {
-  margin-left: 70px;
-  margin-right: 65px;
-  width: 100%;
-  table-layout: fixed;
-}
-.qualitative-table-tr {
-  height: 25px;
-}
-.qualitative-table-td {
-  overflow: auto;
-  font-size: 12px;
-  text-align: left;
-}
-table.qualitative-table td:nth-child(1) {
-  width: 10%;
-}
-table.qualitative-table td:nth-child(2) {
-  width: 15%;
-}
-table.qualitative-table td:nth-child(3) {
-  width: 50%;
-}
-table.qualitative-table td:nth-child(4) {
-  width: 25%;
-}
-.qualitative-table-td-p-blue {
-  background-color: #45bbd8;
-  color: black;
-  display: inline-block;
-  border-radius: 4px;
-  padding-right: 4px;
-  padding-left: 4px;
-  width: 60px;
-}
-.qualitative-table-td-p-light-blue {
-  background-color: #91d1d5;
-  color: black;
-  display: inline-block;
-  border-radius: 4px;
-  padding-right: 4px;
-  padding-left: 4px;
-  width: 100px;
-}
-.qualitative-table-td-p-dark-blue {
-  background-color: #206c87;
-  color: white;
-  display: inline-block;
-  border-radius: 4px;
-  padding-right: 4px;
-  padding-left: 4px;
-  width: 100px;
-}
-.qualitative-table-td-p-text {
-  border: #206c87 1px solid;
-  display: inline-block;
-  border-radius: 4px;
-  padding-right: 4px;
-  padding-left: 4px;
-  width: 100%;
-}
-hr {
-  border: 0.5px solid black;
+.div-result-data-name-email {
+  height: 25%;
   margin-left: 0px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  width: 100%;
 }
-.special-hr {
-  border: 0.5px solid black;
-  margin-left: 40px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  width: 600px;
+.div-result-data-name {
+  font-size: 12px;
+  float: left;
+}
+.div-result-data-email {
+  font-size: 10px;
+  color: #c8d2c5;
+  float: left;
+}
+.div-result-data-topSkill {
+  font-size: 10px;
+  height: 25%;
+  margin-left: 0px;
+}
+.div-result-data-otherSkills {
+  font-size: 10px;
+  height: 25%;
+  margin-left: 0px;
+}
+.div-result-data-topSoftSkill {
+  font-size: 10px;
+  height: 25%;
+  margin-left: 0px;
 }
 </style>

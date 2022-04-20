@@ -424,6 +424,117 @@
             </template>
           </table>
           <!-- acaba -->
+          <div style="margin-bottom: 15px">
+            <div class="row">
+              <div data-v-de19924e="" class="col-md-1">
+                <img
+                  src="https://images.app.goo.gl/iQocuDs1kvF9XQ766"
+                  height="50em"
+                  class="analysis-card-avatar--circle"
+                />
+              </div>
+              <div data-v-de19924e="" class="col-md-3 profile-center-analysis">
+                <h5 class="profile-name-title">JAVA</h5>
+              </div>
+              <div class="col-md-6">
+                <div class="col-sm-12">
+                  <!----><!---->
+                  <div class="progress full-progress-bar">
+                    <div
+                      role="progressbar"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                      aria-valuenow="25"
+                      class="
+                        progress-bar
+                        trainee-progress-selected
+                        progress-bar-striped progress-bar-animated
+                      "
+                      style="width: 25%"
+                    ></div>
+                    <div
+                      role="progressbar"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                      aria-valuenow="25"
+                      class="
+                        progress-bar
+                        junior-progress-selected
+                        progress-bar-striped progress-bar-animated
+                      "
+                      style="width: 25%"
+                    ></div>
+                    <div
+                      role="progressbar"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                      aria-valuenow="7"
+                      class="
+                        progress-bar
+                        middle-progress-selected
+                        progress-bar-striped progress-bar-animated
+                      "
+                      style="width: 7.14%"
+                    >
+                      57.14 %
+                    </div>
+                  </div>
+                  <!---->
+                </div>
+              </div>
+              <div class="col-md-1 profile-center-analysis">
+                <button
+                  type="button"
+                  class="btn btn-secondary expand-button not-collapsed"
+                  aria-expanded="true"
+                  aria-controls="toggleT-0"
+                  control-id="ControlID-96"
+                  style="overflow-anchor: none"
+                >
+                  <svg
+                    aria-labelledby="svg-inline--fa-title-mEiPvYyBphql"
+                    data-prefix="fas"
+                    data-icon="chevron-down"
+                    role="img"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                    id="iconShow-0"
+                    class="trash-icon svg-inline--fa fa-chevron-down fa-w-14"
+                    style="display: none"
+                  >
+                    <title id="svg-inline--fa-title-mEiPvYyBphql" class="">
+                      Expand
+                    </title>
+                    <path
+                      fill="currentColor"
+                      d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"
+                      class=""
+                    ></path>
+                  </svg>
+                  <svg
+                    aria-labelledby="svg-inline--fa-title-0RDMWVYh2udF"
+                    data-prefix="fas"
+                    data-icon="chevron-up"
+                    role="img"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                    id="iconNotShow-0"
+                    class="trash-icon svg-inline--fa fa-chevron-up fa-w-14"
+                    style="display: block"
+                  >
+                    <title id="svg-inline--fa-title-0RDMWVYh2udF" class="">
+                      Contract
+                    </title>
+                    <path
+                      fill="currentColor"
+                      d="M240.971 130.524l194.343 194.343c9.373 9.373 9.373 24.569 0 33.941l-22.667 22.667c-9.357 9.357-24.522 9.375-33.901.04L224 227.495 69.255 381.516c-9.379 9.335-24.544 9.317-33.901-.04l-22.667-22.667c-9.373-9.373-9.373-24.569 0-33.941L207.03 130.525c9.372-9.373 24.568-9.373 33.941-.001z"
+                      class=""
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
         </section>
       </VueHtml2pdf>
     </div>

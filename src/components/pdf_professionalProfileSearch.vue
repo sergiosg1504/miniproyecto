@@ -227,7 +227,7 @@
           </div>
           <div class="div-results" v-for="(result, i) in results" :key="i">
             <div class="div-result">
-              <img class="result-image" src="progradumLogoBase64" />
+              <img class="result-image" :src="progradumLetter" />
               <div class="div-result-data">
                 <div class="div-result-data-name-email">
                   <div class="div-result-data-name">
@@ -486,7 +486,10 @@ export default {
 hr {
   width: 90%;
 }
-
+span,
+p {
+  margin-left: 10px;
+}
 .header-progradum-logo {
   margin-top: 80px;
   margin-left: 24px;
@@ -616,12 +619,13 @@ table.filters-table td:nth-child(4) {
 }
 .div-results {
   margin-left: 0px;
+  margin-bottom: 10px;
   text-align: center;
 }
 .div-result {
   height: 100px;
   width: 60%;
-  border: #c8d2c5 4px solid;
+  border: #c8d2c5 2px solid;
   border-radius: 8px;
   margin: 0px auto;
   display: flex;
@@ -634,14 +638,15 @@ table.filters-table td:nth-child(4) {
   border-radius: 50%;
   margin-top: 15px;
   margin-bottom: 15px;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 25px;
+  margin-right: 10px;
   object-fit: cover;
   object-position: right;
 }
 .div-result-data {
   display: flex;
   flex-direction: column;
+  text-align: left;
   margin-left: 0px;
 }
 .div-result-data-name-email {
@@ -651,6 +656,7 @@ table.filters-table td:nth-child(4) {
 .div-result-data-name {
   font-size: 12px;
   float: left;
+  margin-left: 0px;
 }
 .div-result-data-email {
   font-size: 10px;

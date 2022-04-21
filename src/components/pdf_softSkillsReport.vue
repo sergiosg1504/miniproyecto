@@ -115,7 +115,11 @@
                   </div>
                 </td>
                 <td class="spider-td">
-                  <img class="img-stat" src="../assets/spider.png" />
+                  <!--<img class="img-stat" src="../assets/spider.png" />-->
+                  <radar-chart
+                    :chart-data="radarChartData"
+                    :options="radarChartOptions"
+                  />
                 </td>
               </tr>
             </table>
@@ -349,11 +353,17 @@
         </section>
       </VueHtml2pdf>
     </div>
+    <div>
+      <button @click="loadCards">Load Cards</button>
+      <radar-chart :chart-data="radarChartData" :options="radarChartOptions" />
+    </div>
   </div>
 </template>
 
 <script>
 import VueHtml2pdf from "vue-html2pdf";
+import RadarChart from "../components/RadarChart.vue";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   props: {
@@ -361,6 +371,7 @@ export default {
   },
   components: {
     VueHtml2pdf,
+    RadarChart,
   },
   data() {
     return {
@@ -389,6 +400,34 @@ export default {
           unit: "in",
           format: "a4",
           orientation: "portrait",
+        },
+      },
+      radarChartOptions: {
+        responsive: true,
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+                display: false,
+                min: 0,
+                max: 10,
+              },
+              gridLines: {
+                display: false,
+              },
+              scaleLabel: {
+                display: false,
+              },
+            },
+          ],
+          xAxes: [
+            {
+              gridLines: {
+                display: false,
+              },
+            },
+          ],
         },
       },
       progradumLogoBase64:
@@ -613,7 +652,28 @@ export default {
       },
     };
   },
+  computed: {
+    ...mapGetters(["getCards"]),
+    radarChartData() {
+      return {
+        labels: this.getCards.map((card) => card.title),
+        datasets: [
+          {
+            label: "Importance",
+            backgroundColor: "rgb(54, 162, 235, 0.75)",
+            data: this.getCards.map((card) => card.importance),
+          },
+          {
+            label: "Effectiveness",
+            backgroundColor: "rgb(75, 192, 192, 0.75)",
+            data: this.getCards.map((card) => card.effectiveness),
+          },
+        ],
+      };
+    },
+  },
   methods: {
+    ...mapActions(["loadCards"]),
     firstInGroup(competence) {
       if (competence.group !== undefined) return 1;
       else return 0;
@@ -775,7 +835,7 @@ hr {
 .table-average {
   margin-left: 40px;
 }
-.img-stat {
+.canvas-stat {
   margin-left: 0px;
   width: 60%;
 }

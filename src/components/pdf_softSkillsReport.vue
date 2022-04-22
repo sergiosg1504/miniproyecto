@@ -75,7 +75,6 @@
             </div>
           </div>
           <div class="container-assessment-spider">
-            <!--img class="img-stat" src="../assets/stats.png" height="180" /-->
             <table>
               <tr>
                 <td>
@@ -115,11 +114,13 @@
                   </div>
                 </td>
                 <td class="spider-td">
-                  <!--<img class="img-stat" src="../assets/spider.png" />-->
-                  <radar-chart
-                    :chart-data="radarChartData"
-                    :options="radarChartOptions"
-                  />
+                  <div class="hide-options"></div>
+                  <apexchart
+                    type="radar"
+                    height="350"
+                    :options="chartOptions"
+                    :series="spiderDiagramData"
+                  ></apexchart>
                 </td>
               </tr>
             </table>
@@ -353,17 +354,13 @@
         </section>
       </VueHtml2pdf>
     </div>
-    <div>
-      <button @click="loadCards">Load Cards</button>
-      <radar-chart :chart-data="radarChartData" :options="radarChartOptions" />
-    </div>
   </div>
 </template>
 
 <script>
 import VueHtml2pdf from "vue-html2pdf";
-import RadarChart from "../components/RadarChart.vue";
-import { mapGetters, mapActions } from "vuex";
+
+import VueApexCharts from "vue-apexcharts";
 
 export default {
   props: {
@@ -371,7 +368,7 @@ export default {
   },
   components: {
     VueHtml2pdf,
-    RadarChart,
+    apexchart: VueApexCharts,
   },
   data() {
     return {
@@ -385,6 +382,30 @@ export default {
       averagePair: 8.97,
       average: 7.88,
       averageCollaborator: 8.63,
+      spiderDiagramData: [
+        {
+          name: "Requiered profile",
+          data: [80, 50, 30, 40, 100, 20],
+        },
+        {
+          name: "Assesment  profile",
+          data: [20, 30, 40, 80, 20, 80],
+        },
+      ],
+      chartOptions: {
+        chart: {
+          type: "radar",
+        },
+        stroke: {
+          width: 2,
+        },
+        markers: {
+          size: 0,
+        },
+        xaxis: {
+          categories: ["", "", "", "", "", ""],
+        },
+      },
       htmlToPdfOptions: {
         margin: [40, 20, 60, 20],
         enableLinks: false,
@@ -400,34 +421,6 @@ export default {
           unit: "in",
           format: "a4",
           orientation: "portrait",
-        },
-      },
-      radarChartOptions: {
-        responsive: true,
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true,
-                display: false,
-                min: 0,
-                max: 10,
-              },
-              gridLines: {
-                display: false,
-              },
-              scaleLabel: {
-                display: false,
-              },
-            },
-          ],
-          xAxes: [
-            {
-              gridLines: {
-                display: false,
-              },
-            },
-          ],
         },
       },
       progradumLogoBase64:
@@ -652,28 +645,7 @@ export default {
       },
     };
   },
-  computed: {
-    ...mapGetters(["getCards"]),
-    radarChartData() {
-      return {
-        labels: this.getCards.map((card) => card.title),
-        datasets: [
-          {
-            label: "Importance",
-            backgroundColor: "rgb(54, 162, 235, 0.75)",
-            data: this.getCards.map((card) => card.importance),
-          },
-          {
-            label: "Effectiveness",
-            backgroundColor: "rgb(75, 192, 192, 0.75)",
-            data: this.getCards.map((card) => card.effectiveness),
-          },
-        ],
-      };
-    },
-  },
   methods: {
-    ...mapActions(["loadCards"]),
     firstInGroup(competence) {
       if (competence.group !== undefined) return 1;
       else return 0;
@@ -788,7 +760,7 @@ hr {
   width: 800px;
 }
 .spider-td {
-  padding-left: 70px;
+  padding-left: 10px;
 }
 .div-assessment-results {
   margin-left: 0px;
@@ -1027,5 +999,13 @@ hr {
   margin-top: 5px;
   margin-bottom: 5px;
   width: 600px;
+}
+.hide-options {
+  position: absolute;
+  height: 20px;
+  width: 200px;
+  left: 645px;
+  background-color: white;
+  z-index: 100;
 }
 </style>

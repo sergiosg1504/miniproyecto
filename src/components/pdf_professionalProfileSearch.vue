@@ -227,7 +227,7 @@
           </div>
           <div class="div-results" v-for="(result, i) in results" :key="i">
             <div class="div-result">
-              <img class="result-image" src="progradumLogoBase64" />
+              <img class="result-image" :src="progradumLetter" />
               <div class="div-result-data">
                 <div class="div-result-data-name-email">
                   <div class="div-result-data-name">

@@ -634,8 +634,8 @@ table.filters-table td:nth-child(4) {
   border-radius: 50%;
   margin-top: 15px;
   margin-bottom: 15px;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 20px;
+  margin-right: 0px;
   object-fit: cover;
   object-position: right;
 }
@@ -650,10 +650,12 @@ table.filters-table td:nth-child(4) {
 }
 .div-result-data-name {
   font-size: 12px;
+  margin-left: 0px;
   float: left;
 }
 .div-result-data-email {
   font-size: 10px;
+  margin-left: 0px;
   color: #c8d2c5;
   float: left;
 }
@@ -661,15 +663,18 @@ table.filters-table td:nth-child(4) {
   font-size: 10px;
   height: 25%;
   margin-left: 0px;
+  text-align: left;
 }
 .div-result-data-otherSkills {
   font-size: 10px;
   height: 25%;
   margin-left: 0px;
+  text-align: left;
 }
 .div-result-data-topSoftSkill {
   font-size: 10px;
   height: 25%;
   margin-left: 0px;
+  text-align: left;
 }
 </style>

@@ -17,92 +17,6 @@
       >
         <section slot="pdf-content">
           <!-- empieza -->
-          <div data-v-84180a8e="" class="div-result">
-            <div data-v-84180a8e="" class="row full-width m-2">
-              <div data-v-84180a8e="" class="col-md-3">
-                <img
-                  data-v-84180a8e=""
-                  src="https://media-exp1.licdn.com/dms/image/C5603AQFRtPaIu2guDg/profile-displayphoto-shrink_200_200/0/1570205215612?e=1651708800&amp;v=beta&amp;t=pvZ7n3kgtjeMHJNwWW39JPIQ6s0tDAhKUdCk2cBzLvA"
-                  class="result-image"
-                />
-              </div>
-              <div data-v-84180a8e="" class="col-md-9">
-                <div data-v-84180a8e="" class="row title-row">
-                  <h5 data-v-84180a8e="" class="card-title">
-                    Marcos Severt Silva
-                  </h5>
-                  <p data-v-84180a8e="" class="card-text card-text-email">
-                    (marcos_ss@usal.es)
-                  </p>
-                </div>
-                <div data-v-84180a8e="" class="row top-skill-row">
-                  <p data-v-84180a8e="" class="card-text-top-skill">
-                    <b data-v-84180a8e="">Top Hard Skill:&nbsp;&nbsp;</b>
-                    <img
-                      data-v-84180a8e=""
-                      title="Java"
-                      src="https://progradumpublic.s3.eu-west-3.amazonaws.com/images/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQzMzY4ODQ1LCJleHAiOjE2NDM0NTUyNDV9.2HLyG17r6XDomPB3YrcBqZK44r7OoPg5pFr0QsD-3CA_2.png"
-                      height="30em"
-                      class="analysis-card-avatar--circle"
-                    />
-                    &nbsp;&nbsp;JUNIOR
-                  </p>
-                  <div data-v-84180a8e="" class="progress">
-                    <div
-                      data-v-84180a8e=""
-                      role="progressbar"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                      aria-valuenow="29"
-                      class="progress-bar removePadding bg-success"
-                      style="
-                        width: 28.57%;
-                        background: rgb(175, 232, 158) !important;
-                        color: black;
-                      "
-                    >
-                      <span data-v-84180a8e="">Java: 28.57 %</span>
-                    </div>
-                  </div>
-                </div>
-                <div data-v-84180a8e="" class="row other-skills-row">
-                  <p data-v-84180a8e="" class="card-text-other-skills">
-                    <b data-v-84180a8e="">Other Top Hard Skills:</b>
-                  </p>
-                  <div data-v-84180a8e="" class="row other-skills-div">
-                    <img
-                      data-v-84180a8e=""
-                      src="https://progradumpublic.s3.eu-west-3.amazonaws.com/images/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQzMzY4ODQ1LCJleHAiOjE2NDM0NTUyNDV9.2HLyG17r6XDomPB3YrcBqZK44r7OoPg5pFr0QsD-3CA_4.png"
-                      title="Python Trainee"
-                      height="30em"
-                      class="analysis-card-avatar--circle col-3"
-                    /><img
-                      data-v-84180a8e=""
-                      src="https://progradumpublic.s3.eu-west-3.amazonaws.com/images/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQzMzY4ODQ1LCJleHAiOjE2NDM0NTUyNDV9.2HLyG17r6XDomPB3YrcBqZK44r7OoPg5pFr0QsD-3CA_3.png"
-                      title="Javascript Trainee"
-                      height="30em"
-                      class="analysis-card-avatar--circle col-3"
-                    /><img
-                      data-v-84180a8e=""
-                      src="https://progradumpublic.s3.eu-west-3.amazonaws.com/images/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQzMzY4ODQ1LCJleHAiOjE2NDM0NTUyNDV9.2HLyG17r6XDomPB3YrcBqZK44r7OoPg5pFr0QsD-3CA_13.png"
-                      title=".net Trainee"
-                      height="30em"
-                      class="analysis-card-avatar--circle col-3"
-                    />
-                  </div>
-                </div>
-                <div
-                  data-v-84180a8e=""
-                  class="row top-skill-row margin-top-3 mb-2"
-                >
-                  <p data-v-84180a8e="" class="card-text-top-skill">
-                    <b data-v-84180a8e="">Top Soft Skill:&nbsp;&nbsp;</b>
-                    &nbsp;&nbsp;N/A
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
           <img
             class="header-progradum-logo"
             src="data:image/png;base64,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"
@@ -312,139 +226,101 @@
             </div>
           </div>
           <div class="div-results" v-for="(result, i) in results" :key="i">
-            <div class="div-result">
-              <img class="result-image" :src="progradumLetter" />
-              <div class="div-result-data">
-                <div class="div-result-data-name-email">
+            <div data-v-84180a8e="" class="div-result">
+              <img
+                data-v-84180a8e=""
+                src="https://media-exp1.licdn.com/dms/image/C5603AQFRtPaIu2guDg/profile-displayphoto-shrink_200_200/0/1570205215612?e=1651708800&amp;v=beta&amp;t=pvZ7n3kgtjeMHJNwWW39JPIQ6s0tDAhKUdCk2cBzLvA"
+                class="result-image"
+              />
+              <div data-v-84180a8e="" class="div-result-data">
+                <div data-v-84180a8e="" class="div-result-data-name-email">
                   <div class="div-result-data-name">
-                    <p>{{ result.name }}</p>
+                    <p>Marcos Severt Silva</p>
                   </div>
                   <div class="div-result-data-email">
-                    <span>{{ result.email }}</span>
+                    <p>(marcos_ss@usal.es)</p>
                   </div>
                 </div>
-                <div class="div-result-data-topSkill">
-                  <span>Top skill:</span>
+
+                <div data-v-84180a8e="" class="div-result-data-div">
+                  <p
+                    class="div-result-data-top-skill-p"
+                    style="font-weight: bold"
+                  >
+                    Top skill:&nbsp;&nbsp;
+                  </p>
+                  <img
+                    data-v-84180a8e=""
+                    title="Java"
+                    src="https://progradumpublic.s3.eu-west-3.amazonaws.com/images/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQzMzY4ODQ1LCJleHAiOjE2NDM0NTUyNDV9.2HLyG17r6XDomPB3YrcBqZK44r7OoPg5pFr0QsD-3CA_2.png"
+                    height="12px"
+                    class="div-result-data-top-skill-image"
+                  />
+                  <p class="div-result-data-top-skill-p">&nbsp;&nbsp;JUNIOR</p>
+                  <div
+                    data-v-84180a8e=""
+                    class="div-result-data-top-skill-progress"
+                  >
+                    <span
+                      class="div-result-data-top-skill-span"
+                      data-v-84180a8e=""
+                      >Java: 28.57 %</span
+                    >
+                    <div
+                      data-v-84180a8e=""
+                      role="progressbar"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                      aria-valuenow="29"
+                      class="div-result-data-top-skill-progress-bar"
+                      style="width: 28.57%; color: black"
+                    />
+                  </div>
                 </div>
-                <div class="div-result-data-otherSkills">
-                  <span>Other important skills:</span>
+
+                <div data-v-84180a8e="" class="div-result-data-div">
+                  <p
+                    class="div-result-data-top-skill-p"
+                    style="font-weight: bold"
+                  >
+                    Other important skills:&nbsp;&nbsp;
+                  </p>
+                  <div
+                    data-v-84180a8e=""
+                    class="div-result-data-otherSkills-images"
+                  >
+                    <img
+                      data-v-84180a8e=""
+                      src="https://progradumpublic.s3.eu-west-3.amazonaws.com/images/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQzMzY4ODQ1LCJleHAiOjE2NDM0NTUyNDV9.2HLyG17r6XDomPB3YrcBqZK44r7OoPg5pFr0QsD-3CA_4.png"
+                      title="Python Trainee"
+                      class="div-result-data-otherSkills-image"
+                    /><img
+                      data-v-84180a8e=""
+                      src="https://progradumpublic.s3.eu-west-3.amazonaws.com/images/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQzMzY4ODQ1LCJleHAiOjE2NDM0NTUyNDV9.2HLyG17r6XDomPB3YrcBqZK44r7OoPg5pFr0QsD-3CA_3.png"
+                      title="Javascript Trainee"
+                      class="div-result-data-otherSkills-image"
+                    /><img
+                      data-v-84180a8e=""
+                      src="https://progradumpublic.s3.eu-west-3.amazonaws.com/images/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQzMzY4ODQ1LCJleHAiOjE2NDM0NTUyNDV9.2HLyG17r6XDomPB3YrcBqZK44r7OoPg5pFr0QsD-3CA_13.png"
+                      title=".net Trainee"
+                      class="div-result-data-otherSkills-image"
+                    />
+                  </div>
                 </div>
-                <div class="div-result-data-topSoftSkill">
-                  <span>Top soft skill:</span>
+
+                <div data-v-84180a8e="" class="div-result-data-div">
+                  <p
+                    class="div-result-data-top-skill-p"
+                    style="font-weight: bold"
+                  >
+                    Top soft skill:&nbsp;&nbsp;
+                  </p>
+                  <p data-v-84180a8e="" class="">&nbsp;&nbsp;N/A</p>
                 </div>
               </div>
             </div>
           </div>
           <!-- acaba -->
-          <!--<div style="margin-bottom: 15px">
-            <div class="row">
-              <div data-v-de19924e="" class="col-md-1">
-                <img
-                  src="https://images.app.goo.gl/iQocuDs1kvF9XQ766"
-                  height="50em"
-                  class="analysis-card-avatar--circle"
-                />
-              </div>
-              <div data-v-de19924e="" class="col-md-3 profile-center-analysis">
-                <h5 class="profile-name-title">JAVA</h5>
-              </div>
-              <div class="col-md-6">
-                <div class="col-sm-12">
-                  <div class="progress full-progress-bar">
-                    <div
-                      role="progressbar"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                      aria-valuenow="25"
-                      class="
-                        progress-bar
-                        trainee-progress-selected
-                        progress-bar-striped progress-bar-animated
-                      "
-                      style="width: 25%"
-                    ></div>
-                    <div
-                      role="progressbar"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                      aria-valuenow="25"
-                      class="
-                        progress-bar
-                        junior-progress-selected
-                        progress-bar-striped progress-bar-animated
-                      "
-                      style="width: 25%"
-                    ></div>
-                    <div
-                      role="progressbar"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                      aria-valuenow="7"
-                      class="
-                        progress-bar
-                        middle-progress-selected
-                        progress-bar-striped progress-bar-animated
-                      "
-                      style="width: 7.14%"
-                    >
-                      57.14 %
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-1 profile-center-analysis">
-                <button
-                  type="button"
-                  class="btn btn-secondary expand-button not-collapsed"
-                  aria-expanded="true"
-                  aria-controls="toggleT-0"
-                  control-id="ControlID-96"
-                  style="overflow-anchor: none"
-                >
-                  <svg
-                    aria-labelledby="svg-inline--fa-title-mEiPvYyBphql"
-                    data-prefix="fas"
-                    data-icon="chevron-down"
-                    role="img"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 448 512"
-                    id="iconShow-0"
-                    class="trash-icon svg-inline--fa fa-chevron-down fa-w-14"
-                    style="display: none"
-                  >
-                    <title id="svg-inline--fa-title-mEiPvYyBphql" class="">
-                      Expand
-                    </title>
-                    <path
-                      fill="currentColor"
-                      d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"
-                      class=""
-                    ></path>
-                  </svg>
-                  <svg
-                    aria-labelledby="svg-inline--fa-title-0RDMWVYh2udF"
-                    data-prefix="fas"
-                    data-icon="chevron-up"
-                    role="img"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 448 512"
-                    id="iconNotShow-0"
-                    class="trash-icon svg-inline--fa fa-chevron-up fa-w-14"
-                    style="display: block"
-                  >
-                    <title id="svg-inline--fa-title-0RDMWVYh2udF" class="">
-                      Contract
-                    </title>
-                    <path
-                      fill="currentColor"
-                      d="M240.971 130.524l194.343 194.343c9.373 9.373 9.373 24.569 0 33.941l-22.667 22.667c-9.357 9.357-24.522 9.375-33.901.04L224 227.495 69.255 381.516c-9.379 9.335-24.544 9.317-33.901-.04l-22.667-22.667c-9.373-9.373-9.373-24.569 0-33.941L207.03 130.525c9.372-9.373 24.568-9.373 33.941-.001z"
-                      class=""
-                    ></path>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>-->
         </section>
       </VueHtml2pdf>
     </div>
@@ -706,12 +582,11 @@ table.filters-table td:nth-child(4) {
 }
 .div-result {
   height: 100px;
-  width: 60%;
   border: #c8d2c5 4px solid;
   border-radius: 8px;
-  margin: 0px auto;
   display: flex;
-  align-items: center;
+  margin-left: 120px;
+  margin-right: 200px;
 }
 .result-image {
   display: inline;
@@ -729,60 +604,68 @@ table.filters-table td:nth-child(4) {
   display: flex;
   flex-direction: column;
   margin-left: 0px;
+  height: 100%;
+  width: 70%;
 }
 .div-result-data-name-email {
-  height: 25%;
+  height: 25px;
   margin-left: 0px;
 }
 .div-result-data-name {
   font-size: 12px;
+  font-weight: bold;
   margin-left: 0px;
   float: left;
 }
 .div-result-data-email {
-  font-size: 10px;
+  font-size: 8px;
   margin-left: 0px;
   color: #c8d2c5;
   float: left;
 }
-.div-result-data-topSkill {
-  font-size: 10px;
-  height: 25%;
+.div-result-data-div {
+  font-size: 8px;
+  height: 25px;
   margin-left: 0px;
   text-align: left;
+  margin-left: 40px;
 }
-.div-result-data-otherSkills {
-  font-size: 10px;
-  height: 25%;
+.div-result-data-top-skill-image {
+  float: left;
+  margin: 0px;
+}
+.div-result-data-top-skill-p {
+  font-size: 8px;
+  float: left;
+  margin: 0px;
+}
+.div-result-data-top-skill-progress {
+  height: 12px;
+  float: left;
+  margin-left: 30px;
+  max-width: 50%;
+  min-width: 50%;
+  background: #c8d2c5;
+}
+.div-result-data-top-skill-progress-bar {
+  height: 12px;
+  background: #62c4e4 !important;
   margin-left: 0px;
-  text-align: left;
 }
-.div-result-data-topSoftSkill {
-  font-size: 10px;
-  height: 25%;
-  margin-left: 0px;
-  text-align: left;
+.div-result-data-top-skill-span {
+  font-size: 6px;
+  font-weight: bold;
+  float: left;
+  margin-top: 1px;
+  margin-left: 4px;
 }
-
-.row {
-  --bs-gutter-x: 1.5rem;
-  --bs-gutter-y: 0;
+.div-result-data-otherSkills-images {
+  height: 100%;
   display: flex;
-  flex-wrap: wrap;
-  margin-top: calc(var(--bs-gutter-y) * -1);
-  margin-right: calc(var(--bs-gutter-x) / -2);
-  margin-left: calc(var(--bs-gutter-x) / -2);
+  justify-content: space-between;
 }
-
-.progress {
-  display: flex;
-  height: 1rem;
-  overflow: hidden;
-  font-size: 0.75rem;
-  background-color: #e9ecef;
-  border-radius: 0.25rem;
-}
-.full-progress-bar {
-  max-width: 100%;
+.div-result-data-otherSkills-image {
+  float: left;
+  height: 12px;
 }
 </style>

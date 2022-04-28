@@ -17,16 +17,14 @@
       >
         <section slot="pdf-content">
           <!-- empieza -->
-          <div data-v-84180a8e="" class="card candidate">
+          <div data-v-84180a8e="" class="div-result">
             <div data-v-84180a8e="" class="row full-width m-2">
               <div data-v-84180a8e="" class="col-md-3">
                 <img
                   data-v-84180a8e=""
                   src="https://media-exp1.licdn.com/dms/image/C5603AQFRtPaIu2guDg/profile-displayphoto-shrink_200_200/0/1570205215612?e=1651708800&amp;v=beta&amp;t=pvZ7n3kgtjeMHJNwWW39JPIQ6s0tDAhKUdCk2cBzLvA"
-                  class="profile-img"
-                /><button data-v-84180a8e="" class="btn btn-secondary btn-info">
-                  More info
-                </button>
+                  class="result-image"
+                />
               </div>
               <div data-v-84180a8e="" class="col-md-9">
                 <div data-v-84180a8e="" class="row title-row">

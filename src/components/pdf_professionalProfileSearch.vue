@@ -235,10 +235,12 @@
               <div data-v-84180a8e="" class="div-result-data">
                 <div data-v-84180a8e="" class="div-result-data-name-email">
                   <div class="div-result-data-name">
-                    <p>Marcos Severt Silva</p>
+                    <p>{{ result.name }}</p>
                   </div>
                   <div class="div-result-data-email">
-                    <p>(marcos_ss@usal.es)</p>
+                    <p style="margin-left: 15px; margin-top: 3px">
+                      ({{ result.email }})
+                    </p>
                   </div>
                 </div>
 
@@ -256,7 +258,9 @@
                     height="12px"
                     class="div-result-data-top-skill-image"
                   />
-                  <p class="div-result-data-top-skill-p">&nbsp;&nbsp;JUNIOR</p>
+                  <p class="div-result-data-top-skill-p">
+                    &nbsp;&nbsp;{{ result.topSkill.skill }}
+                  </p>
                   <div
                     data-v-84180a8e=""
                     class="div-result-data-top-skill-progress"
@@ -264,10 +268,11 @@
                     <span
                       class="div-result-data-top-skill-span"
                       data-v-84180a8e=""
-                      >Java: 28.57 %</span
+                      >{{ result.topSkill.progressBarContent }}</span
                     >
                     <div
                       data-v-84180a8e=""
+                      id="progressbar"
                       role="progressbar"
                       aria-valuemin="0"
                       aria-valuemax="100"
@@ -315,7 +320,9 @@
                   >
                     Top soft skill:&nbsp;&nbsp;
                   </p>
-                  <p data-v-84180a8e="" class="">&nbsp;&nbsp;N/A</p>
+                  <p data-v-84180a8e="" class="">
+                    &nbsp;&nbsp;{{ result.topSoftSkill }}
+                  </p>
                 </div>
               </div>
             </div>
@@ -388,26 +395,22 @@ export default {
         {
           name: "Pablo Chamoso Santos",
           email: "chamoso88@hotmail.com",
-          topSkill: "",
-          otherSkills: "",
-          topSoftSkill: "",
-          picture: "",
-        },
-        {
-          name: "Pablo Chamoso Santos",
-          email: "chamoso88@hotmail.com",
-          topSkill: "",
-          otherSkills: "",
-          topSoftSkill: "",
-          picture: "",
-        },
-        {
-          name: "Pablo Chamoso Santos",
-          email: "chamoso88@hotmail.com",
-          topSkill: "",
-          otherSkills: "",
-          topSoftSkill: "",
-          picture: "",
+          picture:
+            "https://media-exp1.licdn.com/dms/image/C5603AQFRtPaIu2guDg/profile-displayphoto-shrink_200_200/0/1570205215612?e=1651708800&amp;v=beta&amp;t=pvZ7n3kgtjeMHJNwWW39JPIQ6s0tDAhKUdCk2cBzLvA",
+          topSkill: {
+            logo: "https://progradumpublic.s3.eu-west-3.amazonaws.com/images/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQzMzY4ODQ1LCJleHAiOjE2NDM0NTUyNDV9.2HLyG17r6XDomPB3YrcBqZK44r7OoPg5pFr0QsD-3CA_2.png",
+            skill: "JUNIOR",
+            progressBarContent: "Java: 28.57 %",
+          },
+          otherSkills: {
+            logo1:
+              "https://progradumpublic.s3.eu-west-3.amazonaws.com/images/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQzMzY4ODQ1LCJleHAiOjE2NDM0NTUyNDV9.2HLyG17r6XDomPB3YrcBqZK44r7OoPg5pFr0QsD-3CA_4.png",
+            logo2:
+              "https://progradumpublic.s3.eu-west-3.amazonaws.com/images/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQzMzY4ODQ1LCJleHAiOjE2NDM0NTUyNDV9.2HLyG17r6XDomPB3YrcBqZK44r7OoPg5pFr0QsD-3CA_3.png",
+            logo3:
+              "https://progradumpublic.s3.eu-west-3.amazonaws.com/images/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQzMzY4ODQ1LCJleHAiOjE2NDM0NTUyNDV9.2HLyG17r6XDomPB3YrcBqZK44r7OoPg5pFr0QsD-3CA_13.png",
+          },
+          topSoftSkill: "N/A",
         },
       ],
     };

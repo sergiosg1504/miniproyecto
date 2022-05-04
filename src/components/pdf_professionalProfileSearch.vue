@@ -229,7 +229,7 @@
             <div data-v-84180a8e="" class="div-result">
               <img
                 data-v-84180a8e=""
-                src="https://media-exp1.licdn.com/dms/image/C5603AQFRtPaIu2guDg/profile-displayphoto-shrink_200_200/0/1570205215612?e=1651708800&amp;v=beta&amp;t=pvZ7n3kgtjeMHJNwWW39JPIQ6s0tDAhKUdCk2cBzLvA"
+                :src="result.picture"
                 class="result-image"
               />
               <div data-v-84180a8e="" class="div-result-data">
@@ -254,7 +254,7 @@
                   <img
                     data-v-84180a8e=""
                     title="Java"
-                    src="https://progradumpublic.s3.eu-west-3.amazonaws.com/images/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQzMzY4ODQ1LCJleHAiOjE2NDM0NTUyNDV9.2HLyG17r6XDomPB3YrcBqZK44r7OoPg5pFr0QsD-3CA_2.png"
+                    :src="result.topSkill.logo"
                     height="12px"
                     class="div-result-data-top-skill-image"
                   />
@@ -296,17 +296,17 @@
                   >
                     <img
                       data-v-84180a8e=""
-                      src="https://progradumpublic.s3.eu-west-3.amazonaws.com/images/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQzMzY4ODQ1LCJleHAiOjE2NDM0NTUyNDV9.2HLyG17r6XDomPB3YrcBqZK44r7OoPg5pFr0QsD-3CA_4.png"
+                      :src="result.otherSkills.logo1"
                       title="Python Trainee"
                       class="div-result-data-otherSkills-image"
                     /><img
                       data-v-84180a8e=""
-                      src="https://progradumpublic.s3.eu-west-3.amazonaws.com/images/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQzMzY4ODQ1LCJleHAiOjE2NDM0NTUyNDV9.2HLyG17r6XDomPB3YrcBqZK44r7OoPg5pFr0QsD-3CA_3.png"
+                      :src="result.otherSkills.logo2"
                       title="Javascript Trainee"
                       class="div-result-data-otherSkills-image"
                     /><img
                       data-v-84180a8e=""
-                      src="https://progradumpublic.s3.eu-west-3.amazonaws.com/images/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQzMzY4ODQ1LCJleHAiOjE2NDM0NTUyNDV9.2HLyG17r6XDomPB3YrcBqZK44r7OoPg5pFr0QsD-3CA_13.png"
+                      :src="result.otherSkills.logo3"
                       title=".net Trainee"
                       class="div-result-data-otherSkills-image"
                     />
